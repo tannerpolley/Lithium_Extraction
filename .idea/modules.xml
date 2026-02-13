@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Lithium_Extraction.iml" filepath="$PROJECT_DIR$/.idea/Lithium_Extraction.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../PC-SAFT/.idea/PC-SAFT.iml" filepath="$PROJECT_DIR$/../PC-SAFT/.idea/PC-SAFT.iml" />
     </modules>
   </component>
 </project>

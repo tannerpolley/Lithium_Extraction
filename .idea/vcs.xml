@@ -2,7 +2,7 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/../PC-SAFT" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../PC-SAFT-Polley/externals/eigen" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../PC-SAFT/externals/eigen" vcs="Git" />
   </component>
 </project>
