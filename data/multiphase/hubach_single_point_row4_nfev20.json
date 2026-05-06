@@ -1,0 +1,92 @@
+{
+  "option": {
+    "debug": 0,
+    "max_nfev": 20,
+    "solver_tol": 1e-08,
+    "split_tol": 0.0001,
+    "tpdf_global_trials": 1200,
+    "tpdf_local_trials": 600
+  },
+  "option_index": 1,
+  "result": {
+    "backend": "electrolyte_lle",
+    "converged": 0,
+    "diagnostics": {
+      "acceptance_gate": "predictive_solve_failed",
+      "algorithm_reference": {
+        "authors": "Ascani, Sadowski, and Held",
+        "doi": "10.1021/acs.jced.1c00866",
+        "title": "Calculation of Multiphase Equilibria Containing Mixed Solvents and Mixed Electrolytes",
+        "year": 2022
+      },
+      "basis_rank": 1,
+      "best_failure_reason": "candidate collapsed to one phase",
+      "charge_balance_error": 0.0,
+      "composition_basis": "mole_fraction",
+      "e_matrix": [
+        [
+          1.0,
+          1.0
+        ]
+      ],
+      "effective_max_iterations": 20,
+      "equilibrium_route": "electrolyte_lle",
+      "feed_composition": [
+        0.7769717174562218,
+        0.1778784720915591,
+        0.036982391730687396,
+        0.004083709360765877,
+        0.004083709360765877
+      ],
+      "fugacity_residual": [
+        -1.802291649255494e-11,
+        -1.7717383116178098e-11,
+        -1.759303813742008e-11,
+        -3.603872755775228e-11
+      ],
+      "fugacity_residual_norm": 3.603872755775228e-11,
+      "gibbs_delta": -1.0051000032262891e-09,
+      "gibbs_feed": -11.008050012470362,
+      "gibbs_seed_method": "native_golden_section",
+      "gibbs_split": -11.008050013475462,
+      "iterations": 2,
+      "material_balance_error": 6.938893903907228e-18,
+      "message": "electrolyte LLE flash did not converge",
+      "native_entrypoint": "_solve_equilibrium_native",
+      "phase_distance": 3.3306690738754696e-16,
+      "phase_equilibrium_model": "electrolyte_lle_v5_native_charge_constrained_solve",
+      "repeated_stability_iterations": 1,
+      "requested_max_iterations": 20,
+      "route_reason": "ion-containing mixture",
+      "salt_pairs": [
+        {
+          "anion": 4,
+          "cation": 3,
+          "label": "LiCl"
+        }
+      ],
+      "solver_language": "c++",
+      "solver_method": "native_transformed_newton",
+      "solver_residual_norm": 3.603872755775228e-11,
+      "solver_seed_name": "formula_feed",
+      "stability_analysis": "electrolyte_tpd",
+      "stability_checked": 1,
+      "stability_min_tpd": -0.5101389973481284,
+      "stability_stable": 0,
+      "tpd_method": "native_tpd_global_search",
+      "variable_model": "ascani_transformed_salt_pairs"
+    },
+    "message": "('electrolyte LLE flash did not converge', {'charge_balance_error': 0.0, 'fugacity_residual_norm': 3.603872755775228e-11, 'gibbs_delta': -1.0051000032262891e-09, 'gibbs_feed': -11.008050012470362, 'gibbs_split': -11.008050013475462, 'material_balance_error': 6.938893903907228e-18, 'phase_distance': 3.3306690738754696e-16, 'solver_residual_norm': 3.603872755775228e-11, 'stability_min_tpd': -0.5101389973481284, 'basis_rank': 1, 'effective_max_iterations': 20, 'iterations': 2, 'repeated_stability_iterations': 1, 'requested_max_iterations': 20, 'stability_checked': True, 'stability_stable': False, 'acceptance_gate': 'predictive_solve_failed', 'best_failure_reason': 'candidate collapsed to one phase', 'equilibrium_route': 'electrolyte_lle', 'gibbs_seed_method': 'native_golden_section', 'message': 'electrolyte LLE flash did not converge', 'native_entrypoint': '_solve_equilibrium_native', 'phase_equilibrium_model': 'electrolyte_lle_v5_native_charge_constrained_solve', 'route_reason': 'ion-containing mixture', 'solver_language': 'c++', 'solver_method': 'native_transformed_newton', 'solver_seed_name': 'formula_feed', 'stability_analysis': 'electrolyte_tpd', 'tpd_method': 'native_tpd_global_search', 'variable_model': 'ascani_transformed_salt_pairs', 'feed_composition': [0.7769717174562218, 0.1778784720915591, 0.036982391730687396, 0.004083709360765877, 0.004083709360765877], 'fugacity_residual': [-1.802291649255494e-11, -1.7717383116178098e-11, -1.759303813742008e-11, -3.603872755775228e-11], 'algorithm_reference': {'authors': 'Ascani, Sadowski, and Held', 'year': 2022, 'title': 'Calculation of Multiphase Equilibria Containing Mixed Solvents and Mixed Electrolytes', 'doi': '10.1021/acs.jced.1c00866'}, 'e_matrix': [[1.0, 1.0]], 'salt_pairs': [{'label': 'LiCl', 'cation': 3, 'anion': 4}], 'composition_basis': 'mole_fraction'})",
+    "n_phases": 1,
+    "phases": [],
+    "residual_norm": 3.603872755775228e-11,
+    "status": "SolutionError",
+    "tpdf_min": "nan"
+  },
+  "row": {
+    "e_calc_s11_pct": 97.04,
+    "e_exp_pct": 98.33,
+    "rw_oa": 3.933
+  },
+  "wall_seconds": 18.756975700000112
+}

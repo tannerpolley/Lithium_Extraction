@@ -1,0 +1,13 @@
+\begin{tabular}{p{2.6cm} p{2.9cm} p{1.2cm} p{3.8cm} p{3.1cm} p{3.6cm} p{4.0cm}}
+\hline
+\textbf{Symbol} & \textbf{Name} & \textbf{Units} & \textbf{Description} & \textbf{Shows up in} & \textbf{Main purpose} & \textbf{Important notes} \\
+\hline
+$m_i$ & segment number & -- & Number of PC-SAFT segments used to represent component $i$. & hard-chain; dispersion & Sets chain length and coarse-grained molecular size. & Higher $m_i$ generally means a longer or less spherical molecule. \\
+$\sigma_i$ & segment diameter & \AA & Temperature-independent segment diameter of component $i$. & hard-chain; dispersion; association; Debye-H\"uckel & Sets the molecular size and packing length scale. & Also enters effective temperature-dependent diameters used in several ePC-SAFT terms. \\
+$\epsilon_i/k_B$ & dispersion energy parameter & K & Segment energy parameter for non-specific attractive interactions. & dispersion; hard-chain & Sets the strength of van der Waals-type attraction between segments. & Also appears in the temperature-dependent effective segment diameter expression. \\
+$\epsilon_{hb}^{A_iB_i}/k_B$ & association energy & K & Site-specific association energy between sites on component $i$. & association & Sets the strength of hydrogen-bonding or other specific association interactions. & Only relevant for associating components and association sites. \\
+$\kappa_{hb}^{A_iB_i}$ & association volume & -- & Effective association volume for the bonding sites on component $i$. & association & Sets the geometric probability or bonding volume for association. & Works together with $\epsilon_{hb}^{A_iB_i}/k_B$ to control the association strength. \\
+$\varepsilon_{r,i}$ & relative permittivity & -- & Pure-component relative permittivity used in dielectric mixing rules. & Debye-H\"uckel; Born & Controls electrostatic screening and ion solvation strength through the dielectric response. & Important mainly for electrolyte applications and mixed-solvent dielectric rules. \\
+$k_{ij}$ & binary interaction parameter & -- & Unlike-pair binary interaction parameter used in the dispersion combining rule for $\epsilon_{ij}$. & mixing rule / unlike interaction; dispersion & Tunes unlike-species energetic interactions when the default mixing rule is not sufficient. & Usually fitted to binary mixture data and applied pairwise. \\
+\hline
+\end{tabular}

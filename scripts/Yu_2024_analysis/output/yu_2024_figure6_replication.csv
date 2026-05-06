@@ -1,0 +1,14 @@
+section,oa_ratio,e_li_exp_pct,e_mg_exp_pct,e_li_calc_pct,e_mg_calc_pct,converged,status,message,residual_norm,tpdf_min,beta_org,beta_aq,x_li_org,x_mg_org
+digitized_point,1.0,37.0,0.8,nan,nan,False,InputError,V4 electrolyte_lle currently supports only 1:1 salts.,nan,nan,nan,nan,nan,nan
+digitized_point,2.0,75.0,0.7,nan,nan,False,InputError,V4 electrolyte_lle currently supports only 1:1 salts.,nan,nan,nan,nan,nan,nan
+digitized_point,3.0,83.2,0.7,nan,nan,False,InputError,V4 electrolyte_lle currently supports only 1:1 salts.,nan,nan,nan,nan,nan,nan
+digitized_point,4.0,87.3,0.9,nan,nan,False,InputError,V4 electrolyte_lle currently supports only 1:1 salts.,nan,nan,nan,nan,nan,nan
+digitized_point,5.0,88.7,1.1,nan,nan,False,InputError,V4 electrolyte_lle currently supports only 1:1 salts.,nan,nan,nan,nan,nan,nan
+digitized_point,6.0,89.0,1.4,nan,nan,False,InputError,V4 electrolyte_lle currently supports only 1:1 salts.,nan,nan,nan,nan,nan,nan
+dense_curve,1.0,,,nan,nan,False,InputError,V4 electrolyte_lle currently supports only 1:1 salts.,nan,nan,nan,nan,nan,nan
+dense_curve,2.0,,,nan,nan,False,InputError,V4 electrolyte_lle currently supports only 1:1 salts.,nan,nan,nan,nan,nan,nan
+dense_curve,3.0,,,nan,nan,False,InputError,V4 electrolyte_lle currently supports only 1:1 salts.,nan,nan,nan,nan,nan,nan
+dense_curve,4.0,,,nan,nan,False,InputError,V4 electrolyte_lle currently supports only 1:1 salts.,nan,nan,nan,nan,nan,nan
+dense_curve,5.0,,,nan,nan,False,InputError,V4 electrolyte_lle currently supports only 1:1 salts.,nan,nan,nan,nan,nan,nan
+dense_curve,6.0,,,nan,nan,False,InputError,V4 electrolyte_lle currently supports only 1:1 salts.,nan,nan,nan,nan,nan,nan
+fit_summary,2.0,75.0,,nan,,,,effective_TOP_concentration_mol_per_L_org=1.90000000,,,,,,

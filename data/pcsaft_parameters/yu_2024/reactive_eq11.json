@@ -1,0 +1,53 @@
+{
+  "model": "eq11_reactive_wrapper",
+  "fit_timestamp_utc": "2026-05-01T01:12:27Z",
+  "basis": {
+    "paper_equation": "Eq. 11",
+    "paper_mechanism": "1 IL + 1 TOP + 1 Li <-> 1 aqueous [HOEMIM]+ + 1 organic Li complex",
+    "current_user_options": "2025 preset retained in yu_2024 dataset; reaction handled in a wrapper outside the core pcsaft flash",
+    "digitized_points_csv": "C:\\Users\\Tanner\\Documents\\git\\Lithium_Extraction\\scripts\\Yu_2024_analysis\\figure6_digitized_points.csv"
+  },
+  "constants": {
+    "li_feed_mol_per_l_aq": 0.11037463976945244,
+    "mg_feed_mol_per_l_aq": 4.071740024681201,
+    "il_conc_mol_per_l_org": 0.09,
+    "top_conc_mol_per_l_org": 1.9,
+    "baseline_hoemim_cation_aq_mol_per_l": 0.005611
+  },
+  "fit_parameters": {
+    "log10_k_li": 0.2231117663069331,
+    "log10_k_mg": -2.4948664628207005
+  },
+  "fit_points": [
+    {
+      "oa_ratio": 1.0,
+      "e_li_exp_pct": 37.0,
+      "e_mg_exp_pct": 0.8
+    },
+    {
+      "oa_ratio": 2.0,
+      "e_li_exp_pct": 75.0,
+      "e_mg_exp_pct": 0.7
+    },
+    {
+      "oa_ratio": 3.0,
+      "e_li_exp_pct": 83.2,
+      "e_mg_exp_pct": 0.7
+    },
+    {
+      "oa_ratio": 4.0,
+      "e_li_exp_pct": 87.3,
+      "e_mg_exp_pct": 0.9
+    },
+    {
+      "oa_ratio": 5.0,
+      "e_li_exp_pct": 88.7,
+      "e_mg_exp_pct": 1.1
+    },
+    {
+      "oa_ratio": 6.0,
+      "e_li_exp_pct": 89.0,
+      "e_mg_exp_pct": 1.4
+    }
+  ]
+}

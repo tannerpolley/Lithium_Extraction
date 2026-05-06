@@ -1,0 +1,2 @@
+sweep_type,condition_label,na_mg_L,oa_ratio,li_extraction_pct,na_extraction_pct,li_org_mg_L_basis,na_org_mg_L_basis,li_raffinate_mg_L,na_raffinate_mg_L,d_li,d_na,selectivity,saltout_factor
+nominal,"Na = 10900 mg/L, O/A = 1.00",10900.0,1.0,52.00472287377231,0.906746516991823,31.202833724263385,98.83537035210871,28.79716627573661,10801.164629647892,1.0835383393453435,0.009150436433569168,118.41384257588953,6.0

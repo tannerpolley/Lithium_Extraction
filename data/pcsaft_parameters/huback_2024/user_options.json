@@ -1,0 +1,20 @@
+{
+  "canonical_user_options": {
+    "elec_model": {
+      "ssm_ds": false,
+      "base": "2020",
+      "dielc_rule": "combined",
+      "born_contrib": true,
+      "eps_r_bulk": "mix",
+      "born_diff_options": {
+        "include_delta_d_i_conc_dep": true,
+        "include_dielc_conc_dep": true,
+        "include_sum_term": true
+      },
+      "dielc_diff_mode": "analytic",
+      "born_diff_model": "analytic",
+      "bjeruum_treatment": false
+    },
+    "debug": false
+  }
+}
