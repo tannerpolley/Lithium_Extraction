@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.8.27">
 
   <meta name="author" content="Codex">
-  <meta name="dcterms.date" content="2026-05-04">
+  <meta name="dcterms.date" content="2026-05-06">
   <title>ePC-SAFT For Produced-Water Lithium Extraction</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -130,7 +130,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">ePC-SAFT For Produced-Water Lithium Extraction</h1>
-  <p class="subtitle">A Smackover case study for PrOMMiS and IDAES integration</p>
+  <p class="subtitle">A non-ionic HBTA/TOPO case study for PrOMMiS and IDAES integration</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -140,7 +140,7 @@ Codex
 </div>
 </div>
 
-  <p class="date">2026-05-04</p>
+  <p class="date">2026-05-06</p>
 </section>
 <section id="why-this-case-study-exists" class="slide level2 title-slide center">
 <h2>Why This Case Study Exists</h2>
@@ -148,18 +148,161 @@ Codex
 <div class="callout callout-none no-icon callout-style-simple">
 <div class="callout-body">
 <div class="callout-content">
-<p>Produced-water lithium extraction needs a thermodynamic engine that can turn basin chemistry into solvent-extraction transfer variables. ePC-SAFT is the candidate backbone for that role in PrOMMiS and IDAES.</p>
+<p>Produced-water lithium extraction needs a thermodynamic engine that can turn basin chemistry into solvent-extraction transfer variables. In this deck, the active benchmark is the non-ionic HBTA/TOPO field-water case, and ePC-SAFT is the candidate backbone for that role in PrOMMiS and IDAES. Active chemistry boundary: ionic-liquid systems are out of scope for this benchmark set.</p>
 </div>
 </div>
 </div>
 <ul>
 <li>The location story is southern Arkansas Smackover.</li>
-<li>The process story is selective aqueous/organic lithium extraction.</li>
+<li>The process story is selective non-ionic aqueous/organic lithium extraction.</li>
 <li>The modeling story is electrolyte LLE plus chemistry-specific selectivity.</li>
 <li>The software story is PrOMMiS/IDAES integration through equilibrium data, surrogates, or external functions.</li>
 </ul>
 <aside class="notes">
-<p>Open with the implementation need, not with a generic lithium motivation. The audience should understand within the first minute that this is a case for why ePC-SAFT belongs in the process-modeling ecosystem.</p>
+<p>Use only the generated artifact pack below and explicitly tagged literature sources for quantitative claims. Do not introduce ionic-liquid results as active evidence.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="evidence-pack-for-this-section" class="slide level2 tight">
+<h2>Evidence Pack For This Section</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Artifact</th>
+<th>Use in this deck</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>data/reference/produced_water/non_ionic_case_study_process_summary.csv</code></td>
+<td>Process-stage metrics and operating context</td>
+</tr>
+<tr class="even">
+<td><code>data/reference/produced_water/non_ionic_case_study_composition.csv</code></td>
+<td>Non-ionic feed composition basis</td>
+</tr>
+<tr class="odd">
+<td><code>data/reference/produced_water/non_ionic_case_study_sources.md</code></td>
+<td>Literature anchors and exclusion rationale</td>
+</tr>
+<tr class="even">
+<td><code>data/reference/produced_water/smackover_usgs_clean_observation_summary.csv</code></td>
+<td>Source-cited Smackover Li/TDS/major-ion observation summary</td>
+</tr>
+<tr class="odd">
+<td><code>data/reference/produced_water/smackover_li_tds_sensitivity_basis.csv</code></td>
+<td>Actual and screening Li/TDS rows for sensitivity cases</td>
+</tr>
+<tr class="even">
+<td><code>data/reference/produced_water/smackover_critical_minerals_ree_status.csv</code></td>
+<td>Trace-metal and REE reporting status for the Smackover source set</td>
+</tr>
+<tr class="odd">
+<td><code>data/reference/produced_water/smackover_selected_base_feed_ms2.csv</code></td>
+<td>Selected Phase 9 base produced-water feed</td>
+</tr>
+<tr class="even">
+<td><code>data/reference/produced_water/phase9_costing_skeleton.csv</code></td>
+<td>Costing-hook skeleton and user-needed assumptions</td>
+</tr>
+<tr class="odd">
+<td><code>data/pcsaft_parameters/gando_2025/hbta_topo_reactive_fit.json</code></td>
+<td>Calibrated HBTA/TOPO 2:1:1 reactive-stage parameters</td>
+</tr>
+<tr class="even">
+<td><code>data/reference/produced_water/hbta_topo_reactive_stage_results.csv</code></td>
+<td>Staged reactive HBTA/TOPO transfer rows with ePC-SAFT aqueous activity corrections</td>
+</tr>
+<tr class="odd">
+<td><code>data/reference/produced_water/hbta_topo_reactive_prommis_stage_table.csv</code></td>
+<td>PrOMMiS/IDAES stage-variable table from the reactive-stage solve</td>
+</tr>
+<tr class="even">
+<td><code>data/reference/produced_water/hbta_topo_formal_costing_results.csv</code></td>
+<td>Formal Class-5 scenario costing table</td>
+</tr>
+<tr class="odd">
+<td><code>data/reference/produced_water/smackover_ms2_transfer_sensitivity.csv</code></td>
+<td>MS-2 reactive-stage sensitivity rows with trust labels</td>
+</tr>
+<tr class="even">
+<td><code>data/reference/produced_water/smackover_prommis_transfer_handoff.csv</code></td>
+<td>PrOMMiS/IDAES transfer-variable handoff table</td>
+</tr>
+<tr class="odd">
+<td><code>data/reference/produced_water/phase8_costing_scenarios_skeleton.csv</code></td>
+<td>Throughput-to-Li2CO3 skeleton scenarios</td>
+</tr>
+<tr class="even">
+<td><code>data/reference/produced_water/non_ionic_solvent_literature_matrix.csv</code></td>
+<td>Non-ionic solvent evidence ranking and backup status</td>
+</tr>
+<tr class="odd">
+<td><code>data/reference/produced_water/zotero_organic_solvents_review_2026_05_07.md</code></td>
+<td>Zotero-backed Organic Solvents review and Rezaee 2026 boundary</td>
+</tr>
+<tr class="even">
+<td><code>data/reference/produced_water/zotero_parameter_source_inventory_2026_05_07.csv</code></td>
+<td>Parameter-source inventory separating active chemistry from smoke-test sources</td>
+</tr>
+<tr class="odd">
+<td><code>data/reference/produced_water/rezaee_2026_epcsaft_parameter_smoke_report.md</code></td>
+<td>Rezaee DES/TOPO diagnostic fit and equilibrium-smoke result</td>
+</tr>
+<tr class="even">
+<td><code>data/reference/produced_water/rezaee_2026_des_parameter_fit_summary.csv</code></td>
+<td>Nonassociating DES density-fit parameters from the smoke test</td>
+</tr>
+<tr class="odd">
+<td><code>data/reference/produced_water/hbta_topo_model_gap_table.csv</code></td>
+<td>Explicit parameter and reaction-constant gaps</td>
+</tr>
+<tr class="even">
+<td><code>data/multiphase/gando_2025_one_stage_assets/gando_2025_one_stage_nominal.csv</code></td>
+<td>One-stage (D), extraction, selectivity numbers</td>
+</tr>
+<tr class="odd">
+<td><code>data/multiphase/gando_2025_slide_assets/gando_2025_stage_summary.csv</code></td>
+<td>Stage-wise cumulative Li/Na extraction and (S_{Li/Na})</td>
+</tr>
+<tr class="even">
+<td><code>data/multiphase/gando_2025_one_stage_assets/gando_2025_one_stage_species_split.png</code></td>
+<td>One-stage species split figure</td>
+</tr>
+<tr class="odd">
+<td><code>data/multiphase/gando_2025_slide_assets/gando_2025_cumulative_extraction_wide.png</code></td>
+<td>Multi-stage cumulative extraction figure</td>
+</tr>
+</tbody>
+</table>
+<aside class="notes">
+<p>This deck is intended as an implementation-argument narrative for ePC-SAFT inside PrOMMiS/IDAES, not a chemical-discovery paper.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside class="notes">
+<p>Open with the implementation need, not with a generic lithium motivation. The audience should understand within the first minute that this is a case for why ePC-SAFT belongs in the process-modeling ecosystem and why the benchmark is a conventional ligand system rather than an ionic liquid.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -277,6 +420,201 @@ Codex
 </div></div>
 <aside class="notes">
 <p>The key line is: Smackover wins not because it is easy, but because it is valuable and thermodynamically unforgiving. That is exactly where an electrolyte EoS earns its keep.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="smackover-feed-basis-now-in-the-repo" class="slide level2 tight">
+<h2>Smackover Feed Basis Now In The Repo</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Case</th>
+<th>Source row</th>
+<th style="text-align: right;">Li (mg/L)</th>
+<th style="text-align: right;">TDS (mg/L)</th>
+<th style="text-align: right;">Na (mg/L)</th>
+<th style="text-align: right;">Ca (mg/L)</th>
+<th style="text-align: right;">Mg (mg/L)</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Low observed</td>
+<td><code>SH-2</code></td>
+<td style="text-align: right;"><code>11.7</code></td>
+<td style="text-align: right;"><code>156,000</code></td>
+<td style="text-align: right;"><code>37,100</code></td>
+<td style="text-align: right;"><code>13,900</code></td>
+<td style="text-align: right;"><code>2,250</code></td>
+<td>Lower source bound</td>
+</tr>
+<tr class="even">
+<td>Base observed</td>
+<td><code>MS-2</code></td>
+<td style="text-align: right;"><code>168</code></td>
+<td style="text-align: right;"><code>305,000</code></td>
+<td style="text-align: right;"><code>64,100</code></td>
+<td style="text-align: right;"><code>36,900</code></td>
+<td style="text-align: right;"><code>3,310</code></td>
+<td>Median-TDS base proxy</td>
+</tr>
+<tr class="odd">
+<td>High observed</td>
+<td><code>BR-2</code></td>
+<td style="text-align: right;"><code>252</code></td>
+<td style="text-align: right;"><code>340,000</code></td>
+<td style="text-align: right;"><code>70,800</code></td>
+<td style="text-align: right;"><code>39,900</code></td>
+<td style="text-align: right;"><code>3,130</code></td>
+<td>High-TDS/high-Li proxy</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-none no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p>These are source rows from the local USGS southern-Arkansas Smackover file after duplicate and blank rows are excluded. The separate <code>100/200/400 mg/L Li</code> rows are sensitivity cases, not direct well samples.</p>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>Use <code>data/reference/produced_water/smackover_li_tds_sensitivity_basis.csv</code> and <code>smackover_usgs_clean_observation_summary.csv</code> as the source for this slide. This is the cleanest way to show true composition without pretending that the Shan/Gando extraction feed is a Smackover sample.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="selected-base-brine-for-phase-9" class="slide level2 tight">
+<h2>Selected Base Brine For Phase 9</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Source row</td>
+<td><code>MS-2 / MSPU 4-W1</code></td>
+</tr>
+<tr class="even">
+<td>Field</td>
+<td><code>Magnolia Smackover Production Unit</code></td>
+</tr>
+<tr class="odd">
+<td>Formation</td>
+<td><code>Smackover</code></td>
+</tr>
+<tr class="even">
+<td>County</td>
+<td><code>Columbia County, Arkansas</code></td>
+</tr>
+<tr class="odd">
+<td>Sample date</td>
+<td><code>2022-08-24</code></td>
+</tr>
+<tr class="even">
+<td>Li</td>
+<td><code>168 mg/L</code></td>
+</tr>
+<tr class="odd">
+<td>TDS</td>
+<td><code>305,000 mg/L</code></td>
+</tr>
+<tr class="even">
+<td>Na / Ca / Mg</td>
+<td><code>64,100 / 36,900 / 3,310 mg/L</code></td>
+</tr>
+<tr class="odd">
+<td>Cl / Br</td>
+<td><code>174,000 / 2,700 mg/L</code></td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-none no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p>The feed is Smackover-specific. The extraction chemistry is Shan/Gando HBTA/TOPO. The current skeleton couples a real source brine to a literature-backed non-ionic extraction chemistry without claiming a fully calibrated Arkansas extraction experiment.</p>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>This is the key Phase 9 feed slide. It makes the case study concrete enough to present while preserving the source-vs-chemistry boundary.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="critical-minerals-and-ree-boundary" class="slide level2 tight">
+<h2>Critical Minerals And REE Boundary</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Group</th>
+<th>What the local Smackover source table supports</th>
+<th>How to present it</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Reported trace fields</td>
+<td>Fe, Mn, Zn, Al, As, Be, Cd, Co, Cu, Cr, Hg, Mo, Ni, Pb, U, V, DIC, NPOC, acetate</td>
+<td>Use as trace/pretreatment context, with censoring caveats</td>
+</tr>
+<tr class="even">
+<td>REE</td>
+<td><code>not_reported</code> in the local source file</td>
+<td>Do not infer; make this a future-data need</td>
+</tr>
+<tr class="odd">
+<td>Organic carbon</td>
+<td>NPOC reported across clean rows</td>
+<td>Connect to pretreatment and extraction-interference risk</td>
+</tr>
+</tbody>
+</table>
+<aside class="notes">
+<p>Use <code>data/reference/produced_water/smackover_critical_minerals_ree_status.csv</code>. Many trace-metal values are censored thresholds, so avoid treating the medians as exact resource grades. The key message is disciplined: REE are not source-supported for this feed yet.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -443,10 +781,72 @@ Codex
 <td>Stability, convergence, and phase-distance checks</td>
 <td>Failed or collapsed points do not silently become process data</td>
 </tr>
+<tr class="even">
+<td>Process handoff</td>
+<td>(D_i), (S_{Li/Na}), phase fractions, and residual-validity flags</td>
+<td>Direct feed of transfer-ready variables into PrOMMiS/IDAES stage equations</td>
+</tr>
 </tbody>
 </table>
 <aside class="notes">
-<p>The novelty claim is reusable insight. The model lets the project ask where the chemistry should work, why the answer changes across basins, and what variables the process model should receive.</p>
+<p>The novelty claim is reusable insight. The model lets the project ask where the chemistry should work, why the answer changes across basins, and what variables the process model should receive. For this deck, those variables are transfer variables, not equipment performance coefficients.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="rezaee-2026-as-the-parameter-fitting-smoke-test" class="slide level2 tight">
+<h2>Rezaee 2026 As The Parameter-Fitting Smoke Test</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>What Rezaee gives</th>
+<th>How this deck should use it</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>DES/TOPO lithium extraction modeling with tabulated PC-SAFT-style parameters</td>
+<td>Package regression and equilibrium smoke test</td>
+</tr>
+<tr class="even">
+<td>Organic phase modeled with PC-SAFT</td>
+<td>Do not cite as full ePC-SAFT organic-phase closure</td>
+</tr>
+<tr class="odd">
+<td>Aqueous electrolyte phase modeled with ePC-SAFT</td>
+<td>Useful support for the aqueous-brine side of the bridge</td>
+</tr>
+<tr class="even">
+<td>Fitted organic binary interactions and product pseudo-species</td>
+<td>Useful parameterization pattern, not Shan/Gando chemistry</td>
+</tr>
+<tr class="odd">
+<td>Different DES chemistry from HBTA/TOPO/sulfonated kerosene</td>
+<td>Keep flagship HBTA/TOPO parameter gaps visible</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-none no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p>Rezaee is a method lead and runtime test, not the final HBTA/TOPO model.</p>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>This slide prevents overclaiming. It answers the obvious reviewer question: yes, the new paper is useful, but it used PC-SAFT for the organic side and ePC-SAFT for the aqueous side. The case study still needs its own HBTA/TOPO parameterization.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -505,31 +905,37 @@ Codex
 <h2>One-Stage Selective Split</h2>
 <div class="columns">
 <div class="column" style="width:45%;">
-<section id="nominal-one-stage-result" class="panel">
-<h3>Nominal one-stage result</h3>
+<section id="ms-2-oa-1-stage-result" class="panel">
+<h3>MS-2 O/A = 1 stage result</h3>
 <ul>
-<li>Li extraction: <code>52.0047%</code></li>
-<li>Na extraction: <code>0.9067%</code></li>
-<li>(D_{Li} = 1.0835)</li>
-<li>(D_{Na} = 0.009150)</li>
-<li>(S_{Li/Na} = 118.4138)</li>
-<li>Raffinate Li: <code>28.7972 mg/L</code></li>
+<li>Li extraction: <code>47.2846%</code></li>
+<li>Na extraction: <code>0.0131%</code></li>
+<li>(D_{Li} = 0.8970)</li>
+<li>(S_{Li/Na} = 6840.1)</li>
+<li>Raffinate Li: <code>88.56 mg/L</code></li>
+<li>Activity source: local ePC-SAFT aqueous gamma</li>
 </ul>
 </section>
 <div class="callout callout-none no-icon callout-style-simple">
 <div class="callout-body">
 <div class="callout-content">
-<p>Frame this as the current Smackover-like high-TDS selective extraction engine, not as a fully calibrated Arkansas-well flowsheet.</p>
+<p>Frame this as a calibrated reactive-stage solve, not a full predictive reactive LLE flash. The missing organic HBTA/TOPO/complex parameters remain part of the implementation ask.</p>
 </div>
 </div>
 </div>
 </div><div class="column" style="width:55%;">
-<div class="figure-frame">
-<p><img data-src="../data/multiphase/gando_2025_one_stage_assets/gando_2025_one_stage_species_split.png" alt="One-stage species split chart for the selective lithium extraction showcase"></p>
-</div>
+<section id="what-changed-from-the-old-wrapper" class="panel">
+<h3>What changed from the old wrapper</h3>
+<ul>
+<li>The chemistry now carries the literature-backed <code>2 HBTA : 1 TOPO : 1 Li</code> complex stoichiometry.</li>
+<li>The aqueous Li/Na activity correction is evaluated by the local ePC-SAFT runtime when available.</li>
+<li>The old selective wrapper remains only as historical support and fallback context.</li>
+<li><code>hbta_topo_reactive_stage_results.csv</code> is the current stage-output source.</li>
+</ul>
+</section>
 </div></div>
 <aside class="notes">
-<p>The important contrast is selective transfer: lithium moves materially while sodium barely moves. The wrapper is not a weakness; it is the explicit chemistry layer on top of the phase-split backbone.</p>
+<p>The important contrast is selective transfer: lithium moves materially while sodium barely moves. The model is still calibrated, but it is now a chemistry-explicit stage model rather than the older generic selective wrapper.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -550,20 +956,20 @@ Codex
 <p><img data-src="../data/multiphase/gando_2025_slide_assets/gando_2025_cumulative_extraction_wide.png" alt="Cumulative extraction profile across three stages for the selective lithium extraction showcase"></p>
 </div>
 </div><div class="column" style="width:44%;">
-<section id="three-stage-selective-chain" class="panel">
-<h3>Three-stage selective chain</h3>
+<section id="three-stage-reactive-stage-chain" class="panel">
+<h3>Three-stage reactive-stage chain</h3>
 <ul>
-<li>Stage 1 cumulative Li extraction: <code>52.0047%</code></li>
-<li>Stage 2 cumulative Li extraction: <code>84.8499%</code></li>
-<li>Stage 3 cumulative Li extraction: <code>97.8025%</code></li>
-<li>Stage 3 cumulative Na extraction: <code>3.5827%</code></li>
-<li>Stage 3 (D_{Li} = 5.8941)</li>
-<li>Stage 3 (S_{Li/Na} = 382.7454)</li>
+<li>Stage 1 cumulative Li extraction: <code>47.2846%</code></li>
+<li>Stage 2 cumulative Li extraction: <code>89.5753%</code></li>
+<li>Stage 3 model Li extraction: near-total</li>
+<li>Stage 3 cumulative Na extraction: <code>0.1160%</code></li>
+<li>Stage 3 trust label: <code>outside_literature_capacity_envelope_near_total_transfer</code></li>
+<li>Costing recovery is capped at the <code>97.17%</code> literature anchor</li>
 </ul>
 </section>
 </div></div>
 <aside class="notes">
-<p>If only one quantitative hero slide survives, use this one. It answers what the current workflow can show now that the placeholder could not.</p>
+<p>The near-total stage-three value is useful as a design signal, not as a final physical claim. In the costing tables it is capped to the Shan/Gando three-stage anchor.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -687,6 +1093,71 @@ Codex
           display:block!important;
       }</style></aside>
 </section>
+<section id="transfer-variable-contract" class="slide level2">
+<h2>Transfer-Variable Contract</h2>
+<p>For this implementation pass, the deck should treat the ePC-SAFT output as the following structured contract:</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Definition</th>
+<th>Why PrOMMiS / IDAES needs it</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>(_i)</td>
+<td>stage removal (= (C_{i,in} - C_{i,out}) / C_{i,in})</td>
+<td>Links chemistry to process-wide recovery objectives</td>
+</tr>
+<tr class="even">
+<td>(D_i)</td>
+<td>(C_{i,org} / C_{i,aq})</td>
+<td>Controls staged transfer in material balance equations</td>
+</tr>
+<tr class="odd">
+<td>(S_{Li/Na}), (S_{Li/Mg}), (S_{Li/Ca})</td>
+<td>Selectivity ratios from stage/phase outputs</td>
+<td>Enables solvent and design comparison without refitting fixed coefficients</td>
+</tr>
+<tr class="even">
+<td>Phase fraction</td>
+<td>(<em>{aq}), (</em>{org})</td>
+<td>Sets equilibrium closure and recycle-ready stage state</td>
+</tr>
+<tr class="odd">
+<td>Convergence/validity</td>
+<td>residuals, phase flags, domain bounds</td>
+<td>Prevents brittle points from entering surrogate or optimizer datasets</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-none no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p>This keeps the story concrete: ePC-SAFT computes the transfer map; PrOMMiS/IDAES consumes it.</p>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>This slide is the strongest technical anchor for implementation reviewers because it is explicit about what gets passed across process boundaries.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="why-this-belongs-in-prommis-idaes" class="slide level2">
 <h2>Why This Belongs In PrOMMiS / IDAES</h2>
 <div class="process-grid">
@@ -709,6 +1180,80 @@ Codex
 </div>
 <aside class="notes">
 <p>This is the recommended maturity ladder. Do not pitch direct coupling as the only path. The lowest-risk first step is an offline data generator that feeds a bounded surrogate.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="formal-costing-scaffold" class="slide level2 tight">
+<h2>Formal Costing Scaffold</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Costing block</th>
+<th>Current basis</th>
+<th>Needed before formal TEA</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Feed and annual basis</td>
+<td><code>MS-2</code> feed; <code>100/1000/10000 m3/day</code> scenarios</td>
+<td>user-approved flowrate and uptime</td>
+</tr>
+<tr class="even">
+<td>Pretreatment</td>
+<td>Class-5 placeholder per m3 feed</td>
+<td>removal target, reagent use, waste handling</td>
+</tr>
+<tr class="odd">
+<td>Extraction/contacting</td>
+<td>three-stage HBTA/TOPO reactive-stage solve</td>
+<td>contactor sizing, residence time, solvent inventory</td>
+</tr>
+<tr class="even">
+<td>Stripping/back-extraction</td>
+<td>process-cost placeholder</td>
+<td>acid dose, stripping efficiency, recycle closure</td>
+</tr>
+<tr class="odd">
+<td>Solvent makeup/loss</td>
+<td>low/base/high placeholder per m3 feed</td>
+<td>HBTA/TOPO/diluent prices and loss rate</td>
+</tr>
+<tr class="even">
+<td>Concentration and Li2CO3 precipitation</td>
+<td>product-purity anchor <code>99.28%</code>; recovery capped at <code>97.17%</code></td>
+<td>evaporation duty, carbonate reagent, product spec</td>
+</tr>
+<tr class="odd">
+<td>Revenue and credits</td>
+<td>Li2CO3 price scenarios</td>
+<td>user-approved price and avoided-disposal-credit policy</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-none no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p>This is a formal Class-5 scaffold, not investment-grade TEA. It now computes production, revenue, placeholder annual costs, annualized contactor CAPEX, and net-before-tax scenario values.</p>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>Use <code>data/reference/produced_water/hbta_topo_formal_costing_results.csv</code> and <code>hbta_topo_formal_costing_assumptions.csv</code>. The assumptions are scenario placeholders, not quotes.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -784,7 +1329,7 @@ Codex
 <tbody>
 <tr class="odd">
 <td>Must</td>
-<td>Finalize the Smackover feed basis from source-cited data</td>
+<td>Choose the final Smackover base row and scaling policy from the new source table</td>
 <td>Converts “Smackover-like” into a basin-specific case</td>
 </tr>
 <tr class="even">
@@ -803,6 +1348,16 @@ Codex
 <td>Prevents overclaiming site calibration</td>
 </tr>
 <tr class="odd">
+<td>Done</td>
+<td>Add calibrated reactive HBTA/TOPO stage solve</td>
+<td>Replaces the older generic wrapper with a chemistry-explicit bridge</td>
+</tr>
+<tr class="even">
+<td>Done</td>
+<td>Add formal Class-5 costing scaffold</td>
+<td>Shows how IDAES economics can attach once assumptions are approved</td>
+</tr>
+<tr class="odd">
 <td>Should</td>
 <td>Add O/A and salt-load sensitivity slide</td>
 <td>Shows why equilibrium variables matter</td>
@@ -813,6 +1368,11 @@ Codex
 <td>Anchors the showcase against field literature</td>
 </tr>
 <tr class="odd">
+<td>Should</td>
+<td>Add Rezaee DES/TOPO regression smoke-test results</td>
+<td>Shows the new ePC-SAFT package can run a literature-derived parameter workflow while keeping HBTA/TOPO gaps honest</td>
+</tr>
+<tr class="even">
 <td>Future</td>
 <td>Add Mg/Ca/Sr/Ba competition and ALAMO surrogate</td>
 <td>Moves from showcase to full process-design package</td>

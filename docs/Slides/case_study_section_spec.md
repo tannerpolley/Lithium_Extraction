@@ -6,8 +6,12 @@
 - Deliverable type: slide-by-slide markdown handoff for later deck authoring, not a finished `.pptx`.
 - Section objective: replace the current generic LLE example and repeated stage-2 lithium/sodium slides with a produced-water-first story that shows:
   1. basin chemistry varies enough that screening matters;
-  2. the earlier placeholder workflow did not preserve lithium-selective behavior well enough to be the hero case;
-  3. the current ePC-SAFT plus external chemistry wrapper workflow can now support a more credible selective produced-water case and process-design handoff.
+  2. ionic-liquid extraction is explicitly out of scope for the active benchmark;
+  3. the earlier placeholder workflow did not preserve lithium-selective behavior well enough to be the hero case;
+  4. the current ePC-SAFT-supported calibrated reactive-stage workflow can now support a more credible conventional ligand case and process-design handoff.
+- Non-negotiable narrative boundary for this deck:
+  - Active benchmark chemistry is non-ionic (HBTA/TOPO + conventional diluent/synergist context).
+  - Ionic-liquid systems stay in background only.
 - Source priority used for this draft:
   1. Zotero local API at `http://localhost:23119/api/` if available in the execution environment.
   2. Fallback to browsed primary literature and USGS sources.
@@ -21,6 +25,40 @@
 - `to-be-generated`: visual or table still needs to be built before slide authoring.
 - `to-confirm`: drafting placeholder that should be replaced with a database-backed percentile or basin summary before final slide build.
 
+## Generated Evidence Pack
+
+Anchor every numeric deck claim to local generated artifacts so the case study is reproducible and auditable:
+
+| Artifact | Type | Deck purpose |
+|---|---|---|
+| `data/reference/produced_water/non_ionic_case_study_sources.md` | Markdown | Literature anchor provenance and exclusion notes |
+| `data/reference/produced_water/non_ionic_case_study_composition.csv` | CSV | Source-composition basis for Shan 2025 selectivity and process cases |
+| `data/reference/produced_water/non_ionic_case_study_process_summary.csv` | CSV | Extraction-stage percentages and purity outcomes |
+| `data/reference/produced_water/non_ionic_case_study_transfer_matrix.md` | Markdown | Slide-ready transfer-variable narrative (with staged \(D\)/selectivity summary) |
+| `data/reference/produced_water/non_ionic_case_study_transfer_matrix.csv` | CSV | Copy-safe CSV values for stage and one-stage KPI slides |
+| `data/reference/produced_water/smackover_usgs_clean_observation_summary.csv` | CSV | Clean local USGS Smackover observation summary after duplicate/blank filtering |
+| `data/reference/produced_water/smackover_li_tds_sensitivity_basis.csv` | CSV | Actual low/base/high rows and slide-friendly Li/TDS sensitivity rows |
+| `data/reference/produced_water/smackover_critical_minerals_ree_status.csv` | CSV | Trace-metal and REE reporting status for the local Smackover source set |
+| `data/reference/produced_water/smackover_selected_base_feed_ms2.csv` | CSV | Selected Phase 9 base Smackover produced-water feed row |
+| `data/reference/produced_water/smackover_phase9_case_basis.md` | Markdown | Source-vs-chemistry boundary for the final skeleton |
+| `data/reference/produced_water/phase9_costing_skeleton.csv` | CSV | Early costing-hook skeleton retained for provenance |
+| `data/reference/produced_water/smackover_ms2_transfer_sensitivity.csv` | CSV | MS-2 transfer-variable sensitivity rows from the calibrated reactive-stage bridge |
+| `data/reference/produced_water/hbta_topo_reactive_stage_results.csv` | CSV | Calibrated reactive-stage HBTA/TOPO crossflow results with ePC-SAFT aqueous activity support |
+| `data/reference/produced_water/hbta_topo_reactive_prommis_stage_table.csv` | CSV | Stage-by-stage PrOMMiS/IDAES transfer-variable handoff table |
+| `data/reference/produced_water/hbta_topo_reactive_fit_parameters.csv` | CSV | Fitted bridge constants and status labels |
+| `data/reference/produced_water/hbta_topo_formal_costing_results.csv` | CSV | Formal Class-5 costing scenarios with recovery cap basis |
+| `data/reference/produced_water/smackover_prommis_transfer_handoff.csv` | CSV | PrOMMiS/IDAES handoff variables for the base case |
+| `data/reference/produced_water/phase8_costing_scenarios_skeleton.csv` | CSV | Throughput and Li2CO3 skeleton scenarios |
+| `data/reference/produced_water/prommis_stage_mass_balance_skeleton.csv` | CSV | Stage-by-stage Li/Na material-balance skeleton |
+| `data/reference/produced_water/non_ionic_solvent_literature_matrix.csv` | CSV | Non-ionic solvent ranking, Zotero keys, and claim status |
+| `data/reference/produced_water/hbta_topo_model_gap_table.csv` | CSV | Explicit ePC-SAFT parameter and reaction-constant gaps |
+| `data/multiphase/gando_2025_one_stage_assets/gando_2025_one_stage_nominal.csv` | CSV | One-stage quantitative metrics |
+| `data/multiphase/gando_2025_slide_assets/gando_2025_stage_summary.csv` | CSV | Stage-wise cumulative Li/Na extraction and \(S_{Li/Na}\) |
+| `data/multiphase/gando_2025_one_stage_assets/gando_2025_one_stage_species_split.png` | PNG | One-stage species split figure |
+| `data/multiphase/gando_2025_slide_assets/gando_2025_cumulative_extraction_wide.png` | PNG | Multi-stage cumulative performance figure |
+
+Claims not represented in this pack should stay tagged `to-confirm`.
+
 ## Zotero-Derived Produced-Water Extraction Literature Anchors
 
 These are the local-library papers that most directly improved this spec.
@@ -28,12 +66,14 @@ These are the local-library papers that most directly improved this spec.
 | Paper | Why it matters to the case study | Key extractable takeaway | Claim tag |
 |---|---|---|---|
 | Jang et al., 2017, *Lithium recovery from shale gas produced water using solvent extraction* | Baseline two-stage produced-water solvent-extraction paper already referenced by the current placeholder model | Produced water in the Marcellus area contains about `95 mg/L` lithium on average; first-stage divalent removal exceeded `94.4%`; second-stage lithium extraction reached `41.2%`; total recovered lithium was `30.8%` after lithium loss in pretreatment | `zotero-local` |
-| Lee and Chung, 2020, *Lithium recovery by solvent extraction from simulated shale gas produced water – Impact of organic compounds* | Best local paper for showing that produced-water organics materially affect extraction and therefore belong in the case-study sensitivity framing | Increasing alkane chain length and increasing `n`-hexane concentration reduced final lithium recovery in the two-stage solvent-extraction workflow | `zotero-local` |
-| Zante et al., 2020, *Solvent extraction of lithium from simulated shale gas produced water with a bifunctional ionic liquid* | Strong one-cycle literature benchmark after divalent-ion pretreatment | After a divalent-removal stage, `[Aliquat-336][DEHPA]` at `1 mol/L` removed `83%` of lithium in one extraction cycle from synthetic brine | `zotero-local` |
-| Wang et al., 2024, *Direct lithium extraction from Canadian oil and gas produced water using functional ionic liquids – A preliminary study* | Most relevant local paper for actual oil-and-gas produced water rather than only synthetic shale-gas brine | Actual Canadian produced-water tests gave about `70%` average lithium extraction and as high as `90%` after divalent-ion reduction; dissolved organics did not strongly suppress extraction in that study | `zotero-local` |
+| Shan et al., 2025, *Influence Mechanism of Coexisting Ions on the Extraction Efficiency of Lithium from Oil and Gas Field Water* | Primary non-ionic benchmark for the rebuilt case study | Table 1 is a simulated coexisting-ion feed; the 15 L actual-field-water process case uses HBTA extractant, TOPO synergist, sulfonated kerosene diluent, 100% saponification, and a three-stage cross-flow result above `97%` lithium extraction after impurity removal | `zotero-local` |
 | Gerardo and Song, 2025, *Lithium recovery from U.S. oil and gas produced waters: resource quality and siting considerations* | Best local paper for connecting chemistry to basin screening, plant location, and realistic basin-grade comparisons | Marcellus was highlighted as attractive because of lower secondary-cation burden, estimated annual output around `930 metric tons` lithium metal, and proximity to battery-manufacturing demand centers; Wolfcamp averages about `14 ppm` Li and the top water-producing Permian formations fall in the `1-30 ppm` range | `zotero-local` |
+| Knapik et al., 2023, *Recovery of lithium from oilfield brines - current achievements and future perspectives* | Background review for oilfield brine context and process boundaries | Supports the produced-water opportunity framing without turning the deck into an ionic-liquid survey | `zotero-local` |
+| Chen et al., 2025, *Qualitative Assessment of PC88A and HBTA Extractants in Lithium Recovery Processes Using Solvent Extraction* | Secondary ligand-class comparison for HBTA/TOPO and DBM/TOPO context | Gives a literature bridge for conventional beta-diketone / organophosphorus extraction classes without making ionic liquids the active benchmark | `zotero-local` |
 | Kumar et al., 2019, *Lithium Recovery from Oil and Gas Produced Water: A Need for a Growing Energy Industry* | High-level framing paper for why produced water matters as a lithium resource | Use this as a concise motivation source, not as the main quantitative anchor | `zotero-local` |
 | Liu et al., 2023, *Lithium recovery from oil and gas produced water: Opportunities, challenges, and future outlook* | Useful review for technology buckets and the hybrid-process framing | Supports the idea that pretreatment plus enrichment/separation plus recovery is the right conceptual process chain | `zotero-local` |
+
+Ionic-liquid papers such as Zante 2020 and Wang 2024 remain background citations only. They are excluded from the active benchmark set for this case study.
 
 ## Recommended Flagship Basin
 
@@ -46,7 +86,11 @@ These are the local-library papers that most directly improved this spec.
 - Recommended presenter line:
   - `Smackover is the right flagship basin because it is attractive enough to matter, saline enough to be genuinely hard, and already industrial enough that process integration is credible.`
 - Required caution:
-  - The current repo showcase result is still a selective Li/Na extraction demonstration, not a fully site-calibrated Arkansas flowsheet. The deck should present Smackover as the recommended target basin and the current Gando selective workflow as the thermodynamic/process-design engine to calibrate onto that basin basis next.
+  - The current repo showcase result is still a selective Li/Na extraction demonstration, not a fully site-calibrated Arkansas flowsheet.
+  - The Shan 2025 benchmark is a process-evidence anchor for actual field water, but not a Smackover composition source.
+  - The new local source table gives Smackover feed chemistry and Li/TDS sensitivity rows, but it still does not supply HBTA/TOPO extraction data for those exact rows.
+  - The non-ionic benchmark chemistry should be presented as HBTA/TOPO actual oil and gas field water.
+  - DBM/TOPO can stay in the background as a secondary conventional-ligand comparison, but it should not displace the HBTA/TOPO benchmark.
 
 ## Full Case Study Thesis
 
@@ -71,7 +115,7 @@ The current spec is strong enough to support the story, but the full case study 
 | Chemistry difficulty | The feed is hypersaline and contains competing ions / produced-water complexity | Shows why a physics-based electrolyte model is needed | Ready conceptually; final slide needs a clean sensitivity matrix |
 | Prior limitation | The old Jang-style placeholder did not preserve a convincing Li-over-Na split | Shows the failure mode of weak placeholders | Ready from repo outputs and project memory |
 | ePC-SAFT role | The model computes equilibrium/phase split behavior and supports structured sensitivity over TDS, O/A, solvent, and ion burden | Makes ePC-SAFT the backbone, not a decorative model mention | Needs a dedicated explanatory slide |
-| Selective extraction result | The current Gando-style selective wrapper moves Li while keeping Na low | Gives a quantitative proof point that the workflow can support a better case | Ready from one-stage and three-stage repo assets |
+| Selective extraction result | The current calibrated reactive-stage HBTA/TOPO bridge moves Li while keeping Na low | Gives a quantitative proof point that the workflow can support a better case | Ready from reactive-stage and PrOMMiS handoff artifacts |
 | Process-model bridge | Map equilibrium outputs into PrOMMiS/IDAES variables: phase compositions, phase fractions, distribution ratios, selectivity, raffinate/extract compositions, and validity bounds | Makes the implementation ask concrete | Needs a new slide and handoff table |
 | Integration ask | ePC-SAFT should enter PrOMMiS/IDAES as a property/equilibrium service, surrogate source, or external-function block | Turns the technical result into a clear software roadmap | Needs a closing slide |
 
@@ -120,13 +164,19 @@ Recommended presenter line:
 
 `PrOMMiS and IDAES do not just need a lithium recovery number. They need a defensible map from produced-water chemistry to stage transfer variables. ePC-SAFT is the candidate engine for that map.`
 
+The intended bridge story is:
+
+- non-ionic field-water chemistry in;
+- equilibrium and selectivity variables out;
+- PrOMMiS stage models and IDAES costing in.
+
 ## Novel Insight To Emphasize
 
 The case study should not claim novelty from a single high recovery number. The stronger novelty claim is:
 
 - `Location selection becomes thermodynamic`: Smackover is attractive not only because of lithium grade, but because its combination of high Li, high salinity, favorable basin context, and process infrastructure creates a high-value test of electrolyte thermodynamics.
 - `The model explains why one feed is harder than another`: TDS, competing ions, organics, O/A ratio, and solvent chemistry are variables in the thermodynamic/process story, not nuisance caveats.
-- `The workflow separates physics from calibration`: ePC-SAFT handles the phase-equilibrium backbone; the external chemistry wrapper or surrogate captures chemistry-specific selectivity where bare equilibrium is not enough.
+- `The workflow separates physics from calibration`: ePC-SAFT handles the electrolyte activity/equilibrium backbone; the fitted reactive-stage bridge captures chemistry-specific selectivity until full predictive HBTA/TOPO LLE parameters are available.
 - `The process model gets reusable variables`: the output is not just a plot; it is a pathway to distribution coefficients, phase compositions, selectivity, and validity bounds for PrOMMiS/IDAES.
 
 Use this wording for the strongest claim:
@@ -205,8 +255,8 @@ Use this wording for the strongest claim:
 | Gerardo and Song, 2025 | Basin-scale lithium grade and siting both belong in the screening story | Wolfcamp averages about `14 ppm` Li and the main Permian water-producing formations fall in the `1-30 ppm` range; Marcellus was favored partly because of lower secondary-cation burden and geography | `zotero-local` |
 | Jang et al., 2017 | Divalent-ion pretreatment belongs in the screening story | First-stage divalent removal exceeded `94.4%`; second-stage lithium extraction reached `41.2%`; total recovered lithium was `30.8%` after pretreatment loss | `zotero-local` |
 | Lee and Chung, 2020 | Organics should be treated as a sensitivity axis, not ignored | Increasing alkane chain length and increasing `n`-hexane concentration both reduced final lithium recovery | `zotero-local` |
-| Zante et al., 2020 | Extractant chemistry choice can completely change one-stage performance | After divalent removal, the bifunctional ionic liquid system removed `83%` of lithium in one cycle | `zotero-local` |
-| Wang et al., 2024 | Real produced water can behave differently from synthetic shale-gas brine | Actual produced-water tests gave about `70%` average lithium extraction and as high as `90%`; dissolved organics were not the controlling penalty in that study | `zotero-local` |
+| Shan et al., 2025 | Conventional ligand chemistry can still be highly selective in actual field water | Table 1 is a simulated coexisting-ion feed, while the actual 15 L field-water process case reached above `97%` lithium extraction after impurity removal with HBTA/TOPO | `zotero-local` |
+| Chen et al., 2025 | HBTA and DBM class chemistry give the conventional-ligand comparison frame | Use this as the secondary ligand-class bridge when explaining why the active benchmark is non-ionic rather than ionic-liquid-based | `zotero-local` |
 
 - Speaker points:
   - The case study needs to show more than a single composition and one operating point.
@@ -242,39 +292,39 @@ Use this wording for the strongest claim:
 - Asset sources:
   - Existing placeholder chart can be regenerated from `scripts/lle/jang_2017_stage2_li_na_tbp_d2ehpa.py` if needed. `to-be-generated`
   - If regeneration is not worth it, this slide can use a text-only comparison table.
-  - Optional side table comparing placeholder behavior against literature anchors from Jang 2017, Zante 2020, and Wang 2024.
+  - Optional side table comparing placeholder behavior against literature anchors from Jang 2017, Shan 2025, and Chen 2025.
 
 ### Slide 4
 
-- Title: `What We Can Do Now: One-Stage Selective Produced-Water Split`
-- Purpose: show the first credible lithium-selective result supported by the current workflow.
+- Title: `What We Can Do Now: One-Stage Reactive Produced-Water Split`
+- Purpose: show the first credible lithium-selective result supported by the current calibrated reactive-stage workflow.
 - Visual concept:
   - Main visual: species split chart plus small KPI table.
-  - Supporting annotation: simple process cartoon showing `PC-SAFT phase split + external selective chemistry wrapper`.
+  - Supporting annotation: simple process cartoon showing `ePC-SAFT aqueous activity support + fitted HBTA/TOPO reactive-stage bridge`.
 - Exact quantitative claims:
-  - Nominal one-stage Li extraction = `52.0047%`. `repo-derived`
-  - Nominal one-stage Na extraction = `0.9067%`. `repo-derived`
-  - \(D_{Li} = 1.0835\). `repo-derived`
-  - \(D_{Na} = 0.009150\). `repo-derived`
-  - \(S_{Li/Na} = 118.4138\). `repo-derived`
-  - Raffinate after one stage: Li = `28.7972 mg/L`, Na = `10801.1646 mg/L`. `repo-derived`
-  - This should be framed as a project showcase result, not a direct apples-to-apples replacement for any one literature experiment. `repo-derived`
+  - Selected MS-2 one-stage Li extraction at `O/A = 1` = `47.2846%`. `repo-derived`
+  - Selected MS-2 one-stage Na extraction at `O/A = 1` = `0.0131%`. `repo-derived`
+  - \(D_{Li} = 0.8970\). `repo-derived`
+  - \(S_{Li/Na} = 6840.1071\). `repo-derived`
+  - Raffinate after one stage: Li = `88.5619 mg/L`, Na = `64091.5953 mg/L`. `repo-derived`
+  - Activity source label = `epcsaft_from_local_runtime_params`. `repo-derived`
+  - This should be framed as a calibrated bridge result, not a direct Smackover-well HBTA/TOPO experiment. `repo-derived`
 - Repo evidence:
-  - `data/multiphase/gando_2025_one_stage_assets/gando_2025_one_stage_assets.md`
-  - `data/multiphase/gando_2025_one_stage_assets/gando_2025_one_stage_species_split.png`
-  - `data/multiphase/gando_2025_one_stage_assets/gando_2025_one_stage_nominal_table.png`
+  - `data/reference/produced_water/hbta_topo_reactive_stage_results.csv`
+  - `data/reference/produced_water/hbta_topo_reactive_prommis_stage_table.csv`
+  - `data/reference/produced_water/hbta_topo_reactive_model_report.md`
 - Required bridge statement for the deck:
-  - Present this as the current `selective extraction engine` for a Smackover-like high-TDS lithium brine, not as a claim that the Arkansas wells are already fully parameterized in the repo.
-  - The story should be: basin screening identifies Smackover as the premium target, and the current ePC-SAFT plus external-chemistry workflow is the first model in this project that is strong enough to be calibrated onto that kind of brine without collapsing back to a nonselective placeholder.
+  - Present this as the current `calibrated reactive-stage engine` for a source-backed Smackover feed, not as a claim that the Arkansas wells already have measured HBTA/TOPO extraction data.
+  - The story should be: basin screening identifies Smackover as the premium target, and the current ePC-SAFT plus fitted HBTA/TOPO bridge is the first model in this project that is strong enough to generate process variables for that kind of brine without collapsing back to a nonselective placeholder.
 - Speaker points:
   - This is the first point in the talk where the audience should feel a real step change versus the placeholder case.
   - The result is selective: lithium moves materially, sodium barely moves.
-  - The chemistry is not claimed to arise from the bare flash alone; the wrapper is the point.
-  - That makes this a better bridge to external-function or surrogate deployment because the selective chemistry is isolated and inspectable.
-  - A small benchmark inset can show that the literature also needs chemistry-specific tuning: Jang 2017 reached `41.2%` second-stage lithium extraction after pretreatment, Zante 2020 reached `83%` in one cycle with a bifunctional ionic liquid after divalent removal, and Wang 2024 reported about `70-90%` on actual produced water with ionic-liquid DLE after pretreatment.
+  - The chemistry is not claimed to arise from the bare flash alone; the fitted reaction stoichiometry and activity-informed transfer law are the point.
+  - That makes this a better bridge to external-function or surrogate deployment because the selective chemistry is isolated, inspectable, and labeled by trust region.
+  - A small benchmark inset can show that the literature also needs chemistry-specific tuning: Jang 2017 reached `41.2%` second-stage lithium extraction after pretreatment, Shan 2025 reached above `97%` after impurity removal with HBTA/TOPO in actual field water, and Chen 2025 keeps the HBTA/DBM conventional-ligand comparison frame visible.
 - Asset sources:
-  - Existing repo PNGs listed above.
-  - Optional callout box summarizing wrapper basis from `data/pcsaft_parameters/gando_2025/reactive_selectivity.json`.
+  - Reactive-stage tables listed above.
+  - Optional callout box summarizing fit basis from `data/pcsaft_parameters/gando_2025/hbta_topo_reactive_fit.json`.
   - Optional benchmark inset: `to-be-generated` from Zotero-derived literature anchors.
 
 ### Slide 5
@@ -286,18 +336,18 @@ Use this wording for the strongest claim:
   - Small stage summary table.
   - Right-side callout: `this is the “could not do before” slide`.
 - Exact quantitative claims:
-  - Stage 1 cumulative Li extraction = `52.0047%`. `repo-derived`
-  - Stage 2 cumulative Li extraction = `84.8499%`. `repo-derived`
-  - Stage 3 cumulative Li extraction = `97.8025%`. `repo-derived`
-  - Stage 3 cumulative Na extraction = `3.5827%`. `repo-derived`
-  - Stage 3 \(D_{Li} = 5.8941\). `repo-derived`
-  - Stage 3 \(S_{Li/Na} = 382.7454\). `repo-derived`
+  - Stage 1 cumulative Li extraction = `47.2846%`. `repo-derived`
+  - Stage 2 cumulative Li extraction = `89.5753%`. `repo-derived`
+  - Stage 3 model cumulative Li extraction = `99.99999%`, labeled `outside_literature_capacity_envelope_near_total_transfer`. `repo-derived`
+  - Stage 3 cumulative Na extraction = `0.1160%`. `repo-derived`
+  - Stage 1 \(D_{Li} = 0.8970\). `repo-derived`
+  - Stage 1 \(S_{Li/Na} = 6840.1071\). `repo-derived`
+  - Formal costing uses the source-backed `97.17%` recovery cap instead of the near-total extrapolated model recovery. `repo-derived`
   - Paper comparison for cumulative Li extraction: Stage 1 `54.95%`, Stage 2 `85.60%`, Stage 3 `97.17%`. `repo-derived` from local summary of paper comparison
 - Repo evidence:
-  - `data/multiphase/gando_2025_stage3_comparison.md`
-  - `data/multiphase/gando_2025_slide_assets/gando_2025_slide_assets.md`
-  - `data/multiphase/gando_2025_slide_assets/gando_2025_cumulative_extraction_wide.png`
-  - `data/multiphase/gando_2025_slide_assets/gando_2025_stage_summary_table.png`
+  - `data/reference/produced_water/hbta_topo_reactive_stage_results.csv`
+  - `data/reference/produced_water/hbta_topo_reactive_prommis_stage_table.csv`
+  - `data/reference/produced_water/hbta_topo_formal_costing_results.csv`
 - Speaker points:
   - The new workflow is not just a nicer one-stage spot result; it carries through a staged separation train.
   - By stage 3, lithium recovery is near complete while sodium remains low.
@@ -305,7 +355,7 @@ Use this wording for the strongest claim:
   - If time is tight, this should be the single quantitative hero slide in the case-study section.
   - The produced-water literature mostly reports one- or two-stage experimental demonstrations; showing a clean staged selective progression is one of the strongest differentiators of the current project workflow.
 - Asset sources:
-  - Existing repo PNGs and markdown tables.
+  - Reactive-stage CSVs and generated Quarto tables.
 
 ### Slide 6
 
@@ -325,7 +375,7 @@ Use this wording for the strongest claim:
   - The detailed chemistry model defines the trustworthy region.
   - Trust-region logic prevents the surrogate from being trained blindly in irrelevant or unstable regions.
   - ALAMO is the next surrogate upgrade to test rather than defaulting to low-order polynomials.
-  - The external chemistry wrapper makes it natural to expose the model either as:
+  - The calibrated reactive-stage bridge makes it natural to expose the model either as:
     - an algebraic surrogate inside PrOMMiS, or
     - an external-function-style block similar in spirit to the IAPWS integration pattern.
   - Do not say `best EoS available` unless a benchmark slide is added. Safer wording:
@@ -334,10 +384,10 @@ Use this wording for the strongest claim:
 
 - Why ePC-SAFT is the right backbone for this case:
 
-| Modeling need in the Smackover case | Why ePC-SAFT + external chemistry wrapper fits | Why weaker alternatives are not enough for this project story |
+| Modeling need in the Smackover case | Why ePC-SAFT + calibrated reactive-stage bridge fits | Why weaker alternatives are not enough for this project story |
 |---|---|---|
 | `Very high TDS electrolyte brine` | ePC-SAFT gives a physically structured thermodynamic basis for hypersaline electrolyte brines instead of treating salinity as a nuisance correction | A low-order polynomial surrogate or a fixed placeholder fit cannot be trusted outside its calibration window and does not explain why basin chemistry changes the split |
-| `Aqueous-organic Li-selective extraction` | The current project already couples the ePC-SAFT phase split to an external selective-chemistry layer, which is exactly the architecture needed when bare equilibrium is not the whole story | The old Jang-style placeholder compressed chemistry into fixed factors and lost convincing Li-over-Na selectivity |
+| `Aqueous-organic Li-selective extraction` | The current project already couples ePC-SAFT aqueous activity behavior to a fitted HBTA/TOPO reactive-stage law, which is exactly the architecture needed when bare equilibrium is not the whole story | The old Jang-style placeholder compressed chemistry into fixed factors and lost convincing Li-over-Na selectivity |
 | `Potential organics / hydrocarbon carryover and follow-on VLE` | The same backbone can support mixed aqueous-organic-electrolyte and hydrocarbon cases, which keeps the workflow coherent as the case study expands | Simpler activity-coefficient placeholders tend to become regime-specific and fragment the story into disconnected models |
 | `Process embedding and trust-region surrogates` | A mechanistic thermodynamic backbone is a better source model for ALAMO or external-function deployment because the surrogate can be trained around a physically meaningful region | Surrogating a weak placeholder just produces a faster weak placeholder |
 - Speaker points:
@@ -359,7 +409,7 @@ Use this wording for the strongest claim:
   - Right: PrOMMiS/IDAES stage model box.
 - Required variables to show:
 
-| ePC-SAFT / wrapper output | Process meaning | Presentation use |
+| ePC-SAFT / reactive-stage bridge output | Process meaning | Presentation use |
 |---|---|---|
 | aqueous phase composition | raffinate equilibrium state | shows what remains after extraction |
 | organic phase composition | loaded solvent equilibrium state | shows what the solvent carries forward |
@@ -434,9 +484,9 @@ Use this wording for the strongest claim:
 | Smackover-premium-Li | Use `100-400+ mg/L` hotspot framing | `156,000-340,000 mg/L` TDS with `305,000 mg/L` median from the current USGS 2022 southern-Arkansas observation set | bromine / high-salinity brine context | recovery/value benchmark | `future case expansion` |
 
 - Optional literature-informed note box for this slide:
-  - Jang 2017 and Zante 2020 indicate that synthetic shale-gas produced-water studies remain highly sensitive to divalent-ion removal strategy.
+  - Jang 2017 shows the baseline placeholder problem and why pretreatment matters.
   - Lee 2020 shows organics deserve their own sensitivity row.
-  - Wang 2024 shows actual produced-water behavior can differ from synthetic-brine expectations, so at least one “real brine” branch should exist in any next-step screening plan.
+  - Shan 2025 shows that actual field water with conventional ligands can still be highly selective once impurity removal and chemistry are handled explicitly.
 
 - Speaker points:
   - This slide is intentionally a roadmap, not a fake result slide.
