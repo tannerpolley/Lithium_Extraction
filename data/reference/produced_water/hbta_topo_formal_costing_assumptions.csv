@@ -1,0 +1,14 @@
+assumption,value,units,notes
+Li2CO3_price_low_usd_kg,12.0,USD/kg,"scenario assumption, not market quote"
+Li2CO3_price_base_usd_kg,20.0,USD/kg,"scenario assumption, not market quote"
+Li2CO3_price_high_usd_kg,35.0,USD/kg,"scenario assumption, not market quote"
+pretreatment_low_usd_m3,2.0,USD/m3 feed,placeholder for Ca/Mg removal
+pretreatment_base_usd_m3,5.0,USD/m3 feed,placeholder for Ca/Mg removal
+pretreatment_high_usd_m3,10.0,USD/m3 feed,placeholder for Ca/Mg removal
+extraction_opex_base_usd_m3,3.0,USD/m3 feed,"contacting, pumping, phase disengagement placeholder"
+concentration_precip_base_usd_m3,6.0,USD/m3 feed,stripping/concentration/Li2CO3 precipitation placeholder
+solvent_makeup_low_usd_m3,0.5,USD/m3 feed,low loss scenario
+solvent_makeup_base_usd_m3,2.0,USD/m3 feed,base loss scenario
+solvent_makeup_high_usd_m3,6.0,USD/m3 feed,high loss scenario
+annual_charge_factor,0.2,1/year,conceptual annualized capex factor
+contactor_capex_usd_per_m3_day,15000.0,USD/(m3/day),Class-5 placeholder

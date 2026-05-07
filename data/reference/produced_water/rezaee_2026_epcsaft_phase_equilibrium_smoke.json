@@ -1,0 +1,1218 @@
+{
+  "electrolyte_lle": {
+    "args": [
+      "electrolyte LLE flash did not converge",
+      {
+        "acceptance_gate": "predictive_solve_failed",
+        "algorithm_reference": {
+          "authors": "Ascani, Sadowski, and Held",
+          "doi": "10.1021/acs.jced.1c00866",
+          "title": "Calculation of Multiphase Equilibria Containing Mixed Solvents and Mixed Electrolytes",
+          "year": 2022
+        },
+        "basis_rank": 1,
+        "best_failure_reason": "candidate collapsed to one phase",
+        "best_noncollapsed_candidate": "none",
+        "charge_balance_error": 0.0,
+        "composition_basis": "mole_fraction",
+        "coupled_density_lle_attempted": false,
+        "density_best_near_root": {},
+        "density_candidate_roots": [],
+        "density_diagnostics_mode": "auto",
+        "density_failure_contexts": [],
+        "density_failure_count": 0,
+        "density_fallback_rejected_reason": "",
+        "density_fallback_used": false,
+        "density_scan_summary": {},
+        "density_validity_gate": "not_evaluated",
+        "density_warm_start_source": "",
+        "e_matrix": [
+          [
+            1.0,
+            1.0
+          ]
+        ],
+        "effective_max_iterations": 180,
+        "equilibrium_route": "electrolyte_lle",
+        "experimental_coupled_density_lle": false,
+        "feed_composition": [
+          0.7976019920239601,
+          0.0012000019879999603,
+          0.0012000019879999603,
+          0.19999800400003998
+        ],
+        "fugacity_residual": [
+          -1.2363443602225743e-12,
+          -1.2647660696529783e-12,
+          -2.3874235921539366e-12
+        ],
+        "fugacity_residual_norm": 2.3874235921539366e-12,
+        "gibbs_delta": -2.4868995751603507e-14,
+        "gibbs_feed": -6.249141996910366,
+        "gibbs_seed_method": "native_golden_section",
+        "gibbs_split": -6.2491419969103905,
+        "ignored_legacy_options": [],
+        "iterations": 1,
+        "legacy_candidate_found": false,
+        "legacy_candidate_message": "legacy candidate fallback disabled; Python equilibrium candidates are not exposed.",
+        "legacy_candidate_mode": "auto",
+        "legacy_candidate_residual_tolerance": 0.2,
+        "legacy_candidate_split_tolerance": 0.0001,
+        "material_balance_error": 0.0,
+        "message": "electrolyte LLE flash did not converge",
+        "native_entrypoint": "_solve_equilibrium_native",
+        "phase_distance": 2.7755575615628914e-17,
+        "phase_equilibrium_model": "electrolyte_lle_v5_native_charge_constrained_solve",
+        "repeated_stability_iterations": 1,
+        "requested_max_iterations": 180,
+        "route_reason": "ion-containing mixture",
+        "salt_pairs": [
+          {
+            "anion": 2,
+            "anion_charge": -1.0,
+            "anion_stoich": 1,
+            "cation": 1,
+            "cation_charge": 1.0,
+            "cation_stoich": 1,
+            "label": "LiCl"
+          }
+        ],
+        "seed_attempt_count": 78,
+        "seed_attempts": [
+          {
+            "beta_org": 5.565409565132346e-13,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": 2.743215521405773e-08,
+            "iterations": 13,
+            "material_balance_error": 1.1102230246251565e-16,
+            "phase_distance": 0.7252038708158023,
+            "rejection_reason": "nonlinear residual did not converge",
+            "seed_name": "initial_phases",
+            "solver_residual_norm": 0.7123467084712729
+          },
+          {
+            "beta_org": 0.5,
+            "charge_balance_error": 1e+300,
+            "gibbs_delta": 0.0,
+            "iterations": 21,
+            "material_balance_error": 1e+300,
+            "phase_distance": 0.0,
+            "rejection_reason": "nonlinear residual did not converge",
+            "seed_name": "native_tpd_trial",
+            "solver_residual_norm": 1e+300
+          },
+          {
+            "beta_org": 0.20853497030549192,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": -0.5129143061516617,
+            "iterations": 14,
+            "material_balance_error": 1.1102230246251565e-16,
+            "phase_distance": 0.9589364769316793,
+            "rejection_reason": "nonlinear residual did not converge",
+            "seed_name": "native_gibbs_tpd_trial",
+            "solver_residual_norm": 5.7509697245266125
+          },
+          {
+            "beta_org": 0.020000000000000004,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": -2.4868995751603507e-14,
+            "iterations": 1,
+            "material_balance_error": 0.0,
+            "phase_distance": 2.7755575615628914e-17,
+            "rejection_reason": "candidate collapsed to one phase",
+            "seed_name": "formula_feed_b2",
+            "solver_residual_norm": 2.3874235921539366e-12
+          },
+          {
+            "beta_org": 0.048725664028947666,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": -3.673505943879718e-12,
+            "iterations": 11,
+            "material_balance_error": 1.1102230246251565e-16,
+            "phase_distance": 6.061817714453355e-13,
+            "rejection_reason": "candidate collapsed to one phase",
+            "seed_name": "formula_feed_b5",
+            "solver_residual_norm": 1.1823431123048067e-11
+          },
+          {
+            "beta_org": 0.09999554395045866,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": -1.4866330388940696e-11,
+            "iterations": 10,
+            "material_balance_error": 1.1102230246251565e-16,
+            "phase_distance": 4.0754899455208715e-12,
+            "rejection_reason": "candidate collapsed to one phase",
+            "seed_name": "formula_feed_b10",
+            "solver_residual_norm": 6.900791049702093e-11
+          },
+          {
+            "beta_org": 0.4543531903249494,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": -9.820588786624285e-12,
+            "iterations": 14,
+            "material_balance_error": 1.1102230246251565e-16,
+            "phase_distance": 3.388678226912134e-13,
+            "rejection_reason": "candidate collapsed to one phase",
+            "seed_name": "formula_feed_b25",
+            "solver_residual_norm": 9.777068044058979e-12
+          },
+          {
+            "beta_org": 0.4961538100300829,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": -1.2541079286165768e-12,
+            "iterations": 5,
+            "material_balance_error": 2.220446049250313e-16,
+            "phase_distance": 2.127242826333031e-12,
+            "rejection_reason": "candidate collapsed to one phase",
+            "seed_name": "formula_feed_b50",
+            "solver_residual_norm": 2.3078428057488054e-11
+          },
+          {
+            "beta_org": 0.7326260214819038,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": -5.791811474864517e-12,
+            "iterations": 9,
+            "material_balance_error": 5.551115123125783e-17,
+            "phase_distance": 5.440092820663267e-15,
+            "rejection_reason": "candidate collapsed to one phase",
+            "seed_name": "formula_feed_b75",
+            "solver_residual_norm": 2.6356694604601216e-12
+          },
+          {
+            "beta_org": 0.9067126747999926,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": -8.997247391562269e-12,
+            "iterations": 3,
+            "material_balance_error": 2.168404344971009e-19,
+            "phase_distance": 1.399047544481391e-12,
+            "rejection_reason": "candidate collapsed to one phase",
+            "seed_name": "formula_feed_b90",
+            "solver_residual_norm": 5.547917680814862e-11
+          },
+          {
+            "beta_org": 3.1955631873017924e-19,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": -1.2947865002388426e-11,
+            "iterations": 25,
+            "material_balance_error": 0.0,
+            "phase_distance": 0.19999751399002516,
+            "rejection_reason": "nonlinear residual did not converge",
+            "seed_name": "formula_component_0_rich_b2",
+            "solver_residual_norm": 0.5038130400336422
+          },
+          {
+            "beta_org": 9.885694581809164e-305,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": 0.0,
+            "iterations": 27,
+            "material_balance_error": 0.0,
+            "phase_distance": 0.1999975139898793,
+            "rejection_reason": "nonlinear residual did not converge",
+            "seed_name": "formula_component_0_rich_b5",
+            "solver_residual_norm": 0.5038130372965535
+          },
+          {
+            "beta_org": 9.885694643530757e-305,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": 0.0,
+            "iterations": 30,
+            "material_balance_error": 0.0,
+            "phase_distance": 0.19999751398975407,
+            "rejection_reason": "nonlinear residual did not converge",
+            "seed_name": "formula_component_0_rich_b10",
+            "solver_residual_norm": 0.5038130488420713
+          },
+          {
+            "beta_org": 4.491006560942484e-56,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": -1.2947865002388426e-11,
+            "iterations": 28,
+            "material_balance_error": 0.0,
+            "phase_distance": 0.19999751398988222,
+            "rejection_reason": "nonlinear residual did not converge",
+            "seed_name": "formula_component_0_rich_b25",
+            "solver_residual_norm": 0.5038130408017865
+          },
+          {
+            "beta_org": 2.375197994503223e-16,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": -1.169819796587035e-11,
+            "iterations": 27,
+            "material_balance_error": 1.1102230246251565e-16,
+            "phase_distance": 0.1999975139898618,
+            "rejection_reason": "nonlinear residual did not converge",
+            "seed_name": "formula_component_0_rich_b50",
+            "solver_residual_norm": 0.5038130448799563
+          },
+          {
+            "beta_org": 1.1496479453140832e-40,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": -5.006661751849606e-12,
+            "iterations": 35,
+            "material_balance_error": 0.0,
+            "phase_distance": 0.199997513989715,
+            "rejection_reason": "nonlinear residual did not converge",
+            "seed_name": "formula_component_0_rich_b75",
+            "solver_residual_norm": 0.5038130486888246
+          },
+          {
+            "beta_org": 0.5,
+            "charge_balance_error": 1e+300,
+            "gibbs_delta": 0.0,
+            "iterations": 16,
+            "material_balance_error": 1e+300,
+            "phase_distance": 0.0,
+            "rejection_reason": "nonlinear residual did not converge",
+            "seed_name": "formula_component_0_rich_b90",
+            "solver_residual_norm": 1e+300
+          },
+          {
+            "beta_org": 1.2073087174762311e-17,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": -5.006661751849606e-12,
+            "iterations": 41,
+            "material_balance_error": 0.0,
+            "phase_distance": 0.747923576964613,
+            "rejection_reason": "nonlinear residual did not converge",
+            "seed_name": "formula_component_1_rich_b2",
+            "solver_residual_norm": 0.5829512714004821
+          },
+          {
+            "beta_org": 1.2243883747445867e-18,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": 0.0,
+            "iterations": 38,
+            "material_balance_error": 0.0,
+            "phase_distance": 0.7479236751081568,
+            "rejection_reason": "nonlinear residual did not converge",
+            "seed_name": "formula_component_1_rich_b5",
+            "solver_residual_norm": 0.5829512414905587
+          },
+          {
+            "beta_org": 1.145341203557417e-238,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": -1.2947865002388426e-11,
+            "iterations": 44,
+            "material_balance_error": 0.0,
+            "phase_distance": 0.747923500910934,
+            "rejection_reason": "nonlinear residual did not converge",
+            "seed_name": "formula_component_1_rich_b10",
+            "solver_residual_norm": 0.5829512945722293
+          },
+          {
+            "beta_org": 0.5,
+            "charge_balance_error": 1e+300,
+            "gibbs_delta": 0.0,
+            "iterations": 9,
+            "material_balance_error": 1e+300,
+            "phase_distance": 0.0,
+            "rejection_reason": "nonlinear residual did not converge",
+            "seed_name": "formula_component_1_rich_b25",
+            "solver_residual_norm": 1e+300
+          },
+          {
+            "beta_org": 0.5,
+            "charge_balance_error": 1e+300,
+            "gibbs_delta": 0.0,
+            "iterations": 16,
+            "material_balance_error": 1e+300,
+            "phase_distance": 0.0,
+            "rejection_reason": "nonlinear residual did not converge",
+            "seed_name": "formula_component_1_rich_b50",
+            "solver_residual_norm": 1e+300
+          },
+          {
+            "beta_org": 0.5,
+            "charge_balance_error": 1e+300,
+            "gibbs_delta": 0.0,
+            "iterations": 17,
+            "material_balance_error": 1e+300,
+            "phase_distance": 0.0,
+            "rejection_reason": "nonlinear residual did not converge",
+            "seed_name": "formula_component_1_rich_b75",
+            "solver_residual_norm": 1e+300
+          },
+          {
+            "beta_org": 0.5,
+            "charge_balance_error": 1e+300,
+            "gibbs_delta": 0.0,
+            "iterations": 21,
+            "material_balance_error": 1e+300,
+            "phase_distance": 0.0,
+            "rejection_reason": "nonlinear residual did not converge",
+            "seed_name": "formula_component_1_rich_b90",
+            "solver_residual_norm": 1e+300
+          },
+          {
+            "beta_org": 0.5,
+            "charge_balance_error": 1e+300,
+            "gibbs_delta": 0.0,
+            "iterations": 23,
+            "material_balance_error": 1e+300,
+            "phase_distance": 0.0,
+            "rejection_reason": "nonlinear residual did not converge",
+            "seed_name": "formula_component_2_rich_b2",
+            "solver_residual_norm": 1e+300
+          },
+          {
+            "beta_org": 0.5,
+            "charge_balance_error": 1e+300,
+            "gibbs_delta": 0.0,
+            "iterations": 11,
+            "material_balance_error": 1e+300,
+            "phase_distance": 0.0,
+            "rejection_reason": "nonlinear residual did not converge",
+            "seed_name": "formula_component_2_rich_b5",
+            "solver_residual_norm": 1e+300
+          },
+          {
+            "beta_org": 0.5,
+            "charge_balance_error": 1e+300,
+            "gibbs_delta": 0.0,
+            "iterations": 16,
+            "material_balance_error": 1e+300,
+            "phase_distance": 0.0,
+            "rejection_reason": "nonlinear residual did not converge",
+            "seed_name": "formula_component_2_rich_b10",
+            "solver_residual_norm": 1e+300
+          },
+          {
+            "beta_org": 0.5,
+            "charge_balance_error": 1e+300,
+            "gibbs_delta": 0.0,
+            "iterations": 25,
+            "material_balance_error": 1e+300,
+            "phase_distance": 0.0,
+            "rejection_reason": "nonlinear residual did not converge",
+            "seed_name": "formula_component_2_rich_b25",
+            "solver_residual_norm": 1e+300
+          },
+          {
+            "beta_org": 0.5,
+            "charge_balance_error": 1e+300,
+            "gibbs_delta": 0.0,
+            "iterations": 24,
+            "material_balance_error": 1e+300,
+            "phase_distance": 0.0,
+            "rejection_reason": "nonlinear residual did not converge",
+            "seed_name": "formula_component_2_rich_b50",
+            "solver_residual_norm": 1e+300
+          },
+          {
+            "beta_org": 0.5,
+            "charge_balance_error": 1e+300,
+            "gibbs_delta": 0.0,
+            "iterations": 29,
+            "material_balance_error": 1e+300,
+            "phase_distance": 0.0,
+            "rejection_reason": "nonlinear residual did not converge",
+            "seed_name": "formula_component_2_rich_b75",
+            "solver_residual_norm": 1e+300
+          },
+          {
+            "beta_org": 0.5,
+            "charge_balance_error": 1e+300,
+            "gibbs_delta": 0.0,
+            "iterations": 28,
+            "material_balance_error": 1e+300,
+            "phase_distance": 0.0,
+            "rejection_reason": "nonlinear residual did not converge",
+            "seed_name": "formula_component_2_rich_b90",
+            "solver_residual_norm": 1e+300
+          },
+          {
+            "beta_org": 9.859676543759995e-305,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": 0.0,
+            "iterations": 46,
+            "material_balance_error": 0.0,
+            "phase_distance": 1.3148648836391885e-12,
+            "rejection_reason": "Gibbs split was not favored by current thermodynamic surface",
+            "seed_name": "partition_seed_b2",
+            "solver_residual_norm": 1.488542622496425e-11
+          },
+          {
+            "beta_org": 0.5,
+            "charge_balance_error": 1e+300,
+            "gibbs_delta": 0.0,
+            "iterations": 12,
+            "material_balance_error": 1e+300,
+            "phase_distance": 0.0,
+            "rejection_reason": "nonlinear residual did not converge",
+            "seed_name": "partition_seed_b5",
+            "solver_residual_norm": 1e+300
+          },
+          {
+            "beta_org": 0.5,
+            "charge_balance_error": 1e+300,
+            "gibbs_delta": 0.0,
+            "iterations": 18,
+            "material_balance_error": 1e+300,
+            "phase_distance": 0.0,
+            "rejection_reason": "nonlinear residual did not converge",
+            "seed_name": "partition_seed_b10",
+            "solver_residual_norm": 1e+300
+          },
+          {
+            "beta_org": 2.8412891012413354e-11,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": 3.678835014397919e-12,
+            "iterations": 16,
+            "material_balance_error": 1.1102230246251565e-16,
+            "phase_distance": 0.10239066176336853,
+            "rejection_reason": "nonlinear residual did not converge",
+            "seed_name": "partition_seed_b25",
+            "solver_residual_norm": 5.642803439657996
+          },
+          {
+            "beta_org": 2.475673998710378e-44,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": -1.2947865002388426e-11,
+            "iterations": 66,
+            "material_balance_error": 0.0,
+            "phase_distance": 0.7479234504476598,
+            "rejection_reason": "nonlinear residual did not converge",
+            "seed_name": "partition_seed_b50",
+            "solver_residual_norm": 0.5829509768209356
+          },
+          {
+            "beta_org": 1.3120099613011472e-33,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": 0.0,
+            "iterations": 59,
+            "material_balance_error": 0.0,
+            "phase_distance": 0.7479235222687164,
+            "rejection_reason": "nonlinear residual did not converge",
+            "seed_name": "partition_seed_b75",
+            "solver_residual_norm": 0.5829506811329495
+          },
+          {
+            "beta_org": 6.685144156661389e-16,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": 0.0,
+            "iterations": 63,
+            "material_balance_error": 0.0,
+            "phase_distance": 1.9735046929980626e-12,
+            "rejection_reason": "Gibbs split was not favored by current thermodynamic surface",
+            "seed_name": "partition_seed_b90",
+            "solver_residual_norm": 1.3415046851150692e-11
+          },
+          {
+            "beta_org": 1.7907657861253573e-46,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": -1.2947865002388426e-11,
+            "iterations": 42,
+            "material_balance_error": 0.0,
+            "phase_distance": 7.019107517436396e-13,
+            "rejection_reason": "candidate collapsed to one phase",
+            "seed_name": "org_endpoint_salt_1_b2",
+            "solver_residual_norm": 1.949729266925715e-11
+          },
+          {
+            "beta_org": 1.443710482201572e-40,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": 0.0,
+            "iterations": 44,
+            "material_balance_error": 0.0,
+            "phase_distance": 1.0448031328991192e-12,
+            "rejection_reason": "Gibbs split was not favored by current thermodynamic surface",
+            "seed_name": "org_endpoint_salt_1_b5",
+            "solver_residual_norm": 1.6654233547797048e-11
+          },
+          {
+            "beta_org": 5.798569548651082e-23,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": -1.2947865002388426e-11,
+            "iterations": 44,
+            "material_balance_error": 0.0,
+            "phase_distance": 4.96713781217295e-13,
+            "rejection_reason": "candidate collapsed to one phase",
+            "seed_name": "org_endpoint_salt_1_b10",
+            "solver_residual_norm": 6.174616373755271e-12
+          },
+          {
+            "beta_org": 0.2670407867633399,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": -0.45891740227495603,
+            "iterations": 9,
+            "material_balance_error": 5.551115123125783e-17,
+            "phase_distance": 0.750813027382599,
+            "rejection_reason": "nonlinear residual did not converge",
+            "seed_name": "org_endpoint_salt_1_b25",
+            "solver_residual_norm": 17.191148529940733
+          },
+          {
+            "beta_org": 0.19308373357516992,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": -0.16187715648960221,
+            "iterations": 24,
+            "material_balance_error": 1.1102230246251565e-16,
+            "phase_distance": 0.667761211159996,
+            "rejection_reason": "nonlinear residual did not converge",
+            "seed_name": "org_endpoint_salt_1_b50",
+            "solver_residual_norm": 16.30921075297647
+          },
+          {
+            "beta_org": 1.016461443243598e-13,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": -1.2721379505364894e-11,
+            "iterations": 2,
+            "material_balance_error": 1.1102230246251565e-16,
+            "phase_distance": 0.12781695540159654,
+            "rejection_reason": "nonlinear residual did not converge",
+            "seed_name": "aq_endpoint_salt_1_b2",
+            "solver_residual_norm": 2.291087040288783
+          },
+          {
+            "beta_org": 9.859676543759765e-305,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": -8.351541680440278e-12,
+            "iterations": 41,
+            "material_balance_error": 0.0,
+            "phase_distance": 9.972023207183156e-13,
+            "rejection_reason": "candidate collapsed to one phase",
+            "seed_name": "aq_endpoint_salt_1_b5",
+            "solver_residual_norm": 8.185452315956354e-12
+          },
+          {
+            "beta_org": 9.859676543759779e-305,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": -8.351541680440278e-12,
+            "iterations": 41,
+            "material_balance_error": 0.0,
+            "phase_distance": 1.030453500305839e-12,
+            "rejection_reason": "candidate collapsed to one phase",
+            "seed_name": "aq_endpoint_salt_1_b10",
+            "solver_residual_norm": 7.560174708487466e-12
+          },
+          {
+            "beta_org": 9.859676543759805e-305,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": -5.006661751849606e-12,
+            "iterations": 42,
+            "material_balance_error": 0.0,
+            "phase_distance": 1.472572064287192e-12,
+            "rejection_reason": "candidate collapsed to one phase",
+            "seed_name": "aq_endpoint_salt_1_b25",
+            "solver_residual_norm": 1.1713296999005252e-11
+          },
+          {
+            "beta_org": 7.900771891325574e-13,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": -8.529177364380303e-12,
+            "iterations": 4,
+            "material_balance_error": 1.1102230246251565e-16,
+            "phase_distance": 0.07988777964591143,
+            "rejection_reason": "nonlinear residual did not converge",
+            "seed_name": "aq_endpoint_salt_1_b50",
+            "solver_residual_norm": 1.841774514345218
+          },
+          {
+            "beta_org": 1.1134336442334742e-11,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": -7.632117160483176e-12,
+            "iterations": 3,
+            "material_balance_error": 2.220446049250313e-16,
+            "phase_distance": 0.2791667421436024,
+            "rejection_reason": "nonlinear residual did not converge",
+            "seed_name": "org_endpoint_salt_10_b2",
+            "solver_residual_norm": 9.763115030604183
+          },
+          {
+            "beta_org": 9.859676543759963e-305,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": 0.0,
+            "iterations": 45,
+            "material_balance_error": 0.0,
+            "phase_distance": 6.392664175791651e-13,
+            "rejection_reason": "Gibbs split was not favored by current thermodynamic surface",
+            "seed_name": "org_endpoint_salt_10_b5",
+            "solver_residual_norm": 1.5221157667610896e-11
+          },
+          {
+            "beta_org": 0.0007820943414820828,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": 3.134381643121742e-12,
+            "iterations": 45,
+            "material_balance_error": 2.7755575615628914e-17,
+            "phase_distance": 5.152267501529195e-13,
+            "rejection_reason": "Gibbs split was not favored by current thermodynamic surface",
+            "seed_name": "org_endpoint_salt_10_b10",
+            "solver_residual_norm": 3.1036506698001176e-11
+          },
+          {
+            "beta_org": 0.5,
+            "charge_balance_error": 1e+300,
+            "gibbs_delta": 0.0,
+            "iterations": 9,
+            "material_balance_error": 1e+300,
+            "phase_distance": 0.0,
+            "rejection_reason": "nonlinear residual did not converge",
+            "seed_name": "org_endpoint_salt_10_b25",
+            "solver_residual_norm": 1e+300
+          },
+          {
+            "beta_org": 0.0001083200196339013,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": 7.51576578750246e-12,
+            "iterations": 62,
+            "material_balance_error": 1.1102230246251565e-16,
+            "phase_distance": 1.8167412019209905e-12,
+            "rejection_reason": "Gibbs split was not favored by current thermodynamic surface",
+            "seed_name": "org_endpoint_salt_10_b50",
+            "solver_residual_norm": 2.6830093702301383e-11
+          },
+          {
+            "beta_org": 0.0033144370006587603,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": -0.0005839530477720345,
+            "iterations": 9,
+            "material_balance_error": 1.1102230246251565e-16,
+            "phase_distance": 0.15128406141080095,
+            "rejection_reason": "nonlinear residual did not converge",
+            "seed_name": "aq_endpoint_salt_10_b2",
+            "solver_residual_norm": 3.5768029222865714
+          },
+          {
+            "beta_org": 0.02403889765749122,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": -0.004171334930703985,
+            "iterations": 10,
+            "material_balance_error": 1.1102230246251565e-16,
+            "phase_distance": 0.15456355293708676,
+            "rejection_reason": "nonlinear residual did not converge",
+            "seed_name": "aq_endpoint_salt_10_b5",
+            "solver_residual_norm": 3.604996176416279
+          },
+          {
+            "beta_org": 0.0829550520180517,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": -0.0144371791552933,
+            "iterations": 3,
+            "material_balance_error": 1.1102230246251565e-16,
+            "phase_distance": 0.16456678267751582,
+            "rejection_reason": "nonlinear residual did not converge",
+            "seed_name": "aq_endpoint_salt_10_b10",
+            "solver_residual_norm": 5.21782428107457
+          },
+          {
+            "beta_org": 0.04684899169608793,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": -0.003304112099710821,
+            "iterations": 7,
+            "material_balance_error": 2.7755575615628914e-17,
+            "phase_distance": 0.11927223970037981,
+            "rejection_reason": "nonlinear residual did not converge",
+            "seed_name": "aq_endpoint_salt_10_b25",
+            "solver_residual_norm": 3.5498848532977263
+          },
+          {
+            "beta_org": 0.042201643121966566,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": -0.0013494786673984294,
+            "iterations": 14,
+            "material_balance_error": 2.220446049250313e-16,
+            "phase_distance": 0.08873537399634913,
+            "rejection_reason": "nonlinear residual did not converge",
+            "seed_name": "aq_endpoint_salt_10_b50",
+            "solver_residual_norm": 2.9713089654437113
+          },
+          {
+            "beta_org": 9.859676543760133e-305,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": -8.351541680440278e-12,
+            "iterations": 44,
+            "material_balance_error": 0.0,
+            "phase_distance": 2.558370182370595e-12,
+            "rejection_reason": "candidate collapsed to one phase",
+            "seed_name": "org_endpoint_salt_50_b2",
+            "solver_residual_norm": 3.6777692002942786e-11
+          },
+          {
+            "beta_org": 0.5,
+            "charge_balance_error": 1e+300,
+            "gibbs_delta": 0.0,
+            "iterations": 7,
+            "material_balance_error": 1e+300,
+            "phase_distance": 0.0,
+            "rejection_reason": "nonlinear residual did not converge",
+            "seed_name": "org_endpoint_salt_50_b5",
+            "solver_residual_norm": 1e+300
+          },
+          {
+            "beta_org": 0.5,
+            "charge_balance_error": 1e+300,
+            "gibbs_delta": 0.0,
+            "iterations": 17,
+            "material_balance_error": 1e+300,
+            "phase_distance": 0.0,
+            "rejection_reason": "nonlinear residual did not converge",
+            "seed_name": "org_endpoint_salt_50_b10",
+            "solver_residual_norm": 1e+300
+          },
+          {
+            "beta_org": 0.5,
+            "charge_balance_error": 1e+300,
+            "gibbs_delta": 0.0,
+            "iterations": 15,
+            "material_balance_error": 1e+300,
+            "phase_distance": 0.0,
+            "rejection_reason": "nonlinear residual did not converge",
+            "seed_name": "org_endpoint_salt_50_b25",
+            "solver_residual_norm": 1e+300
+          },
+          {
+            "beta_org": 0.5,
+            "charge_balance_error": 1e+300,
+            "gibbs_delta": 0.0,
+            "iterations": 11,
+            "material_balance_error": 1e+300,
+            "phase_distance": 0.0,
+            "rejection_reason": "nonlinear residual did not converge",
+            "seed_name": "org_endpoint_salt_50_b50",
+            "solver_residual_norm": 1e+300
+          },
+          {
+            "beta_org": 7.28414732158223e-24,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": -5.006661751849606e-12,
+            "iterations": 46,
+            "material_balance_error": 0.0,
+            "phase_distance": 1.6880941089425505e-13,
+            "rejection_reason": "candidate collapsed to one phase",
+            "seed_name": "aq_endpoint_salt_50_b2",
+            "solver_residual_norm": 2.8421709430404007e-12
+          },
+          {
+            "beta_org": 1.1582033937762979e-62,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": -1.2947865002388426e-11,
+            "iterations": 44,
+            "material_balance_error": 0.0,
+            "phase_distance": 1.3078427230084344e-12,
+            "rejection_reason": "candidate collapsed to one phase",
+            "seed_name": "aq_endpoint_salt_50_b5",
+            "solver_residual_norm": 1.071143174158351e-11
+          },
+          {
+            "beta_org": 2.4775134885456993e-146,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": -8.351541680440278e-12,
+            "iterations": 47,
+            "material_balance_error": 0.0,
+            "phase_distance": 1.1850798120605077e-12,
+            "rejection_reason": "candidate collapsed to one phase",
+            "seed_name": "aq_endpoint_salt_50_b10",
+            "solver_residual_norm": 1.0800249583553523e-11
+          },
+          {
+            "beta_org": 4.869957031413062e-16,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": -8.351541680440278e-12,
+            "iterations": 48,
+            "material_balance_error": 2.7755575615628914e-17,
+            "phase_distance": 1.0515199821981014e-12,
+            "rejection_reason": "candidate collapsed to one phase",
+            "seed_name": "aq_endpoint_salt_50_b25",
+            "solver_residual_norm": 1.2164491636212915e-11
+          },
+          {
+            "beta_org": 1.1188207720851377e-70,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": -8.351541680440278e-12,
+            "iterations": 48,
+            "material_balance_error": 0.0,
+            "phase_distance": 6.852185485684004e-12,
+            "rejection_reason": "candidate collapsed to one phase",
+            "seed_name": "aq_endpoint_salt_50_b50",
+            "solver_residual_norm": 4.0749625895841746e-11
+          },
+          {
+            "beta_org": 0.5,
+            "charge_balance_error": 1e+300,
+            "gibbs_delta": 0.0,
+            "iterations": 17,
+            "material_balance_error": 1e+300,
+            "phase_distance": 0.0,
+            "rejection_reason": "nonlinear residual did not converge",
+            "seed_name": "org_endpoint_salt_150_b2",
+            "solver_residual_norm": 1e+300
+          },
+          {
+            "beta_org": 0.5,
+            "charge_balance_error": 1e+300,
+            "gibbs_delta": 0.0,
+            "iterations": 16,
+            "material_balance_error": 1e+300,
+            "phase_distance": 0.0,
+            "rejection_reason": "nonlinear residual did not converge",
+            "seed_name": "org_endpoint_salt_150_b5",
+            "solver_residual_norm": 1e+300
+          },
+          {
+            "beta_org": 0.5,
+            "charge_balance_error": 1e+300,
+            "gibbs_delta": 0.0,
+            "iterations": 19,
+            "material_balance_error": 1e+300,
+            "phase_distance": 0.0,
+            "rejection_reason": "nonlinear residual did not converge",
+            "seed_name": "org_endpoint_salt_150_b10",
+            "solver_residual_norm": 1e+300
+          },
+          {
+            "beta_org": 0.5,
+            "charge_balance_error": 1e+300,
+            "gibbs_delta": 0.0,
+            "iterations": 21,
+            "material_balance_error": 1e+300,
+            "phase_distance": 0.0,
+            "rejection_reason": "nonlinear residual did not converge",
+            "seed_name": "org_endpoint_salt_150_b25",
+            "solver_residual_norm": 1e+300
+          },
+          {
+            "beta_org": 0.5,
+            "charge_balance_error": 1e+300,
+            "gibbs_delta": 0.0,
+            "iterations": 21,
+            "material_balance_error": 1e+300,
+            "phase_distance": 0.0,
+            "rejection_reason": "nonlinear residual did not converge",
+            "seed_name": "org_endpoint_salt_150_b50",
+            "solver_residual_norm": 1e+300
+          },
+          {
+            "beta_org": 2.8511542812461398e-87,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": -5.006661751849606e-12,
+            "iterations": 44,
+            "material_balance_error": 0.0,
+            "phase_distance": 1.5121237595394632e-12,
+            "rejection_reason": "candidate collapsed to one phase",
+            "seed_name": "aq_endpoint_salt_150_b2",
+            "solver_residual_norm": 1.9175772081325704e-11
+          },
+          {
+            "beta_org": 8.011032760988782e-192,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": -1.2947865002388426e-11,
+            "iterations": 46,
+            "material_balance_error": 0.0,
+            "phase_distance": 7.097655796428626e-13,
+            "rejection_reason": "candidate collapsed to one phase",
+            "seed_name": "aq_endpoint_salt_150_b5",
+            "solver_residual_norm": 1.1709744285326451e-11
+          },
+          {
+            "beta_org": 1.321410737714565e-37,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": -1.2947865002388426e-11,
+            "iterations": 48,
+            "material_balance_error": 0.0,
+            "phase_distance": 5.159761506945415e-13,
+            "rejection_reason": "candidate collapsed to one phase",
+            "seed_name": "aq_endpoint_salt_150_b10",
+            "solver_residual_norm": 1.750777300912887e-11
+          },
+          {
+            "beta_org": 4.8286851195860864e-12,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": -1.0330403199532157e-11,
+            "iterations": 12,
+            "material_balance_error": 2.220446049250313e-16,
+            "phase_distance": 0.05589816501803965,
+            "rejection_reason": "nonlinear residual did not converge",
+            "seed_name": "aq_endpoint_salt_150_b25",
+            "solver_residual_norm": 5.384328472527386
+          },
+          {
+            "beta_org": 9.859676543759579e-305,
+            "charge_balance_error": 0.0,
+            "gibbs_delta": -1.2947865002388426e-11,
+            "iterations": 55,
+            "material_balance_error": 0.0,
+            "phase_distance": 1.1512180098094404e-12,
+            "rejection_reason": "candidate collapsed to one phase",
+            "seed_name": "aq_endpoint_salt_150_b50",
+            "solver_residual_norm": 1.0743406164692715e-11
+          }
+        ],
+        "solver_language": "c++",
+        "solver_method": "native_transformed_newton",
+        "solver_residual_norm": 2.3874235921539366e-12,
+        "solver_seed_name": "formula_feed_b2",
+        "stability_analysis": "electrolyte_tpd",
+        "stability_checked": true,
+        "stability_min_tpd": -0.5681261682618914,
+        "stability_stable": false,
+        "tpd_method": "native_tpd_global_search",
+        "unstable_feed_collapsed_all_candidates": true,
+        "variable_model": "ascani_transformed_salt_pairs"
+      }
+    ],
+    "diagnostics_summary": {
+      "acceptance_gate": "predictive_solve_failed",
+      "algorithm_reference": {
+        "authors": "Ascani, Sadowski, and Held",
+        "doi": "10.1021/acs.jced.1c00866",
+        "title": "Calculation of Multiphase Equilibria Containing Mixed Solvents and Mixed Electrolytes",
+        "year": 2022
+      },
+      "basis_rank": 1,
+      "best_failure_reason": "candidate collapsed to one phase",
+      "best_noncollapsed_candidate": "none",
+      "charge_balance_error": 0.0,
+      "composition_basis": "mole_fraction",
+      "coupled_density_lle_attempted": false,
+      "density_best_near_root": {},
+      "density_candidate_roots": [],
+      "density_diagnostics_mode": "auto",
+      "density_failure_context_count": 0,
+      "density_failure_contexts": [],
+      "density_failure_count": 0,
+      "density_fallback_rejected_reason": "",
+      "density_fallback_used": false,
+      "density_scan_summary": {},
+      "density_validity_gate": "not_evaluated",
+      "density_warm_start_source": "",
+      "e_matrix": [
+        [
+          1.0,
+          1.0
+        ]
+      ],
+      "effective_max_iterations": 180,
+      "equilibrium_route": "electrolyte_lle",
+      "experimental_coupled_density_lle": false,
+      "feed_composition": [
+        0.7976019920239601,
+        0.0012000019879999603,
+        0.0012000019879999603,
+        0.19999800400003998
+      ],
+      "fugacity_residual": [
+        -1.2363443602225743e-12,
+        -1.2647660696529783e-12,
+        -2.3874235921539366e-12
+      ],
+      "fugacity_residual_norm": 2.3874235921539366e-12,
+      "gibbs_delta": -2.4868995751603507e-14,
+      "gibbs_feed": -6.249141996910366,
+      "gibbs_seed_method": "native_golden_section",
+      "gibbs_split": -6.2491419969103905,
+      "ignored_legacy_options": [],
+      "iterations": 1,
+      "legacy_candidate_found": false,
+      "legacy_candidate_message": "legacy candidate fallback disabled; Python equilibrium candidates are not exposed.",
+      "legacy_candidate_mode": "auto",
+      "legacy_candidate_residual_tolerance": 0.2,
+      "legacy_candidate_split_tolerance": 0.0001,
+      "material_balance_error": 0.0,
+      "message": "electrolyte LLE flash did not converge",
+      "native_entrypoint": "_solve_equilibrium_native",
+      "phase_distance": 2.7755575615628914e-17,
+      "phase_equilibrium_model": "electrolyte_lle_v5_native_charge_constrained_solve",
+      "repeated_stability_iterations": 1,
+      "requested_max_iterations": 180,
+      "route_reason": "ion-containing mixture",
+      "salt_pairs": [
+        {
+          "anion": 2,
+          "anion_charge": -1.0,
+          "anion_stoich": 1,
+          "cation": 1,
+          "cation_charge": 1.0,
+          "cation_stoich": 1,
+          "label": "LiCl"
+        }
+      ],
+      "seed_attempt_count": 78,
+      "seed_attempts": [
+        {
+          "beta_org": 5.565409565132346e-13,
+          "charge_balance_error": 0.0,
+          "gibbs_delta": 2.743215521405773e-08,
+          "iterations": 13,
+          "material_balance_error": 1.1102230246251565e-16,
+          "phase_distance": 0.7252038708158023,
+          "rejection_reason": "nonlinear residual did not converge",
+          "seed_name": "initial_phases",
+          "solver_residual_norm": 0.7123467084712729
+        },
+        {
+          "beta_org": 0.5,
+          "charge_balance_error": 1e+300,
+          "gibbs_delta": 0.0,
+          "iterations": 21,
+          "material_balance_error": 1e+300,
+          "phase_distance": 0.0,
+          "rejection_reason": "nonlinear residual did not converge",
+          "seed_name": "native_tpd_trial",
+          "solver_residual_norm": 1e+300
+        },
+        {
+          "beta_org": 0.20853497030549192,
+          "charge_balance_error": 0.0,
+          "gibbs_delta": -0.5129143061516617,
+          "iterations": 14,
+          "material_balance_error": 1.1102230246251565e-16,
+          "phase_distance": 0.9589364769316793,
+          "rejection_reason": "nonlinear residual did not converge",
+          "seed_name": "native_gibbs_tpd_trial",
+          "solver_residual_norm": 5.7509697245266125
+        },
+        {
+          "beta_org": 0.020000000000000004,
+          "charge_balance_error": 0.0,
+          "gibbs_delta": -2.4868995751603507e-14,
+          "iterations": 1,
+          "material_balance_error": 0.0,
+          "phase_distance": 2.7755575615628914e-17,
+          "rejection_reason": "candidate collapsed to one phase",
+          "seed_name": "formula_feed_b2",
+          "solver_residual_norm": 2.3874235921539366e-12
+        },
+        {
+          "beta_org": 0.048725664028947666,
+          "charge_balance_error": 0.0,
+          "gibbs_delta": -3.673505943879718e-12,
+          "iterations": 11,
+          "material_balance_error": 1.1102230246251565e-16,
+          "phase_distance": 6.061817714453355e-13,
+          "rejection_reason": "candidate collapsed to one phase",
+          "seed_name": "formula_feed_b5",
+          "solver_residual_norm": 1.1823431123048067e-11
+        }
+      ],
+      "solver_language": "c++",
+      "solver_method": "native_transformed_newton",
+      "solver_residual_norm": 2.3874235921539366e-12,
+      "solver_seed_name": "formula_feed_b2",
+      "stability_analysis": "electrolyte_tpd",
+      "stability_checked": true,
+      "stability_min_tpd": -0.5681261682618914,
+      "stability_stable": false,
+      "tpd_method": "native_tpd_global_search",
+      "unstable_feed_collapsed_all_candidates": true,
+      "variable_model": "ascani_transformed_salt_pairs"
+    },
+    "error_type": "SolutionError",
+    "message": "('electrolyte LLE flash did not converge', {'charge_balance_error': 0.0, 'fugacity_residual_norm': 2.3874235921539366e-12, 'gibbs_delta': -2.4868995751603507e-14, 'gibbs_feed': -6.249141996910366, 'gibbs_split': -6.2491419969103905, 'material_balance_error': 0.0, 'phase_distance': 2.7755575615628914e-17, 'solver_residual_norm': 2.3874235921539366e-12, 'stability_min_tpd': -0.5681261682618914, 'basis_rank': 1, 'density_failure_count': 0, 'effective_max_iterations': 180, 'iterations': 1, 'repeated_stability_iterations': 1, 'requested_max_iterations': 180, 'seed_attempt_count': 78, 'coupled_density_lle_attempted': False, 'density_fallback_used': False, 'experimental_coupled_density_lle': False, 'stability_checked': True, 'stability_stable': False, 'unstable_feed_collapsed_all_candidates': True, 'acceptance_gate': 'predictive_solve_failed', 'best_failure_reason': 'candidate collapsed to one phase', 'best_noncollapsed_candidate': 'none', 'density_diagnostics_mode': 'auto', 'density_validity_gate': 'not_evaluated', 'density_warm_start_source': '', 'equilibrium_route': 'electrolyte_lle', 'gibbs_seed_method': 'native_golden_section', 'message': 'electrolyte LLE flash did not converge', 'native_entrypoint': '_solve_equilibrium_native', 'phase_equilibrium_model': 'electrolyte_lle_v5_native_charge_constrained_solve', 'route_reason': 'ion-containing mixture', 'solver_language': 'c++', 'solver_method': 'native_transformed_newton', 'solver_seed_name': 'formula_feed_b2', 'stability_analysis': 'electrolyte_tpd', 'tpd_method': 'native_tpd_global_search', 'variable_model': 'ascani_transformed_salt_pairs', 'feed_composition': [0.7976019920239601, 0.0012000019879999603, 0.0012000019879999603, 0.19999800400003998], 'fugacity_residual': [-1.2363443602225743e-12, -1.2647660696529783e-12, -2.3874235921539366e-12], 'seed_attempts': [{'seed_name': 'initial_phases', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 5.565409565132346e-13, 'phase_distance': 0.7252038708158023, 'solver_residual_norm': 0.7123467084712729, 'material_balance_error': 1.1102230246251565e-16, 'charge_balance_error': 0.0, 'gibbs_delta': 2.743215521405773e-08, 'iterations': 13}, {'seed_name': 'native_tpd_trial', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.5, 'phase_distance': 0.0, 'solver_residual_norm': 1e+300, 'material_balance_error': 1e+300, 'charge_balance_error': 1e+300, 'gibbs_delta': 0.0, 'iterations': 21}, {'seed_name': 'native_gibbs_tpd_trial', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.20853497030549192, 'phase_distance': 0.9589364769316793, 'solver_residual_norm': 5.7509697245266125, 'material_balance_error': 1.1102230246251565e-16, 'charge_balance_error': 0.0, 'gibbs_delta': -0.5129143061516617, 'iterations': 14}, {'seed_name': 'formula_feed_b2', 'rejection_reason': 'candidate collapsed to one phase', 'beta_org': 0.020000000000000004, 'phase_distance': 2.7755575615628914e-17, 'solver_residual_norm': 2.3874235921539366e-12, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': -2.4868995751603507e-14, 'iterations': 1}, {'seed_name': 'formula_feed_b5', 'rejection_reason': 'candidate collapsed to one phase', 'beta_org': 0.048725664028947666, 'phase_distance': 6.061817714453355e-13, 'solver_residual_norm': 1.1823431123048067e-11, 'material_balance_error': 1.1102230246251565e-16, 'charge_balance_error': 0.0, 'gibbs_delta': -3.673505943879718e-12, 'iterations': 11}, {'seed_name': 'formula_feed_b10', 'rejection_reason': 'candidate collapsed to one phase', 'beta_org': 0.09999554395045866, 'phase_distance': 4.0754899455208715e-12, 'solver_residual_norm': 6.900791049702093e-11, 'material_balance_error': 1.1102230246251565e-16, 'charge_balance_error': 0.0, 'gibbs_delta': -1.4866330388940696e-11, 'iterations': 10}, {'seed_name': 'formula_feed_b25', 'rejection_reason': 'candidate collapsed to one phase', 'beta_org': 0.4543531903249494, 'phase_distance': 3.388678226912134e-13, 'solver_residual_norm': 9.777068044058979e-12, 'material_balance_error': 1.1102230246251565e-16, 'charge_balance_error': 0.0, 'gibbs_delta': -9.820588786624285e-12, 'iterations': 14}, {'seed_name': 'formula_feed_b50', 'rejection_reason': 'candidate collapsed to one phase', 'beta_org': 0.4961538100300829, 'phase_distance': 2.127242826333031e-12, 'solver_residual_norm': 2.3078428057488054e-11, 'material_balance_error': 2.220446049250313e-16, 'charge_balance_error': 0.0, 'gibbs_delta': -1.2541079286165768e-12, 'iterations': 5}, {'seed_name': 'formula_feed_b75', 'rejection_reason': 'candidate collapsed to one phase', 'beta_org': 0.7326260214819038, 'phase_distance': 5.440092820663267e-15, 'solver_residual_norm': 2.6356694604601216e-12, 'material_balance_error': 5.551115123125783e-17, 'charge_balance_error': 0.0, 'gibbs_delta': -5.791811474864517e-12, 'iterations': 9}, {'seed_name': 'formula_feed_b90', 'rejection_reason': 'candidate collapsed to one phase', 'beta_org': 0.9067126747999926, 'phase_distance': 1.399047544481391e-12, 'solver_residual_norm': 5.547917680814862e-11, 'material_balance_error': 2.168404344971009e-19, 'charge_balance_error': 0.0, 'gibbs_delta': -8.997247391562269e-12, 'iterations': 3}, {'seed_name': 'formula_component_0_rich_b2', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 3.1955631873017924e-19, 'phase_distance': 0.19999751399002516, 'solver_residual_norm': 0.5038130400336422, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': -1.2947865002388426e-11, 'iterations': 25}, {'seed_name': 'formula_component_0_rich_b5', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 9.885694581809164e-305, 'phase_distance': 0.1999975139898793, 'solver_residual_norm': 0.5038130372965535, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': 0.0, 'iterations': 27}, {'seed_name': 'formula_component_0_rich_b10', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 9.885694643530757e-305, 'phase_distance': 0.19999751398975407, 'solver_residual_norm': 0.5038130488420713, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': 0.0, 'iterations': 30}, {'seed_name': 'formula_component_0_rich_b25', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 4.491006560942484e-56, 'phase_distance': 0.19999751398988222, 'solver_residual_norm': 0.5038130408017865, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': -1.2947865002388426e-11, 'iterations': 28}, {'seed_name': 'formula_component_0_rich_b50', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 2.375197994503223e-16, 'phase_distance': 0.1999975139898618, 'solver_residual_norm': 0.5038130448799563, 'material_balance_error': 1.1102230246251565e-16, 'charge_balance_error': 0.0, 'gibbs_delta': -1.169819796587035e-11, 'iterations': 27}, {'seed_name': 'formula_component_0_rich_b75', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 1.1496479453140832e-40, 'phase_distance': 0.199997513989715, 'solver_residual_norm': 0.5038130486888246, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': -5.006661751849606e-12, 'iterations': 35}, {'seed_name': 'formula_component_0_rich_b90', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.5, 'phase_distance': 0.0, 'solver_residual_norm': 1e+300, 'material_balance_error': 1e+300, 'charge_balance_error': 1e+300, 'gibbs_delta': 0.0, 'iterations': 16}, {'seed_name': 'formula_component_1_rich_b2', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 1.2073087174762311e-17, 'phase_distance': 0.747923576964613, 'solver_residual_norm': 0.5829512714004821, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': -5.006661751849606e-12, 'iterations': 41}, {'seed_name': 'formula_component_1_rich_b5', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 1.2243883747445867e-18, 'phase_distance': 0.7479236751081568, 'solver_residual_norm': 0.5829512414905587, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': 0.0, 'iterations': 38}, {'seed_name': 'formula_component_1_rich_b10', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 1.145341203557417e-238, 'phase_distance': 0.747923500910934, 'solver_residual_norm': 0.5829512945722293, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': -1.2947865002388426e-11, 'iterations': 44}, {'seed_name': 'formula_component_1_rich_b25', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.5, 'phase_distance': 0.0, 'solver_residual_norm': 1e+300, 'material_balance_error': 1e+300, 'charge_balance_error': 1e+300, 'gibbs_delta': 0.0, 'iterations': 9}, {'seed_name': 'formula_component_1_rich_b50', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.5, 'phase_distance': 0.0, 'solver_residual_norm': 1e+300, 'material_balance_error': 1e+300, 'charge_balance_error': 1e+300, 'gibbs_delta': 0.0, 'iterations': 16}, {'seed_name': 'formula_component_1_rich_b75', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.5, 'phase_distance': 0.0, 'solver_residual_norm': 1e+300, 'material_balance_error': 1e+300, 'charge_balance_error': 1e+300, 'gibbs_delta': 0.0, 'iterations': 17}, {'seed_name': 'formula_component_1_rich_b90', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.5, 'phase_distance': 0.0, 'solver_residual_norm': 1e+300, 'material_balance_error': 1e+300, 'charge_balance_error': 1e+300, 'gibbs_delta': 0.0, 'iterations': 21}, {'seed_name': 'formula_component_2_rich_b2', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.5, 'phase_distance': 0.0, 'solver_residual_norm': 1e+300, 'material_balance_error': 1e+300, 'charge_balance_error': 1e+300, 'gibbs_delta': 0.0, 'iterations': 23}, {'seed_name': 'formula_component_2_rich_b5', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.5, 'phase_distance': 0.0, 'solver_residual_norm': 1e+300, 'material_balance_error': 1e+300, 'charge_balance_error': 1e+300, 'gibbs_delta': 0.0, 'iterations': 11}, {'seed_name': 'formula_component_2_rich_b10', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.5, 'phase_distance': 0.0, 'solver_residual_norm': 1e+300, 'material_balance_error': 1e+300, 'charge_balance_error': 1e+300, 'gibbs_delta': 0.0, 'iterations': 16}, {'seed_name': 'formula_component_2_rich_b25', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.5, 'phase_distance': 0.0, 'solver_residual_norm': 1e+300, 'material_balance_error': 1e+300, 'charge_balance_error': 1e+300, 'gibbs_delta': 0.0, 'iterations': 25}, {'seed_name': 'formula_component_2_rich_b50', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.5, 'phase_distance': 0.0, 'solver_residual_norm': 1e+300, 'material_balance_error': 1e+300, 'charge_balance_error': 1e+300, 'gibbs_delta': 0.0, 'iterations': 24}, {'seed_name': 'formula_component_2_rich_b75', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.5, 'phase_distance': 0.0, 'solver_residual_norm': 1e+300, 'material_balance_error': 1e+300, 'charge_balance_error': 1e+300, 'gibbs_delta': 0.0, 'iterations': 29}, {'seed_name': 'formula_component_2_rich_b90', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.5, 'phase_distance': 0.0, 'solver_residual_norm': 1e+300, 'material_balance_error': 1e+300, 'charge_balance_error': 1e+300, 'gibbs_delta': 0.0, 'iterations': 28}, {'seed_name': 'partition_seed_b2', 'rejection_reason': 'Gibbs split was not favored by current thermodynamic surface', 'beta_org': 9.859676543759995e-305, 'phase_distance': 1.3148648836391885e-12, 'solver_residual_norm': 1.488542622496425e-11, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': 0.0, 'iterations': 46}, {'seed_name': 'partition_seed_b5', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.5, 'phase_distance': 0.0, 'solver_residual_norm': 1e+300, 'material_balance_error': 1e+300, 'charge_balance_error': 1e+300, 'gibbs_delta': 0.0, 'iterations': 12}, {'seed_name': 'partition_seed_b10', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.5, 'phase_distance': 0.0, 'solver_residual_norm': 1e+300, 'material_balance_error': 1e+300, 'charge_balance_error': 1e+300, 'gibbs_delta': 0.0, 'iterations': 18}, {'seed_name': 'partition_seed_b25', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 2.8412891012413354e-11, 'phase_distance': 0.10239066176336853, 'solver_residual_norm': 5.642803439657996, 'material_balance_error': 1.1102230246251565e-16, 'charge_balance_error': 0.0, 'gibbs_delta': 3.678835014397919e-12, 'iterations': 16}, {'seed_name': 'partition_seed_b50', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 2.475673998710378e-44, 'phase_distance': 0.7479234504476598, 'solver_residual_norm': 0.5829509768209356, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': -1.2947865002388426e-11, 'iterations': 66}, {'seed_name': 'partition_seed_b75', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 1.3120099613011472e-33, 'phase_distance': 0.7479235222687164, 'solver_residual_norm': 0.5829506811329495, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': 0.0, 'iterations': 59}, {'seed_name': 'partition_seed_b90', 'rejection_reason': 'Gibbs split was not favored by current thermodynamic surface', 'beta_org': 6.685144156661389e-16, 'phase_distance': 1.9735046929980626e-12, 'solver_residual_norm': 1.3415046851150692e-11, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': 0.0, 'iterations': 63}, {'seed_name': 'org_endpoint_salt_1_b2', 'rejection_reason': 'candidate collapsed to one phase', 'beta_org': 1.7907657861253573e-46, 'phase_distance': 7.019107517436396e-13, 'solver_residual_norm': 1.949729266925715e-11, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': -1.2947865002388426e-11, 'iterations': 42}, {'seed_name': 'org_endpoint_salt_1_b5', 'rejection_reason': 'Gibbs split was not favored by current thermodynamic surface', 'beta_org': 1.443710482201572e-40, 'phase_distance': 1.0448031328991192e-12, 'solver_residual_norm': 1.6654233547797048e-11, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': 0.0, 'iterations': 44}, {'seed_name': 'org_endpoint_salt_1_b10', 'rejection_reason': 'candidate collapsed to one phase', 'beta_org': 5.798569548651082e-23, 'phase_distance': 4.96713781217295e-13, 'solver_residual_norm': 6.174616373755271e-12, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': -1.2947865002388426e-11, 'iterations': 44}, {'seed_name': 'org_endpoint_salt_1_b25', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.2670407867633399, 'phase_distance': 0.750813027382599, 'solver_residual_norm': 17.191148529940733, 'material_balance_error': 5.551115123125783e-17, 'charge_balance_error': 0.0, 'gibbs_delta': -0.45891740227495603, 'iterations': 9}, {'seed_name': 'org_endpoint_salt_1_b50', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.19308373357516992, 'phase_distance': 0.667761211159996, 'solver_residual_norm': 16.30921075297647, 'material_balance_error': 1.1102230246251565e-16, 'charge_balance_error': 0.0, 'gibbs_delta': -0.16187715648960221, 'iterations': 24}, {'seed_name': 'aq_endpoint_salt_1_b2', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 1.016461443243598e-13, 'phase_distance': 0.12781695540159654, 'solver_residual_norm': 2.291087040288783, 'material_balance_error': 1.1102230246251565e-16, 'charge_balance_error': 0.0, 'gibbs_delta': -1.2721379505364894e-11, 'iterations': 2}, {'seed_name': 'aq_endpoint_salt_1_b5', 'rejection_reason': 'candidate collapsed to one phase', 'beta_org': 9.859676543759765e-305, 'phase_distance': 9.972023207183156e-13, 'solver_residual_norm': 8.185452315956354e-12, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': -8.351541680440278e-12, 'iterations': 41}, {'seed_name': 'aq_endpoint_salt_1_b10', 'rejection_reason': 'candidate collapsed to one phase', 'beta_org': 9.859676543759779e-305, 'phase_distance': 1.030453500305839e-12, 'solver_residual_norm': 7.560174708487466e-12, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': -8.351541680440278e-12, 'iterations': 41}, {'seed_name': 'aq_endpoint_salt_1_b25', 'rejection_reason': 'candidate collapsed to one phase', 'beta_org': 9.859676543759805e-305, 'phase_distance': 1.472572064287192e-12, 'solver_residual_norm': 1.1713296999005252e-11, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': -5.006661751849606e-12, 'iterations': 42}, {'seed_name': 'aq_endpoint_salt_1_b50', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 7.900771891325574e-13, 'phase_distance': 0.07988777964591143, 'solver_residual_norm': 1.841774514345218, 'material_balance_error': 1.1102230246251565e-16, 'charge_balance_error': 0.0, 'gibbs_delta': -8.529177364380303e-12, 'iterations': 4}, {'seed_name': 'org_endpoint_salt_10_b2', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 1.1134336442334742e-11, 'phase_distance': 0.2791667421436024, 'solver_residual_norm': 9.763115030604183, 'material_balance_error': 2.220446049250313e-16, 'charge_balance_error': 0.0, 'gibbs_delta': -7.632117160483176e-12, 'iterations': 3}, {'seed_name': 'org_endpoint_salt_10_b5', 'rejection_reason': 'Gibbs split was not favored by current thermodynamic surface', 'beta_org': 9.859676543759963e-305, 'phase_distance': 6.392664175791651e-13, 'solver_residual_norm': 1.5221157667610896e-11, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': 0.0, 'iterations': 45}, {'seed_name': 'org_endpoint_salt_10_b10', 'rejection_reason': 'Gibbs split was not favored by current thermodynamic surface', 'beta_org': 0.0007820943414820828, 'phase_distance': 5.152267501529195e-13, 'solver_residual_norm': 3.1036506698001176e-11, 'material_balance_error': 2.7755575615628914e-17, 'charge_balance_error': 0.0, 'gibbs_delta': 3.134381643121742e-12, 'iterations': 45}, {'seed_name': 'org_endpoint_salt_10_b25', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.5, 'phase_distance': 0.0, 'solver_residual_norm': 1e+300, 'material_balance_error': 1e+300, 'charge_balance_error': 1e+300, 'gibbs_delta': 0.0, 'iterations': 9}, {'seed_name': 'org_endpoint_salt_10_b50', 'rejection_reason': 'Gibbs split was not favored by current thermodynamic surface', 'beta_org': 0.0001083200196339013, 'phase_distance': 1.8167412019209905e-12, 'solver_residual_norm': 2.6830093702301383e-11, 'material_balance_error': 1.1102230246251565e-16, 'charge_balance_error': 0.0, 'gibbs_delta': 7.51576578750246e-12, 'iterations': 62}, {'seed_name': 'aq_endpoint_salt_10_b2', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.0033144370006587603, 'phase_distance': 0.15128406141080095, 'solver_residual_norm': 3.5768029222865714, 'material_balance_error': 1.1102230246251565e-16, 'charge_balance_error': 0.0, 'gibbs_delta': -0.0005839530477720345, 'iterations': 9}, {'seed_name': 'aq_endpoint_salt_10_b5', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.02403889765749122, 'phase_distance': 0.15456355293708676, 'solver_residual_norm': 3.604996176416279, 'material_balance_error': 1.1102230246251565e-16, 'charge_balance_error': 0.0, 'gibbs_delta': -0.004171334930703985, 'iterations': 10}, {'seed_name': 'aq_endpoint_salt_10_b10', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.0829550520180517, 'phase_distance': 0.16456678267751582, 'solver_residual_norm': 5.21782428107457, 'material_balance_error': 1.1102230246251565e-16, 'charge_balance_error': 0.0, 'gibbs_delta': -0.0144371791552933, 'iterations': 3}, {'seed_name': 'aq_endpoint_salt_10_b25', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.04684899169608793, 'phase_distance': 0.11927223970037981, 'solver_residual_norm': 3.5498848532977263, 'material_balance_error': 2.7755575615628914e-17, 'charge_balance_error': 0.0, 'gibbs_delta': -0.003304112099710821, 'iterations': 7}, {'seed_name': 'aq_endpoint_salt_10_b50', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.042201643121966566, 'phase_distance': 0.08873537399634913, 'solver_residual_norm': 2.9713089654437113, 'material_balance_error': 2.220446049250313e-16, 'charge_balance_error': 0.0, 'gibbs_delta': -0.0013494786673984294, 'iterations': 14}, {'seed_name': 'org_endpoint_salt_50_b2', 'rejection_reason': 'candidate collapsed to one phase', 'beta_org': 9.859676543760133e-305, 'phase_distance': 2.558370182370595e-12, 'solver_residual_norm': 3.6777692002942786e-11, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': -8.351541680440278e-12, 'iterations': 44}, {'seed_name': 'org_endpoint_salt_50_b5', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.5, 'phase_distance': 0.0, 'solver_residual_norm': 1e+300, 'material_balance_error': 1e+300, 'charge_balance_error': 1e+300, 'gibbs_delta': 0.0, 'iterations': 7}, {'seed_name': 'org_endpoint_salt_50_b10', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.5, 'phase_distance': 0.0, 'solver_residual_norm': 1e+300, 'material_balance_error': 1e+300, 'charge_balance_error': 1e+300, 'gibbs_delta': 0.0, 'iterations': 17}, {'seed_name': 'org_endpoint_salt_50_b25', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.5, 'phase_distance': 0.0, 'solver_residual_norm': 1e+300, 'material_balance_error': 1e+300, 'charge_balance_error': 1e+300, 'gibbs_delta': 0.0, 'iterations': 15}, {'seed_name': 'org_endpoint_salt_50_b50', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.5, 'phase_distance': 0.0, 'solver_residual_norm': 1e+300, 'material_balance_error': 1e+300, 'charge_balance_error': 1e+300, 'gibbs_delta': 0.0, 'iterations': 11}, {'seed_name': 'aq_endpoint_salt_50_b2', 'rejection_reason': 'candidate collapsed to one phase', 'beta_org': 7.28414732158223e-24, 'phase_distance': 1.6880941089425505e-13, 'solver_residual_norm': 2.8421709430404007e-12, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': -5.006661751849606e-12, 'iterations': 46}, {'seed_name': 'aq_endpoint_salt_50_b5', 'rejection_reason': 'candidate collapsed to one phase', 'beta_org': 1.1582033937762979e-62, 'phase_distance': 1.3078427230084344e-12, 'solver_residual_norm': 1.071143174158351e-11, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': -1.2947865002388426e-11, 'iterations': 44}, {'seed_name': 'aq_endpoint_salt_50_b10', 'rejection_reason': 'candidate collapsed to one phase', 'beta_org': 2.4775134885456993e-146, 'phase_distance': 1.1850798120605077e-12, 'solver_residual_norm': 1.0800249583553523e-11, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': -8.351541680440278e-12, 'iterations': 47}, {'seed_name': 'aq_endpoint_salt_50_b25', 'rejection_reason': 'candidate collapsed to one phase', 'beta_org': 4.869957031413062e-16, 'phase_distance': 1.0515199821981014e-12, 'solver_residual_norm': 1.2164491636212915e-11, 'material_balance_error': 2.7755575615628914e-17, 'charge_balance_error': 0.0, 'gibbs_delta': -8.351541680440278e-12, 'iterations': 48}, {'seed_name': 'aq_endpoint_salt_50_b50', 'rejection_reason': 'candidate collapsed to one phase', 'beta_org': 1.1188207720851377e-70, 'phase_distance': 6.852185485684004e-12, 'solver_residual_norm': 4.0749625895841746e-11, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': -8.351541680440278e-12, 'iterations': 48}, {'seed_name': 'org_endpoint_salt_150_b2', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.5, 'phase_distance': 0.0, 'solver_residual_norm': 1e+300, 'material_balance_error': 1e+300, 'charge_balance_error': 1e+300, 'gibbs_delta': 0.0, 'iterations': 17}, {'seed_name': 'org_endpoint_salt_150_b5', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.5, 'phase_distance': 0.0, 'solver_residual_norm': 1e+300, 'material_balance_error': 1e+300, 'charge_balance_error': 1e+300, 'gibbs_delta': 0.0, 'iterations': 16}, {'seed_name': 'org_endpoint_salt_150_b10', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.5, 'phase_distance': 0.0, 'solver_residual_norm': 1e+300, 'material_balance_error': 1e+300, 'charge_balance_error': 1e+300, 'gibbs_delta': 0.0, 'iterations': 19}, {'seed_name': 'org_endpoint_salt_150_b25', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.5, 'phase_distance': 0.0, 'solver_residual_norm': 1e+300, 'material_balance_error': 1e+300, 'charge_balance_error': 1e+300, 'gibbs_delta': 0.0, 'iterations': 21}, {'seed_name': 'org_endpoint_salt_150_b50', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.5, 'phase_distance': 0.0, 'solver_residual_norm': 1e+300, 'material_balance_error': 1e+300, 'charge_balance_error': 1e+300, 'gibbs_delta': 0.0, 'iterations': 21}, {'seed_name': 'aq_endpoint_salt_150_b2', 'rejection_reason': 'candidate collapsed to one phase', 'beta_org': 2.8511542812461398e-87, 'phase_distance': 1.5121237595394632e-12, 'solver_residual_norm': 1.9175772081325704e-11, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': -5.006661751849606e-12, 'iterations': 44}, {'seed_name': 'aq_endpoint_salt_150_b5', 'rejection_reason': 'candidate collapsed to one phase', 'beta_org': 8.011032760988782e-192, 'phase_distance': 7.097655796428626e-13, 'solver_residual_norm': 1.1709744285326451e-11, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': -1.2947865002388426e-11, 'iterations': 46}, {'seed_name': 'aq_endpoint_salt_150_b10', 'rejection_reason': 'candidate collapsed to one phase', 'beta_org': 1.321410737714565e-37, 'phase_distance': 5.159761506945415e-13, 'solver_residual_norm': 1.750777300912887e-11, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': -1.2947865002388426e-11, 'iterations': 48}, {'seed_name': 'aq_endpoint_salt_150_b25', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 4.8286851195860864e-12, 'phase_distance': 0.05589816501803965, 'solver_residual_norm': 5.384328472527386, 'material_balance_error': 2.220446049250313e-16, 'charge_balance_error': 0.0, 'gibbs_delta': -1.0330403199532157e-11, 'iterations': 12}, {'seed_name': 'aq_endpoint_salt_150_b50', 'rejection_reason': 'candidate collapsed to one phase', 'beta_org': 9.859676543759579e-305, 'phase_distance': 1.1512180098094404e-12, 'solver_residual_norm': 1.0743406164692715e-11, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': -1.2947865002388426e-11, 'iterations': 55}], 'legacy_candidate_mode': 'auto', 'legacy_candidate_residual_tolerance': 0.2, 'legacy_candidate_split_tolerance': 0.0001, 'ignored_legacy_options': [], 'density_failure_contexts': [], 'density_scan_summary': {}, 'density_candidate_roots': [], 'density_best_near_root': {}, 'density_fallback_rejected_reason': '', 'legacy_candidate_found': False, 'legacy_candidate_message': 'legacy candidate fallback disabled; Python equilibrium candidates are not exposed.', 'algorithm_reference': {'authors': 'Ascani, Sadowski, and Held', 'year': 2022, 'title': 'Calculation of Multiphase Equilibria Containing Mixed Solvents and Mixed Electrolytes', 'doi': '10.1021/acs.jced.1c00866'}, 'e_matrix': [[1.0, 1.0]], 'salt_pairs': [{'label': 'LiCl', 'cation': 1, 'anion': 2, 'cation_stoich': 1, 'anion_stoich': 1, 'cation_charge': 1.0, 'anion_charge': -1.0}], 'composition_basis': 'mole_fraction'})",
+    "status": "error",
+    "traceback_tail": [
+      "    lle = mix.equilibrium(",
+      "          ^^^^^^^^^^^^^^^^",
+      "  File \"C:\\Users\\Tanner\\Documents\\git\\Lithium_Extraction\\.venv\\Lib\\site-packages\\epcsaft\\epcsaft.py\", line 467, in equilibrium",
+      "    return electrolyte_lle_flash_native(",
+      "           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+      "  File \"C:\\Users\\Tanner\\Documents\\git\\Lithium_Extraction\\.venv\\Lib\\site-packages\\epcsaft\\equilibrium.py\", line 1164, in electrolyte_lle_flash_native",
+      "    raise SolutionError(exc.message, _json_like(diagnostics)) from exc",
+      "epcsaft._types.SolutionError: ('electrolyte LLE flash did not converge', {'charge_balance_error': 0.0, 'fugacity_residual_norm': 2.3874235921539366e-12, 'gibbs_delta': -2.4868995751603507e-14, 'gibbs_feed': -6.249141996910366, 'gibbs_split': -6.2491419969103905, 'material_balance_error': 0.0, 'phase_distance': 2.7755575615628914e-17, 'solver_residual_norm': 2.3874235921539366e-12, 'stability_min_tpd': -0.5681261682618914, 'basis_rank': 1, 'density_failure_count': 0, 'effective_max_iterations': 180, 'iterations': 1, 'repeated_stability_iterations': 1, 'requested_max_iterations': 180, 'seed_attempt_count': 78, 'coupled_density_lle_attempted': False, 'density_fallback_used': False, 'experimental_coupled_density_lle': False, 'stability_checked': True, 'stability_stable': False, 'unstable_feed_collapsed_all_candidates': True, 'acceptance_gate': 'predictive_solve_failed', 'best_failure_reason': 'candidate collapsed to one phase', 'best_noncollapsed_candidate': 'none', 'density_diagnostics_mode': 'auto', 'density_validity_gate': 'not_evaluated', 'density_warm_start_source': '', 'equilibrium_route': 'electrolyte_lle', 'gibbs_seed_method': 'native_golden_section', 'message': 'electrolyte LLE flash did not converge', 'native_entrypoint': '_solve_equilibrium_native', 'phase_equilibrium_model': 'electrolyte_lle_v5_native_charge_constrained_solve', 'route_reason': 'ion-containing mixture', 'solver_language': 'c++', 'solver_method': 'native_transformed_newton', 'solver_seed_name': 'formula_feed_b2', 'stability_analysis': 'electrolyte_tpd', 'tpd_method': 'native_tpd_global_search', 'variable_model': 'ascani_transformed_salt_pairs', 'feed_composition': [0.7976019920239601, 0.0012000019879999603, 0.0012000019879999603, 0.19999800400003998], 'fugacity_residual': [-1.2363443602225743e-12, -1.2647660696529783e-12, -2.3874235921539366e-12], 'seed_attempts': [{'seed_name': 'initial_phases', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 5.565409565132346e-13, 'phase_distance': 0.7252038708158023, 'solver_residual_norm': 0.7123467084712729, 'material_balance_error': 1.1102230246251565e-16, 'charge_balance_error': 0.0, 'gibbs_delta': 2.743215521405773e-08, 'iterations': 13}, {'seed_name': 'native_tpd_trial', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.5, 'phase_distance': 0.0, 'solver_residual_norm': 1e+300, 'material_balance_error': 1e+300, 'charge_balance_error': 1e+300, 'gibbs_delta': 0.0, 'iterations': 21}, {'seed_name': 'native_gibbs_tpd_trial', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.20853497030549192, 'phase_distance': 0.9589364769316793, 'solver_residual_norm': 5.7509697245266125, 'material_balance_error': 1.1102230246251565e-16, 'charge_balance_error': 0.0, 'gibbs_delta': -0.5129143061516617, 'iterations': 14}, {'seed_name': 'formula_feed_b2', 'rejection_reason': 'candidate collapsed to one phase', 'beta_org': 0.020000000000000004, 'phase_distance': 2.7755575615628914e-17, 'solver_residual_norm': 2.3874235921539366e-12, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': -2.4868995751603507e-14, 'iterations': 1}, {'seed_name': 'formula_feed_b5', 'rejection_reason': 'candidate collapsed to one phase', 'beta_org': 0.048725664028947666, 'phase_distance': 6.061817714453355e-13, 'solver_residual_norm': 1.1823431123048067e-11, 'material_balance_error': 1.1102230246251565e-16, 'charge_balance_error': 0.0, 'gibbs_delta': -3.673505943879718e-12, 'iterations': 11}, {'seed_name': 'formula_feed_b10', 'rejection_reason': 'candidate collapsed to one phase', 'beta_org': 0.09999554395045866, 'phase_distance': 4.0754899455208715e-12, 'solver_residual_norm': 6.900791049702093e-11, 'material_balance_error': 1.1102230246251565e-16, 'charge_balance_error': 0.0, 'gibbs_delta': -1.4866330388940696e-11, 'iterations': 10}, {'seed_name': 'formula_feed_b25', 'rejection_reason': 'candidate collapsed to one phase', 'beta_org': 0.4543531903249494, 'phase_distance': 3.388678226912134e-13, 'solver_residual_norm': 9.777068044058979e-12, 'material_balance_error': 1.1102230246251565e-16, 'charge_balance_error': 0.0, 'gibbs_delta': -9.820588786624285e-12, 'iterations': 14}, {'seed_name': 'formula_feed_b50', 'rejection_reason': 'candidate collapsed to one phase', 'beta_org': 0.4961538100300829, 'phase_distance': 2.127242826333031e-12, 'solver_residual_norm': 2.3078428057488054e-11, 'material_balance_error': 2.220446049250313e-16, 'charge_balance_error': 0.0, 'gibbs_delta': -1.2541079286165768e-12, 'iterations': 5}, {'seed_name': 'formula_feed_b75', 'rejection_reason': 'candidate collapsed to one phase', 'beta_org': 0.7326260214819038, 'phase_distance': 5.440092820663267e-15, 'solver_residual_norm': 2.6356694604601216e-12, 'material_balance_error': 5.551115123125783e-17, 'charge_balance_error': 0.0, 'gibbs_delta': -5.791811474864517e-12, 'iterations': 9}, {'seed_name': 'formula_feed_b90', 'rejection_reason': 'candidate collapsed to one phase', 'beta_org': 0.9067126747999926, 'phase_distance': 1.399047544481391e-12, 'solver_residual_norm': 5.547917680814862e-11, 'material_balance_error': 2.168404344971009e-19, 'charge_balance_error': 0.0, 'gibbs_delta': -8.997247391562269e-12, 'iterations': 3}, {'seed_name': 'formula_component_0_rich_b2', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 3.1955631873017924e-19, 'phase_distance': 0.19999751399002516, 'solver_residual_norm': 0.5038130400336422, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': -1.2947865002388426e-11, 'iterations': 25}, {'seed_name': 'formula_component_0_rich_b5', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 9.885694581809164e-305, 'phase_distance': 0.1999975139898793, 'solver_residual_norm': 0.5038130372965535, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': 0.0, 'iterations': 27}, {'seed_name': 'formula_component_0_rich_b10', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 9.885694643530757e-305, 'phase_distance': 0.19999751398975407, 'solver_residual_norm': 0.5038130488420713, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': 0.0, 'iterations': 30}, {'seed_name': 'formula_component_0_rich_b25', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 4.491006560942484e-56, 'phase_distance': 0.19999751398988222, 'solver_residual_norm': 0.5038130408017865, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': -1.2947865002388426e-11, 'iterations': 28}, {'seed_name': 'formula_component_0_rich_b50', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 2.375197994503223e-16, 'phase_distance': 0.1999975139898618, 'solver_residual_norm': 0.5038130448799563, 'material_balance_error': 1.1102230246251565e-16, 'charge_balance_error': 0.0, 'gibbs_delta': -1.169819796587035e-11, 'iterations': 27}, {'seed_name': 'formula_component_0_rich_b75', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 1.1496479453140832e-40, 'phase_distance': 0.199997513989715, 'solver_residual_norm': 0.5038130486888246, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': -5.006661751849606e-12, 'iterations': 35}, {'seed_name': 'formula_component_0_rich_b90', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.5, 'phase_distance': 0.0, 'solver_residual_norm': 1e+300, 'material_balance_error': 1e+300, 'charge_balance_error': 1e+300, 'gibbs_delta': 0.0, 'iterations': 16}, {'seed_name': 'formula_component_1_rich_b2', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 1.2073087174762311e-17, 'phase_distance': 0.747923576964613, 'solver_residual_norm': 0.5829512714004821, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': -5.006661751849606e-12, 'iterations': 41}, {'seed_name': 'formula_component_1_rich_b5', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 1.2243883747445867e-18, 'phase_distance': 0.7479236751081568, 'solver_residual_norm': 0.5829512414905587, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': 0.0, 'iterations': 38}, {'seed_name': 'formula_component_1_rich_b10', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 1.145341203557417e-238, 'phase_distance': 0.747923500910934, 'solver_residual_norm': 0.5829512945722293, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': -1.2947865002388426e-11, 'iterations': 44}, {'seed_name': 'formula_component_1_rich_b25', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.5, 'phase_distance': 0.0, 'solver_residual_norm': 1e+300, 'material_balance_error': 1e+300, 'charge_balance_error': 1e+300, 'gibbs_delta': 0.0, 'iterations': 9}, {'seed_name': 'formula_component_1_rich_b50', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.5, 'phase_distance': 0.0, 'solver_residual_norm': 1e+300, 'material_balance_error': 1e+300, 'charge_balance_error': 1e+300, 'gibbs_delta': 0.0, 'iterations': 16}, {'seed_name': 'formula_component_1_rich_b75', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.5, 'phase_distance': 0.0, 'solver_residual_norm': 1e+300, 'material_balance_error': 1e+300, 'charge_balance_error': 1e+300, 'gibbs_delta': 0.0, 'iterations': 17}, {'seed_name': 'formula_component_1_rich_b90', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.5, 'phase_distance': 0.0, 'solver_residual_norm': 1e+300, 'material_balance_error': 1e+300, 'charge_balance_error': 1e+300, 'gibbs_delta': 0.0, 'iterations': 21}, {'seed_name': 'formula_component_2_rich_b2', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.5, 'phase_distance': 0.0, 'solver_residual_norm': 1e+300, 'material_balance_error': 1e+300, 'charge_balance_error': 1e+300, 'gibbs_delta': 0.0, 'iterations': 23}, {'seed_name': 'formula_component_2_rich_b5', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.5, 'phase_distance': 0.0, 'solver_residual_norm': 1e+300, 'material_balance_error': 1e+300, 'charge_balance_error': 1e+300, 'gibbs_delta': 0.0, 'iterations': 11}, {'seed_name': 'formula_component_2_rich_b10', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.5, 'phase_distance': 0.0, 'solver_residual_norm': 1e+300, 'material_balance_error': 1e+300, 'charge_balance_error': 1e+300, 'gibbs_delta': 0.0, 'iterations': 16}, {'seed_name': 'formula_component_2_rich_b25', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.5, 'phase_distance': 0.0, 'solver_residual_norm': 1e+300, 'material_balance_error': 1e+300, 'charge_balance_error': 1e+300, 'gibbs_delta': 0.0, 'iterations': 25}, {'seed_name': 'formula_component_2_rich_b50', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.5, 'phase_distance': 0.0, 'solver_residual_norm': 1e+300, 'material_balance_error': 1e+300, 'charge_balance_error': 1e+300, 'gibbs_delta': 0.0, 'iterations': 24}, {'seed_name': 'formula_component_2_rich_b75', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.5, 'phase_distance': 0.0, 'solver_residual_norm': 1e+300, 'material_balance_error': 1e+300, 'charge_balance_error': 1e+300, 'gibbs_delta': 0.0, 'iterations': 29}, {'seed_name': 'formula_component_2_rich_b90', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.5, 'phase_distance': 0.0, 'solver_residual_norm': 1e+300, 'material_balance_error': 1e+300, 'charge_balance_error': 1e+300, 'gibbs_delta': 0.0, 'iterations': 28}, {'seed_name': 'partition_seed_b2', 'rejection_reason': 'Gibbs split was not favored by current thermodynamic surface', 'beta_org': 9.859676543759995e-305, 'phase_distance': 1.3148648836391885e-12, 'solver_residual_norm': 1.488542622496425e-11, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': 0.0, 'iterations': 46}, {'seed_name': 'partition_seed_b5', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.5, 'phase_distance': 0.0, 'solver_residual_norm': 1e+300, 'material_balance_error': 1e+300, 'charge_balance_error': 1e+300, 'gibbs_delta': 0.0, 'iterations': 12}, {'seed_name': 'partition_seed_b10', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.5, 'phase_distance': 0.0, 'solver_residual_norm': 1e+300, 'material_balance_error': 1e+300, 'charge_balance_error': 1e+300, 'gibbs_delta': 0.0, 'iterations': 18}, {'seed_name': 'partition_seed_b25', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 2.8412891012413354e-11, 'phase_distance': 0.10239066176336853, 'solver_residual_norm': 5.642803439657996, 'material_balance_error': 1.1102230246251565e-16, 'charge_balance_error': 0.0, 'gibbs_delta': 3.678835014397919e-12, 'iterations': 16}, {'seed_name': 'partition_seed_b50', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 2.475673998710378e-44, 'phase_distance': 0.7479234504476598, 'solver_residual_norm': 0.5829509768209356, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': -1.2947865002388426e-11, 'iterations': 66}, {'seed_name': 'partition_seed_b75', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 1.3120099613011472e-33, 'phase_distance': 0.7479235222687164, 'solver_residual_norm': 0.5829506811329495, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': 0.0, 'iterations': 59}, {'seed_name': 'partition_seed_b90', 'rejection_reason': 'Gibbs split was not favored by current thermodynamic surface', 'beta_org': 6.685144156661389e-16, 'phase_distance': 1.9735046929980626e-12, 'solver_residual_norm': 1.3415046851150692e-11, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': 0.0, 'iterations': 63}, {'seed_name': 'org_endpoint_salt_1_b2', 'rejection_reason': 'candidate collapsed to one phase', 'beta_org': 1.7907657861253573e-46, 'phase_distance': 7.019107517436396e-13, 'solver_residual_norm': 1.949729266925715e-11, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': -1.2947865002388426e-11, 'iterations': 42}, {'seed_name': 'org_endpoint_salt_1_b5', 'rejection_reason': 'Gibbs split was not favored by current thermodynamic surface', 'beta_org': 1.443710482201572e-40, 'phase_distance': 1.0448031328991192e-12, 'solver_residual_norm': 1.6654233547797048e-11, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': 0.0, 'iterations': 44}, {'seed_name': 'org_endpoint_salt_1_b10', 'rejection_reason': 'candidate collapsed to one phase', 'beta_org': 5.798569548651082e-23, 'phase_distance': 4.96713781217295e-13, 'solver_residual_norm': 6.174616373755271e-12, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': -1.2947865002388426e-11, 'iterations': 44}, {'seed_name': 'org_endpoint_salt_1_b25', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.2670407867633399, 'phase_distance': 0.750813027382599, 'solver_residual_norm': 17.191148529940733, 'material_balance_error': 5.551115123125783e-17, 'charge_balance_error': 0.0, 'gibbs_delta': -0.45891740227495603, 'iterations': 9}, {'seed_name': 'org_endpoint_salt_1_b50', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.19308373357516992, 'phase_distance': 0.667761211159996, 'solver_residual_norm': 16.30921075297647, 'material_balance_error': 1.1102230246251565e-16, 'charge_balance_error': 0.0, 'gibbs_delta': -0.16187715648960221, 'iterations': 24}, {'seed_name': 'aq_endpoint_salt_1_b2', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 1.016461443243598e-13, 'phase_distance': 0.12781695540159654, 'solver_residual_norm': 2.291087040288783, 'material_balance_error': 1.1102230246251565e-16, 'charge_balance_error': 0.0, 'gibbs_delta': -1.2721379505364894e-11, 'iterations': 2}, {'seed_name': 'aq_endpoint_salt_1_b5', 'rejection_reason': 'candidate collapsed to one phase', 'beta_org': 9.859676543759765e-305, 'phase_distance': 9.972023207183156e-13, 'solver_residual_norm': 8.185452315956354e-12, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': -8.351541680440278e-12, 'iterations': 41}, {'seed_name': 'aq_endpoint_salt_1_b10', 'rejection_reason': 'candidate collapsed to one phase', 'beta_org': 9.859676543759779e-305, 'phase_distance': 1.030453500305839e-12, 'solver_residual_norm': 7.560174708487466e-12, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': -8.351541680440278e-12, 'iterations': 41}, {'seed_name': 'aq_endpoint_salt_1_b25', 'rejection_reason': 'candidate collapsed to one phase', 'beta_org': 9.859676543759805e-305, 'phase_distance': 1.472572064287192e-12, 'solver_residual_norm': 1.1713296999005252e-11, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': -5.006661751849606e-12, 'iterations': 42}, {'seed_name': 'aq_endpoint_salt_1_b50', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 7.900771891325574e-13, 'phase_distance': 0.07988777964591143, 'solver_residual_norm': 1.841774514345218, 'material_balance_error': 1.1102230246251565e-16, 'charge_balance_error': 0.0, 'gibbs_delta': -8.529177364380303e-12, 'iterations': 4}, {'seed_name': 'org_endpoint_salt_10_b2', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 1.1134336442334742e-11, 'phase_distance': 0.2791667421436024, 'solver_residual_norm': 9.763115030604183, 'material_balance_error': 2.220446049250313e-16, 'charge_balance_error': 0.0, 'gibbs_delta': -7.632117160483176e-12, 'iterations': 3}, {'seed_name': 'org_endpoint_salt_10_b5', 'rejection_reason': 'Gibbs split was not favored by current thermodynamic surface', 'beta_org': 9.859676543759963e-305, 'phase_distance': 6.392664175791651e-13, 'solver_residual_norm': 1.5221157667610896e-11, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': 0.0, 'iterations': 45}, {'seed_name': 'org_endpoint_salt_10_b10', 'rejection_reason': 'Gibbs split was not favored by current thermodynamic surface', 'beta_org': 0.0007820943414820828, 'phase_distance': 5.152267501529195e-13, 'solver_residual_norm': 3.1036506698001176e-11, 'material_balance_error': 2.7755575615628914e-17, 'charge_balance_error': 0.0, 'gibbs_delta': 3.134381643121742e-12, 'iterations': 45}, {'seed_name': 'org_endpoint_salt_10_b25', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.5, 'phase_distance': 0.0, 'solver_residual_norm': 1e+300, 'material_balance_error': 1e+300, 'charge_balance_error': 1e+300, 'gibbs_delta': 0.0, 'iterations': 9}, {'seed_name': 'org_endpoint_salt_10_b50', 'rejection_reason': 'Gibbs split was not favored by current thermodynamic surface', 'beta_org': 0.0001083200196339013, 'phase_distance': 1.8167412019209905e-12, 'solver_residual_norm': 2.6830093702301383e-11, 'material_balance_error': 1.1102230246251565e-16, 'charge_balance_error': 0.0, 'gibbs_delta': 7.51576578750246e-12, 'iterations': 62}, {'seed_name': 'aq_endpoint_salt_10_b2', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.0033144370006587603, 'phase_distance': 0.15128406141080095, 'solver_residual_norm': 3.5768029222865714, 'material_balance_error': 1.1102230246251565e-16, 'charge_balance_error': 0.0, 'gibbs_delta': -0.0005839530477720345, 'iterations': 9}, {'seed_name': 'aq_endpoint_salt_10_b5', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.02403889765749122, 'phase_distance': 0.15456355293708676, 'solver_residual_norm': 3.604996176416279, 'material_balance_error': 1.1102230246251565e-16, 'charge_balance_error': 0.0, 'gibbs_delta': -0.004171334930703985, 'iterations': 10}, {'seed_name': 'aq_endpoint_salt_10_b10', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.0829550520180517, 'phase_distance': 0.16456678267751582, 'solver_residual_norm': 5.21782428107457, 'material_balance_error': 1.1102230246251565e-16, 'charge_balance_error': 0.0, 'gibbs_delta': -0.0144371791552933, 'iterations': 3}, {'seed_name': 'aq_endpoint_salt_10_b25', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.04684899169608793, 'phase_distance': 0.11927223970037981, 'solver_residual_norm': 3.5498848532977263, 'material_balance_error': 2.7755575615628914e-17, 'charge_balance_error': 0.0, 'gibbs_delta': -0.003304112099710821, 'iterations': 7}, {'seed_name': 'aq_endpoint_salt_10_b50', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.042201643121966566, 'phase_distance': 0.08873537399634913, 'solver_residual_norm': 2.9713089654437113, 'material_balance_error': 2.220446049250313e-16, 'charge_balance_error': 0.0, 'gibbs_delta': -0.0013494786673984294, 'iterations': 14}, {'seed_name': 'org_endpoint_salt_50_b2', 'rejection_reason': 'candidate collapsed to one phase', 'beta_org': 9.859676543760133e-305, 'phase_distance': 2.558370182370595e-12, 'solver_residual_norm': 3.6777692002942786e-11, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': -8.351541680440278e-12, 'iterations': 44}, {'seed_name': 'org_endpoint_salt_50_b5', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.5, 'phase_distance': 0.0, 'solver_residual_norm': 1e+300, 'material_balance_error': 1e+300, 'charge_balance_error': 1e+300, 'gibbs_delta': 0.0, 'iterations': 7}, {'seed_name': 'org_endpoint_salt_50_b10', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.5, 'phase_distance': 0.0, 'solver_residual_norm': 1e+300, 'material_balance_error': 1e+300, 'charge_balance_error': 1e+300, 'gibbs_delta': 0.0, 'iterations': 17}, {'seed_name': 'org_endpoint_salt_50_b25', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.5, 'phase_distance': 0.0, 'solver_residual_norm': 1e+300, 'material_balance_error': 1e+300, 'charge_balance_error': 1e+300, 'gibbs_delta': 0.0, 'iterations': 15}, {'seed_name': 'org_endpoint_salt_50_b50', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.5, 'phase_distance': 0.0, 'solver_residual_norm': 1e+300, 'material_balance_error': 1e+300, 'charge_balance_error': 1e+300, 'gibbs_delta': 0.0, 'iterations': 11}, {'seed_name': 'aq_endpoint_salt_50_b2', 'rejection_reason': 'candidate collapsed to one phase', 'beta_org': 7.28414732158223e-24, 'phase_distance': 1.6880941089425505e-13, 'solver_residual_norm': 2.8421709430404007e-12, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': -5.006661751849606e-12, 'iterations': 46}, {'seed_name': 'aq_endpoint_salt_50_b5', 'rejection_reason': 'candidate collapsed to one phase', 'beta_org': 1.1582033937762979e-62, 'phase_distance': 1.3078427230084344e-12, 'solver_residual_norm': 1.071143174158351e-11, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': -1.2947865002388426e-11, 'iterations': 44}, {'seed_name': 'aq_endpoint_salt_50_b10', 'rejection_reason': 'candidate collapsed to one phase', 'beta_org': 2.4775134885456993e-146, 'phase_distance': 1.1850798120605077e-12, 'solver_residual_norm': 1.0800249583553523e-11, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': -8.351541680440278e-12, 'iterations': 47}, {'seed_name': 'aq_endpoint_salt_50_b25', 'rejection_reason': 'candidate collapsed to one phase', 'beta_org': 4.869957031413062e-16, 'phase_distance': 1.0515199821981014e-12, 'solver_residual_norm': 1.2164491636212915e-11, 'material_balance_error': 2.7755575615628914e-17, 'charge_balance_error': 0.0, 'gibbs_delta': -8.351541680440278e-12, 'iterations': 48}, {'seed_name': 'aq_endpoint_salt_50_b50', 'rejection_reason': 'candidate collapsed to one phase', 'beta_org': 1.1188207720851377e-70, 'phase_distance': 6.852185485684004e-12, 'solver_residual_norm': 4.0749625895841746e-11, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': -8.351541680440278e-12, 'iterations': 48}, {'seed_name': 'org_endpoint_salt_150_b2', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.5, 'phase_distance': 0.0, 'solver_residual_norm': 1e+300, 'material_balance_error': 1e+300, 'charge_balance_error': 1e+300, 'gibbs_delta': 0.0, 'iterations': 17}, {'seed_name': 'org_endpoint_salt_150_b5', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.5, 'phase_distance': 0.0, 'solver_residual_norm': 1e+300, 'material_balance_error': 1e+300, 'charge_balance_error': 1e+300, 'gibbs_delta': 0.0, 'iterations': 16}, {'seed_name': 'org_endpoint_salt_150_b10', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.5, 'phase_distance': 0.0, 'solver_residual_norm': 1e+300, 'material_balance_error': 1e+300, 'charge_balance_error': 1e+300, 'gibbs_delta': 0.0, 'iterations': 19}, {'seed_name': 'org_endpoint_salt_150_b25', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.5, 'phase_distance': 0.0, 'solver_residual_norm': 1e+300, 'material_balance_error': 1e+300, 'charge_balance_error': 1e+300, 'gibbs_delta': 0.0, 'iterations': 21}, {'seed_name': 'org_endpoint_salt_150_b50', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.5, 'phase_distance': 0.0, 'solver_residual_norm': 1e+300, 'material_balance_error': 1e+300, 'charge_balance_error': 1e+300, 'gibbs_delta': 0.0, 'iterations': 21}, {'seed_name': 'aq_endpoint_salt_150_b2', 'rejection_reason': 'candidate collapsed to one phase', 'beta_org': 2.8511542812461398e-87, 'phase_distance': 1.5121237595394632e-12, 'solver_residual_norm': 1.9175772081325704e-11, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': -5.006661751849606e-12, 'iterations': 44}, {'seed_name': 'aq_endpoint_salt_150_b5', 'rejection_reason': 'candidate collapsed to one phase', 'beta_org': 8.011032760988782e-192, 'phase_distance': 7.097655796428626e-13, 'solver_residual_norm': 1.1709744285326451e-11, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': -1.2947865002388426e-11, 'iterations': 46}, {'seed_name': 'aq_endpoint_salt_150_b10', 'rejection_reason': 'candidate collapsed to one phase', 'beta_org': 1.321410737714565e-37, 'phase_distance': 5.159761506945415e-13, 'solver_residual_norm': 1.750777300912887e-11, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': -1.2947865002388426e-11, 'iterations': 48}, {'seed_name': 'aq_endpoint_salt_150_b25', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 4.8286851195860864e-12, 'phase_distance': 0.05589816501803965, 'solver_residual_norm': 5.384328472527386, 'material_balance_error': 2.220446049250313e-16, 'charge_balance_error': 0.0, 'gibbs_delta': -1.0330403199532157e-11, 'iterations': 12}, {'seed_name': 'aq_endpoint_salt_150_b50', 'rejection_reason': 'candidate collapsed to one phase', 'beta_org': 9.859676543759579e-305, 'phase_distance': 1.1512180098094404e-12, 'solver_residual_norm': 1.0743406164692715e-11, 'material_balance_error': 0.0, 'charge_balance_error': 0.0, 'gibbs_delta': -1.2947865002388426e-11, 'iterations': 55}], 'legacy_candidate_mode': 'auto', 'legacy_candidate_residual_tolerance': 0.2, 'legacy_candidate_split_tolerance': 0.0001, 'ignored_legacy_options': [], 'density_failure_contexts': [], 'density_scan_summary': {}, 'density_candidate_roots': [], 'density_best_near_root': {}, 'density_fallback_rejected_reason': '', 'legacy_candidate_found': False, 'legacy_candidate_message': 'legacy candidate fallback disabled; Python equilibrium candidates are not exposed.', 'algorithm_reference': {'authors': 'Ascani, Sadowski, and Held', 'year': 2022, 'title': 'Calculation of Multiphase Equilibria Containing Mixed Solvents and Mixed Electrolytes', 'doi': '10.1021/acs.jced.1c00866'}, 'e_matrix': [[1.0, 1.0]], 'salt_pairs': [{'label': 'LiCl', 'cation': 1, 'anion': 2, 'cation_stoich': 1, 'anion_stoich': 1, 'cation_charge': 1.0, 'anion_charge': -1.0}], 'composition_basis': 'mole_fraction'})"
+    ]
+  },
+  "electrolyte_stability": {
+    "diagnostics": {
+      "algorithm_reference": {
+        "authors": "Ascani, Sadowski, and Held",
+        "doi": "10.1021/acs.jced.1c00866",
+        "title": "Calculation of Multiphase Equilibria Containing Mixed Solvents and Mixed Electrolytes",
+        "year": 2022
+      },
+      "basis_rank": 1,
+      "composition_basis": "mole_fraction",
+      "e_matrix": [
+        [
+          1.0,
+          1.0
+        ]
+      ],
+      "effective_max_iterations": 180,
+      "min_tpd": -0.5681261687345767,
+      "native_entrypoint": "_solve_equilibrium_native",
+      "parent_phases": [
+        "liq",
+        "vap"
+      ],
+      "phase_charge_balance": {
+        "feed": 0.0,
+        "trial": 0.0
+      },
+      "phase_charge_balance_feed": 0.0,
+      "phase_charge_balance_trial": 0.0,
+      "requested_max_iterations": 180,
+      "salt_pairs": [
+        {
+          "anion": 2,
+          "anion_charge": -1.0,
+          "anion_stoich": 1,
+          "cation": 1,
+          "cation_charge": 1.0,
+          "cation_stoich": 1,
+          "label": "LiCl"
+        }
+      ],
+      "seed_name": "polished_logit_axis_1_pos_4",
+      "solver_language": "c++",
+      "stability_analysis": "electrolyte_tpd",
+      "stability_checked": true,
+      "stability_stable": false,
+      "tpd_best_seed_name": "polished_logit_axis_1_pos_4",
+      "tpd_method": "native_tpd_global_search",
+      "tpd_multistart_count": 14,
+      "tpd_objective_value": -0.5681261687345767,
+      "tpd_polish_iterations": 594,
+      "tpd_threshold": 1e-06,
+      "tpd_trial_count": 28,
+      "trial_count": 28,
+      "trial_phases": [
+        "liq",
+        "vap"
+      ],
+      "variable_model": "ascani_transformed_salt_pairs"
+    },
+    "min_tpd": -0.5681261687345767,
+    "stable": false,
+    "status": "success",
+    "trial_composition": [
+      0.01350040430709491,
+      2.4614358021101495e-13,
+      2.4614358021101495e-13,
+      0.9864995956924127
+    ]
+  },
+  "feed_composition": [
+    0.7976019920239602,
+    0.0012000019879999603,
+    0.0012000019879999603,
+    0.19999800400004
+  ],
+  "initial_phases": {
+    "aq": [
+      0.9969999900300002,
+      0.0014999999850000003,
+      0.0014999999850000003,
+      9.999999900000002e-09
+    ],
+    "org": [
+      9.999999800000004e-06,
+      9.999999800000003e-09,
+      9.999999800000003e-09,
+      0.9999899800002003
+    ],
+    "phase_fraction_beta_org": 0.2
+  },
+  "source": {
+    "boundary": "organic phase PC-SAFT plus aqueous phase ePC-SAFT; not a full reactive HBTA/TOPO ePC-SAFT model",
+    "citation_key": "Rezaee2026",
+    "doi": "10.1016/j.fluid.2026.114737",
+    "title": "Thermodynamic modeling of lithium extraction from synthetic brine using deep eutectic solvents: A PC-SAFT approach",
+    "zotero_key": "3NMV5MF2"
+  },
+  "species": [
+    "H2O",
+    "Li+",
+    "Cl-",
+    "Rezaee_DES"
+  ]
+}

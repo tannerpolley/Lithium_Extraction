@@ -1,0 +1,14 @@
+variable,value,units,source,prommis_idaes_use
+feed_li_mg_L,168.0,mg/L,MS-2 source feed,aqueous_feed[Li]
+feed_na_mg_L,64100.0,mg/L,MS-2 source feed,aqueous_feed[Na]
+feed_ca_mg_L,36900.0,mg/L,MS-2 source feed,pretreatment_feed[Ca]
+feed_mg_mg_L,3310.0,mg/L,MS-2 source feed,pretreatment_feed[Mg]
+tds_mg_L,305000.0,mg/L,MS-2 source feed,surrogate_feature_tds
+oa_ratio,1.0,dimensionless,case-study design variable,MSContactor.OA_ratio
+eta_li_stage1_pct,47.2846085852254,percent,calibrated reactive-stage HBTA/TOPO bridge,transfer[Li]
+eta_na_stage1_pct,0.013111805874858998,percent,calibrated reactive-stage HBTA/TOPO bridge,transfer[Na]
+D_li_stage1,0.8969791803911921,dimensionless,calibrated reactive-stage HBTA/TOPO bridge,distribution_ratio[Li]
+S_li_na_stage1,6840.107142998455,dimensionless,calibrated reactive-stage HBTA/TOPO bridge,"selectivity[Li,Na]"
+eta_li_stage3_pct,99.99998957530654,percent,calibrated reactive-stage HBTA/TOPO bridge,flowsheet_recovery[Li]
+eta_na_stage3_pct,0.11600192736928028,percent,calibrated reactive-stage HBTA/TOPO bridge,flowsheet_recovery[Na]
+validity_status,outside_literature_capacity_envelope_near_total_transfer,label,trust-region diagnostic,surrogate_validity_flag

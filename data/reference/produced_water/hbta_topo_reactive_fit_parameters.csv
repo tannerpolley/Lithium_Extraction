@@ -1,0 +1,10 @@
+parameter,value,units,source
+log10_beta_li,1.7005825170001887,various,least_squares_fit
+log10_beta_na,-0.9473818975570434,various,least_squares_fit
+log10_capacity_factor,0.24457360384703203,various,least_squares_fit
+saltout_gain,1.0265837671473417,various,least_squares_fit
+saltout_ref_mol_L,10.0,various,least_squares_fit
+hbta_stoich_per_li,2.0,various,least_squares_fit
+topo_stoich_per_li,1.0,various,least_squares_fit
+activity_model,epcsaft_aqueous_gamma_when_available,various,least_squares_fit
+model_status,calibrated_reactive_hbta_topo_not_full_predictive_epcsaft,various,least_squares_fit

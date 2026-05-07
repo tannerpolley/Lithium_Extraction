@@ -1,0 +1,29 @@
+column_name,role,dtype,units,required,allowed_or_expected_values
+case_id,feature,string,text,true,"known case ids from smackover_li_tds_sensitivity_basis.csv"
+basis_type,provenance,string,text,true,"observed_clean_usgs_row or screening_case"
+source_policy,provenance,string,text,true,"reported_source_row or base_major_ions_scaled_to_tds"
+site_id,provenance,string,text,true,"MS-2 or sensitivity row ids"
+Li_feed_mg_L,feature,float,mg/L,true,positive
+Na_feed_mg_L,feature,float,mg/L,true,positive
+K_feed_mg_L,feature,float,mg/L,true,nonnegative
+Mg_feed_mg_L,feature,float,mg/L,true,nonnegative
+Ca_feed_mg_L,feature,float,mg/L,true,nonnegative
+Sr_feed_mg_L,feature,float,mg/L,true,nonnegative
+Ba_feed_mg_L,feature,float,mg/L,true,nonnegative
+Cl_feed_mg_L,feature,float,mg/L,true,positive
+Br_feed_mg_L,feature,float,mg/L,true,nonnegative
+SO4_feed_mg_L,feature,float,mg/L,true,nonnegative
+B_feed_mg_L,feature,float,mg/L,true,nonnegative
+TDS_mg_L,feature,float,mg/L,true,positive
+oa_ratio,feature,float,dimensionless,true,"0.5, 1.0, 1.5 in current skeleton"
+stage_count,feature,int,count,true,3
+one_stage_Li_extraction_pct,target,float,percent,true,0_to_100
+one_stage_Na_extraction_pct,target,float,percent,true,0_to_100
+one_stage_D_Li,target,float,dimensionless,true,nonnegative
+one_stage_S_Li_Na,target,float,dimensionless,true,nonnegative
+three_stage_Li_cumulative_pct,target,float,percent,true,0_to_100
+three_stage_Na_cumulative_pct,target,float,percent,true,0_to_100
+three_stage_D_Li_final,target,float,dimensionless,true,nonnegative
+three_stage_S_Li_Na_final,target,float,dimensionless,true,nonnegative
+trust_label,diagnostic,string,text,true,"inside_existing_showcase_envelope; calibrated_reactive_extrapolated_to_smackover; extrapolative_scaling_major_ions; outside_existing_oa_sweep; outside_literature_capacity_envelope_near_total_transfer"
+model_status,diagnostic,string,text,true,calibrated_reactive_hbta_topo_not_full_predictive_epcsaft
