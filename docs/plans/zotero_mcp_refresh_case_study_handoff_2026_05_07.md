@@ -284,6 +284,155 @@ Interpretation:
    - blocked parameter-gap/status.
 3. The missing parameter set is not a cosmetic issue. It is the core scientific boundary of the current case study.
 
+## Updated ePC-SAFT Capability Map
+
+This section supersedes the earlier vague assumption that the package might not be able to handle reactive chemistry.
+
+The downstream environment was rechecked against the sibling source checkout:
+
+```text
+C:\Users\Tanner\Documents\git\ePC-SAFT
+```
+
+After forcing a path-dependency reinstall:
+
+```powershell
+uv sync --reinstall-package epcsaft
+```
+
+the installed package in `Lithium_Extraction` exposed the current reactive APIs at source commit:
+
+```text
+1ae609c70636
+```
+
+with package version:
+
+```text
+1.5.0
+```
+
+### Reactive APIs That Exist Now
+
+The package can already do these things:
+
+1. `solve_reactive_speciation(...)`
+   - Solves homogeneous chemical equilibrium in one phase.
+   - Inputs: `species`, `balances`, `totals`, `reactions`, `initial_x`, and `mixture_factory`.
+   - Reactions are supplied explicitly through `ReactionDefinition(...)`.
+   - Supported reaction standard states: `mole_fraction_activity`, `ideal_mole_fraction`, and `concentration`.
+
+2. `solve_reactive_staged_equilibrium(...)`
+   - Solves chemical equilibrium first, then passes the chemically equilibrated composition into a phase-equilibrium route.
+   - Available phase routes include `auto`, `tp_flash`, `lle_flash`, `stability`, `electrolyte_lle`, `electrolyte_stability`, and `electrolyte_bubble_pressure`.
+
+3. Mixture-level public routes:
+   - `mixture.equilibrium(kind="chemical_equilibrium", ...)`
+   - `mixture.equilibrium(kind="reactive_staged_equilibrium", ...)`
+   - `mixture.equilibrium(kind="reactive_stability", ...)`
+   - `mixture.equilibrium(kind="reactive_electrolyte_bubble_pressure", ...)`
+
+4. Reactive electrolyte bubble workflows:
+   - `solve_reactive_electrolyte_bubble(...)`
+   - `solve_reactive_electrolyte_bubble_sweep(...)`
+   - These run native reactive speciation first and then native fixed-liquid electrolyte bubble pressure.
+
+### Important Boundary On What It Still Does Not Do
+
+The package does not currently expose a fully coupled reactive flash solve for the kind of organic extraction problem we want.
+
+The clearest source-code boundary is:
+
+```text
+reactive_flash_tp is not exposed; use an explicit staged phase_kind.
+```
+
+That means:
+
+1. The package can do staged:
+   - chemical equilibrium first;
+   - then phase equilibrium or stability.
+
+2. The package does not yet expose a single fully coupled reactive LLE flash route where reaction and phase split are solved in one monolithic flash solve for the flagship HBTA/TOPO extraction chemistry.
+
+### Current Public Regression Boundaries
+
+Public regression capabilities confirmed now:
+
+1. `fit_pure_neutral(...)`
+   - Public and native-backed.
+   - Current public V1 scope is nonassociating neutral-component fitting for `m`, `s`, and `e`.
+
+2. `fit_pure_ion(...)`
+   - Public and native-backed.
+   - Fits ionic parameters including ion `s`, `e`, and optional `d_born`.
+
+3. `fit_binary_pair(...)`
+   - Public and native-backed.
+   - Current V1 scope is binary VLE fitting for constant `k_ij`-style targets.
+   - It does not currently support binary LLE regression as a public finished route.
+
+4. There is code for associating-neutral fitting internally, but it is not the public finished route that this downstream case study can rely on yet.
+
+### What This Means For The Case Study
+
+Accurate statement:
+
+```text
+The package can already represent homogeneous reactive speciation and staged chemical-equilibrium-then-phase-equilibrium workflows. The missing closure for the flagship HBTA/TOPO case is not the absence of any reactive API; it is the absence of the full solvent/complex parameter payload, reaction constants, and a finished public regression path for this extraction chemistry.
+```
+
+So the package is already strong enough to support:
+
+1. explicit Li complexation reactions;
+2. a staged reactive extraction approximation driven by ePC-SAFT activities;
+3. a better bridge than the old generic wrapper;
+
+while these still remain open:
+
+1. full predictive HBTA/TOPO reactive LLE closure;
+2. public associating-neutral regression workflow adequate for HBTA/TOPO;
+3. public LLE/extraction-data regression workflow for the required binary and complex interactions.
+
+### Validation Notes From This Recheck
+
+Validated in the downstream `Lithium_Extraction` environment:
+
+```powershell
+uv sync --reinstall-package epcsaft
+uv run python scripts\case_study\rezaee_des_epcsaft_parameter_smoke.py
+```
+
+Upstream package fix and downstream validation:
+
+```powershell
+uv sync --reinstall-package epcsaft
+uv run python -c "import epcsaft, json; print(epcsaft.__git_commit__); print(json.dumps(epcsaft.capabilities(), indent=2))"
+uv run python scripts\case_study\rezaee_des_epcsaft_parameter_smoke.py
+uv run python scripts\case_study\hbta_topo_reactive_stage_solve.py
+```
+
+Current outcome after upstream PR #33:
+
+1. `uv sync --reinstall-package epcsaft` succeeded.
+2. Installed `epcsaft.__git_commit__` reports `1ae609c70636`.
+3. Capabilities report `reactive_speciation`, `reactive_electrolyte_bubble`, `electrolyte_lle`, `pure_neutral`, `pure_ion`, and `binary_pair`.
+4. `rezaee_des_epcsaft_parameter_smoke.py` succeeded:
+   - `fit_success = True`
+   - `density_metric = 0.007347057112639847`
+   - `stability_min_tpd = -0.5681261687345767`
+   - `lle_status = error diagnostic / collapsed-candidate path`
+5. `hbta_topo_reactive_stage_solve.py` succeeded and regenerated:
+   - `hbta_topo_reactive_fit.json`
+   - `hbta_topo_reactive_stage_results.csv`
+   - `hbta_topo_reactive_prommis_stage_table.csv`
+   - `hbta_topo_formal_costing_results.csv`
+   - `hbta_topo_reactive_model_report.md`
+
+Interpretation:
+
+The earlier concentration-standard-state diagnostics mismatch was fixed upstream by PR #33 and validated downstream at the package-install and capability level. The remaining case-study limits are scientific/modeling limits, not a basic package install/API blocker.
+
 ## Existing And New Artifacts In This Branch
 
 Important current files and artifacts:
@@ -315,6 +464,7 @@ Known commands:
 
 ```powershell
 uv sync --dev
+uv sync --reinstall-package epcsaft
 uv run python -m compileall -q scripts data
 uv run python -c "import epcsaft; from epcsaft import ePCSAFTMixture; print(epcsaft.__file__)"
 ```
@@ -536,6 +686,7 @@ Core commands:
 
 ```powershell
 uv sync --dev
+uv sync --reinstall-package epcsaft
 uv run python -m compileall -q scripts data
 uv run python -c "import epcsaft; from epcsaft import ePCSAFTMixture; print(epcsaft.__file__)"
 uv run python scripts\case_study\hbta_topo_reactive_stage_solve.py
@@ -572,13 +723,17 @@ User said another thread is waiting to improve the package if downstream finds e
 
 Current downstream finding:
 
-This is not primarily an API crash. The bigger issue is missing parameter/regression support for the solvent-extraction systems needed by the case study:
+This is not primarily an API-absence problem anymore. The package already has reactive-speciation and staged reactive-equilibrium APIs. The bigger issue is missing parameter/regression support for the solvent-extraction systems needed by the case study:
 
 1. HBTA/TOPO/sulfonated kerosene flagship parameters are missing.
 2. Li-BTA-TOPO and competing divalent complex parameters are missing.
 3. Binary interactions and reaction-equilibrium constants are missing.
 4. D2EHDTPA/BuPhen, TBP/FeCl3, D2EHPA/TBP backup systems also lack complete local parameter payloads.
-5. Rezaee smoke test shows density fitting and stability calls can run, but direct pseudo-DES LLE is diagnostic and can collapse to one phase.
+5. Public regression is still incomplete for this use case:
+   - public neutral regression is still V1/nonassociating;
+   - public binary-pair regression is still V1/VLE-oriented and does not yet close the needed LLE/extraction fitting path.
+6. Rezaee smoke test shows density fitting and stability calls can run, but direct pseudo-DES LLE is diagnostic and can collapse to one phase.
+7. The earlier upstream reactive-speciation concentration-standard-state diagnostics mismatch was fixed by upstream PR #33 and downstream validation now installs commit `1ae609c70636`.
 
 Recommended next action:
 
@@ -599,9 +754,10 @@ Suggested discussion body should include:
    - `uv run python scripts\case_study\solvent_candidate_scorecard.py`
 3. Current model boundary.
 4. Needed package support:
-   - pure neutral/associating parameter regression;
+   - public associating-neutral parameter regression suitable for HBTA/TOPO-class solvents;
    - binary-interaction fitting from LLE/extraction data;
-   - reactive electrolyte LLE with organic ligand complexes;
+   - a stronger public workflow for extraction-relevant LLE/reactive fitting, even if the solver remains staged;
+   - eventual fully coupled reactive LLE support if the package roadmap wants to go beyond staged chemistry-plus-phase workflows;
    - documented pattern for passing ePC-SAFT equilibrium results to downstream PrOMMiS/IDAES transfer tables.
 5. Completion condition:
    - downstream can replace calibrated HBTA/TOPO bridge with a true reactive ePC-SAFT parameter payload and run a staged handoff table.
@@ -657,6 +813,13 @@ Read:
 ```text
 docs/plans/prompt.md
 docs/plans/zotero_mcp_refresh_case_study_handoff_2026_05_07.md
+```
+
+Before making any package-capability claim, refresh the local path install and print the live capability map:
+
+```powershell
+uv sync --reinstall-package epcsaft
+uv run python -c "import epcsaft, json; print(epcsaft.__git_commit__); print(json.dumps(epcsaft.capabilities(), indent=2))"
 ```
 
 ### Step 2 - Retry Zotero MCP
@@ -794,6 +957,8 @@ Your immediate tasks:
 3. Confirm the top five solvent ranking and update the generated scorecard/review artifacts if needed.
 4. Run or confirm the available candidate scripts: HBTA/TOPO bridge, Rezaee DES/TOPO smoke, and the Jang baseline if practical.
 5. If package-side ePC-SAFT parameter/regression/reactive-LLE support is missing, create a GitHub Discussion in tannerpolley/ePC-SAFT using the coordination skill contract.
+   - The discussion should say that reactive APIs do exist now.
+   - The request is for parameterization and extraction-oriented regression/workflow support, not for basic reactive-speciation existence.
 6. Update the Phase 9 docs and slides/deck.qmd so the presentation clearly shows why ePC-SAFT is needed for PrOMMiS/IDAES.
 
 Do not stop at a high-level plan unless a real blocker occurs. Label all shortcuts and do not claim true predictive reactive HBTA/TOPO ePC-SAFT is complete.
@@ -810,7 +975,7 @@ This is the most important remaining science and engineering work:
 5. Fit or find competing Mg/Ca/Sr/Ba complex parameters if those ions remain in the feed.
 6. Fit or find binary interaction parameters for aqueous/organic and organic/organic pairs.
 7. Fit reaction-equilibrium constants from Zhang/Shan/Gando/Hanada/Rezaee data or digitized curves.
-8. Replace the calibrated HBTA/TOPO reactive-stage bridge with true predictive reactive ePC-SAFT LLE.
+8. Replace the calibrated HBTA/TOPO reactive-stage bridge with a predictive staged reactive-ePC-SAFT workflow or a fully coupled reactive LLE route if the upstream package exposes one later.
 9. Expand the PrOMMiS artifact from handoff tables into an actual staged MSContactor solve for the flagship case.
 10. Add formal IDAES costing hooks for pretreatment, extraction/contacting, stripping, solvent makeup/loss, concentration, Li2CO3 precipitation, and waste handling.
 11. Tighten source-specific Smackover critical-mineral/REE evidence if the user can provide or locate a source that reports REE.
@@ -829,4 +994,3 @@ It should say:
 ```text
 This case study shows why ePC-SAFT belongs in the PrOMMiS/IDAES ecosystem. A real high-TDS produced-water source and a source-backed non-ionic extraction chemistry require equilibrium, speciation, selectivity, and phase-split calculations that fixed recovery factors cannot defend. The current repository already generates bridge transfer variables and costing skeletons, while the unresolved parameter/regression work defines the exact package capability needed to turn the bridge into a predictive thermodynamic model.
 ```
-
