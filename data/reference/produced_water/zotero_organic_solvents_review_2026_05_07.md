@@ -34,7 +34,7 @@ Rezaee 2026 is valuable, but it is not a complete solution to the HBTA/TOPO prob
 
 | Rank | Solvent system | Evidence realism | ePC-SAFT readiness | Recommendation |
 |---:|---|---|---|---|
-| 1 | HBTA/TOPO/sulfonated kerosene | Highest for the current objective: actual oil-and-gas field water, conventional extractant/synergist, direct stage/process evidence | Missing pure-component, complex, binary-interaction, and reaction-equilibrium payloads | Keep as flagship; use the current calibrated reactive bridge until parameters are fitted |
+| 1 | HBTA/TOPO/sulfonated kerosene | Highest for the current objective: actual oil-and-gas field water, conventional extractant/synergist, direct stage/process evidence | Missing pure-component, complex, binary-interaction, and reaction-equilibrium payloads | Keep as flagship; use the current source-regressed Li/Na stage model until full multication parameters are fitted |
 | 2 | HBTA/TOPO or HTTA/TOPO DES | Strong selectivity and useful physical-property data; not the same as sulfonated kerosene field-water system | Better pseudo-component fitting path because density/viscosity data exist, but still not full reactive ePC-SAFT | Use as an alternate fitting target and mechanism support |
 | 3 | Rezaee DES/TOPO | Strongest immediate parameter/regression pilot because it reports PC-SAFT-style parameters and organic/aqueous modeling workflow | Good for smoke-testing regression and phase-equilibrium plumbing; not the same active chemistry and not full ePC-SAFT | Use as method pilot, not flagship |
 | 4 | TBP+D2EHPA | Real produced-water literature and existing local scripts | Current local model remains placeholder-heavy and less selective | Keep as comparison/limitation baseline |
@@ -58,7 +58,7 @@ Rezaee is the best immediate package/regression smoke test because the required 
 
 ## Parameterization Path
 
-1. Preserve the current HBTA/TOPO fitted bridge as `calibrated_reactive_hbta_topo_not_full_predictive_epcsaft`.
+1. Preserve the current HBTA/TOPO source-regressed Li/Na stage model as `source_regressed_li_na_predictive_stage_model_limited_epcsaft`.
 2. Use Rezaee 2026 as a regression and phase-equilibrium smoke test for the new ePC-SAFT package.
 3. Use Hanada 2021 density/viscosity values to justify a future HBTA/TOPO or HTTA/TOPO pseudo-component fitting attempt if direct pure-component parameters remain unavailable.
 4. Digitize Zhang 2017 and Shan/Gando 2025 curves if fitted reaction constants are needed beyond the current stage-anchor calibration.

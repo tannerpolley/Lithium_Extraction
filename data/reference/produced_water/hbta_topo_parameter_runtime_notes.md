@@ -35,5 +35,5 @@ For the current presentation skeleton, do not claim the HBTA/TOPO case has a com
 - source-backed feed chemistry;
 - literature-backed HBTA/TOPO process evidence;
 - fitted reactive-stage transfer variables from `hbta_topo_reactive_stage_results.csv`;
-- the formal Class-5 costing cap from `hbta_topo_formal_costing_results.csv`;
+- the formal downstream IDAES costing cap from `hbta_topo_idaes_costing_input.csv` and PrOMMiS `hbta_topo_idaes_costing_results.csv`;
 - this parameter table as the reason the next scientific step is parameterization and reaction-constant fitting.

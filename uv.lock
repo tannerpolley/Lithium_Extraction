@@ -105,9 +105,11 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
+    { name = "cyipopt", marker = "extra == 'ipopt'" },
     { name = "numpy", specifier = ">=2.0" },
     { name = "pandas", specifier = ">=2.2" },
 ]
+provides-extras = ["ipopt"]
 
 [package.metadata.requires-dev]
 build = [
@@ -134,6 +136,7 @@ dev = [
     { name = "sphinx", specifier = ">=7.0" },
 ]
 docs = [{ name = "sphinx", specifier = ">=7.0" }]
+ipopt = [{ name = "cyipopt" }]
 style = [
     { name = "black", specifier = ">=24.0" },
     { name = "ruff", specifier = ">=0.5" },

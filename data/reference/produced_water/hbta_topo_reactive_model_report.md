@@ -2,11 +2,11 @@
 
 ## What Changed
 
-The old Smackover Phase 6-8 path used a selective wrapper. This artifact adds a calibrated reactive-stage model with the literature-supported `2 HBTA : 1 TOPO : 1 Li` complex stoichiometry and ePC-SAFT aqueous activity coefficients when the local runtime can evaluate them.
+The old Smackover Phase 6-8 path used a selective wrapper. This artifact adds a source-regressed Li/Na-first reactive-stage model with the literature-supported `2 HBTA : 1 TOPO : 1 Li` complex stoichiometry and ePC-SAFT aqueous activity coefficients when the local runtime can evaluate them.
 
 ## Scientific Boundary
 
-This is still not a full predictive reactive ePC-SAFT LLE calculation. HBTA, TOPO, sulfonated kerosene/diluent, Li-complex, and competing divalent-complex ePC-SAFT parameters remain unresolved. The new model is a better bridge because its chemistry is explicit and fitted to source-backed stage data, but it is still a calibrated stage law.
+This is predictive only in the Li/Na staged-transfer sense: one source-regressed parameter payload is reused across feed and O/A cases without per-case refitting. It is still not a full multication reactive ePC-SAFT LLE calculation. HBTA, TOPO, sulfonated kerosene/diluent, Li-complex, and competing divalent-complex ePC-SAFT parameters remain unresolved.
 
 ## Sources Used
 
@@ -35,7 +35,12 @@ For formal costing, lithium recovery is capped at the source-backed `97.17%` Sha
 
 - `data\pcsaft_parameters\gando_2025\hbta_topo_reactive_fit.json`
 - `data\reference\produced_water\hbta_topo_reactive_fit_parameters.csv`
+- `data\reference\produced_water\hbta_topo_predictive_regression_dataset.csv`
+- `data\reference\produced_water\hbta_topo_predictive_regression_residuals.csv`
+- `data\reference\produced_water\hbta_topo_predictive_parameter_uncertainty.csv`
+- `data\reference\produced_water\hbta_topo_predictive_model_audit.csv`
 - `data\reference\produced_water\hbta_topo_reactive_stage_results.csv`
 - `data\reference\produced_water\hbta_topo_reactive_prommis_stage_table.csv`
 - `data\reference\produced_water\hbta_topo_formal_costing_assumptions.csv`
 - `data\reference\produced_water\hbta_topo_formal_costing_results.csv`
+- `data\reference\produced_water\hbta_topo_idaes_costing_input.csv`

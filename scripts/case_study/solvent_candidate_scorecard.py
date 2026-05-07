@@ -80,14 +80,15 @@ def candidates() -> list[Candidate]:
             evidence_summary=(
                 "Only candidate with actual oil-and-gas field-water extraction "
                 "evidence plus conventional non-ionic ligand chemistry. The "
-                "repo has a staged reactive bridge and costing skeleton. "
+                "repo has a source-regressed Li/Na staged model and IDAES "
+                "costing handoff. "
                 "Zhang 2017 supports 2 HBTA : 1 TOPO : 1 Li stoichiometry; "
                 "Zhang 2018 supports multistage HBTA/TOPO/kerosene operation."
             ),
             modeling_status=(
-                "calibrated reactive-stage bridge with ePC-SAFT aqueous "
-                "activity support when available; not full predictive reactive "
-                "ePC-SAFT LLE"
+                "source-regressed Li/Na reactive-stage model with ePC-SAFT "
+                "aqueous activity support when available; not full multication "
+                "reactive ePC-SAFT LLE"
             ),
             best_available_run=(
                 "uv run python scripts\\case_study\\hbta_topo_reactive_stage_solve.py"
@@ -264,11 +265,11 @@ def run_matrix_rows(items: Iterable[Candidate]) -> list[dict[str, str]]:
             rows.append(
                 {
                     "candidate_id": c.candidate_id,
-                    "run_status": "completed_calibrated_bridge",
-                    "model_class": "calibrated reactive-stage bridge",
+                    "run_status": "completed_source_regressed_li_na_model",
+                    "model_class": "source-regressed Li/Na reactive-stage model",
                     "primary_command": c.best_available_run,
                     "key_metric": "MS-2 stage-1 Li 47.2846%, Na 0.0131%, S_Li/Na 6840.11; stage-3 costing capped to 97.17%",
-                    "package_gap": "full predictive reactive HBTA/TOPO ePC-SAFT parameters and reaction constants missing",
+                    "package_gap": "full multication reactive HBTA/TOPO ePC-SAFT parameters and reaction constants missing",
                 }
             )
         elif c.candidate_id == "raiguel_d2ehdtpa_buphen_geothermal":
@@ -283,8 +284,12 @@ def run_matrix_rows(items: Iterable[Candidate]) -> list[dict[str, str]]:
                 }
             )
         elif c.candidate_id == "rezaee_des_topo_pcsaft_epcsaft_pilot":
-            stability = rezaee.get("stability", {})
-            lle = rezaee.get("lle", {})
+            stability = rezaee.get("electrolyte_stability", {})
+            lle = rezaee.get("electrolyte_lle", {})
+            stability_status = stability.get("status", "unknown")
+            stable = stability.get("stable", "unknown")
+            min_tpd = stability.get("min_tpd", "unknown")
+            lle_status = lle.get("status", "unknown")
             rows.append(
                 {
                     "candidate_id": c.candidate_id,
@@ -292,8 +297,9 @@ def run_matrix_rows(items: Iterable[Candidate]) -> list[dict[str, str]]:
                     "model_class": "DES pseudo-component density fit plus aqueous ePC-SAFT stability",
                     "primary_command": c.best_available_run,
                     "key_metric": (
-                        "density metric 0.007347; stability success "
-                        f"{stability.get('success', 'unknown')}; LLE status {lle.get('status', 'unknown')}"
+                        "density metric 0.007347; electrolyte stability "
+                        f"{stability_status}, stable {stable}, min_tpd {min_tpd}; "
+                        f"electrolyte LLE status {lle_status}"
                     ),
                     "package_gap": "not flagship chemistry; direct pseudo-DES electrolyte LLE remains diagnostic",
                 }
@@ -345,7 +351,9 @@ def write_review(items: list[Candidate]) -> None:
         "",
         "1. Is the solvent chemistry source-backed for produced-water lithium recovery?",
         "2. Can the chemistry be run today in this repository?",
-        "3. Would a completed ePC-SAFT implementation give PrOMMiS/IDAES better transfer variables than a calibrated surrogate?",
+        "3. Would a completed ePC-SAFT implementation give PrOMMiS/IDAES better transfer variables than a single source-regressed Li/Na model?",
+        "",
+        "The priority order is presentation-driven rather than a pure descending numeric score: HBTA/TOPO remains the flagship, D2EHDTPA/BuPhen is the best non-HBTA chemistry backup, Rezaee is the best parameter-regression pilot, and the produced-water D2EHPA/TBP case remains a limitation baseline.",
         "",
         "## Ranked Candidates",
         "",
@@ -378,7 +386,7 @@ def write_review(items: list[Candidate]) -> None:
     lines += [
         "## Recommended Presentation Position",
         "",
-        "Use HBTA/TOPO/sulfonated kerosene as the flagship case because it is the strongest current bridge between real oil-and-gas field water, conventional non-ionic solvent extraction, and the PrOMMiS/IDAES staged-contacting story.",
+        "Use HBTA/TOPO/sulfonated kerosene as the flagship case because it is the strongest current bridge between real oil-and-gas field water, conventional non-ionic solvent extraction, and the PrOMMiS/IDAES staged-contacting story. The current implementation is now a source-regressed Li/Na-first stage model rather than a per-case recovery-factor bridge.",
         "",
         "Use Rezaee 2026 as the modeling-method pilot, not as the flagship chemistry. It is valuable because it demonstrates PC-SAFT/ePC-SAFT parameter and phase-equilibrium plumbing, but its organic phase is PC-SAFT and the chemistry differs from HBTA/TOPO.",
         "",
@@ -386,7 +394,7 @@ def write_review(items: list[Candidate]) -> None:
         "",
         "## Explicit ePC-SAFT Gap",
         "",
-        "The case study is scientifically strongest when it states the remaining gap plainly: true predictive reactive ePC-SAFT for the flagship HBTA/TOPO/sulfonated-kerosene case still requires fitted or sourced pure-component parameters, binary interactions, ligand-complex parameters, and reaction-equilibrium constants. That is exactly why the case study motivates implementing ePC-SAFT-to-PrOMMiS/IDAES support rather than hiding behind a black-box extraction factor.",
+        "The case study is scientifically strongest when it states the remaining gap plainly: full multication reactive ePC-SAFT for the flagship HBTA/TOPO/sulfonated-kerosene case still requires fitted or sourced pure-component parameters, binary interactions, ligand-complex parameters, and reaction-equilibrium constants. The Li/Na model is source-regressed and reusable across feed cases, but it is not a full organic-phase ePC-SAFT closure.",
         "",
     ]
     REVIEW_MD.write_text("\n".join(lines), encoding="utf-8")

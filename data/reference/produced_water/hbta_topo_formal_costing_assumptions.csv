@@ -11,4 +11,4 @@ solvent_makeup_low_usd_m3,0.5,USD/m3 feed,low loss scenario
 solvent_makeup_base_usd_m3,2.0,USD/m3 feed,base loss scenario
 solvent_makeup_high_usd_m3,6.0,USD/m3 feed,high loss scenario
 annual_charge_factor,0.2,1/year,conceptual annualized capex factor
-contactor_capex_usd_per_m3_day,15000.0,USD/(m3/day),Class-5 placeholder
+contactor_capex_usd_per_m3_day,15000.0,USD/(m3/day),scenario placeholder for downstream IDAES costing

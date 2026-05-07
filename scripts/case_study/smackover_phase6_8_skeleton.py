@@ -32,7 +32,7 @@ TOPO_MOL_L = 0.015
 STAGE_COUNT = 3
 HOURS_PER_YEAR = 8000.0
 LI2CO3_PER_LI = 73.891 / (2.0 * 6.94)
-MODEL_STATUS = "calibrated_reactive_hbta_topo_not_full_predictive_epcsaft"
+MODEL_STATUS = "source_regressed_li_na_predictive_stage_model_limited_epcsaft"
 
 
 @dataclass
@@ -118,7 +118,7 @@ def _trust_label(feed: FeedCase, oa_ratio: float) -> str:
     if in_li and in_na and in_oa:
         return "inside_existing_showcase_envelope"
     if in_oa:
-        return "calibrated_reactive_extrapolated_to_smackover"
+        return "source_regressed_extrapolated_to_smackover"
     return "outside_existing_oa_sweep"
 
 
@@ -174,7 +174,7 @@ def _write_transfer_rows(cases: list[FeedCase]) -> list[dict[str, object]]:
                     "TOPO_consumed_mol_L_org_stage3": three.topo_consumed_mol_L_org,
                     "gamma_source_stage3": three.gamma_source,
                     "trust_label": trust_label,
-                    "model_status": MODEL_STATUS,
+                    "model_status": fit.model_status,
                 }
             )
     with TRANSFER_OUT.open("w", newline="", encoding="utf-8") as handle:
@@ -196,42 +196,42 @@ def _write_handoff(base_row: dict[str, object]) -> None:
             "eta_li_stage1_pct",
             base_row["one_stage_Li_extraction_pct"],
             "percent",
-            "calibrated reactive-stage HBTA/TOPO bridge",
+            "source-regressed Li/Na HBTA/TOPO stage model",
             "transfer[Li]",
         ),
         (
             "eta_na_stage1_pct",
             base_row["one_stage_Na_extraction_pct"],
             "percent",
-            "calibrated reactive-stage HBTA/TOPO bridge",
+            "source-regressed Li/Na HBTA/TOPO stage model",
             "transfer[Na]",
         ),
         (
             "D_li_stage1",
             base_row["one_stage_D_Li"],
             "dimensionless",
-            "calibrated reactive-stage HBTA/TOPO bridge",
+            "source-regressed Li/Na HBTA/TOPO stage model",
             "distribution_ratio[Li]",
         ),
         (
             "S_li_na_stage1",
             base_row["one_stage_S_Li_Na"],
             "dimensionless",
-            "calibrated reactive-stage HBTA/TOPO bridge",
+            "source-regressed Li/Na HBTA/TOPO stage model",
             "selectivity[Li,Na]",
         ),
         (
             "eta_li_stage3_pct",
             base_row["three_stage_Li_cumulative_pct"],
             "percent",
-            "calibrated reactive-stage HBTA/TOPO bridge",
+            "source-regressed Li/Na HBTA/TOPO stage model",
             "flowsheet_recovery[Li]",
         ),
         (
             "eta_na_stage3_pct",
             base_row["three_stage_Na_cumulative_pct"],
             "percent",
-            "calibrated reactive-stage HBTA/TOPO bridge",
+            "source-regressed Li/Na HBTA/TOPO stage model",
             "flowsheet_recovery[Na]",
         ),
         ("validity_status", base_row["trust_label"], "label", "trust-region diagnostic", "surrogate_validity_flag"),
@@ -276,7 +276,7 @@ def _write_report(base_row: dict[str, object]) -> None:
         "",
         "## Scope",
         "",
-        "These outputs use the calibrated HBTA/TOPO reactive-stage model with 2 HBTA : 1 TOPO : 1 Li stoichiometry and ePC-SAFT aqueous activity coefficients when available. They are transfer-variable and costing scaffold artifacts, not full predictive reactive HBTA/TOPO ePC-SAFT LLE predictions.",
+        "These outputs use the source-regressed Li/Na HBTA/TOPO reactive-stage model with 2 HBTA : 1 TOPO : 1 Li stoichiometry and ePC-SAFT aqueous activity coefficients when available. They are transfer-variable and costing scaffold artifacts, not full multication reactive HBTA/TOPO ePC-SAFT LLE predictions.",
         "",
         "## Generated Files",
         "",

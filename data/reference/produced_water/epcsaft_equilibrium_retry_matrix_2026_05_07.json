@@ -1,0 +1,641 @@
+{
+  "package": {
+    "capabilities": {
+      "equilibrium": {
+        "dataset_validation": {
+          "available": 1,
+          "helper": "validate_dataset_bundle",
+          "scope": "external parameter bundle structure and reaction/species compatibility checks"
+        },
+        "electrolyte_bubble_pressure": {
+          "available": 1,
+          "backend": "native",
+          "scope": "fixed liquid composition with neutral vapor species; ions remain liquid-only"
+        },
+        "electrolyte_lle": {
+          "available": 1,
+          "backend": "native",
+          "default_auto_uses_ipopt": 0,
+          "full_constrained_nlp_available": 0,
+          "ipopt_available": 0,
+          "ipopt_formulation": "bound_constrained_residual_minimization",
+          "solver_backends": [
+            "auto",
+            "newton",
+            "ipopt"
+          ]
+        },
+        "neutral_bubble_dew": {
+          "available": 1,
+          "backend": "python_orchestrated_native_state_fugacity",
+          "methods": [
+            "bubble_p",
+            "bubble_t",
+            "dew_p",
+            "dew_t"
+          ]
+        },
+        "neutral_lle_flash": {
+          "available": 1,
+          "backend": "native"
+        },
+        "neutral_stability": {
+          "available": 1,
+          "backend": "native"
+        },
+        "neutral_tp_flash": {
+          "available": 1,
+          "backend": "native"
+        },
+        "reactive_electrolyte_bubble": {
+          "available": 1,
+          "backend": "native",
+          "scope": "native chemical speciation followed by native fixed-liquid electrolyte bubble pressure"
+        },
+        "reactive_speciation": {
+          "activity_output_modes": [
+            "auto",
+            "always",
+            "never"
+          ],
+          "available": 1,
+          "backend": "native activity evaluations",
+          "continuation_state_available": 1,
+          "default_auto_uses_ipopt": 0,
+          "full_constrained_nlp_available": 0,
+          "ipopt_available": 0,
+          "ipopt_formulation": "bound_constrained_residual_minimization",
+          "solver_backends": [
+            "auto",
+            "newton",
+            "ipopt"
+          ],
+          "sweep_available": 1
+        },
+        "repeated_state_properties": {
+          "available": 1,
+          "density_seed_aliases": [
+            "rho_guess",
+            "rho_seed"
+          ],
+          "helpers": [
+            "evaluate_fugacity_coefficients",
+            "evaluate_fugacity_coefficients_batch"
+          ]
+        }
+      },
+      "native_extension": 1,
+      "optimizers": {
+        "ipopt": {
+          "available": 0,
+          "backend": "cyipopt",
+          "default_auto_uses_ipopt": 0,
+          "dependency_group": "ipopt",
+          "exact_hessian_available": 0,
+          "formulations": [
+            "bound_constrained_residual_minimization"
+          ],
+          "full_constrained_nlp_available": 0,
+          "hessian_includes_second_residual_derivatives": 0,
+          "hessian_strategies": [
+            "gauss_newton",
+            "lbfgs"
+          ],
+          "import_error": "ModuleNotFoundError: No module named 'cyipopt'",
+          "module": "cyipopt",
+          "optional_extra": "ipopt",
+          "scope": "explicit opt-in cyipopt backend; native Newton/default backends remain defaults",
+          "solver_backend": "ipopt"
+        }
+      },
+      "regression": {
+        "binary_pair": {
+          "available": 1,
+          "backend": "native"
+        },
+        "mea_co2_h2o_electrolyte_benchmark": {
+          "available": 1,
+          "backend": "native",
+          "scope": "fixed-composition benchmark, not reactive bubble-pressure fitting"
+        },
+        "pure_ion": {
+          "available": 1,
+          "backend": "native"
+        },
+        "pure_neutral": {
+          "available": 1,
+          "backend": "native"
+        }
+      }
+    },
+    "equilibrium_options": [
+      "max_iterations",
+      "tolerance",
+      "damping",
+      "min_composition",
+      "include_phase_diagnostics",
+      "stability_precheck",
+      "legacy_candidate_mode",
+      "legacy_candidate_residual_tolerance",
+      "legacy_candidate_split_tolerance",
+      "legacy_candidate_max_iterations",
+      "ignored_legacy_options",
+      "density_diagnostics",
+      "experimental_coupled_density_lle",
+      "jacobian_backend",
+      "solver_backend",
+      "hessian_strategy"
+    ],
+    "file": "C:\\Users\\Tanner\\Documents\\git\\Lithium_Extraction\\.venv\\Lib\\site-packages\\epcsaft\\__init__.py",
+    "runtime_build_info": {
+      "direct_url": "file:///C:/Users/Tanner/Documents/git/ePC-SAFT",
+      "editable": 0,
+      "machine": "AMD64",
+      "native_extension": "C:\\Users\\Tanner\\Documents\\git\\Lithium_Extraction\\.venv\\Lib\\site-packages\\epcsaft\\_core.cp312-win_amd64.pyd",
+      "native_extension_available": 1,
+      "native_extension_mtime_utc": "2026-05-07T22:20:55.154878+00:00",
+      "optional_dependencies": {
+        "cyipopt": {
+          "available": 0,
+          "backend": "cyipopt",
+          "dependency_group": "ipopt",
+          "import_error": "ModuleNotFoundError: No module named 'cyipopt'",
+          "module": "cyipopt",
+          "optional_extra": "ipopt"
+        }
+      },
+      "package_file": "C:\\Users\\Tanner\\Documents\\git\\Lithium_Extraction\\.venv\\Lib\\site-packages\\epcsaft\\runtime.py",
+      "package_version": "1.5.0",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "python": "3.12.10",
+      "source_git_commit": "a56d9c81af1b",
+      "source_root": "C:\\Users\\Tanner\\Documents\\git\\ePC-SAFT"
+    },
+    "version": "1.5.0"
+  },
+  "results": [
+    {
+      "case": "hubach_2024_row0_tbp_emim_tcb_licl_water",
+      "exitcode": 0,
+      "metadata": {
+        "e_calc_s11_pct": 78.16,
+        "e_exp_pct": 75.39,
+        "rw_oa": 0.522
+      },
+      "ok": 1,
+      "result": {
+        "backend": "electrolyte_tpd",
+        "diagnostics": {
+          "algorithm_reference": {
+            "authors": "Ascani, Sadowski, and Held",
+            "doi": "10.1021/acs.jced.1c00866",
+            "title": "Calculation of Multiphase Equilibria Containing Mixed Solvents and Mixed Electrolytes",
+            "year": 2022
+          },
+          "basis_rank": 1,
+          "composition_basis": "mole_fraction",
+          "e_matrix": [
+            [
+              1.0,
+              1.0
+            ]
+          ],
+          "effective_max_iterations": 12,
+          "min_tpd": -2.5058140448113444,
+          "native_entrypoint": "_solve_equilibrium_native",
+          "parent_phases": [
+            "liq",
+            "vap"
+          ],
+          "phase_charge_balance": {
+            "feed": 0.0,
+            "trial": 0.0
+          },
+          "phase_charge_balance_feed": 0.0,
+          "phase_charge_balance_trial": 0.0,
+          "requested_max_iterations": 12,
+          "salt_pairs": [
+            {
+              "anion": 4,
+              "anion_charge": -1.0,
+              "anion_stoich": 1,
+              "cation": 3,
+              "cation_charge": 1.0,
+              "cation_stoich": 1,
+              "label": "LiCl"
+            }
+          ],
+          "seed_name": "polished_logit_axis_2_pos_4",
+          "solver_language": "c++",
+          "stability_analysis": "electrolyte_tpd",
+          "stability_checked": 1,
+          "stability_stable": 0,
+          "tpd_best_seed_name": "polished_logit_axis_2_pos_4",
+          "tpd_method": "native_tpd_global_search",
+          "tpd_multistart_count": 18,
+          "tpd_objective_value": -2.5058140448113444,
+          "tpd_polish_iterations": 213,
+          "tpd_threshold": 1e-06,
+          "tpd_trial_count": 36,
+          "trial_count": 36,
+          "trial_phases": [
+            "liq",
+            "vap"
+          ],
+          "variable_model": "ascani_transformed_salt_pairs"
+        },
+        "min_tpd": -2.5058140448113444,
+        "problem_kind": "electrolyte_stability",
+        "stable": 0
+      },
+      "timed_out": 0,
+      "variant": {
+        "initial_phases": 0,
+        "name": "stability_native",
+        "operation": "stability",
+        "options": {
+          "include_phase_diagnostics": 1,
+          "max_iterations": 12,
+          "tolerance": 1e-06
+        }
+      },
+      "wall_seconds": 0.6637577000001329,
+      "wall_seconds_outer": 2.631587400001081
+    },
+    {
+      "case_name": "hubach",
+      "exitcode": -15,
+      "ok": 0,
+      "timed_out": 1,
+      "timeout_seconds": 25.0,
+      "variant": {
+        "initial_phases": 0,
+        "name": "auto_unseeded_12",
+        "operation": "lle",
+        "options": {
+          "include_phase_diagnostics": 1,
+          "max_iterations": 12,
+          "tolerance": 1e-06
+        }
+      },
+      "wall_seconds_outer": 25.012165099999038
+    },
+    {
+      "case_name": "hubach",
+      "exitcode": -15,
+      "ok": 0,
+      "timed_out": 1,
+      "timeout_seconds": 25.0,
+      "variant": {
+        "initial_phases": 1,
+        "name": "auto_seeded_24_density_full",
+        "operation": "lle",
+        "options": {
+          "density_diagnostics": "full",
+          "include_phase_diagnostics": 1,
+          "max_iterations": 24,
+          "tolerance": 1e-06
+        }
+      },
+      "wall_seconds_outer": 25.00742420000097
+    },
+    {
+      "case_name": "hubach",
+      "exitcode": -15,
+      "ok": 0,
+      "timed_out": 1,
+      "timeout_seconds": 25.0,
+      "variant": {
+        "initial_phases": 1,
+        "name": "newton_autodiff_seeded_24",
+        "operation": "lle",
+        "options": {
+          "include_phase_diagnostics": 1,
+          "jacobian_backend": "autodiff",
+          "max_iterations": 24,
+          "solver_backend": "newton",
+          "tolerance": 1e-06
+        }
+      },
+      "wall_seconds_outer": 25.01227359999939
+    },
+    {
+      "case_name": "hubach",
+      "exitcode": -15,
+      "ok": 0,
+      "timed_out": 1,
+      "timeout_seconds": 25.0,
+      "variant": {
+        "initial_phases": 1,
+        "name": "newton_fd_lbfgs_seeded_24",
+        "operation": "lle",
+        "options": {
+          "hessian_strategy": "lbfgs",
+          "include_phase_diagnostics": 1,
+          "jacobian_backend": "finite_difference",
+          "max_iterations": 24,
+          "solver_backend": "newton",
+          "tolerance": 1e-06
+        }
+      },
+      "wall_seconds_outer": 25.00896190000094
+    },
+    {
+      "case_name": "hubach",
+      "exitcode": -15,
+      "ok": 0,
+      "timed_out": 1,
+      "timeout_seconds": 25.0,
+      "variant": {
+        "initial_phases": 1,
+        "name": "coupled_density_seeded_12",
+        "operation": "lle",
+        "options": {
+          "density_diagnostics": "full",
+          "experimental_coupled_density_lle": 1,
+          "include_phase_diagnostics": 1,
+          "max_iterations": 12,
+          "tolerance": 1e-06
+        }
+      },
+      "wall_seconds_outer": 25.009057299999768
+    },
+    {
+      "case_name": "hubach",
+      "diagnostics": null,
+      "error": "cyipopt is required when solver_backend='ipopt' is requested for electrolyte_lle. Install the optional IPOPT dependency with the package 'ipopt' extra or the uv 'ipopt' group. The requested solve was not run with the Newton/default backend. Import diagnostic: ModuleNotFoundError: No module named 'cyipopt'",
+      "error_type": "InputError",
+      "exitcode": 0,
+      "ok": 0,
+      "timed_out": 0,
+      "traceback_tail": [
+        "           ^^^^^^^^^^^^^^^^^^^^^^^^",
+        "  File \"C:\\Users\\Tanner\\Documents\\git\\Lithium_Extraction\\.venv\\Lib\\site-packages\\epcsaft\\epcsaft.py\", line 275, in electrolyte_lle_tp",
+        "    return electrolyte_lle_flash_native(",
+        "           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+        "  File \"C:\\Users\\Tanner\\Documents\\git\\Lithium_Extraction\\.venv\\Lib\\site-packages\\epcsaft\\equilibrium.py\", line 1453, in electrolyte_lle_flash_native",
+        "    return solve_electrolyte_lle_ipopt(",
+        "           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+        "  File \"C:\\Users\\Tanner\\Documents\\git\\Lithium_Extraction\\.venv\\Lib\\site-packages\\epcsaft\\ipopt_backend.py\", line 311, in solve_electrolyte_lle_ipopt",
+        "    require_cyipopt(\"electrolyte_lle\")",
+        "  File \"C:\\Users\\Tanner\\Documents\\git\\Lithium_Extraction\\.venv\\Lib\\site-packages\\epcsaft\\ipopt_backend.py\", line 87, in require_cyipopt",
+        "    raise InputError(",
+        "epcsaft._types.InputError: cyipopt is required when solver_backend='ipopt' is requested for electrolyte_lle. Install the optional IPOPT dependency with the package 'ipopt' extra or the uv 'ipopt' group. The requested solve was not run with the Newton/default backend. Import diagnostic: ModuleNotFoundError: No module named 'cyipopt'"
+      ],
+      "variant": {
+        "initial_phases": 1,
+        "name": "ipopt_seeded_6",
+        "operation": "lle",
+        "options": {
+          "hessian_strategy": "lbfgs",
+          "include_phase_diagnostics": 1,
+          "max_iterations": 6,
+          "solver_backend": "ipopt",
+          "tolerance": 1e-06
+        }
+      },
+      "wall_seconds": 0.014721599998665624,
+      "wall_seconds_outer": 1.4340734999987035
+    },
+    {
+      "case": "jang_2017_single_contact_tbp_d2ehpa_placeholder",
+      "exitcode": 0,
+      "metadata": {
+        "d2ehpa_mol_l": 1.5,
+        "li_feed_mg_l": 0.97,
+        "na_feed_mg_l": 437.0,
+        "tbp_mol_l": 0.3
+      },
+      "ok": 1,
+      "result": {
+        "backend": "electrolyte_tpd",
+        "diagnostics": {
+          "algorithm_reference": {
+            "authors": "Ascani, Sadowski, and Held",
+            "doi": "10.1021/acs.jced.1c00866",
+            "title": "Calculation of Multiphase Equilibria Containing Mixed Solvents and Mixed Electrolytes",
+            "year": 2022
+          },
+          "basis_rank": 2,
+          "composition_basis": "mole_fraction",
+          "e_matrix": [
+            [
+              1.0,
+              0.0,
+              1.0
+            ],
+            [
+              0.0,
+              1.0,
+              1.0
+            ]
+          ],
+          "effective_max_iterations": 12,
+          "min_tpd": -17.358566077818846,
+          "native_entrypoint": "_solve_equilibrium_native",
+          "parent_phases": [
+            "liq",
+            "vap"
+          ],
+          "phase_charge_balance": {
+            "feed": -5.421010862427522e-20,
+            "trial": 0.0
+          },
+          "phase_charge_balance_feed": -5.421010862427522e-20,
+          "phase_charge_balance_trial": 0.0,
+          "requested_max_iterations": 12,
+          "salt_pairs": [
+            {
+              "anion": 6,
+              "anion_charge": -1.0,
+              "anion_stoich": 1,
+              "cation": 4,
+              "cation_charge": 1.0,
+              "cation_stoich": 1,
+              "label": "LiCl"
+            },
+            {
+              "anion": 6,
+              "anion_charge": -1.0,
+              "anion_stoich": 1,
+              "cation": 5,
+              "cation_charge": 1.0,
+              "cation_stoich": 1,
+              "label": "NaCl"
+            }
+          ],
+          "seed_name": "polished_logit_axis_3_pos_2",
+          "solver_language": "c++",
+          "stability_analysis": "electrolyte_tpd",
+          "stability_checked": 1,
+          "stability_stable": 0,
+          "tpd_best_seed_name": "polished_logit_axis_3_pos_2",
+          "tpd_method": "native_tpd_global_search",
+          "tpd_multistart_count": 28,
+          "tpd_objective_value": -17.358566077818846,
+          "tpd_polish_iterations": 336,
+          "tpd_threshold": 1e-06,
+          "tpd_trial_count": 56,
+          "trial_count": 56,
+          "trial_phases": [
+            "liq",
+            "vap"
+          ],
+          "variable_model": "ascani_transformed_salt_pairs"
+        },
+        "min_tpd": -17.358566077818846,
+        "problem_kind": "electrolyte_stability",
+        "stable": 0
+      },
+      "timed_out": 0,
+      "variant": {
+        "initial_phases": 0,
+        "name": "stability_native",
+        "operation": "stability",
+        "options": {
+          "include_phase_diagnostics": 1,
+          "max_iterations": 12,
+          "tolerance": 1e-06
+        }
+      },
+      "wall_seconds": 0.6391242999998212,
+      "wall_seconds_outer": 2.2841865999998845
+    },
+    {
+      "case_name": "jang",
+      "exitcode": -15,
+      "ok": 0,
+      "timed_out": 1,
+      "timeout_seconds": 25.0,
+      "variant": {
+        "initial_phases": 0,
+        "name": "auto_unseeded_12",
+        "operation": "lle",
+        "options": {
+          "include_phase_diagnostics": 1,
+          "max_iterations": 12,
+          "tolerance": 1e-06
+        }
+      },
+      "wall_seconds_outer": 25.009117499999775
+    },
+    {
+      "case_name": "jang",
+      "exitcode": -15,
+      "ok": 0,
+      "timed_out": 1,
+      "timeout_seconds": 25.0,
+      "variant": {
+        "initial_phases": 1,
+        "name": "auto_seeded_24_density_full",
+        "operation": "lle",
+        "options": {
+          "density_diagnostics": "full",
+          "include_phase_diagnostics": 1,
+          "max_iterations": 24,
+          "tolerance": 1e-06
+        }
+      },
+      "wall_seconds_outer": 25.008278499999506
+    },
+    {
+      "case_name": "jang",
+      "exitcode": -15,
+      "ok": 0,
+      "timed_out": 1,
+      "timeout_seconds": 25.0,
+      "variant": {
+        "initial_phases": 1,
+        "name": "newton_autodiff_seeded_24",
+        "operation": "lle",
+        "options": {
+          "include_phase_diagnostics": 1,
+          "jacobian_backend": "autodiff",
+          "max_iterations": 24,
+          "solver_backend": "newton",
+          "tolerance": 1e-06
+        }
+      },
+      "wall_seconds_outer": 25.009602899999663
+    },
+    {
+      "case_name": "jang",
+      "exitcode": -15,
+      "ok": 0,
+      "timed_out": 1,
+      "timeout_seconds": 25.0,
+      "variant": {
+        "initial_phases": 1,
+        "name": "newton_fd_lbfgs_seeded_24",
+        "operation": "lle",
+        "options": {
+          "hessian_strategy": "lbfgs",
+          "include_phase_diagnostics": 1,
+          "jacobian_backend": "finite_difference",
+          "max_iterations": 24,
+          "solver_backend": "newton",
+          "tolerance": 1e-06
+        }
+      },
+      "wall_seconds_outer": 25.01185330000044
+    },
+    {
+      "case_name": "jang",
+      "exitcode": -15,
+      "ok": 0,
+      "timed_out": 1,
+      "timeout_seconds": 25.0,
+      "variant": {
+        "initial_phases": 1,
+        "name": "coupled_density_seeded_12",
+        "operation": "lle",
+        "options": {
+          "density_diagnostics": "full",
+          "experimental_coupled_density_lle": 1,
+          "include_phase_diagnostics": 1,
+          "max_iterations": 12,
+          "tolerance": 1e-06
+        }
+      },
+      "wall_seconds_outer": 25.00839780000024
+    },
+    {
+      "case_name": "jang",
+      "diagnostics": null,
+      "error": "cyipopt is required when solver_backend='ipopt' is requested for electrolyte_lle. Install the optional IPOPT dependency with the package 'ipopt' extra or the uv 'ipopt' group. The requested solve was not run with the Newton/default backend. Import diagnostic: ModuleNotFoundError: No module named 'cyipopt'",
+      "error_type": "InputError",
+      "exitcode": 0,
+      "ok": 0,
+      "timed_out": 0,
+      "traceback_tail": [
+        "           ^^^^^^^^^^^^^^^^^^^^^^^^",
+        "  File \"C:\\Users\\Tanner\\Documents\\git\\Lithium_Extraction\\.venv\\Lib\\site-packages\\epcsaft\\epcsaft.py\", line 275, in electrolyte_lle_tp",
+        "    return electrolyte_lle_flash_native(",
+        "           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+        "  File \"C:\\Users\\Tanner\\Documents\\git\\Lithium_Extraction\\.venv\\Lib\\site-packages\\epcsaft\\equilibrium.py\", line 1453, in electrolyte_lle_flash_native",
+        "    return solve_electrolyte_lle_ipopt(",
+        "           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+        "  File \"C:\\Users\\Tanner\\Documents\\git\\Lithium_Extraction\\.venv\\Lib\\site-packages\\epcsaft\\ipopt_backend.py\", line 311, in solve_electrolyte_lle_ipopt",
+        "    require_cyipopt(\"electrolyte_lle\")",
+        "  File \"C:\\Users\\Tanner\\Documents\\git\\Lithium_Extraction\\.venv\\Lib\\site-packages\\epcsaft\\ipopt_backend.py\", line 87, in require_cyipopt",
+        "    raise InputError(",
+        "epcsaft._types.InputError: cyipopt is required when solver_backend='ipopt' is requested for electrolyte_lle. Install the optional IPOPT dependency with the package 'ipopt' extra or the uv 'ipopt' group. The requested solve was not run with the Newton/default backend. Import diagnostic: ModuleNotFoundError: No module named 'cyipopt'"
+      ],
+      "variant": {
+        "initial_phases": 1,
+        "name": "ipopt_seeded_6",
+        "operation": "lle",
+        "options": {
+          "hessian_strategy": "lbfgs",
+          "include_phase_diagnostics": 1,
+          "max_iterations": 6,
+          "solver_backend": "ipopt",
+          "tolerance": 1e-06
+        }
+      },
+      "wall_seconds": 0.007728299999143928,
+      "wall_seconds_outer": 1.3430852000001323
+    }
+  ],
+  "timeout_seconds": 25.0
+}

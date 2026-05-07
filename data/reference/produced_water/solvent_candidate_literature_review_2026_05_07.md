@@ -10,13 +10,15 @@ The ranking separates three questions that were previously mixed together:
 
 1. Is the solvent chemistry source-backed for produced-water lithium recovery?
 2. Can the chemistry be run today in this repository?
-3. Would a completed ePC-SAFT implementation give PrOMMiS/IDAES better transfer variables than a calibrated surrogate?
+3. Would a completed ePC-SAFT implementation give PrOMMiS/IDAES better transfer variables than a single source-regressed Li/Na model?
+
+The priority order is presentation-driven rather than a pure descending numeric score: HBTA/TOPO remains the flagship, D2EHDTPA/BuPhen is the best non-HBTA chemistry backup, Rezaee is the best parameter-regression pilot, and the produced-water D2EHPA/TBP case remains a limitation baseline.
 
 ## Ranked Candidates
 
 | Rank | Candidate | Zotero keys | Score | Status | Modeling boundary |
 |---:|---|---|---:|---|---|
-| 1 | HBTA + TOPO + sulfonated kerosene | `JUNBXVTI; 9LJWDC7E; AEL6ZEPG` | 83 | flagship | calibrated reactive-stage bridge with ePC-SAFT aqueous activity support when available; not full predictive reactive ePC-SAFT LLE |
+| 1 | HBTA + TOPO + sulfonated kerosene | `JUNBXVTI; 9LJWDC7E; AEL6ZEPG` | 83 | flagship | source-regressed Li/Na reactive-stage model with ePC-SAFT aqueous activity support when available; not full multication reactive ePC-SAFT LLE |
 | 2 | D2EHDTPA + BuPhen + octanol modifiers + n-dodecane | `DQ2M7ZG8` | 65 | best_non_hbta_backup | not runnable with current repo ePC-SAFT parameter inventory; organic ligand, phenanthroline synergist, modifier, and diluent parameters are absent |
 | 3 | TBAC + decanoic-acid DES + TOPO | `3NMV5MF2` | 66 | parameter_regression_pilot | density-fit and electrolyte-stability smoke test runs; direct pseudo-DES electrolyte LLE remains diagnostic and can collapse to one phase |
 | 4 | TBP + FeCl3/HCl | `V7EN7V3S` | 57 | mechanistic_backup | no current repo ePC-SAFT solve; TBP and Fe-complex parameter payloads are not present in the local parameter inventory |
@@ -27,7 +29,7 @@ The ranking separates three questions that were previously mixed together:
 ### 1. HBTA + TOPO + sulfonated kerosene
 
 - **Sources:** Gando-Ferreira/Shan 2025 field-water paper; Zhang 2017 HBTA/TOPO stoichiometry; Zhang 2018 process support. DOI/URL: `10.3390/w17152258; 10.1016/j.seppur.2017.07.028; 10.1016/j.hydromet.2017.10.029`.
-- **Evidence summary:** Only candidate with actual oil-and-gas field-water extraction evidence plus conventional non-ionic ligand chemistry. The repo has a staged reactive bridge and costing skeleton. Zhang 2017 supports 2 HBTA : 1 TOPO : 1 Li stoichiometry; Zhang 2018 supports multistage HBTA/TOPO/kerosene operation.
+- **Evidence summary:** Only candidate with actual oil-and-gas field-water extraction evidence plus conventional non-ionic ligand chemistry. The repo has a source-regressed Li/Na staged model and IDAES costing handoff. Zhang 2017 supports 2 HBTA : 1 TOPO : 1 Li stoichiometry; Zhang 2018 supports multistage HBTA/TOPO/kerosene operation.
 - **Best available run:** `uv run python scripts\case_study\hbta_topo_reactive_stage_solve.py`.
 - **Artifacts:** `hbta_topo_reactive_model_report.md; hbta_topo_reactive_stage_results.csv; smackover_prommis_transfer_handoff.csv`.
 - **Next data needed:** HBTA, TOPO, sulfonated-kerosene/diluent, Li-BTA-TOPO and competing divalent-complex parameters; binary interactions; reaction constants or digitized extraction curves for fitting
@@ -66,7 +68,7 @@ The ranking separates three questions that were previously mixed together:
 
 ## Recommended Presentation Position
 
-Use HBTA/TOPO/sulfonated kerosene as the flagship case because it is the strongest current bridge between real oil-and-gas field water, conventional non-ionic solvent extraction, and the PrOMMiS/IDAES staged-contacting story.
+Use HBTA/TOPO/sulfonated kerosene as the flagship case because it is the strongest current bridge between real oil-and-gas field water, conventional non-ionic solvent extraction, and the PrOMMiS/IDAES staged-contacting story. The current implementation is now a source-regressed Li/Na-first stage model rather than a per-case recovery-factor bridge.
 
 Use Rezaee 2026 as the modeling-method pilot, not as the flagship chemistry. It is valuable because it demonstrates PC-SAFT/ePC-SAFT parameter and phase-equilibrium plumbing, but its organic phase is PC-SAFT and the chemistry differs from HBTA/TOPO.
 
@@ -74,4 +76,4 @@ Use D2EHPA/TBP as the limitation baseline: it is produced-water relevant but the
 
 ## Explicit ePC-SAFT Gap
 
-The case study is scientifically strongest when it states the remaining gap plainly: true predictive reactive ePC-SAFT for the flagship HBTA/TOPO/sulfonated-kerosene case still requires fitted or sourced pure-component parameters, binary interactions, ligand-complex parameters, and reaction-equilibrium constants. That is exactly why the case study motivates implementing ePC-SAFT-to-PrOMMiS/IDAES support rather than hiding behind a black-box extraction factor.
+The case study is scientifically strongest when it states the remaining gap plainly: full multication reactive ePC-SAFT for the flagship HBTA/TOPO/sulfonated-kerosene case still requires fitted or sourced pure-component parameters, binary interactions, ligand-complex parameters, and reaction-equilibrium constants. The Li/Na model is source-regressed and reusable across feed cases, but it is not a full organic-phase ePC-SAFT closure.

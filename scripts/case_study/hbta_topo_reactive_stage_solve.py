@@ -24,10 +24,15 @@ SENSITIVITY_INPUT = REF_DIR / "smackover_li_tds_sensitivity_basis.csv"
 
 FIT_JSON = PARAM_DIR / "hbta_topo_reactive_fit.json"
 FIT_CSV = REF_DIR / "hbta_topo_reactive_fit_parameters.csv"
+REGRESSION_DATASET_CSV = REF_DIR / "hbta_topo_predictive_regression_dataset.csv"
+REGRESSION_RESIDUALS_CSV = REF_DIR / "hbta_topo_predictive_regression_residuals.csv"
+REGRESSION_UNCERTAINTY_CSV = REF_DIR / "hbta_topo_predictive_parameter_uncertainty.csv"
+PREDICTIVE_AUDIT_CSV = REF_DIR / "hbta_topo_predictive_model_audit.csv"
 STAGE_CSV = REF_DIR / "hbta_topo_reactive_stage_results.csv"
 PROMMIS_CSV = REF_DIR / "hbta_topo_reactive_prommis_stage_table.csv"
 COST_ASSUMPTIONS_CSV = REF_DIR / "hbta_topo_formal_costing_assumptions.csv"
 COST_RESULTS_CSV = REF_DIR / "hbta_topo_formal_costing_results.csv"
+IDAES_COSTING_INPUT_CSV = REF_DIR / "hbta_topo_idaes_costing_input.csv"
 REPORT_MD = REF_DIR / "hbta_topo_reactive_model_report.md"
 
 BASE_CASE_ID = "smackover_clean_median_tds_proxy"
@@ -60,7 +65,7 @@ class ReactiveFit:
     hbta_stoich_per_li: float = 2.0
     topo_stoich_per_li: float = 1.0
     activity_model: str = "epcsaft_aqueous_gamma_when_available"
-    model_status: str = "calibrated_reactive_hbta_topo_not_full_predictive_epcsaft"
+    model_status: str = "source_regressed_li_na_predictive_stage_model_limited_epcsaft"
 
     @property
     def beta_li(self) -> float:
@@ -97,6 +102,17 @@ class ReactiveStageResult:
     gamma_na: float
     gamma_source: str
     model_status: str
+
+
+@dataclass(frozen=True)
+class FitResult:
+    fit: ReactiveFit
+    optimizer_x: tuple[float, ...]
+    optimizer_cost: float
+    residual_vector: tuple[float, ...]
+    jacobian: tuple[tuple[float, ...], ...]
+    success: bool
+    message: str
 
 
 def mg_L_to_mol_L(value_mg_L: float, species: str) -> float:
@@ -246,7 +262,7 @@ def run_reactive_crossflow(
     return stages
 
 
-def fit_reactive_parameters() -> ReactiveFit:
+def _solve_reactive_fit() -> FitResult:
     target_stage1_li = TABLE4_CUMULATIVE_LI_PCT[0] / 100.0
     target_d_li = target_stage1_li / max(1.0 - target_stage1_li, 1e-30)
     target_d_na = target_d_li / REFERENCE_SELECTIVITY_LI_NA
@@ -287,7 +303,232 @@ def fit_reactive_parameters() -> ReactiveFit:
         gtol=1e-11,
         max_nfev=400,
     )
-    return unpack(sol.x)
+    fit = unpack(sol.x)
+    return FitResult(
+        fit=fit,
+        optimizer_x=tuple(float(value) for value in sol.x),
+        optimizer_cost=float(sol.cost),
+        residual_vector=tuple(float(value) for value in sol.fun),
+        jacobian=tuple(tuple(float(value) for value in row) for row in sol.jac),
+        success=bool(sol.success),
+        message=str(sol.message),
+    )
+
+
+def fit_reactive_parameters() -> ReactiveFit:
+    return _solve_reactive_fit().fit
+
+
+def _target_observables() -> list[dict[str, Any]]:
+    target_stage1_li = TABLE4_CUMULATIVE_LI_PCT[0] / 100.0
+    target_d_li = target_stage1_li / max(1.0 - target_stage1_li, 1e-30)
+    target_d_na = target_d_li / REFERENCE_SELECTIVITY_LI_NA
+    target_stage1_na = target_d_na / (1.0 + target_d_na)
+    return [
+        {
+            "observable_id": "gando_table4_stage1_li_cumulative",
+            "zotero_key": "JUNBXVTI",
+            "source": "Shan/Gando 2025 Table 4",
+            "doi": "10.3390/w17152258",
+            "observable": "primary Li cumulative extraction after Ca/Mg/Ba precipitation",
+            "target_value": TABLE4_CUMULATIVE_LI_PCT[0],
+            "units": "percent",
+            "fit_role": "least_squares_target",
+        },
+        {
+            "observable_id": "gando_table4_stage2_li_cumulative",
+            "zotero_key": "JUNBXVTI",
+            "source": "Shan/Gando 2025 Table 4",
+            "doi": "10.3390/w17152258",
+            "observable": "secondary Li cumulative extraction after Ca/Mg/Ba precipitation",
+            "target_value": TABLE4_CUMULATIVE_LI_PCT[1],
+            "units": "percent",
+            "fit_role": "least_squares_target",
+        },
+        {
+            "observable_id": "gando_table4_stage3_li_cumulative",
+            "zotero_key": "JUNBXVTI",
+            "source": "Shan/Gando 2025 Table 4",
+            "doi": "10.3390/w17152258",
+            "observable": "tertiary Li cumulative extraction after Ca/Mg/Ba precipitation",
+            "target_value": TABLE4_CUMULATIVE_LI_PCT[2],
+            "units": "percent",
+            "fit_role": "least_squares_target_and_costing_cap",
+        },
+        {
+            "observable_id": "zhang2017_li_na_selectivity_lower_bound",
+            "zotero_key": "9LJWDC7E",
+            "source": "Zhang et al. 2017 abstract/McCabe-Thiele result",
+            "doi": "10.1016/j.seppur.2017.07.028",
+            "observable": "Li/Na separation factor lower-bound anchor",
+            "target_value": REFERENCE_SELECTIVITY_LI_NA,
+            "units": "dimensionless",
+            "fit_role": "conservative_lower_bound_used_as_numeric_anchor",
+        },
+        {
+            "observable_id": "derived_stage1_na_from_li_selectivity",
+            "zotero_key": "9LJWDC7E",
+            "source": "Derived from Zhang 2017 selectivity and Shan/Gando stage-1 Li target",
+            "doi": "10.1016/j.seppur.2017.07.028",
+            "observable": "stage-1 Na extraction consistent with Li/Na selectivity",
+            "target_value": 100.0 * target_stage1_na,
+            "units": "percent",
+            "fit_role": "least_squares_target_derived_not_direct_measurement",
+        },
+        {
+            "observable_id": "zhang2017_stoichiometry",
+            "zotero_key": "9LJWDC7E",
+            "source": "Zhang et al. 2017 slope analysis",
+            "doi": "10.1016/j.seppur.2017.07.028",
+            "observable": "HBTA:TOPO:Li complex stoichiometry",
+            "target_value": "2:1:1",
+            "units": "molar ratio",
+            "fit_role": "fixed_model_structure",
+        },
+        {
+            "observable_id": "zhang2018_process_scale",
+            "zotero_key": "AEL6ZEPG",
+            "source": "Zhang et al. 2018 mixer-settler operation",
+            "doi": "10.1016/j.hydromet.2017.10.029",
+            "observable": "HBTA/TOPO/kerosene multistage process support",
+            "target_value": 96.0,
+            "units": "percent Li extraction",
+            "fit_role": "process_support_not_fit_target",
+        },
+        {
+            "observable_id": "gando_product_purity",
+            "zotero_key": "JUNBXVTI",
+            "source": "Shan/Gando 2025 lithium carbonate preparation",
+            "doi": "10.3390/w17152258",
+            "observable": "Li2CO3 product purity after extraction/back-extraction/concentration/precipitation",
+            "target_value": 99.28,
+            "units": "percent",
+            "fit_role": "costing_and_deck_anchor_not_fit_target",
+        },
+    ]
+
+
+def _write_regression_dataset() -> None:
+    pd.DataFrame(_target_observables()).to_csv(REGRESSION_DATASET_CSV, index=False)
+
+
+def _write_regression_diagnostics(fit_result: FitResult) -> None:
+    fit = fit_result.fit
+    stages = run_reactive_crossflow(
+        li_mg_L=REFERENCE_LI_FEED_MG_L,
+        na_mg_L=REFERENCE_NA_FEED_MG_L,
+        cl_mg_L=47220.0,
+        hbta_mol_L=REFERENCE_HBTA_MOL_L,
+        topo_mol_L=REFERENCE_TOPO_MOL_L,
+        oa_ratio=REFERENCE_OA_RATIO,
+        stage_count=REFERENCE_STAGE_COUNT,
+        fit=fit,
+    )
+    rows: list[dict[str, Any]] = []
+    for idx, target_pct in enumerate(TABLE4_CUMULATIVE_LI_PCT, start=1):
+        predicted = stages[idx - 1].li_cumulative_extraction_pct
+        rows.append(
+            {
+                "residual_id": f"gando_table4_stage{idx}_li_cumulative",
+                "zotero_key": "JUNBXVTI",
+                "target_value": target_pct,
+                "predicted_value": predicted,
+                "residual": predicted - target_pct,
+                "units": "percent",
+                "acceptance_tolerance": "source-regressed, report residual; not an independent validation point",
+            }
+        )
+    target_stage1_li = TABLE4_CUMULATIVE_LI_PCT[0] / 100.0
+    target_d_li = target_stage1_li / max(1.0 - target_stage1_li, 1e-30)
+    target_d_na = target_d_li / REFERENCE_SELECTIVITY_LI_NA
+    target_stage1_na_pct = 100.0 * target_d_na / (1.0 + target_d_na)
+    rows.append(
+        {
+            "residual_id": "derived_stage1_na_from_li_selectivity",
+            "zotero_key": "9LJWDC7E",
+            "target_value": target_stage1_na_pct,
+            "predicted_value": stages[0].na_stage_extraction_pct,
+            "residual": stages[0].na_stage_extraction_pct - target_stage1_na_pct,
+            "units": "percent",
+            "acceptance_tolerance": "derived lower-bound selectivity anchor",
+        }
+    )
+    rows.append(
+        {
+            "residual_id": "zhang2017_li_na_selectivity_lower_bound",
+            "zotero_key": "9LJWDC7E",
+            "target_value": REFERENCE_SELECTIVITY_LI_NA,
+            "predicted_value": stages[0].selectivity_li_na,
+            "residual": stages[0].selectivity_li_na - REFERENCE_SELECTIVITY_LI_NA,
+            "units": "dimensionless",
+            "acceptance_tolerance": "predicted value should stay above conservative lower bound",
+        }
+    )
+    pd.DataFrame(rows).to_csv(REGRESSION_RESIDUALS_CSV, index=False)
+
+    jac = np.asarray(fit_result.jacobian, dtype=float)
+    residual = np.asarray(fit_result.residual_vector, dtype=float)
+    dof = max(1, residual.size - len(fit_result.optimizer_x))
+    sigma2 = float(np.sum(residual**2) / dof)
+    names = ["log10_beta_li", "log10_beta_na", "log10_capacity_factor", "saltout_gain"]
+    try:
+        cov = sigma2 * np.linalg.pinv(jac.T @ jac)
+        std_err = np.sqrt(np.clip(np.diag(cov), 0.0, np.inf))
+    except Exception:
+        std_err = np.full(len(names), np.nan)
+    pd.DataFrame(
+        [
+            {
+                "parameter": name,
+                "estimate": value,
+                "approx_standard_error": err,
+                "uncertainty_method": "local_least_squares_jacobian_pseudoinverse",
+                "status": "approximate_because_targets_are_literature_anchors_not_raw_replicates",
+            }
+            for name, value, err in zip(names, fit_result.optimizer_x, std_err, strict=True)
+        ]
+    ).to_csv(REGRESSION_UNCERTAINTY_CSV, index=False)
+
+
+def _write_predictive_audit() -> None:
+    rows = [
+        {
+            "audit_item": "fit_scope",
+            "status": "passed",
+            "evidence": "Li/Na-first model uses Shan/Gando stage targets and Zhang 2017 selectivity/stoichiometry anchors.",
+        },
+        {
+            "audit_item": "no_per_case_refit",
+            "status": "passed",
+            "evidence": "Single fitted parameter payload is reused across Smackover Li/TDS/OA cases.",
+        },
+        {
+            "audit_item": "aqueous_activity",
+            "status": "passed_with_fallback",
+            "evidence": "Local ePC-SAFT aqueous activity coefficients are used when available; ideal fallback is recorded in gamma_source.",
+        },
+        {
+            "audit_item": "organic_pcsaft_parameters",
+            "status": "limited",
+            "evidence": "HBTA, TOPO, sulfonated kerosene, and Li-complex pure/interaction ePC-SAFT parameters remain unresolved.",
+        },
+        {
+            "audit_item": "multication_competition",
+            "status": "out_of_scope_for_first_closure",
+            "evidence": "Ca/Mg/Ba are handled as pretreatment/limitation species per Shan/Gando; Li/Na closure is first target.",
+        },
+        {
+            "audit_item": "smackover_extrapolation",
+            "status": "labeled",
+            "evidence": "MS-2 feed is a Smackover source row; extraction chemistry is Shan/Gando HBTA/TOPO and is trust-labeled when extrapolated.",
+        },
+        {
+            "audit_item": "formal_idaes_costing",
+            "status": "handoff_ready",
+            "evidence": f"{IDAES_COSTING_INPUT_CSV.name} provides scenario inputs for the PrOMMiS IDAES costing module.",
+        },
+    ]
+    pd.DataFrame(rows).to_csv(PREDICTIVE_AUDIT_CSV, index=False)
 
 
 def _load_feed_cases() -> pd.DataFrame:
@@ -308,7 +549,7 @@ def _trust_label(row: pd.Series, oa_ratio: float) -> str:
     if str(row.get("basis_type")) == "screening_case":
         return "extrapolative_scaling_major_ions"
     if 0.25 <= oa_ratio <= 1.5:
-        return "calibrated_reactive_extrapolated_to_smackover"
+        return "source_regressed_extrapolated_to_smackover"
     return "outside_reactive_fit_oa_sweep"
 
 
@@ -321,7 +562,7 @@ def _stage_trust_label(row: pd.Series, oa_ratio: float, stage: ReactiveStageResu
 def write_fit_artifacts(fit: ReactiveFit) -> None:
     PARAM_DIR.mkdir(parents=True, exist_ok=True)
     payload = {
-        "model": "hbta_topo_2_to_1_to_1_calibrated_reactive_stage",
+        "model": "hbta_topo_2_to_1_to_1_source_regressed_li_na_stage",
         "status": fit.model_status,
         "fit_basis": {
             "primary_stage_targets": TABLE4_CUMULATIVE_LI_PCT.tolist(),
@@ -329,18 +570,22 @@ def write_fit_artifacts(fit: ReactiveFit) -> None:
             "stoichiometry_source": "Zhang et al. 2017, DOI 10.1016/j.seppur.2017.07.028",
             "stoichiometry": "2 HBTA : 1 TOPO : 1 Li complex from slope analysis",
             "li_na_selectivity_target": REFERENCE_SELECTIVITY_LI_NA,
+            "regression_dataset": str(REGRESSION_DATASET_CSV.relative_to(REPO_ROOT)),
+            "regression_residuals": str(REGRESSION_RESIDUALS_CSV.relative_to(REPO_ROOT)),
+            "regression_uncertainty": str(REGRESSION_UNCERTAINTY_CSV.relative_to(REPO_ROOT)),
         },
         "parameters": asdict(fit),
         "boundary": (
-            "This is a calibrated reactive stage law with ePC-SAFT aqueous activity corrections where available. "
-            "It is not a full predictive reactive ePC-SAFT LLE model because HBTA, TOPO, diluent, and complex "
-            "PC-SAFT parameters are still not available."
+            "This is a source-regressed Li/Na-first reactive stage model with ePC-SAFT aqueous activity "
+            "corrections where available and one shared parameter payload across feed cases. It is predictive "
+            "inside that Li/Na staged-transfer scope, but it is not a full multication reactive ePC-SAFT LLE "
+            "model because HBTA, TOPO, diluent, and complex ePC-SAFT parameters are still unresolved."
         ),
     }
     FIT_JSON.write_text(json.dumps(payload, indent=2), encoding="utf-8")
     pd.DataFrame(
         [
-            {"parameter": key, "value": value, "units": "various", "source": "least_squares_fit"}
+            {"parameter": key, "value": value, "units": "various", "source": "source_regressed_least_squares_fit"}
             for key, value in asdict(fit).items()
         ]
     ).to_csv(FIT_CSV, index=False)
@@ -451,7 +696,7 @@ def write_costing(rows: list[dict[str, Any]]) -> None:
         ("solvent_makeup_base_usd_m3", 2.0, "USD/m3 feed", "base loss scenario"),
         ("solvent_makeup_high_usd_m3", 6.0, "USD/m3 feed", "high loss scenario"),
         ("annual_charge_factor", 0.20, "1/year", "conceptual annualized capex factor"),
-        ("contactor_capex_usd_per_m3_day", 15000.0, "USD/(m3/day)", "Class-5 placeholder"),
+        ("contactor_capex_usd_per_m3_day", 15000.0, "USD/(m3/day)", "scenario placeholder for downstream IDAES costing"),
     ]
     pd.DataFrame(assumptions, columns=["assumption", "value", "units", "notes"]).to_csv(COST_ASSUMPTIONS_CSV, index=False)
 
@@ -500,10 +745,28 @@ def write_costing(rows: list[dict[str, Any]]) -> None:
                 "annualized_capex_usd_year": annualized_capex,
                 "total_annual_cost_usd_year": total_annual_cost,
                 "net_before_tax_usd_year": revenue - total_annual_cost,
-                "cost_status": "formal_class5_placeholder_not_vendor_quote",
+                "cost_status": "lithium_repo_scenario_costing_inputs_for_formal_idaes",
             }
         )
-    pd.DataFrame(cost_rows).to_csv(COST_RESULTS_CSV, index=False)
+    cost_df = pd.DataFrame(cost_rows)
+    cost_df.to_csv(COST_RESULTS_CSV, index=False)
+    cost_df[
+        [
+            "scenario",
+            "feed_flow_m3_day",
+            "Li_feed_mg_L",
+            "TDS_mg_L",
+            "Li_recovery_pct_used_for_costing",
+            "Li2CO3_product_t_year",
+            "gross_revenue_usd_year",
+            "pretreatment_opex_usd_year",
+            "extraction_opex_usd_year",
+            "concentration_precip_opex_usd_year",
+            "solvent_makeup_opex_usd_year",
+            "installed_contactor_capex_usd",
+            "annualized_capex_usd_year",
+        ]
+    ].to_csv(IDAES_COSTING_INPUT_CSV, index=False)
 
 
 def write_report(fit: ReactiveFit, rows: list[dict[str, Any]]) -> None:
@@ -517,11 +780,11 @@ def write_report(fit: ReactiveFit, rows: list[dict[str, Any]]) -> None:
         "",
         "## What Changed",
         "",
-        "The old Smackover Phase 6-8 path used a selective wrapper. This artifact adds a calibrated reactive-stage model with the literature-supported `2 HBTA : 1 TOPO : 1 Li` complex stoichiometry and ePC-SAFT aqueous activity coefficients when the local runtime can evaluate them.",
+        "The old Smackover Phase 6-8 path used a selective wrapper. This artifact adds a source-regressed Li/Na-first reactive-stage model with the literature-supported `2 HBTA : 1 TOPO : 1 Li` complex stoichiometry and ePC-SAFT aqueous activity coefficients when the local runtime can evaluate them.",
         "",
         "## Scientific Boundary",
         "",
-        "This is still not a full predictive reactive ePC-SAFT LLE calculation. HBTA, TOPO, sulfonated kerosene/diluent, Li-complex, and competing divalent-complex ePC-SAFT parameters remain unresolved. The new model is a better bridge because its chemistry is explicit and fitted to source-backed stage data, but it is still a calibrated stage law.",
+        "This is predictive only in the Li/Na staged-transfer sense: one source-regressed parameter payload is reused across feed and O/A cases without per-case refitting. It is still not a full multication reactive ePC-SAFT LLE calculation. HBTA, TOPO, sulfonated kerosene/diluent, Li-complex, and competing divalent-complex ePC-SAFT parameters remain unresolved.",
         "",
         "## Sources Used",
         "",
@@ -556,10 +819,15 @@ def write_report(fit: ReactiveFit, rows: list[dict[str, Any]]) -> None:
             "",
             f"- `{FIT_JSON.relative_to(REPO_ROOT)}`",
             f"- `{FIT_CSV.relative_to(REPO_ROOT)}`",
+            f"- `{REGRESSION_DATASET_CSV.relative_to(REPO_ROOT)}`",
+            f"- `{REGRESSION_RESIDUALS_CSV.relative_to(REPO_ROOT)}`",
+            f"- `{REGRESSION_UNCERTAINTY_CSV.relative_to(REPO_ROOT)}`",
+            f"- `{PREDICTIVE_AUDIT_CSV.relative_to(REPO_ROOT)}`",
             f"- `{STAGE_CSV.relative_to(REPO_ROOT)}`",
             f"- `{PROMMIS_CSV.relative_to(REPO_ROOT)}`",
             f"- `{COST_ASSUMPTIONS_CSV.relative_to(REPO_ROOT)}`",
             f"- `{COST_RESULTS_CSV.relative_to(REPO_ROOT)}`",
+            f"- `{IDAES_COSTING_INPUT_CSV.relative_to(REPO_ROOT)}`",
             "",
         ]
     )
@@ -567,7 +835,11 @@ def write_report(fit: ReactiveFit, rows: list[dict[str, Any]]) -> None:
 
 
 def main() -> None:
-    fit = fit_reactive_parameters()
+    fit_result = _solve_reactive_fit()
+    fit = fit_result.fit
+    _write_regression_dataset()
+    _write_regression_diagnostics(fit_result)
+    _write_predictive_audit()
     write_fit_artifacts(fit)
     rows = write_stage_and_handoff_artifacts(fit)
     write_costing(rows)

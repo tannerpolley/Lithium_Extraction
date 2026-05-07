@@ -9,7 +9,7 @@ execute:
 format:
   revealjs:
     theme: white
-    css: theme.scss
+    css: theme.css
     slide-number: c/t
     transition: fade
     center: false
@@ -21,4 +21,3 @@ format:
     preview-links: auto
     footer: "Lithium Extraction with ePC-SAFT"
     chalkboard: false
-

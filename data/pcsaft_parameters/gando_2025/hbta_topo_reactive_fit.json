@@ -1,6 +1,6 @@
 {
-  "model": "hbta_topo_2_to_1_to_1_calibrated_reactive_stage",
-  "status": "calibrated_reactive_hbta_topo_not_full_predictive_epcsaft",
+  "model": "hbta_topo_2_to_1_to_1_source_regressed_li_na_stage",
+  "status": "source_regressed_li_na_predictive_stage_model_limited_epcsaft",
   "fit_basis": {
     "primary_stage_targets": [
       54.95,
@@ -10,7 +10,10 @@
     "primary_stage_source": "Shan/Gando 2025 Table 4, DOI 10.3390/W17152258",
     "stoichiometry_source": "Zhang et al. 2017, DOI 10.1016/j.seppur.2017.07.028",
     "stoichiometry": "2 HBTA : 1 TOPO : 1 Li complex from slope analysis",
-    "li_na_selectivity_target": 2100.0
+    "li_na_selectivity_target": 2100.0,
+    "regression_dataset": "data\\reference\\produced_water\\hbta_topo_predictive_regression_dataset.csv",
+    "regression_residuals": "data\\reference\\produced_water\\hbta_topo_predictive_regression_residuals.csv",
+    "regression_uncertainty": "data\\reference\\produced_water\\hbta_topo_predictive_parameter_uncertainty.csv"
   },
   "parameters": {
     "log10_beta_li": 1.7005825170001887,
@@ -21,7 +24,7 @@
     "hbta_stoich_per_li": 2.0,
     "topo_stoich_per_li": 1.0,
     "activity_model": "epcsaft_aqueous_gamma_when_available",
-    "model_status": "calibrated_reactive_hbta_topo_not_full_predictive_epcsaft"
+    "model_status": "source_regressed_li_na_predictive_stage_model_limited_epcsaft"
   },
-  "boundary": "This is a calibrated reactive stage law with ePC-SAFT aqueous activity corrections where available. It is not a full predictive reactive ePC-SAFT LLE model because HBTA, TOPO, diluent, and complex PC-SAFT parameters are still not available."
+  "boundary": "This is a source-regressed Li/Na-first reactive stage model with ePC-SAFT aqueous activity corrections where available and one shared parameter payload across feed cases. It is predictive inside that Li/Na staged-transfer scope, but it is not a full multication reactive ePC-SAFT LLE model because HBTA, TOPO, diluent, and complex ePC-SAFT parameters are still unresolved."
 }

@@ -11,12 +11,12 @@
   "des_mw_note": "Average formula-unit molecular weight for TBAC + 2 decanoic acid divided by 3. This is a diagnostic pseudo-component basis for the density fit, not a general DES molecular definition.",
   "fit_result": {
     "backend": "least_squares_native",
-    "cost": 2.698962410819588e-05,
+    "cost": 2.6989626359077637e-05,
     "finite_difference_fallback_count": 0,
     "fitted_values": {
-      "e": 252.6883264625197,
-      "m": 8.619136661242647,
-      "s": 3.108524323527317
+      "e": 252.6883318091152,
+      "m": 8.619137007185248,
+      "s": 3.1085242901227192
     },
     "hessian_available": false,
     "hessian_backend": "not_implemented",
@@ -28,7 +28,7 @@
     "jacobian_fallback_used": false,
     "message": "Levenberg-Marquardt terminated because the relative step and reduction became small.",
     "metrics_by_term": {
-      "density": 0.007347057112639847,
+      "density": 0.0073470574190049225,
       "pure_vle_fugacity_balance": 0.0
     },
     "nfev": 53,
@@ -374,11 +374,11 @@
     },
     "provenance_report": {},
     "rendered_values": {
-      "e": 252.6883264625197,
-      "m": 8.619136661242647,
-      "s": 3.108524323527317
+      "e": 252.6883318091152,
+      "m": 8.619137007185248,
+      "s": 3.1085242901227192
     },
-    "residual_norm": 0.007347057112639847,
+    "residual_norm": 0.0073470574190049225,
     "status": 3,
     "success": true
   },

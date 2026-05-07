@@ -58,7 +58,7 @@ The HBTA/TOPO extraction basis remains Shan/Gando 2025:
 
 The current repository does not contain a Smackover-specific HBTA/TOPO extraction experiment. Therefore the deck should say:
 
-> The source feed is Smackover-specific; the extraction chemistry is Shan/Gando HBTA/TOPO; the current model is a calibrated reactive-stage bridge coupled to a literature-backed non-ionic extraction chemistry.
+> The source feed is Smackover-specific; the extraction chemistry is Shan/Gando HBTA/TOPO; the current model is a source-regressed Li/Na stage model coupled to a literature-backed non-ionic extraction chemistry.
 
 ## Phase 9 Use
 
@@ -70,4 +70,4 @@ Use this file to ground:
 4. The cost-basis and product-rate scaffold.
 5. The limitation slide.
 
-Do not use it to claim final predictive Smackover extraction performance until the HBTA/TOPO parameter and reaction-constant gaps are closed. The current calibrated reactive-stage bridge is acceptable for presentation-prep handoff only when labeled with its trust-region caveats.
+Do not use it to claim final full multication Smackover extraction performance until the HBTA/TOPO parameter and reaction-constant gaps are closed. The current source-regressed Li/Na stage model is acceptable for the case-study handoff only when labeled with its trust-region caveats.
