@@ -168,7 +168,7 @@
       "package_version": "1.5.0",
       "platform": "Windows-11-10.0.26200-SP0",
       "python": "3.12.10",
-      "source_git_commit": "a56d9c81af1b",
+      "source_git_commit": "49f93105857d",
       "source_root": "C:\\Users\\Tanner\\Documents\\git\\ePC-SAFT"
     },
     "version": "1.5.0"
@@ -259,8 +259,8 @@
           "tolerance": 1e-06
         }
       },
-      "wall_seconds": 0.6637577000001329,
-      "wall_seconds_outer": 2.631587400001081
+      "wall_seconds": 0.8021248999993986,
+      "wall_seconds_outer": 2.7478531999986444
     },
     {
       "case_name": "hubach",
@@ -278,7 +278,7 @@
           "tolerance": 1e-06
         }
       },
-      "wall_seconds_outer": 25.012165099999038
+      "wall_seconds_outer": 25.011869600000864
     },
     {
       "case_name": "hubach",
@@ -297,7 +297,7 @@
           "tolerance": 1e-06
         }
       },
-      "wall_seconds_outer": 25.00742420000097
+      "wall_seconds_outer": 25.010371500000474
     },
     {
       "case_name": "hubach",
@@ -317,7 +317,7 @@
           "tolerance": 1e-06
         }
       },
-      "wall_seconds_outer": 25.01227359999939
+      "wall_seconds_outer": 25.011499000000185
     },
     {
       "case_name": "hubach",
@@ -338,7 +338,7 @@
           "tolerance": 1e-06
         }
       },
-      "wall_seconds_outer": 25.00896190000094
+      "wall_seconds_outer": 25.011693000000378
     },
     {
       "case_name": "hubach",
@@ -358,7 +358,7 @@
           "tolerance": 1e-06
         }
       },
-      "wall_seconds_outer": 25.009057299999768
+      "wall_seconds_outer": 25.024179599999115
     },
     {
       "case_name": "hubach",
@@ -394,8 +394,8 @@
           "tolerance": 1e-06
         }
       },
-      "wall_seconds": 0.014721599998665624,
-      "wall_seconds_outer": 1.4340734999987035
+      "wall_seconds": 0.00788730000022042,
+      "wall_seconds_outer": 0.9577444000005926
     },
     {
       "case": "jang_2017_single_contact_tbp_d2ehpa_placeholder",
@@ -498,8 +498,8 @@
           "tolerance": 1e-06
         }
       },
-      "wall_seconds": 0.6391242999998212,
-      "wall_seconds_outer": 2.2841865999998845
+      "wall_seconds": 0.4937723000002734,
+      "wall_seconds_outer": 1.4561357999991742
     },
     {
       "case_name": "jang",
@@ -517,7 +517,7 @@
           "tolerance": 1e-06
         }
       },
-      "wall_seconds_outer": 25.009117499999775
+      "wall_seconds_outer": 25.008626099999674
     },
     {
       "case_name": "jang",
@@ -536,7 +536,7 @@
           "tolerance": 1e-06
         }
       },
-      "wall_seconds_outer": 25.008278499999506
+      "wall_seconds_outer": 25.007804200000464
     },
     {
       "case_name": "jang",
@@ -556,7 +556,7 @@
           "tolerance": 1e-06
         }
       },
-      "wall_seconds_outer": 25.009602899999663
+      "wall_seconds_outer": 25.015199100000245
     },
     {
       "case_name": "jang",
@@ -577,7 +577,7 @@
           "tolerance": 1e-06
         }
       },
-      "wall_seconds_outer": 25.01185330000044
+      "wall_seconds_outer": 25.009051400000317
     },
     {
       "case_name": "jang",
@@ -597,7 +597,7 @@
           "tolerance": 1e-06
         }
       },
-      "wall_seconds_outer": 25.00839780000024
+      "wall_seconds_outer": 25.008474000000206
     },
     {
       "case_name": "jang",
@@ -633,8 +633,8 @@
           "tolerance": 1e-06
         }
       },
-      "wall_seconds": 0.007728299999143928,
-      "wall_seconds_outer": 1.3430852000001323
+      "wall_seconds": 0.00593750000007276,
+      "wall_seconds_outer": 0.8914592000000994
     }
   ],
   "timeout_seconds": 25.0

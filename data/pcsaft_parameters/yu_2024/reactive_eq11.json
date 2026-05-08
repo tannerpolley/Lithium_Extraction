@@ -1,11 +1,11 @@
 {
   "model": "eq11_reactive_wrapper",
-  "fit_timestamp_utc": "2026-05-07T09:52:10Z",
+  "fit_timestamp_utc": "2026-05-07T23:10:23Z",
   "basis": {
     "paper_equation": "Eq. 11",
     "paper_mechanism": "1 IL + 1 TOP + 1 Li <-> 1 aqueous [HOEMIM]+ + 1 organic Li complex",
     "current_user_options": "2025 preset retained in yu_2024 dataset; reaction handled in a wrapper outside the core pcsaft flash",
-    "digitized_points_csv": "C:\\Users\\Tanner\\Documents\\git\\Lithium_Extraction\\scripts\\Yu_2024_analysis\\figure6_digitized_points.csv"
+    "digitized_points_csv": "C:\\Users\\Tanner\\Documents\\git\\Lithium_Extraction\\analyses\\yu_2024_figure6\\data\\input\\figure6_digitized_points.csv"
   },
   "constants": {
     "li_feed_mol_per_l_aq": 0.11037463976945244,

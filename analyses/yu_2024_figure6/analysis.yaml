@@ -1,0 +1,29 @@
+id: yu_2024_figure6
+title: Yu 2024 Figure 6 Reproduction
+status: active
+summary: Digitized, reactive-wrapper, and direct ePC-SAFT diagnostics for Yu 2024 Figure 6.
+owner: project
+epcsaft_dependency:
+  required: mixed
+  package_source: C:\Users\Tanner\Documents\git\ePC-SAFT
+  notes:
+    - Digitized recreation can run without trusting direct ePC-SAFT LLE closure.
+    - Reactive-wrapper path is the preferred reproduced figure path.
+    - Direct package path remains a diagnostic for ePC-SAFT LLE behavior.
+inputs:
+  - path: data/pcsaft_parameters/yu_2024/
+    kind: parameter_inputs
+  - path: analyses/yu_2024_figure6/data/input/figure6_digitized_points.csv
+    kind: curated_digitized_input
+outputs:
+  - path: analyses/yu_2024_figure6/results/figure6/
+    kind: generated_figure_outputs
+commands:
+  validate:
+    - uv run python analyses/yu_2024_figure6/scripts/yu_2024_figure6_digitized_recreation.py
+    - uv run python analyses/yu_2024_figure6/scripts/yu_2024_figure6_reactive_replication.py
+  diagnostic:
+    - uv run python analyses/yu_2024_figure6/scripts/yu_2024_figure6_replication.py
+runtime:
+  quick_seconds: 120
+  full_seconds: 300

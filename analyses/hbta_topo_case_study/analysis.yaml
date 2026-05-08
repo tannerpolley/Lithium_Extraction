@@ -1,0 +1,30 @@
+id: hbta_topo_case_study
+title: HBTA/TOPO Lithium Extraction Case Study
+status: active
+summary: Source-backed Li/Na HBTA/TOPO case-study bridge, solvent scorecard, Zotero evidence, Smackover handoff tables, and ePC-SAFT hard-case diagnostics.
+owner: project
+epcsaft_dependency:
+  required: true
+  package_source: C:\Users\Tanner\Documents\git\ePC-SAFT
+  notes:
+    - Rezaee smoke and hard-case retry matrix call the ePC-SAFT public API.
+    - HBTA/TOPO stage model remains source-regressed and limited, not a full predictive reactive ePC-SAFT LLE model.
+inputs:
+  - path: data/reference/produced_water/
+    kind: shared_reference_and_generated_case_tables
+  - path: data/pcsaft_parameters/
+    kind: ePC-SAFT_parameter_inputs
+outputs:
+  - path: data/reference/produced_water/hbta_topo_reactive_stage_results.csv
+    kind: generated_stage_table
+  - path: data/reference/produced_water/epcsaft_equilibrium_retry_matrix_2026_05_07.md
+    kind: generated_diagnostic_report
+commands:
+  validate:
+    - uv run python analyses/hbta_topo_case_study/scripts/hbta_topo_reactive_stage_solve.py
+    - uv run python analyses/hbta_topo_case_study/scripts/rezaee_des_epcsaft_parameter_smoke.py
+    - uv run python analyses/hbta_topo_case_study/scripts/solvent_candidate_scorecard.py
+    - uv run python analyses/hbta_topo_case_study/scripts/epcsaft_equilibrium_retry_matrix_2026_05_07.py --timeout-seconds 25
+runtime:
+  quick_seconds: 120
+  full_seconds: 420

@@ -1,0 +1,30 @@
+id: electrolyte_lle_literature
+title: Electrolyte LLE Literature Benchmarks
+status: active
+summary: Hubach, Jang, and Gando literature benchmark workflows for electrolyte-LLE and selective extraction evidence.
+owner: project
+epcsaft_dependency:
+  required: true
+  package_source: C:\Users\Tanner\Documents\git\ePC-SAFT
+  notes:
+    - Hubach and Jang exercise hard native electrolyte-LLE cases.
+    - Gando selective scripts are the reliable case-study showcase commands.
+inputs:
+  - path: data/pcsaft_parameters/huback_2024/
+    kind: ePC-SAFT_parameter_inputs
+  - path: data/pcsaft_parameters/gando_2025/
+    kind: selective_model_parameter_inputs
+outputs:
+  - path: data/multiphase/
+    kind: generated_benchmark_outputs
+commands:
+  validate:
+    - uv run python analyses/electrolyte_lle_literature/scripts/gando_2025_three_stage_crossflow.py
+    - uv run python analyses/electrolyte_lle_literature/scripts/gando_2025_one_stage_assets.py
+    - uv run python analyses/electrolyte_lle_literature/scripts/gando_2025_slide_assets.py
+  hard_case_diagnostics:
+    - uv run python analyses/electrolyte_lle_literature/scripts/_debug_hubach_single_point.py --timeout-seconds 30
+    - uv run python analyses/electrolyte_lle_literature/scripts/jang_2017_stage2_li_na_tbp_d2ehpa.py --mode single
+runtime:
+  quick_seconds: 120
+  full_seconds: 600
