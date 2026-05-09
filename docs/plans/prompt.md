@@ -1,3 +1,5 @@
+> Historical prompt, superseded 2026-05-08: this planning prompt is preserved for provenance and contains older HBTA/Gando-first assumptions. The current accepted Phase 0-9 basis is the Rezaee DES/TOPO Li/Na bridge after divalent pretreatment. Use `docs/phase0_8_completion_report.md`, `docs/phase9_final_presentation_skeleton.md`, and `docs/plans/lithium_project_status_handoff_2026_05_08.md` for current agent work.
+
 Here is the goal to complete and ask questions with until a full plan is found and developled that is comphrehensive and is updated and adapted based on answers and results:
 
 As we talk you can update the md document with updates.
@@ -34,7 +36,7 @@ Build a presentation-ready and implementation-ready produced-water lithium extra
    - They should not be used as the main case study because of cost and uncertainty.
 2. The active solvent case should use conventional non-ionic ligand chemistry.
 3. The current true reactive HBTA/TOPO ePC-SAFT model is not scientifically complete yet.
-   - Missing pieces include HBTA parameters, TOPO parameters if not already defensibly available, sulfonated kerosene or diluent surrogate parameters, lithium-ligand complex parameters, competing divalent complex parameters, and defensible reaction-equilibrium constants.
+   - Missing pieces include HBTA parameters, TOPO parameters if not already defensibly available, sulfonated kerosene or diluent surrogate parameters, lithium-ligand complex parameters, and defensible Li/Na reaction-equilibrium constants. Divalent complex parameters are out of scope for the active Li/Na-after-pretreatment objective.
    - Until those are found or fitted, the current Gando/Shan workflow must be labeled as a structured or calibrated fallback.
 4. Do not claim the Gando/Shan extraction paper is a Smackover composition source unless a matching Smackover feed source is found.
    - Smackover can be the siting and source-composition case.
@@ -773,7 +775,7 @@ New or updated reactive-stage artifacts:
    - Fits the HBTA/TOPO bridge against the Shan/Gando three-stage lithium extraction anchor and the Zhang HBTA/TOPO lithium-over-sodium selectivity anchor.
    - Uses the `2 HBTA : 1 TOPO : 1 Li` stoichiometry anchor.
    - Uses local ePC-SAFT aqueous activity coefficients when the installed runtime can evaluate the `H2O/Li+/Na+/Cl-` state.
-2. `data/pcsaft_parameters/gando_2025/hbta_topo_reactive_fit.json`
+2. `data/reference/extraction_models/gando_2025/hbta_topo_reactive_fit.json`
    - Stores fitted bridge constants, targets, residuals, source notes, and model-status labels.
 3. `data/reference/produced_water/hbta_topo_reactive_fit_parameters.csv`
    - Copy-safe table of the fitted bridge constants and status labels.

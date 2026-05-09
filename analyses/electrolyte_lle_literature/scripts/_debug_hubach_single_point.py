@@ -38,6 +38,41 @@ def _json_safe(value: Any) -> Any:
     return str(value)
 
 
+def _compact_diagnostics(result: dict[str, Any], max_attempts: int = 8) -> dict[str, Any]:
+    diagnostics = result.get("diagnostics")
+    if not isinstance(diagnostics, dict):
+        return result
+    keep = {
+        "acceptance_gate",
+        "best_failure_reason",
+        "best_noncollapsed_candidate",
+        "budget_exceeded",
+        "budget_trigger",
+        "elapsed_seconds",
+        "requested_timeout_seconds",
+        "objective_evaluation_count",
+        "seed_attempt_count",
+        "density_failure_count",
+        "solver_seed_name",
+        "solver_residual_norm",
+        "phase_distance",
+        "gibbs_delta",
+        "stability_min_tpd",
+        "unstable_feed_collapsed_all_candidates",
+        "phase_equilibrium_model",
+        "equilibrium_route",
+        "message",
+    }
+    compact = {key: diagnostics[key] for key in keep if key in diagnostics}
+    attempts = diagnostics.get("seed_attempts")
+    if isinstance(attempts, list):
+        compact["seed_attempts"] = attempts[:max_attempts]
+        compact["seed_attempts_truncated"] = max(0, len(attempts) - max_attempts)
+    out = dict(result)
+    out["diagnostics"] = compact
+    return out
+
+
 def _prepare(row_index: int) -> tuple[Any, np.ndarray, dict[str, Any]]:
     si_md = hubach.DEFAULT_SI_MD.read_text(encoding="utf-8")
     rows = hubach._parse_table_s11(si_md)
@@ -60,9 +95,11 @@ def _prepare(row_index: int) -> tuple[Any, np.ndarray, dict[str, Any]]:
     return row, z_feed, params
 
 
-def _worker(out: mp.Queue, opt: dict[str, Any], z_feed: np.ndarray, params: dict[str, Any]) -> None:
+def _worker(out: mp.Queue, opt: dict[str, Any], z_feed: np.ndarray, params: dict[str, Any], timeout_seconds: float) -> None:
     started = time.perf_counter()
     try:
+        opt = dict(opt)
+        opt.setdefault("timeout_seconds", max(0.5, 0.50 * float(timeout_seconds)))
         result = pcs.pcsaft_multiphase_lle(
             294.15,
             1.013e5,
@@ -72,6 +109,7 @@ def _worker(out: mp.Queue, opt: dict[str, Any], z_feed: np.ndarray, params: dict
             options=opt,
         )
         result = dict(result)
+        result = _compact_diagnostics(result)
         result["wall_seconds"] = time.perf_counter() - started
         out.put({"ok": True, "result": _json_safe(result)})
     except BaseException as exc:
@@ -88,7 +126,7 @@ def _worker(out: mp.Queue, opt: dict[str, Any], z_feed: np.ndarray, params: dict
 
 def _run_option(opt: dict[str, Any], z_feed: np.ndarray, params: dict[str, Any], timeout_seconds: float) -> dict[str, Any]:
     out: mp.Queue = mp.Queue()
-    proc = mp.Process(target=_worker, args=(out, opt, z_feed, params))
+    proc = mp.Process(target=_worker, args=(out, opt, z_feed, params, timeout_seconds))
     started = time.perf_counter()
     proc.start()
     proc.join(timeout_seconds)

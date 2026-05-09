@@ -2,6 +2,8 @@
 
 Last updated: 2026-05-07
 
+> Superseded context, 2026-05-08: this roadmap is retained for provenance, but its HBTA/TOPO-first recommendation is no longer the active path. Current Phase 0-9 work uses the Rezaee DES/TOPO Li/Na bridge after divalent pretreatment, with HBTA/TOPO as comparison/future parameterization.
+
 ## Purpose
 
 This document preserves the remaining work needed to turn the non-ionic produced-water lithium extraction case study into a presentation-ready and implementation-ready argument for adding ePC-SAFT into the PrOMMiS and IDAES ecosystem.
@@ -10,7 +12,7 @@ The roadmap is dependency ordered. Later phases should not be treated as blocked
 
 ## Core Boundary
 
-True reactive HBTA/TOPO ePC-SAFT is not scientifically complete yet because the required parameter set and reaction-equilibrium constants were not found for HBTA, TOPO, sulfonated kerosene or a defensible diluent surrogate, lithium-ligand complexes, and competing divalent complexes.
+True reactive HBTA/TOPO ePC-SAFT is not scientifically complete yet because the required parameter set and reaction-equilibrium constants were not found for HBTA, TOPO, sulfonated kerosene or a defensible diluent surrogate, and lithium-ligand complexes. Competing divalent complexes are not part of the active Li/Na-after-pretreatment objective.
 
 The current bridge therefore must remain clearly labeled as a calibrated or structured fallback until those parameters and reaction data are sourced, fitted, or explicitly replaced with documented surrogate assumptions.
 

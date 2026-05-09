@@ -4,7 +4,7 @@
 
 - Paper markdown: C:\Users\Tanner\Documents\git\Lithium_Extraction\papers\md\Li+ Extraction from Aqueous Medium Using Tetracyanoborate Ionic.md
 - Supporting-info markdown: C:\Users\Tanner\Documents\git\Lithium_Extraction\papers\md\Supporting Information for Li+ extraction from aqueous medium using tetracyanoborate ionic liquids -.md
-- Dataset directory: C:\Users\Tanner\Documents\git\Lithium_Extraction\data\pcsaft_parameters\huback_2024
+- Dataset directory: C:\Users\Tanner\Documents\git\Lithium_Extraction\data\reference\epcsaft_parameters\2024_Hubach
 - Solver profile: stable
 - Effective user_options: {"debug": false, "elec_model": {"base": "2020", "bjeruum_treatment": false, "born_contrib": true, "born_diff_model": "analytic", "born_diff_options": {"include_delta_d_i_conc_dep": true, "include_dielc_conc_dep": true, "include_sum_term": true}, "dielc_diff_mode": "analytic", "dielc_rule": "combined", "eps_r_bulk": "mix", "ssm_ds": false}}
 

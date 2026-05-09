@@ -10,13 +10,15 @@ epcsaft_dependency:
     - Hubach and Jang exercise hard native electrolyte-LLE cases.
     - Gando selective scripts are the reliable case-study showcase commands.
 inputs:
-  - path: data/pcsaft_parameters/huback_2024/
+  - path: data/reference/epcsaft_parameters/2024_Hubach/
     kind: ePC-SAFT_parameter_inputs
-  - path: data/pcsaft_parameters/gando_2025/
+  - path: data/reference/extraction_models/gando_2025/
     kind: selective_model_parameter_inputs
 outputs:
   - path: data/multiphase/
     kind: generated_benchmark_outputs
+  - path: analyses/electrolyte_lle_literature/results/debug/hubach_single_point_debug_8s_20260507.json
+    kind: generated_bounded_hubach_diagnostic
 commands:
   validate:
     - uv run python analyses/electrolyte_lle_literature/scripts/gando_2025_three_stage_crossflow.py

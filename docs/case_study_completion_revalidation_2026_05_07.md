@@ -2,6 +2,8 @@
 
 Date: 2026-05-07
 
+> Superseded context, 2026-05-08: this document records the pre-pivot HBTA/TOPO review state. The current Phase 0-9 source of truth is the Rezaee DES/TOPO Li/Na bridge after divalent pretreatment. Use `docs/phase0_8_completion_report.md`, `docs/phase9_final_presentation_skeleton.md`, `docs/plans/lithium_project_status_handoff_2026_05_08.md`, and `analyses/rezaee_2026_pcsaft_epcsaft/README.md` before using any HBTA-first claims below.
+
 Scope: HBTA/TOPO source-regressed Li/Na case study, broader Lithium Recovery Zotero evidence, existing article-analysis folders, Quarto/MiKTeX exports, and downstream PrOMMiS/IDAES costing.
 
 ## Zotero Access

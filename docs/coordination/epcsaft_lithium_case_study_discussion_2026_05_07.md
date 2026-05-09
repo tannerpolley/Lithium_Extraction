@@ -1,3 +1,5 @@
+> Superseded context, 2026-05-08: this coordination record predates the Rezaee Phase 0-9 pivot. The active Lithium_Extraction case-study basis is now Rezaee DES/TOPO Li/Na extraction after divalent pretreatment; HBTA/TOPO remains comparison and future parameterization context only.
+
 Context: downstream coordination handoff from `Lithium_Extraction` for the produced-water lithium extraction case study.
 
 Original coordination contract at posting time:

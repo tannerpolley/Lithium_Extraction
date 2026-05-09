@@ -2,6 +2,8 @@
 
 Last updated: 2026-05-06
 
+> Superseded context, 2026-05-08: this plan predates the Rezaee pivot. Use it only as historical planning context. The current active case-study basis is Rezaee DES/TOPO Li/Na extraction after divalent pretreatment, not HBTA/TOPO as the flagship.
+
 ## Purpose
 
 This document is the durable handoff plan for the next implementation pass after the repository is moved to a `uv`-based workflow. It replaces the earlier ionic-liquid extraction framing with a non-ionic, ligand-based solvent extraction case study that can defend the value of ePC-SAFT inside the PrOMMiS and IDAES ecosystem.

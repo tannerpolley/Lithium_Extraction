@@ -16,14 +16,14 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
-DATASET_DIR = REPO_ROOT / "data" / "pcsaft_parameters" / "yu_2024"
+DATASET_DIR = REPO_ROOT / "data" / "reference" / "epcsaft_parameters" / "2024_Yu"
 ANALYSIS_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_DIGITIZED_CSV = ANALYSIS_ROOT / "data" / "input" / "figure6_digitized_points.csv"
 DEFAULT_OUTPUT_DIR = ANALYSIS_ROOT / "results" / "figure6"
 DEFAULT_OUT_CSV = DEFAULT_OUTPUT_DIR / "yu_2024_figure6_reactive_replication.csv"
 DEFAULT_OUT_MD = DEFAULT_OUTPUT_DIR / "yu_2024_figure6_reactive_replication.md"
 DEFAULT_OUT_PNG = DEFAULT_OUTPUT_DIR / "yu_2024_figure6_reactive_replication.png"
-DEFAULT_CONFIG_JSON = DATASET_DIR / "reactive_eq11.json"
+DEFAULT_CONFIG_JSON = DATASET_DIR / "reaction" / "reactive_eq11.json"
 
 LI_G_PER_L = 0.766
 MG_G_PER_L = 98.984
@@ -91,6 +91,14 @@ def _load_exp_points(path: Path) -> list[ExperimentalPoint]:
         for row in rows
     ]
     return sorted(points, key=lambda item: item.oa_ratio)
+
+
+def _repo_relative(path: Path | str) -> str:
+    p = Path(path)
+    try:
+        return p.resolve().relative_to(REPO_ROOT.resolve()).as_posix()
+    except ValueError:
+        return str(path)
 
 
 def _fit_to_fraction(y: float, upper: float) -> float:
@@ -198,7 +206,7 @@ def _write_config(path: Path, config: FitConfig, points: list[ExperimentalPoint]
             "paper_equation": "Eq. 11",
             "paper_mechanism": "1 IL + 1 TOP + 1 Li <-> 1 aqueous [HOEMIM]+ + 1 organic Li complex",
             "current_user_options": "2025 preset retained in yu_2024 dataset; reaction handled in a wrapper outside the core pcsaft flash",
-            "digitized_points_csv": str(DEFAULT_DIGITIZED_CSV),
+            "digitized_points_csv": _repo_relative(DEFAULT_DIGITIZED_CSV),
         },
         "constants": {
             "li_feed_mol_per_l_aq": N_LI0_MOL_PER_L_AQ,
@@ -293,9 +301,9 @@ def _write_markdown(path: Path, point_rows: list[ReactivePoint], config: FitConf
     lines.append("")
     lines.append("## Basis")
     lines.append("")
-    lines.append(f"- Dataset directory: {DATASET_DIR}")
-    lines.append(f"- Digitized experimental points: {args.exp_csv}")
-    lines.append(f"- Reactive wrapper config: {args.config_json}")
+    lines.append(f"- Dataset directory: `{_repo_relative(DATASET_DIR)}`")
+    lines.append(f"- Digitized experimental points: `{_repo_relative(args.exp_csv)}`")
+    lines.append(f"- Reactive wrapper config: `{_repo_relative(args.config_json)}`")
     lines.append("- Paper mechanism used in the wrapper: Eq. 11 with 1:1:1 Li exchange stoichiometry and a separate low-affinity Mg exchange branch.")
     lines.append("- The current 2025 yu_2024 electrolyte preset is retained as the dataset basis; the reaction is represented outside the core pcsaft flash because the direct six-species flash collapsed to a trivial split under the current build.")
     lines.append("")

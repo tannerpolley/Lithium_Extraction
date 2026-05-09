@@ -26,7 +26,7 @@ from data.epcsaft_properties import get_prop_dict
 
 DEFAULT_PAPER_MD = REPO_ROOT / 'papers' / 'md' / 'Li+ Extraction from Aqueous Medium Using Tetracyanoborate Ionic.md'
 DEFAULT_SI_MD = REPO_ROOT / 'papers' / 'md' / 'Supporting Information for Li+ extraction from aqueous medium using tetracyanoborate ionic liquids -.md'
-DEFAULT_DATASET_DIR = REPO_ROOT / 'data' / 'pcsaft_parameters' / 'huback_2024'
+DEFAULT_DATASET_DIR = REPO_ROOT / 'data' / 'reference' / 'epcsaft_parameters' / '2024_Hubach'
 DEFAULT_OUT_CSV = REPO_ROOT / 'data' / 'multiphase' / 'hubach_2024_figure7_replication.csv'
 DEFAULT_OUT_MD = REPO_ROOT / 'data' / 'multiphase' / 'hubach_2024_figure7_replication.md'
 DEFAULT_OUT_PNG = REPO_ROOT / 'data' / 'multiphase' / 'hubach_2024_figure7_replication.png'
@@ -135,17 +135,26 @@ def _parse_scalar(raw: str, field: str, comp: str) -> Any:
     return val
 
 
+def _pure_parameter_path(dataset_dir: Path) -> Path:
+    return dataset_dir / 'pure' / 'any_solvent.csv'
+
+
+def _binary_matrix_path(dataset_dir: Path, file_name: str) -> Path:
+    return dataset_dir / 'mixed' / 'binary_interaction' / file_name
+
+
 def _load_user_params(dataset_dir: Path) -> tuple[dict[str, dict[str, Any]], dict[str, float]]:
-    rows = _read_csv_rows(dataset_dir / 'pure.csv')
+    pure_path = _pure_parameter_path(dataset_dir)
+    rows = _read_csv_rows(pure_path)
     hdr = set(rows[0].keys())
     missing_cols = [c for c in REQUIRED_PURE_COLUMNS if c not in hdr]
     if missing_cols:
-        raise ValueError(f'pure.csv missing required columns {missing_cols}')
+        raise ValueError(f'{pure_path} missing required columns {missing_cols}')
 
     by_comp = {str(r['component']).strip(): r for r in rows if str(r.get('component', '')).strip()}
     missing_comp = [c for c in SPECIES if c not in by_comp]
     if missing_comp:
-        raise ValueError(f'pure.csv missing required components {missing_comp}')
+        raise ValueError(f'{pure_path} missing required components {missing_comp}')
 
     user_params: dict[str, dict[str, Any]] = {}
     mw: dict[str, float] = {}
@@ -186,7 +195,7 @@ def _load_user_options(dataset_dir: Path) -> dict[str, Any]:
 
 
 def _load_matrix(dataset_dir: Path, file_name: str) -> dict[tuple[str, str], float]:
-    rows = _read_csv_rows(dataset_dir / 'binary_interaction' / file_name)
+    rows = _read_csv_rows(_binary_matrix_path(dataset_dir, file_name))
     cols = [c for c in rows[0].keys() if c != 'component']
     if set(cols) != set(SPECIES):
         raise ValueError(f'{file_name} columns must match {SPECIES}; got {cols}')

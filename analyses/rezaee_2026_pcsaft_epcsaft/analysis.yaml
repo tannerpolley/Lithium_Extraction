@@ -1,0 +1,105 @@
+id: rezaee_2026_pcsaft_epcsaft
+title: Rezaee 2026 PC-SAFT/ePC-SAFT Package Smoke
+status: active
+summary: First-class package-validation case study for Rezaee 2026 DES/TOPO parameter regression and electrolyte phase/speciation plumbing.
+owner: project
+boundary:
+  objective: Validate package regression behavior and coupled chemical/phase-equilibrium plumbing for Li extraction from Na after divalent pretreatment.
+  not_objectives:
+    - Full HBTA/TOPO closure.
+    - Divalent extraction or divalent equilibrium modeling.
+    - Full extraction-percent reproduction from the paper.
+    - Treating calibrated distribution-surrogate rows as direct reactive-LLE closure.
+epcsaft_dependency:
+  required: true
+  package_source: C:\Users\Tanner\Documents\git\ePC-SAFT
+  notes:
+    - Uses Rezaee's paper-reported DES/TOPO/RLi/RNa PC-SAFT-style parameters as source truth.
+    - Uses a nonassociating DES density refit as a package regression smoke, not as a replacement for the paper parameterization.
+    - Exercises ePC-SAFT electrolyte stability and LLE API plumbing for a pseudo-DES aqueous/organic split.
+inputs:
+  - path: analyses/rezaee_2026_pcsaft_epcsaft/data/input/rezaee_2026_reaction_constants.csv
+    kind: source_transcription
+  - path: analyses/rezaee_2026_pcsaft_epcsaft/data/input/rezaee_2026_organic_pcsaft_parameters.csv
+    kind: source_transcription
+  - path: analyses/rezaee_2026_pcsaft_epcsaft/data/input/rezaee_2026_organic_binary_interactions.csv
+    kind: source_transcription
+  - path: analyses/rezaee_2026_pcsaft_epcsaft/data/input/rezaee_2026_si_density_tables.csv
+    kind: source_transcription
+  - path: analyses/rezaee_2026_pcsaft_epcsaft/data/input/rezaee_2025_headline_extraction_points.csv
+    kind: source_transcription
+  - path: analyses/rezaee_2026_pcsaft_epcsaft/data/input/rezaee_2025_doe_extraction_responses.csv
+    kind: source_transcription
+  - path: analyses/rezaee_2026_pcsaft_epcsaft/data/input/rezaee_2025_extraction_equilibrium_mole_fractions.csv
+    kind: source_transcription
+  - path: analyses/rezaee_2026_pcsaft_epcsaft/data/input/rezaee_2025_optimum_neighborhood.csv
+    kind: source_transcription
+  - path: analyses/rezaee_2026_pcsaft_epcsaft/data/input/rezaee_2025_screening_extraction.csv
+    kind: source_transcription
+  - path: analyses/rezaee_2026_pcsaft_epcsaft/data/input/rezaee_2025_real_brine_extraction.csv
+    kind: source_transcription
+  - path: data/reference/epcsaft_parameter_fits/rezaee_2026/des_nonassoc_fit.json
+    kind: generated_parameter_fit_payload
+  - path: analyses/rezaee_2026_pcsaft_epcsaft/data/processed/rezaee_2026_des_density_fit_records.csv
+    kind: generated_density_records
+  - path: analyses/rezaee_2026_pcsaft_epcsaft/data/processed/rezaee_2026_des_parameter_fit_summary.csv
+    kind: generated_fit_summary
+  - path: analyses/rezaee_2026_pcsaft_epcsaft/data/processed/rezaee_2025_extraction_target_summary.csv
+    kind: generated_extraction_target_summary
+  - path: analyses/rezaee_2026_pcsaft_epcsaft/data/processed/rezaee_2025_extraction_equilibrium_summary.csv
+    kind: generated_equilibrium_summary
+  - path: analyses/rezaee_2026_pcsaft_epcsaft/results/smoke/rezaee_2026_epcsaft_phase_equilibrium_smoke.json
+    kind: generated_phase_equilibrium_smoke
+  - path: analyses/rezaee_2026_pcsaft_epcsaft/data/processed/rezaee_clean_li_na_pretreated_feed_basis.csv
+    kind: generated_clean_feed_basis
+  - path: analyses/rezaee_2026_pcsaft_epcsaft/data/processed/rezaee_surrogate_input_variable_ranges.csv
+    kind: generated_surrogate_input_contract
+  - path: analyses/rezaee_2026_pcsaft_epcsaft/data/processed/rezaee_surrogate_seed_run_matrix.csv
+    kind: generated_seed_run_matrix
+  - path: analyses/rezaee_2026_pcsaft_epcsaft/data/processed/rezaee_tds_li_oa_uq_design.csv
+    kind: generated_calibrated_surrogate_design
+  - path: analyses/rezaee_2026_pcsaft_epcsaft/data/processed/rezaee_tds_li_oa_uq_predictions.csv
+    kind: generated_calibrated_surrogate_predictions
+  - path: analyses/rezaee_2026_pcsaft_epcsaft/data/processed/rezaee_tds_li_oa_prommis_idaes_transfer.csv
+    kind: generated_calibrated_prommis_idaes_transfer
+  - path: analyses/rezaee_2026_pcsaft_epcsaft/data/processed/rezaee_tds_li_oa_calibrated_idaes_costing_input.csv
+    kind: generated_calibrated_costing_input
+outputs:
+  - path: analyses/rezaee_2026_pcsaft_epcsaft/results/smoke/rezaee_2026_epcsaft_parameter_smoke_report.md
+    kind: generated_smoke_report
+  - path: analyses/rezaee_2026_pcsaft_epcsaft/results/targets/rezaee_2025_extraction_target_summary.md
+    kind: generated_extraction_target_report
+  - path: data/reference/produced_water/rezaee_2026_des_density_fit_records.csv
+    kind: compatibility_mirror
+  - path: data/reference/produced_water/rezaee_2026_des_parameter_fit_summary.csv
+    kind: compatibility_mirror
+  - path: data/reference/produced_water/rezaee_2026_epcsaft_phase_equilibrium_smoke.json
+    kind: compatibility_mirror
+  - path: data/reference/produced_water/rezaee_2026_epcsaft_parameter_smoke_report.md
+    kind: compatibility_mirror
+  - path: analyses/rezaee_2026_pcsaft_epcsaft/results/surrogate_input_space/rezaee_clean_li_na_surrogate_input_space.md
+    kind: generated_surrogate_input_report
+  - path: data/reference/produced_water/rezaee_clean_li_na_surrogate_input_space.md
+    kind: compatibility_mirror
+  - path: analyses/rezaee_2026_pcsaft_epcsaft/results/uq_surrogate/rezaee_tds_li_oa_uq_report.md
+    kind: generated_calibrated_surrogate_report
+  - path: analyses/rezaee_2026_pcsaft_epcsaft/results/uq_surrogate/figures/calibrated_li_extraction_surface.png
+    kind: generated_calibrated_surrogate_figure
+  - path: analyses/rezaee_2026_pcsaft_epcsaft/results/uq_surrogate/figures/calibrated_selectivity_vs_na_li.png
+    kind: generated_calibrated_surrogate_figure
+  - path: analyses/rezaee_2026_pcsaft_epcsaft/results/uq_surrogate/figures/calibrated_costing_scenarios.png
+    kind: generated_calibrated_costing_figure
+  - path: data/reference/produced_water/rezaee_calibrated_surrogate_mscontactor_costing_results.csv
+    kind: prommis_idaes_result_mirror
+  - path: data/reference/produced_water/rezaee_calibrated_surrogate_mscontactor_costing_results.md
+    kind: prommis_idaes_result_mirror
+commands:
+  validate:
+    - uv run python analyses/rezaee_2026_pcsaft_epcsaft/scripts/rezaee_des_epcsaft_parameter_smoke.py
+    - uv run python analyses/rezaee_2026_pcsaft_epcsaft/scripts/rezaee_2025_target_summary.py
+    - uv run python analyses/rezaee_2026_pcsaft_epcsaft/scripts/rezaee_surrogate_input_space.py
+    - uv run python analyses/rezaee_2026_pcsaft_epcsaft/scripts/rezaee_tds_li_oa_calibrated_surrogate.py
+runtime:
+  quick_seconds: 90
+  full_seconds: 180
+

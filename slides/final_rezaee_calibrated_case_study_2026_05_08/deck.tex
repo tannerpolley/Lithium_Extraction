@@ -1,0 +1,231 @@
+\documentclass[aspectratio=169]{beamer}
+
+\usetheme{Madrid}
+\usecolortheme{default}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}[frame number]
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage[version=4]{mhchem}
+\usepackage{siunitx}
+
+\definecolor{netlgreen}{RGB}{137,190,49}
+\definecolor{netlnavy}{RGB}{20,31,46}
+\definecolor{netlteal}{RGB}{20,101,116}
+\setbeamercolor{structure}{fg=netlteal}
+\setbeamercolor{title}{fg=white,bg=netlteal}
+\setbeamercolor{subtitle}{fg=white}
+\setbeamercolor{frametitle}{fg=white,bg=netlteal}
+\setbeamercolor{block title}{fg=white,bg=netlteal}
+\setbeamercolor{block body}{fg=netlnavy,bg=black!3}
+
+\graphicspath{{figures/}}
+
+\title{Produced-Water Lithium Extraction}
+\subtitle{Rezaee DES/TOPO Li/Na bridge for PrOMMiS and IDAES integration}
+\author{Chemical engineering technical review}
+\date{May 8, 2026}
+
+\newcommand{\DLi}{D_{\mathrm{Li}}}
+\newcommand{\DNa}{D_{\mathrm{Na}}}
+\newcommand{\SLiNa}{S_{\mathrm{Li/Na}}}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+  \vspace{-0.3cm}
+  \begin{center}
+    \small Source chain: Smackover brine basis $\rightarrow$ divalent pretreatment
+    $\rightarrow$ Rezaee DES/TOPO Li/Na bridge $\rightarrow$ PrOMMiS/IDAES handoff.
+  \end{center}
+\end{frame}
+
+\section{Case Basis}
+
+\begin{frame}{Why Smackover Is The Flagship Feed}
+  \small
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.56\textwidth}
+      \includegraphics[width=\linewidth]{brine_li_tds_scatter.png}
+    \end{column}
+    \begin{column}{0.41\textwidth}
+      \begin{block}{Engineering premise}
+        Southern Arkansas Smackover brine couples high lithium value with
+        hypersaline electrolyte severity.
+      \end{block}
+      \begin{itemize}
+        \item Selected clean-feed basis: \SI{168}{mg/L} Li and
+          \SI{64100}{mg/L} Na.
+        \item TDS is retained as a severity variable.
+        \item Raw divalents are pretreatment context, not active solvent-model
+          competitors.
+      \end{itemize}
+      \vfill
+      {\scriptsize Sources: USGS Smackover data release; local screening table.}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Pretreatment Defines The Extraction Feed}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.54\textwidth}
+      \includegraphics[width=\linewidth]{rezaee_surrogate_input_ranges.png}
+    \end{column}
+    \begin{column}{0.43\textwidth}
+      \includegraphics[width=\linewidth]{process_bridge_diagram.png}
+      \vspace{0.2cm}
+      \begin{itemize}
+        \item The solvent model sees a clean Li/Na stream.
+        \item \ce{Ca^{2+}}, \ce{Mg^{2+}}, \ce{Sr^{2+}}, and \ce{Ba^{2+}} are
+          removed upstream.
+        \item Produced-water severity is carried through TDS and Na/Li flags.
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\section{Thermodynamic Bridge}
+
+\begin{frame}{Rezaee DES/TOPO Becomes A Transfer-Variable Bridge}
+  \begin{center}
+    \includegraphics[width=0.82\linewidth]{rezaee_surrogate_pipeline.png}
+  \end{center}
+  \begin{itemize}
+    \item Rezaee extraction responses are converted to Li and Na distribution
+      coefficients.
+    \item Calibrated $\log D_i$ surfaces generate the produced-water screening
+      matrix.
+    \item Model-basis and validity flags are carried into downstream process
+      tables.
+  \end{itemize}
+  {\scriptsize Sources: Rezaee et al. 2025 extraction data; Rezaee et al. 2026 parameter and reaction-equilibrium support.}
+\end{frame}
+
+\begin{frame}{Distribution Coefficients Are The Process Contract}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \[
+        D_i = \frac{E_i}{100-E_i}\frac{1}{O/A}
+      \]
+      \[
+        \SLiNa = \frac{\DLi}{\DNa}
+      \]
+      \begin{block}{Nominal MS-2, $O/A=1$}
+        $E_{\mathrm{Li}}=50.66\%$, $E_{\mathrm{Na}}=5.67\%$,
+        $\SLiNa=17.09$.
+      \end{block}
+    \end{column}
+    \begin{column}{0.49\textwidth}
+      \includegraphics[width=\linewidth]{nominal_transfer_math_card.png}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Lithium Extraction Surface}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.62\textwidth}
+      \includegraphics[width=\linewidth]{calibrated_li_extraction_surface.png}
+    \end{column}
+    \begin{column}{0.35\textwidth}
+      \begin{itemize}
+        \item Current matrix spans about $30.2$--$61.4\%$ one-stage Li
+          extraction.
+        \item Organic/aqueous ratio is the dominant operating lever.
+        \item The result is a calibrated process-integration bridge, not a final
+          direct reactive-LLE proof.
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Sodium Load Controls The Validation Risk}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.62\textwidth}
+      \includegraphics[width=\linewidth]{calibrated_selectivity_vs_na_li.png}
+    \end{column}
+    \begin{column}{0.35\textwidth}
+      \begin{itemize}
+        \item Selectivity remains favorable under produced-water sodium load.
+        \item The MS-2 point is outside the original Rezaee Na/Li DOE domain.
+        \item High-Na/Li validation is the most important next experimental
+          check.
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\section{Process Integration}
+
+\begin{frame}{PrOMMiS/IDAES Handoff}
+  \small
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.52\textwidth}
+      \includegraphics[width=0.92\linewidth]{process_bridge_diagram.png}
+      \vspace{0.10cm}
+      \includegraphics[width=0.86\linewidth]{calibrated_costing_scenarios.png}
+    \end{column}
+    \begin{column}{0.45\textwidth}
+      \begin{itemize}
+        \item Handoff rows carry $D_i$, selectivity, extraction, raffinate, and
+          extract loading.
+        \item Costing scenarios use the same feed-flow basis as the surrogate.
+        \item Formal TEA still needs residence time, solvent loss, reagent
+          demand, and product pricing.
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Validation Boundary}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.56\textwidth}
+      \includegraphics[width=\linewidth]{na_li_validation_boundary.png}
+    \end{column}
+    \begin{column}{0.40\textwidth}
+      \begin{block}{Boundary condition}
+        Every produced-water row is flagged as outside the original Rezaee Na/Li
+        DOE training domain.
+      \end{block}
+      \begin{itemize}
+        \item Process screening is appropriate.
+        \item Final physical acceptance requires high-Na validation.
+        \item Direct reactive-LLE closure is not claimed in the main result.
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Final Technical Message}
+  \begin{enumerate}
+    \item Use Rezaee DES/TOPO as the active Li/Na case-study bridge.
+    \item Present Smackover as the produced-water source basis and pretreatment
+      context.
+    \item Move only traceable transfer variables into PrOMMiS/IDAES.
+    \item Keep archived HBTA/TOPO, Gando, Jang, Yu, and Hubach material outside
+      the main chain unless explicitly labeled as comparison or diagnostics.
+  \end{enumerate}
+  \begin{block}{Next rigorous step}
+    Replace the algebraic process handoff with a full PrOMMiS MSContactor solve
+    and an IDAES costing block once the final surrogate run interface is fixed.
+  \end{block}
+\end{frame}
+
+\begin{frame}{References And Source Artifacts}
+  \begin{itemize}
+    \item Rezaee et al. 2025 paper and supporting information: extraction
+      response basis.
+    \item Rezaee et al. 2026 paper and supplementary material: PC-SAFT/ePC-SAFT
+      parameter and reactive-equilibrium evidence.
+    \item U.S. Geological Survey southern Arkansas Smackover data release,
+      DOI: \texttt{10.5066/P9QPRYZN}.
+    \item Project artifacts:
+      \texttt{analyses/rezaee\_2026\_pcsaft\_epcsaft/} and
+      \texttt{data/reference/produced\_water/}.
+  \end{itemize}
+\end{frame}
+
+\end{document}

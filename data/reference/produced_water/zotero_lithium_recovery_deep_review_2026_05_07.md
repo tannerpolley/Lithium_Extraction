@@ -18,7 +18,7 @@ The current thread's Zotero MCP transport returned `Transport closed` after the 
 |---:|---|---|---:|---|---|
 | 1 | HBTA + TOPO + sulfonated kerosene | flagship | 88 | Main Friday case study and current source-regressed Li/Na stage model. | Organic ePC-SAFT parameters and true reaction constants remain absent. |
 | 3 | TBAC + decanoic-acid DES + TOPO | parameter_regression_pilot | 76 | Best source for demonstrating parameter-regression and package plumbing. | Not the flagship HBTA/TOPO chemistry and direct LLE smoke remains diagnostic. |
-| 2 | D2EHDTPA + BuPhen + octanol modifiers + n-dodecane | best_non_hbta_multication_backup | 73 | Best backup for multication selectivity and divalent competition story. | Pure-component and organic-mixture parameters are not available in the repo. |
+| 2 | D2EHDTPA + BuPhen + octanol modifiers + n-dodecane | literature_comparison_after_pretreatment | 73 | Literature comparison only; not an active divalent-equilibrium target. | Pure-component and organic-mixture parameters are not available in the repo. |
 | 6 | HBTA/TOPO or HTTA/TOPO synergistic DES | new_candidate_physical_property_fit | 67 | New candidate for pseudo-component physical-property fitting and capacity comparison. | DES cost/viscosity and chemistry differ from sulfonated-kerosene flagship. |
 | 4 | TBP + FeCl3/HCl + kerosene | conventional_high_mg_backup | 62 | Useful conventional comparator if HBTA/TOPO parameterization stalls. | Acid/Fe handling, corrosion, and chloride speciation complicate IDAES story. |
 | 5 | D2EHPA + TBP + kerosene | produced_water_limitation_baseline | 59 | Limitation baseline showing why generic solvent extraction is not enough. | Low Li recovery/selectivity relative to flagship; current model is placeholder-heavy. |

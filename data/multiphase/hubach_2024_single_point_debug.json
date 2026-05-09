@@ -1,0 +1,175 @@
+{
+  "results": [
+    {
+      "exitcode": 0,
+      "ok": 1,
+      "option": {
+        "debug": 0,
+        "max_nfev": 300,
+        "solver_tol": 1e-08,
+        "split_tol": 0.0001,
+        "tpdf_global_trials": 1200,
+        "tpdf_local_trials": 600
+      },
+      "result": {
+        "backend": "electrolyte_lle",
+        "converged": 0,
+        "diagnostics": {
+          "acceptance_gate": "predictive_budget_exhausted",
+          "best_failure_reason": "candidate collapsed to one phase",
+          "best_noncollapsed_candidate": "none",
+          "budget_exceeded": 1,
+          "budget_trigger": "timeout_seconds",
+          "density_failure_count": 0,
+          "elapsed_seconds": 15.0006723,
+          "equilibrium_route": "electrolyte_lle",
+          "gibbs_delta": -7.27822513368892e-09,
+          "message": "electrolyte LLE flash stopped after a configured work budget was exhausted",
+          "objective_evaluation_count": 15171,
+          "phase_distance": 8.649416946560073e-11,
+          "phase_equilibrium_model": "electrolyte_lle_v5_native_charge_constrained_solve",
+          "requested_timeout_seconds": 15.0,
+          "seed_attempt_count": 4,
+          "seed_attempts": [
+            {
+              "beta_org": 9.004369182283533e-22,
+              "charge_balance_error": 0.0,
+              "gibbs_delta": -3.4625244005326294e-07,
+              "iterations": 1,
+              "material_balance_error": 8.673617379884035e-19,
+              "phase_distance": 0.7196843295787823,
+              "rejection_reason": "nonlinear residual did not converge",
+              "seed_name": "native_tpd_trial",
+              "solver_residual_norm": 2.4578970991182203
+            },
+            {
+              "beta_org": 6.743858262155317e-14,
+              "charge_balance_error": 0.0,
+              "gibbs_delta": 3.5796059449921813e-09,
+              "iterations": 1,
+              "material_balance_error": 2.220446049250313e-16,
+              "phase_distance": 0.7196846080124288,
+              "rejection_reason": "nonlinear residual did not converge",
+              "seed_name": "native_gibbs_tpd_trial",
+              "solver_residual_norm": 2.4578970831734814
+            },
+            {
+              "beta_org": 0.020580912015208935,
+              "charge_balance_error": 0.0,
+              "gibbs_delta": -7.27822513368892e-09,
+              "iterations": 1,
+              "material_balance_error": 2.220446049250313e-16,
+              "phase_distance": 8.649416946560073e-11,
+              "rejection_reason": "candidate collapsed to one phase",
+              "seed_name": "formula_feed_b2",
+              "solver_residual_norm": 7.168428517445591e-09
+            },
+            {
+              "beta_org": 0.5,
+              "charge_balance_error": 1e+300,
+              "gibbs_delta": 0.0,
+              "iterations": 0,
+              "material_balance_error": 1e+300,
+              "phase_distance": 0.0,
+              "rejection_reason": "nonlinear residual did not converge",
+              "seed_name": "formula_feed_b5",
+              "solver_residual_norm": 1e+300
+            }
+          ],
+          "seed_attempts_truncated": 0,
+          "solver_residual_norm": 7.168428517445591e-09,
+          "solver_seed_name": "formula_feed_b2",
+          "stability_min_tpd": -2.219742201582648,
+          "unstable_feed_collapsed_all_candidates": 1
+        },
+        "message": "('electrolyte LLE flash did not converge', {'charge_balance_error': 0.0, 'elapsed_seconds': 15.0006723, 'fugacity_residual_norm': 7.168428517445591e-09, 'gibbs_delta': -7.27822513368892e-09, 'gibbs_feed': -6.209217134340111, 'gibbs_split': -6.209217141618336, 'material_balance_error': 2.220446049250313e-16, 'phase_distance': 8.649416946560073e-11, 'requested_timeout_seconds': 15.0, 'solver_residual_norm': 7.168428517445591e-09, 'stability_min_tpd': -2.219742201582648, 'basis_rank': 1, 'density_failure_count': 0, 'effective_max_iterations': 300, 'iterations': 1, 'max_density_failures': 0, 'max_seed_attempts': 0, 'max_total_objective_evaluations': 0, 'objective_evaluation_count': 15171, 'repeated_stability_iterations': 1, 'requested_max_iterations': 300, 'seed_attempt_count': 4, 'best_effort_phases_returned': False, 'budget_exceeded': True, 'coupled_density_lle_attempted': False, 'density_fallback_used': False, 'experimental_coupled_density_lle': False, 'return_best_effort': False, 'stability_checked': True, 'stability_stable': False, 'unstable_feed_collapsed_all_candidates': True, 'acceptance_gate': 'predictive_budget_exhausted', 'best_failure_reason': 'candidate collapsed to one phase', 'best_noncollapsed_candidate': 'none', 'budget_trigger': 'timeout_seconds', 'density_diagnostics_mode': 'auto', 'density_validity_gate': 'not_evaluated', 'density_warm_start_source': '', 'equilibrium_route': 'electrolyte_lle', 'gibbs_seed_method': 'native_golden_section', 'message': 'electrolyte LLE flash stopped after a configured work budget was exhausted', 'native_entrypoint': '_solve_equilibrium_native', 'phase_equilibrium_model': 'electrolyte_lle_v5_native_charge_constrained_solve', 'route_reason': 'ion-containing mixture', 'solver_language': 'c++', 'solver_method': 'native_transformed_newton', 'solver_seed_name': 'formula_feed_b2', 'stability_analysis': 'electrolyte_tpd', 'tpd_method': 'native_tpd_global_search', 'variable_model': 'ascani_transformed_salt_pairs', 'feed_composition': [0.9549140976171719, 0.029015432040304778, 0.006032546048615457, 0.005018962146953909, 0.005018962146953909], 'fugacity_residual': [-7.168428517445591e-09, -1.350837663949278e-09, -9.668710276855563e-10, 4.757680471811909e-09], 'seed_attempts': [{'seed_name': 'native_tpd_trial', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 9.004369182283533e-22, 'phase_distance': 0.7196843295787823, 'solver_residual_norm': 2.4578970991182203, 'material_balance_error': 8.673617379884035e-19, 'charge_balance_error': 0.0, 'gibbs_delta': -3.4625244005326294e-07, 'iterations': 1}, {'seed_name': 'native_gibbs_tpd_trial', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 6.743858262155317e-14, 'phase_distance': 0.7196846080124288, 'solver_residual_norm': 2.4578970831734814, 'material_balance_error': 2.220446049250313e-16, 'charge_balance_error': 0.0, 'gibbs_delta': 3.5796059449921813e-09, 'iterations': 1}, {'seed_name': 'formula_feed_b2', 'rejection_reason': 'candidate collapsed to one phase', 'beta_org': 0.020580912015208935, 'phase_distance': 8.649416946560073e-11, 'solver_residual_norm': 7.168428517445591e-09, 'material_balance_error': 2.220446049250313e-16, 'charge_balance_error': 0.0, 'gibbs_delta': -7.27822513368892e-09, 'iterations': 1}, {'seed_name': 'formula_feed_b5', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.5, 'phase_distance': 0.0, 'solver_residual_norm': 1e+300, 'material_balance_error': 1e+300, 'charge_balance_error': 1e+300, 'gibbs_delta': 0.0, 'iterations': 0}], 'legacy_candidate_mode': 'auto', 'legacy_candidate_residual_tolerance': 0.2, 'legacy_candidate_split_tolerance': 0.0001, 'ignored_legacy_options': [], 'requested_solver_backend': 'auto', 'requested_hessian_strategy': 'gauss_newton', 'selected_solver_backend': 'native', 'solver_selection_reason': 'default_native', 'default_auto_uses_ipopt': False, 'density_failure_contexts': [], 'density_scan_summary': {}, 'density_candidate_roots': [], 'density_best_near_root': {}, 'density_fallback_rejected_reason': '', 'legacy_candidate_found': False, 'legacy_candidate_message': 'legacy candidate fallback disabled; Python equilibrium candidates are not exposed.', 'algorithm_reference': {'authors': 'Ascani, Sadowski, and Held', 'year': 2022, 'title': 'Calculation of Multiphase Equilibria Containing Mixed Solvents and Mixed Electrolytes', 'doi': '10.1021/acs.jced.1c00866'}, 'e_matrix': [[1.0, 1.0]], 'salt_pairs': [{'label': 'LiCl', 'cation': 3, 'anion': 4, 'cation_stoich': 1, 'anion_stoich': 1, 'cation_charge': 1.0, 'anion_charge': -1.0}], 'composition_basis': 'mole_fraction'})",
+        "n_phases": 1,
+        "phases": [],
+        "residual_norm": 7.168428517445591e-09,
+        "status": "SolutionError",
+        "tpdf_min": "nan",
+        "wall_seconds": 15.00251130000106
+      },
+      "timed_out": 0,
+      "wall_seconds_outer": 16.49893659999725
+    },
+    {
+      "exitcode": 0,
+      "ok": 1,
+      "option": {
+        "charge_weight": 5000.0,
+        "debug": 0,
+        "max_nfev": 1000,
+        "solver_accept_norm": 0.5,
+        "solver_tol": 1e-09,
+        "split_tol": 0.0001,
+        "tpdf_global_trials": 4000,
+        "tpdf_local_trials": 2000
+      },
+      "result": {
+        "backend": "electrolyte_lle",
+        "converged": 0,
+        "diagnostics": {
+          "acceptance_gate": "predictive_budget_exhausted",
+          "best_failure_reason": "nonlinear residual did not converge",
+          "best_noncollapsed_candidate": "available",
+          "budget_exceeded": 1,
+          "budget_trigger": "timeout_seconds",
+          "density_failure_count": 0,
+          "elapsed_seconds": 15.0007342,
+          "equilibrium_route": "electrolyte_lle",
+          "gibbs_delta": -3.4625244005326294e-07,
+          "message": "electrolyte LLE flash stopped after a configured work budget was exhausted",
+          "objective_evaluation_count": 16787,
+          "phase_distance": 0.7196845860380734,
+          "phase_equilibrium_model": "electrolyte_lle_v5_native_charge_constrained_solve",
+          "requested_timeout_seconds": 15.0,
+          "seed_attempt_count": 2,
+          "seed_attempts": [
+            {
+              "beta_org": 9.004388903423118e-22,
+              "charge_balance_error": 0.0,
+              "gibbs_delta": -3.4625244005326294e-07,
+              "iterations": 2,
+              "material_balance_error": 8.673617379884035e-19,
+              "phase_distance": 0.7196845860380734,
+              "rejection_reason": "nonlinear residual did not converge",
+              "seed_name": "native_tpd_trial",
+              "solver_residual_norm": 2.4578972205339795
+            },
+            {
+              "beta_org": 0.5,
+              "charge_balance_error": 1e+300,
+              "gibbs_delta": 0.0,
+              "iterations": 0,
+              "material_balance_error": 1e+300,
+              "phase_distance": 0.0,
+              "rejection_reason": "nonlinear residual did not converge",
+              "seed_name": "native_gibbs_tpd_trial",
+              "solver_residual_norm": 1e+300
+            }
+          ],
+          "seed_attempts_truncated": 0,
+          "solver_residual_norm": 2.4578972205339795,
+          "solver_seed_name": "native_tpd_trial",
+          "stability_min_tpd": -2.219742201582648,
+          "unstable_feed_collapsed_all_candidates": 0
+        },
+        "message": "('electrolyte LLE flash did not converge', {'charge_balance_error': 0.0, 'elapsed_seconds': 15.0007342, 'fugacity_residual_norm': 2.4578972205339795, 'gibbs_delta': -3.4625244005326294e-07, 'gibbs_feed': -6.209217134340111, 'gibbs_split': -6.209217480592551, 'material_balance_error': 8.673617379884035e-19, 'phase_distance': 0.7196845860380734, 'requested_timeout_seconds': 15.0, 'solver_residual_norm': 2.4578972205339795, 'stability_min_tpd': -2.219742201582648, 'basis_rank': 1, 'density_failure_count': 0, 'effective_max_iterations': 1000, 'iterations': 2, 'max_density_failures': 0, 'max_seed_attempts': 0, 'max_total_objective_evaluations': 0, 'objective_evaluation_count': 16787, 'repeated_stability_iterations': 1, 'requested_max_iterations': 1000, 'seed_attempt_count': 2, 'best_effort_phases_returned': False, 'budget_exceeded': True, 'coupled_density_lle_attempted': False, 'density_fallback_used': False, 'experimental_coupled_density_lle': False, 'return_best_effort': False, 'stability_checked': True, 'stability_stable': False, 'unstable_feed_collapsed_all_candidates': False, 'acceptance_gate': 'predictive_budget_exhausted', 'best_failure_reason': 'nonlinear residual did not converge', 'best_noncollapsed_candidate': 'available', 'budget_trigger': 'timeout_seconds', 'density_diagnostics_mode': 'auto', 'density_validity_gate': 'not_evaluated', 'density_warm_start_source': '', 'equilibrium_route': 'electrolyte_lle', 'gibbs_seed_method': 'native_golden_section', 'message': 'electrolyte LLE flash stopped after a configured work budget was exhausted', 'native_entrypoint': '_solve_equilibrium_native', 'phase_equilibrium_model': 'electrolyte_lle_v5_native_charge_constrained_solve', 'route_reason': 'ion-containing mixture', 'solver_language': 'c++', 'solver_method': 'native_transformed_newton', 'solver_seed_name': 'native_tpd_trial', 'stability_analysis': 'electrolyte_tpd', 'tpd_method': 'native_tpd_global_search', 'variable_model': 'ascani_transformed_salt_pairs', 'best_noncollapsed_candidate_aq': [0.9549140976171719, 0.029015432040304778, 0.006032546048615456, 0.005018962146953908, 0.005018962146953908], 'best_noncollapsed_candidate_org': [0.23522951157909855, 0.7439515692121356, 0.02081846845696544, 2.2537590026216183e-07, 2.2537590026216183e-07], 'feed_composition': [0.9549140976171719, 0.029015432040304778, 0.006032546048615457, 0.005018962146953909, 0.005018962146953909], 'fugacity_residual': [-0.7771632210740198, -2.4578972205339795, -0.06878069685600252, -1.4955440974517842e-06], 'seed_attempts': [{'seed_name': 'native_tpd_trial', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 9.004388903423118e-22, 'phase_distance': 0.7196845860380734, 'solver_residual_norm': 2.4578972205339795, 'material_balance_error': 8.673617379884035e-19, 'charge_balance_error': 0.0, 'gibbs_delta': -3.4625244005326294e-07, 'iterations': 2}, {'seed_name': 'native_gibbs_tpd_trial', 'rejection_reason': 'nonlinear residual did not converge', 'beta_org': 0.5, 'phase_distance': 0.0, 'solver_residual_norm': 1e+300, 'material_balance_error': 1e+300, 'charge_balance_error': 1e+300, 'gibbs_delta': 0.0, 'iterations': 0}], 'legacy_candidate_mode': 'auto', 'legacy_candidate_residual_tolerance': 0.2, 'legacy_candidate_split_tolerance': 0.0001, 'ignored_legacy_options': [], 'requested_solver_backend': 'auto', 'requested_hessian_strategy': 'gauss_newton', 'selected_solver_backend': 'native', 'solver_selection_reason': 'default_native', 'default_auto_uses_ipopt': False, 'density_failure_contexts': [], 'density_scan_summary': {}, 'density_candidate_roots': [], 'density_best_near_root': {}, 'density_fallback_rejected_reason': '', 'legacy_candidate_found': False, 'legacy_candidate_message': 'legacy candidate fallback was not triggered', 'algorithm_reference': {'authors': 'Ascani, Sadowski, and Held', 'year': 2022, 'title': 'Calculation of Multiphase Equilibria Containing Mixed Solvents and Mixed Electrolytes', 'doi': '10.1021/acs.jced.1c00866'}, 'e_matrix': [[1.0, 1.0]], 'salt_pairs': [{'label': 'LiCl', 'cation': 3, 'anion': 4, 'cation_stoich': 1, 'anion_stoich': 1, 'cation_charge': 1.0, 'anion_charge': -1.0}], 'composition_basis': 'mole_fraction'})",
+        "n_phases": 1,
+        "phases": [],
+        "residual_norm": 2.4578972205339795,
+        "status": "SolutionError",
+        "tpdf_min": "nan",
+        "wall_seconds": 15.002430099997582
+      },
+      "timed_out": 0,
+      "wall_seconds_outer": 16.018289100000402
+    }
+  ],
+  "row": {
+    "e_calc_s11_pct": 78.16,
+    "e_exp_pct": 75.39,
+    "rw_oa": 0.522
+  }
+}

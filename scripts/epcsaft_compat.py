@@ -96,11 +96,27 @@ def _equilibrium_options(options: dict[str, Any] | None) -> epcsaft.EquilibriumO
     max_iterations = int(options.get("max_iterations", options.get("max_nfev", 80)))
     tolerance = float(options.get("tolerance", options.get("solver_tol", 1.0e-6)))
     damping = float(options.get("damping", 0.5))
+    passthrough = {}
+    for name in (
+        "density_diagnostics",
+        "experimental_coupled_density_lle",
+        "jacobian_backend",
+        "solver_backend",
+        "hessian_strategy",
+        "timeout_seconds",
+        "max_seed_attempts",
+        "max_density_failures",
+        "max_total_objective_evaluations",
+        "return_best_effort",
+    ):
+        if name in options and options[name] is not None:
+            passthrough[name] = options[name]
     return epcsaft.EquilibriumOptions(
         max_iterations=max(1, max_iterations),
         tolerance=max(tolerance, 1.0e-12),
         damping=min(max(damping, 1.0e-6), 1.0),
         include_phase_diagnostics=True,
+        **passthrough,
     )
 
 

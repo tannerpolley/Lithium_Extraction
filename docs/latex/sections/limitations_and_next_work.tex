@@ -1,0 +1,18 @@
+\section{Limitations and Next Work}
+\label{sec:limitations}
+
+The most important limitation is the sodium-load extrapolation. Every produced-water row is outside the original Rezaee DOE \NaIon/\LiIon training range, so the surrogate is currently appropriate for process screening and interface development rather than final design. A second limitation is the gap between the calibrated distribution surrogate and a fully accepted direct reactive ePC-SAFT LLE closure. The current package-facing evidence is valuable, but the manuscript should not claim an accepted physical split until the direct solve, reaction convention, and source-supported residuals are all closed.
+
+The next paper-development steps are:
+\begin{enumerate}
+    \item Replace internal path references with stable citation, table, and artifact identifiers.
+    \item Promote the final Rezaee regression table, residuals, and uncertainty diagnostics into the manuscript.
+    \item Add the full \Prommis MSContactor equations and formal \IDAES costing assumptions.
+    \item Add a transparent pretreatment model for divalent removal before the clean \LiIon/\NaIon extraction feed.
+    \item Compile a final source-backed literature review covering produced-water lithium resources, hydrophobic \DES extraction, \TOPO co-extraction, and thermodynamic surrogate limits.
+\end{enumerate}
+
+\section{Conclusions}
+\label{sec:conclusions}
+
+This scaffold establishes the first manuscript structure for the produced-water lithium extraction case study. The active story is a Rezaee-calibrated \DES/\TOPO distribution surrogate applied to a pretreated \Smackover \LiIon/\NaIon stream, with explicit transfer variables for \Prommis/\IDAES process screening. The draft deliberately preserves the boundary between process-screening evidence and final predictive thermodynamics so that later revisions can strengthen the paper without overstating the current model.

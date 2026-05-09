@@ -403,7 +403,7 @@ def _write_markdown(nominal: OneStageRow, png_paths: list[Path], csv_paths: list
     lines.append("")
     lines.append("## Basis")
     lines.append("")
-    lines.append(f"- Config: `{DEFAULT_CONFIG_JSON}`")
+    lines.append(f"- Config: `{DEFAULT_CONFIG_JSON.relative_to(REPO_ROOT).as_posix()}`")
     lines.append(f"- Feed basis: Li = {LI_FEED_MG_L:.3f} mg/L, Na = {NA_FEED_MG_L:.3f} mg/L, O/A = {OA_RATIO:.3f}, TOP = {TOP_MOL_L:.6f} mol/L.")
     lines.append(f"- Wrapper parameters: `log10(K_Li) = {params['log10_k_li']:.8f}`, `log10(K_Na) = {params['log10_k_na']:.8f}`, `log10(capacity factor) = {params['log10_capacity_factor']:.8f}`.")
     lines.append("")

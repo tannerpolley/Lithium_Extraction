@@ -2,6 +2,8 @@
 
 Date: 2026-05-07
 
+> Superseded context, 2026-05-08: this score review is preserved as a historical HBTA/TOPO comparison-lane audit. The active Phase 0-9 model is now the Rezaee DES/TOPO Li/Na bridge after divalent pretreatment. Do not treat the HBTA/TOPO scores below as the current flagship basis.
+
 Scope: source-regressed Li/Na HBTA/TOPO stage model, ePC-SAFT/PSE bridge artifacts, PrOMMiS handoff, and downstream IDAES costing. These scores intentionally accept the current divalent-ion assumption: Ca/Mg/Sr/Ba are pretreatment/limitation species until enough source data exists to include competitive multication extraction without fabricating behavior.
 
 ## Current Scores And Improvements

@@ -1,0 +1,35 @@
+variable,value,units,source,prommis_idaes_use
+feed_li_mg_L,168.0,mg/L,MS-2 source feed,aqueous_feed[Li]
+feed_na_mg_L,64100.0,mg/L,MS-2 source feed,aqueous_feed[Na]
+tds_mg_L,305000.0,mg/L,MS-2 source feed,surrogate_feature_tds
+oa_ratio,1.0,dimensionless,case-study design variable,MSContactor.OA_ratio
+D_Li_stage1,0.8303633965568034,dimensionless,Rezaee source-regressed bridge,distribution_ratio[Li]
+D_Na_stage1,0.09863590300393085,dimensionless,Rezaee source-regressed bridge,distribution_ratio[Na]
+S_Li_Na_stage1,8.418470062809803,dimensionless,Rezaee source-regressed bridge,"selectivity[Li,Na]"
+eta_li_stage1_pct,45.36604032395126,percent,Rezaee source-regressed bridge,transfer[Li]
+eta_na_stage1_pct,8.97803382669699,percent,Rezaee source-regressed bridge,transfer[Na]
+eta_li_stage3_pct,83.69247573733652,percent,Rezaee source-regressed bridge,flowsheet_recovery[Li]
+eta_na_stage3_pct,24.588316262004838,percent,Rezaee source-regressed bridge,flowsheet_recovery[Na]
+median_source_D_Li,0.601667468334135,dimensionless,Rezaee extraction targets,surrogate_prior[Li]
+median_source_D_Na,0.1257311893354996,dimensionless,Rezaee extraction targets,surrogate_prior[Na]
+epcsaft_stability_min_tpd,-0.5346836582364658,dimensionless,ePC-SAFT diagnostic smoke,validity_diagnostic
+epcsaft_lle_status,success,label,ePC-SAFT diagnostic smoke,validity_diagnostic
+epcsaft_lle_split_detected,False,boolean,ePC-SAFT diagnostic smoke,validity_diagnostic
+direct_reactive_closure_status,source_reference_state_gap,label,Rezaee published-constant convention scan,validity_diagnostic
+direct_reactive_source_variant,paper_eq14_with_activity_vs_paper_k,label,Rezaee published-constant convention scan,validity_diagnostic
+direct_reactive_source_combined_median_abs_ln_residual,35.04605493133792,ln units,Rezaee published-constant convention scan,validity_diagnostic
+direct_reactive_best_simple_variant,paper_eq14_no_activity_vs_inverse_k,label,Rezaee published-constant convention scan,validity_diagnostic
+direct_reactive_best_simple_combined_median_abs_ln_residual,9.506579080295277,ln units,Rezaee published-constant convention scan,validity_diagnostic
+direct_reactive_rows_available,26,count,Rezaee source-data audit,validity_diagnostic
+direct_reactive_rows_used_as_benchmark,26,count,Rezaee source-data audit,validity_diagnostic
+best_epcsaft_aqueous_option,2025_born_no_ssm_empirical,label,Rezaee ePC-SAFT aqueous option scan,validity_diagnostic
+best_epcsaft_aqueous_option_combined_median_abs_ln_residual,33.7571925407821,ln units,Rezaee ePC-SAFT aqueous option scan,validity_diagnostic
+paper_basis_reaction_coordinate_best_mode,2025_born_no_ssm_empirical,label,Rezaee paper-basis reaction-coordinate benchmark,validity_diagnostic
+paper_basis_reaction_coordinate_median_oh_to_li_ratio,0.0006940000000000001,mol/mol,Rezaee paper-basis reaction-coordinate benchmark,validity_diagnostic
+paper_basis_reaction_coordinate_median_li_extraction_pct_calc,3.4725128418839075e-10,percent,Rezaee paper-basis reaction-coordinate benchmark,validity_diagnostic
+section32_direct_li_extraction_aard_pct,99.99999999872657,percent,Rezaee Section 3.2 equation replication,validity_diagnostic
+section32_direct_selectivity_aard_pct,56.35718132404997,percent,Rezaee Section 3.2 equation replication,validity_diagnostic
+section32_best_diagnostic_case,held_2014_s2_no_born_table9_kij_inverseK_diagnostic,label,Rezaee Section 3.2 equation replication,validity_diagnostic
+section32_basis_median_org_total_RLi_over_RNa,3.6375026056361,dimensionless,Rezaee Section 3.2 initial-basis inference,validity_diagnostic
+section32_basis_median_xOH_SI_over_pH_estimate,0.9999690361888166,dimensionless,Rezaee Section 3.2 initial-basis inference,validity_diagnostic
+validity_status,anchored_by_rezaee_real_brine_high_na_li,label,trust-region diagnostic,surrogate_validity_flag

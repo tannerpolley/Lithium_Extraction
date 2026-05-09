@@ -1,0 +1,9 @@
+rank_basis,region_or_source,Li_mg_L,TDS_mg_L,Na_Li_mass_ratio,Divalent_Li_mass_ratio,source_status,score_100,candidate_class,why
+Smackover AR high observed,Southern Arkansas Smackover,252.0,340000.0,280.95238095238096,180.73849206349206,source-backed local clean row,85.0,primary candidate,Highest Li and TDS clean Smackover row in the local set.
+Marcellus NE PA median,Appalachian Basin / Marcellus,205.0,100000.0,,4.878048780487805,peer-reviewed regional median,82.0,primary candidate,High Li and low Mg/Li relative to SW PA; TDS shown as literature lower-bound class.
+Smackover AR MS-2 base,Southern Arkansas Smackover,168.0,305000.0,381.54761904761904,250.9427976190476,source-backed local clean row,80.2,primary candidate,"Base produced-water candidate: high Li, high TDS, high Ca/Sr pretreatment burden."
+Bakken high-Li county signal,Williston Basin / Bakken,103.0,258193.0,771.0194174757281,15.841359223300971,peer-reviewed article; mixed figure/table extraction,74.5,secondary candidate,"High salinity, high Na, high Sr/Rb; Li from highest reported county average."
+Marcellus SW PA median,Appalachian Basin / Marcellus,127.0,100000.0,,18.11023622047244,peer-reviewed regional median,71.0,secondary candidate,Lower Li and higher Mg/Li than NE PA but larger produced-water volume per well.
+Permian Midland typical,Permian Basin / Midland,20.0,122000.0,,0.0,peer-reviewed article; public abstract/snippet values,55.0,screening only,Midland Li range is above Delaware but still low for DES/TOPO flagship screening.
+Smackover AR low observed,Southern Arkansas Smackover,11.7,156000.0,3170.9401709401714,1458.5017094017096,source-backed local clean row,47.8,screening only,Unfavorable clean Smackover bound; low Li but complete major-ion context.
+Permian Delaware typical,Permian Basin / Delaware,12.0,71600.0,,0.0,peer-reviewed article; public abstract/snippet values,46.8,screening only,High water volume and treatment relevance; lower Li grade than Smackover/Marcellus.

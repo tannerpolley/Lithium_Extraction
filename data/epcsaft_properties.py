@@ -441,7 +441,13 @@ BASE_KEYS = [
 ]
 OPTIONAL_KEYS = ['d_born', 'f_solv']
 
-CATALOG_PATH = Path(__file__).resolve().parent / "epc-saft_parameters" / "epc-saft_parameters.json"
+CATALOG_PATH = (
+    Path(__file__).resolve().parent
+    / "reference"
+    / "epcsaft_parameter_catalog"
+    / "legacy_epcsaft_properties"
+    / "epc-saft_parameters.json"
+)
 _CATALOG_CACHE = None
 
 _RULE_ALIASES = {
@@ -460,8 +466,15 @@ _DIELC_DIFF_RULE_ALIASES = {
     "rule1-override": "rule1",
     "constant_saltfree": "constant_saltfree",
 }
-_DIFFC_MODE_ALIASES = {"analytic": 0, "numeric": 1}
-_BORN_DIFF_MODE_ALIASES = {"analytic": 0, "numeric": 1, "eq133": 2, "no_dielc_dep": 3}
+_DIFFC_MODE_ALIASES = {"analytic": 0, "analytical": 0, "numeric": 1, "numerical": 1}
+_BORN_DIFF_MODE_ALIASES = {
+    "analytic": 0,
+    "analytical": 0,
+    "numeric": 1,
+    "numerical": 1,
+    "eq133": 2,
+    "no_dielc_dep": 3,
+}
 
 _CANONICAL_ELEC_MODEL = {
     "born_contrib": True,
@@ -702,7 +715,39 @@ def _normalize_elec_model(model):
         normalized[k] = value
 
     if "born_model" in normalized and "born_contrib" not in normalized:
-        normalized["born_contrib"] = _coerce_bool(normalized["born_model"])
+        if isinstance(normalized["born_model"], dict):
+            normalized["born_contrib"] = _coerce_bool(normalized.get("include_born_model", True))
+        else:
+            normalized["born_contrib"] = _coerce_bool(normalized["born_model"])
+    if isinstance(normalized.get("include_born_model"), bool):
+        normalized["born_contrib"] = _coerce_bool(normalized["include_born_model"])
+    if isinstance(normalized.get("rel_perm"), dict):
+        rel_perm = normalized["rel_perm"]
+        if "rule" in rel_perm:
+            normalized["dielc_rule"] = rel_perm["rule"]
+        if "differential_mode" in rel_perm:
+            normalized["dielc_diff_mode"] = rel_perm["differential_mode"]
+    if isinstance(normalized.get("DH_model"), dict):
+        dh_model = normalized["DH_model"]
+        if "bjeruum_treatment" in dh_model:
+            normalized["bjeruum_treatment"] = dh_model["bjeruum_treatment"]
+    if isinstance(normalized.get("born_model"), dict):
+        born_model = normalized["born_model"]
+        normalized["ssm_ds"] = _coerce_bool(born_model.get("solvation_shell_model", normalized.get("ssm_ds", False)))
+        normalized["dielectric_saturation"] = _coerce_bool(
+            born_model.get("dielectric_saturation", normalized.get("dielectric_saturation", False))
+        )
+        if "bulk_mode" in born_model:
+            normalized["eps_r_bulk"] = born_model["bulk_mode"]
+        mu_born = born_model.get("mu_born_model")
+        if isinstance(mu_born, dict):
+            if "differential_mode" in mu_born:
+                normalized["born_diff_model"] = mu_born["differential_mode"]
+            normalized["born_diff_options"] = {
+                "include_sum_term": mu_born.get("include_sum_term", True),
+                "include_dielc_conc_dep": mu_born.get("comp_dep_rel_perm", True),
+                "include_delta_d_i_conc_dep": mu_born.get("comp_dep_delta_d", False),
+            }
     if "bjeruum_treatment" in normalized:
         normalized["bjeruum_treatment"] = _coerce_bool(normalized["bjeruum_treatment"])
     if "born_contrib" in normalized:

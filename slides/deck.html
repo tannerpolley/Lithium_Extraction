@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.8.27">
 
   <meta name="author" content="Chemical engineering technical review">
-  <meta name="dcterms.date" content="2026-05-07">
+  <meta name="dcterms.date" content="2026-05-08">
   <title>ePC-SAFT For Produced-Water Lithium Extraction</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -31,7 +31,6 @@
     }
   </style>
   <link rel="stylesheet" href="deck_files/libs/revealjs/dist/theme/quarto-534cd8e3a96973385dffff3f4709048d.css">
-  <link rel="stylesheet" href="theme.css">
   <link href="deck_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="deck_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="deck_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -130,7 +129,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">ePC-SAFT For Produced-Water Lithium Extraction</h1>
-  <p class="subtitle">Thermodynamic and process-systems case study for HBTA/TOPO solvent extraction</p>
+  <p class="subtitle">Rezaee DES/TOPO Li/Na bridge for thermodynamic and process-systems integration</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -140,7 +139,7 @@ Chemical engineering technical review
 </div>
 </div>
 
-  <p class="date">2026-05-07</p>
+  <p class="date">2026-05-08</p>
 </section>
 <section id="technical-thesis" class="slide level2 title-slide center">
 <h2>0. Technical Thesis</h2>
@@ -148,18 +147,18 @@ Chemical engineering technical review
 <div class="callout callout-none no-icon callout-style-simple">
 <div class="callout-body">
 <div class="callout-content">
-<p>Produced-water lithium extraction needs a thermodynamic model that maps basin chemistry into solvent-extraction transfer variables. The benchmark chemistry is the non-ionic HBTA/TOPO/sulfonated-kerosene system; ePC-SAFT is evaluated as the equilibrium backbone for PrOMMiS and IDAES.</p>
+<p>Produced-water lithium extraction needs a thermodynamic model that maps basin chemistry into solvent-extraction transfer variables. The active Li/Na bridge is Rezaee DES/TOPO after divalent pretreatment; ePC-SAFT is evaluated as the equilibrium and diagnostics backbone for PrOMMiS and IDAES.</p>
 </div>
 </div>
 </div>
 <ul>
 <li>Feed basis: southern Arkansas Smackover brine.</li>
-<li>Solvent chemistry: HBTA/TOPO complexation with selective Li transfer.</li>
-<li>Thermodynamic target: electrolyte liquid-liquid equilibrium and ion-specific distribution.</li>
+<li>Solvent chemistry: Rezaee TBAC/decanoic-acid DES with TOPO coextractant.</li>
+<li>Thermodynamic target: phase-specific reactive equilibrium, electrolyte diagnostics, and ion-specific distribution.</li>
 <li>Process target: staged extraction, surrogate generation, and IDAES costing.</li>
 </ul>
 <aside class="notes">
-<p>Restrict quantitative claims to source-backed literature, generated validation tables, and explicitly labeled model outputs. Ionic-liquid systems are context only, not the active benchmark.</p>
+<p>Restrict quantitative claims to source-backed literature, generated validation tables, and explicitly labeled model outputs. Divalent ions are feed-context species only; the active objective is Li extraction from Na after divalent pretreatment.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -362,7 +361,7 @@ Chemical engineering technical review
 </div>
 </div>
 <aside class="notes">
-<p>This slide shows true source composition without implying that the Shan/Gando extraction feed is a Smackover sample.</p>
+<p>This slide shows true source composition without implying that the Rezaee extraction experiments were performed on this Smackover sample.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -414,7 +413,7 @@ Chemical engineering technical review
 <div class="callout callout-none no-icon callout-style-simple">
 <div class="callout-body">
 <div class="callout-content">
-<p>The feed is Smackover-specific. The extraction chemistry is Shan/Gando HBTA/TOPO. The model couples a source-backed brine to a literature-backed non-ionic extraction chemistry without claiming a fully calibrated Arkansas extraction experiment.</p>
+<p>The feed is Smackover-specific. The extraction chemistry is Rezaee DES/TOPO. The model couples a source-backed brine to a literature-backed Li/Na extraction chemistry without claiming a fully calibrated Arkansas extraction experiment.</p>
 </div>
 </div>
 </div>
@@ -496,29 +495,68 @@ Chemical engineering technical review
 <td>Changes recovery target and stage count</td>
 </tr>
 <tr class="even">
-<td>TDS / NaCl load</td>
-<td>Changes ionic strength and activity behavior</td>
-<td>Moves distribution behavior and surrogate validity</td>
+<td>Na/Li ratio</td>
+<td>Defines the clean post-pretreatment competition problem</td>
+<td>Changes Li/Na selectivity and sodium co-transfer</td>
 </tr>
 <tr class="odd">
-<td>Competing ions</td>
-<td>Mg, Ca, Sr, Ba, and Na affect selectivity</td>
-<td>Changes pretreatment and solvent burden</td>
+<td>pH and temperature</td>
+<td>Rezaee reports these as major response drivers</td>
+<td>Moves extraction and selectivity at the chemistry level</td>
 </tr>
 <tr class="even">
-<td>Solvent / extractant chemistry</td>
-<td>Determines whether selective transfer is plausible</td>
-<td>Changes (D_i), selectivity, and loaded-solvent composition</td>
+<td>TOPO loading</td>
+<td>Controls ligand capacity and solvent cost</td>
+<td>Changes (D_i), selectivity, and solvent inventory</td>
 </tr>
 <tr class="odd">
 <td>O/A ratio</td>
 <td>Directly affects stage transfer</td>
 <td>Becomes a design and optimization variable</td>
 </tr>
+<tr class="even">
+<td>TDS / salinity feature</td>
+<td>Carries produced-water severity into the process model</td>
+<td>Sets surrogate validity and pretreatment/costing context</td>
+</tr>
 </tbody>
 </table>
 <aside class="notes">
-<p>This slide makes the problem multidimensional without inventing unsupported ranges. It sets up why a thermodynamic engine is needed before a process optimizer starts sampling.</p>
+<p>The raw Smackover brine is still the source site. The extraction model starts after pretreatment, so Mg, Ca, Sr, and Ba are not active extraction variables in this Li/Na bridge.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="clean-lina-surrogate-input-space" class="slide level2 tight">
+<h2>1.7 Clean Li/Na Surrogate Input Space</h2>
+
+<img data-src="../analyses/rezaee_2026_pcsaft_epcsaft/results/surrogate_input_space/figures/rezaee_surrogate_input_ranges.png" class="quarto-figure quarto-figure-center r-stretch" style="width:94.0%"><aside class="notes">
+<p>This is the input contract for the next surrogate run. It separates Rezaee’s paper-tested ranges from the produced-water extension needed for the selected Smackover clean Li+Na stream. Do not present these bounds as completed response surfaces until the concrete run script generates the extraction outputs.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="surrogate-readiness-surface" class="slide level2 tight">
+<h2>1.8 Surrogate Readiness Surface</h2>
+
+<img data-src="../analyses/rezaee_2026_pcsaft_epcsaft/results/uq_surrogate/figures/calibrated_li_extraction_surface.png" class="quarto-figure quarto-figure-center r-stretch" style="width:88.0%"><aside class="notes">
+<p>This scaffold response surface is for process-integration readiness. It checks that the TDS, Li, and O/A design can be carried through transfer variables, staged recovery, and costing before the calibrated Rezaee/ePC-SAFT surrogate rows replace it.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -654,32 +692,32 @@ Chemical engineering technical review
 </thead>
 <tbody>
 <tr class="odd">
-<td>DES/TOPO lithium extraction modeling with tabulated PC-SAFT-style parameters</td>
-<td>Package regression and equilibrium smoke test</td>
+<td>2025 extraction responses and SI phase-composition rows</td>
+<td>Source-backed Li/Na bridge targets</td>
 </tr>
 <tr class="even">
-<td>Organic phase modeled with PC-SAFT</td>
-<td>Do not cite as full ePC-SAFT organic-phase closure</td>
+<td>2026 DES/TOPO/RLi/RNa PC-SAFT parameters and organic (k_{ij}) values</td>
+<td>Package-facing parameter payload</td>
 </tr>
 <tr class="odd">
-<td>Aqueous electrolyte phase modeled with ePC-SAFT</td>
-<td>Useful support for the aqueous-brine side of the bridge</td>
+<td>2026 reaction constants and phase-specific ion-exchange equations</td>
+<td>Reactive-equilibrium diagnostic target</td>
 </tr>
 <tr class="even">
-<td>Fitted organic interactions and product pseudo-species</td>
-<td>Useful parameterization pattern, not Shan/Gando chemistry</td>
+<td>Aqueous electrolyte phase modeled with ePC-SAFT</td>
+<td>Activity and stability diagnostics for the brine side</td>
 </tr>
 </tbody>
 </table>
 <div class="callout callout-none no-icon callout-style-simple">
 <div class="callout-body">
 <div class="callout-content">
-<p>Rezaee is a method lead and runtime test, not the final HBTA/TOPO model.</p>
+<p>Rezaee is now the active Li/Na bridge. Direct published-constant closure is still a documented activity-reference gap.</p>
 </div>
 </div>
 </div>
 <aside class="notes">
-<p>This slide prevents overclaiming. It answers the obvious reviewer question: yes, the new paper is useful, but it used PC-SAFT for the organic side and ePC-SAFT for the aqueous side. The case study still needs its own HBTA/TOPO parameterization.</p>
+<p>This slide prevents overclaiming. The source-regressed bridge is presentation-facing; the direct published-constant thermodynamic replay remains diagnostic until the activity-reference gap is closed.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -692,52 +730,46 @@ Chemical engineering technical review
           display:block!important;
       }</style></aside>
 </section>
-<section id="solvent-candidate-scorecard" class="slide level2 tight">
-<h2>2.4 Solvent Candidate Scorecard</h2>
-<table class="caption-top" style="width:100%;">
+<section id="active-rezaee-workflow-chain" class="slide level2 tight">
+<h2>2.4 Active Rezaee Workflow Chain</h2>
+<table class="caption-top">
 <colgroup>
+<col style="width: 40%">
 <col style="width: 30%">
-<col style="width: 23%">
-<col style="width: 23%">
-<col style="width: 23%">
+<col style="width: 30%">
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: right;">Priority</th>
-<th>System</th>
-<th>Role</th>
-<th>Status</th>
+<th style="text-align: right;">Step</th>
+<th>Current artifact</th>
+<th>Use</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">1</td>
-<td>HBTA + TOPO + sulfonated kerosene</td>
-<td>Flagship</td>
-<td>Field-water evidence, source-regressed Li/Na stage model, missing full multication parameter payload</td>
+<td>Rezaee 2025/2026 source tables</td>
+<td>Li/Na extraction and PC-SAFT/ePC-SAFT parameter evidence</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">2</td>
-<td>D2EHDTPA + BuPhen + octanol + n-dodecane</td>
-<td>Best non-HBTA backup</td>
-<td>Strong multication selectivity, blocked by missing parameter set</td>
+<td>Section 3.2 DOE-basis surface</td>
+<td>calibrated log-(D_i) response basis</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">3</td>
-<td>TBAC + decanoic-acid DES + TOPO</td>
-<td>Parameter-regression pilot</td>
-<td>Rezaee smoke test runs; not the flagship chemistry</td>
+<td>523-row TDS-Li-O/A matrix</td>
+<td>produced-water process screening</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">4</td>
-<td>TBP + FeCl3/HCl</td>
-<td>Mechanistic backup</td>
-<td>Useful high-Mg comparison, process-burden and parameter gaps</td>
+<td>PrOMMiS/IDAES transfer table</td>
+<td>staged-contacting and costing handoff</td>
 </tr>
 </tbody>
 </table>
 <aside class="notes">
-<p>This ranking keeps the active benchmark conventional and non-ionic while still identifying backup solvent families.</p>
+<p>Legacy solvent-choice artifacts are retained only in the archive. The active presentation chain is Rezaee DES/TOPO after divalent pretreatment.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -750,41 +782,28 @@ Chemical engineering technical review
           display:block!important;
       }</style></aside>
 </section>
-<section id="limitation-of-fixed-coefficient-crossflow" class="slide level2">
-<h2>2.5 Limitation Of Fixed-Coefficient Crossflow</h2>
+<section id="why-the-calibrated-surrogate-is-the-right-bridge" class="slide level2">
+<h2>2.5 Why The Calibrated Surrogate Is The Right Bridge</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="panel">
-<p><strong>Placeholder limitation</strong></p>
+<p><strong>What it now gives</strong></p>
 <ul>
-<li>The legacy Jang-style crossflow placeholder reaches only <code>39.96%</code> cumulative Li extraction after ten contacts.</li>
-<li>Sodium still reaches <code>38.05%</code> cumulative extraction in that same chain.</li>
-<li>It is a limitation baseline, not a flagship produced-water case.</li>
+<li>finite Li and Na extraction for all 523 rows</li>
+<li>explicit (D_{Li}), (D_{Na}), and selectivity</li>
+<li>transfer variables ready for staged process models</li>
 </ul>
 </div>
 </div><div class="column" style="width:50%;">
 <div class="panel">
-<p><strong>Why it was not enough</strong></p>
+<p><strong>What remains bounded</strong></p>
 <ul>
-<li>fixed surrogate chemistry</li>
-<li>weak Li-over-Na separation</li>
-<li>no bridge to trust-region sampling or ALAMO</li>
+<li>raw Smackover is not fed directly to extraction</li>
+<li>divalents are pretreatment species</li>
+<li>high Na/Li rows carry extrapolation warnings</li>
 </ul>
 </div>
 </div></div>
-<aside class="notes">
-<p>This slide creates the contrast. The older result is not embarrassing; it is the baseline that proves why a better thermodynamic/chemistry architecture is needed.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
 </section></section>
 <section>
 <section id="selective-extraction-model" class="title-slide slide level1 section-divider center">
@@ -798,18 +817,18 @@ Chemical engineering technical review
 <div class="panel">
 <p><strong>MS-2 O/A = 1 stage result</strong></p>
 <ul>
-<li>Li extraction: <code>47.2846%</code></li>
-<li>Na extraction: <code>0.0131%</code></li>
-<li>(D_{Li} = 0.8970)</li>
-<li>(S_{Li/Na} = 6840.1)</li>
-<li>Raffinate Li: <code>88.56 mg/L</code></li>
-<li>Activity correction: ePC-SAFT aqueous gamma</li>
+<li>Li extraction: <code>45.3660%</code></li>
+<li>Na extraction: <code>8.9780%</code></li>
+<li>(D_{Li} = 0.8304)</li>
+<li>(D_{Na} = 0.09864)</li>
+<li>(S_{Li/Na} = 8.4185)</li>
+<li>Trust label: <code>anchored_by_rezaee_real_brine_high_na_li</code></li>
 </ul>
 </div>
 <div class="callout callout-none no-icon callout-style-simple">
 <div class="callout-body">
 <div class="callout-content">
-<p>Source-regressed Li/Na stage solve; not a full multication reactive LLE flash.</p>
+<p>Source-regressed Rezaee Li/Na bridge after divalent pretreatment; not a divalent reactive LLE flash.</p>
 </div>
 </div>
 </div>
@@ -817,15 +836,15 @@ Chemical engineering technical review
 <div class="panel">
 <p><strong>What changed from the old wrapper</strong></p>
 <ul>
-<li>The chemistry now carries the literature-backed <code>2 HBTA : 1 TOPO : 1 Li</code> complex stoichiometry.</li>
-<li>The aqueous Li/Na activity correction is evaluated by ePC-SAFT when available.</li>
-<li>The old selective wrapper remains only as historical support and fallback context.</li>
+<li>The active bridge now uses Rezaee DES/TOPO source responses instead of the old HBTA/TOPO placeholder.</li>
+<li>The package evaluates ePC-SAFT electrolyte stability and PC-SAFT/ePC-SAFT activity diagnostics.</li>
+<li>The old HBTA/TOPO wrapper remains only as comparison and future parameterization context.</li>
 <li>The current stage-output table carries extraction, distribution, selectivity, and validity labels.</li>
 </ul>
 </div>
 </div></div>
 <aside class="notes">
-<p>The important contrast is selective transfer: lithium moves materially while sodium barely moves. The model is source-regressed against literature anchors and reused across feed cases, but it is still not a full organic-phase ePC-SAFT closure.</p>
+<p>The important contrast is selective transfer after divalent pretreatment: lithium moves more strongly than sodium, and the bridge remains explicitly source-regressed until direct Rezaee thermodynamic closure is resolved.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -838,60 +857,66 @@ Chemical engineering technical review
           display:block!important;
       }</style></aside>
 </section>
-<section id="lina-regression-closure" class="slide level2 tight">
-<h2>3.2 Li/Na Regression Closure</h2>
+<section id="rezaee-bridge-closure" class="slide level2 tight">
+<h2>3.2 Rezaee Bridge Closure</h2>
 <table class="caption-top">
 <colgroup>
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 22%">
-<col style="width: 22%">
-<col style="width: 22%">
+<col style="width: 23%">
+<col style="width: 23%">
+<col style="width: 30%">
+<col style="width: 23%">
 </colgroup>
 <thead>
 <tr class="header">
-<th>Anchor</th>
-<th>Zotero key</th>
-<th style="text-align: right;">Target</th>
-<th style="text-align: right;">Prediction</th>
-<th style="text-align: right;">Residual</th>
+<th>Evidence item</th>
+<th>Source artifact</th>
+<th style="text-align: right;">Value</th>
+<th>Use</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Stage 1 Li cumulative extraction</td>
-<td><code>JUNBXVTI</code></td>
-<td style="text-align: right;"><code>54.95%</code></td>
-<td style="text-align: right;"><code>54.8882%</code></td>
-<td style="text-align: right;"><code>-0.0618 pp</code></td>
+<td>Extraction target rows</td>
+<td><code>rezaee_2025_extraction_target_summary.csv</code></td>
+<td style="text-align: right;"><code>32</code></td>
+<td>Source-regressed bridge fit</td>
 </tr>
 <tr class="even">
-<td>Stage 2 Li cumulative extraction</td>
-<td><code>JUNBXVTI</code></td>
-<td style="text-align: right;"><code>85.60%</code></td>
-<td style="text-align: right;"><code>85.7224%</code></td>
-<td style="text-align: right;"><code>+0.1224 pp</code></td>
+<td>SI phase-composition rows</td>
+<td><code>rezaee_2025_extraction_equilibrium_summary.csv</code></td>
+<td style="text-align: right;"><code>26</code></td>
+<td>Reactive-equilibrium diagnostic</td>
 </tr>
 <tr class="odd">
-<td>Stage 3 Li cumulative extraction</td>
-<td><code>JUNBXVTI</code></td>
-<td style="text-align: right;"><code>97.17%</code></td>
-<td style="text-align: right;"><code>97.0385%</code></td>
-<td style="text-align: right;"><code>-0.1315 pp</code></td>
+<td>Median source (D_{Li})</td>
+<td><code>rezaee_li_na_distribution_coefficients.csv</code></td>
+<td style="text-align: right;"><code>0.6017</code></td>
+<td>Surrogate prior</td>
 </tr>
 <tr class="even">
-<td>Li/Na selectivity lower-bound anchor</td>
-<td><code>9LJWDC7E</code></td>
-<td style="text-align: right;"><code>2100</code></td>
-<td style="text-align: right;"><code>2100.008</code></td>
-<td style="text-align: right;"><code>+0.008</code></td>
+<td>Median source (D_{Na})</td>
+<td><code>rezaee_li_na_distribution_coefficients.csv</code></td>
+<td style="text-align: right;"><code>0.1257</code></td>
+<td>Surrogate prior</td>
+</tr>
+<tr class="odd">
+<td>Bridge Li logit RMSE</td>
+<td><code>rezaee_li_na_distribution_bridge_report.md</code></td>
+<td style="text-align: right;"><code>0.154</code></td>
+<td>Fit diagnostic</td>
+</tr>
+<tr class="even">
+<td>Bridge Na logit RMSE</td>
+<td><code>rezaee_li_na_distribution_bridge_report.md</code></td>
+<td style="text-align: right;"><code>0.1615</code></td>
+<td>Fit diagnostic</td>
 </tr>
 </tbody>
 </table>
 <div class="callout callout-none no-icon callout-style-simple">
 <div class="callout-body">
 <div class="callout-content">
-<p>This is the current predictive closure: Li/Na staged transfer from one source-regressed parameter payload. Ca, Mg, Ba, Sr, diluent, and complex parameters remain explicit limits.</p>
+<p>This is the current presentation-facing closure: Li/Na staged transfer from a Rezaee source-regressed bridge. Ca, Mg, and other divalent ions remain pretreatment context, not active extraction targets.</p>
 </div>
 </div>
 </div>
@@ -899,24 +924,45 @@ Chemical engineering technical review
 <section id="multi-stage-performance" class="slide level2">
 <h2>3.3 Multi-Stage Performance</h2>
 <div class="columns">
-<div class="column" style="width:56%;">
-<div class="figure-frame">
-<p><img data-src="../data/multiphase/gando_2025_slide_assets/gando_2025_cumulative_extraction_wide.png" alt="Cumulative extraction profile across three stages for the selective lithium extraction showcase"></p>
-</div>
-</div><div class="column" style="width:44%;">
+<div class="column" style="width:50%;">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Stage metric</th>
+<th style="text-align: right;">Rezaee bridge value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Stage 1 Li extraction</td>
+<td style="text-align: right;"><code>45.3660%</code></td>
+</tr>
+<tr class="even">
+<td>Stage 1 Na extraction</td>
+<td style="text-align: right;"><code>8.9780%</code></td>
+</tr>
+<tr class="odd">
+<td>Stage 3 Li recovery</td>
+<td style="text-align: right;"><code>83.6925%</code></td>
+</tr>
+<tr class="even">
+<td>Stage 3 Na recovery</td>
+<td style="text-align: right;"><code>24.5883%</code></td>
+</tr>
+</tbody>
+</table>
+</div><div class="column" style="width:50%;">
 <div class="panel">
-<p><strong>Three-stage reactive-stage chain</strong></p>
+<p><strong>Three-stage bridge interpretation</strong></p>
 <ul>
-<li>Stage 1 cumulative Li extraction: <code>47.2846%</code></li>
-<li>Stage 2 cumulative Li extraction: <code>89.5753%</code></li>
-<li>Stage 3 model Li extraction: near-total</li>
-<li>Stage 3 cumulative Na extraction: <code>0.1160%</code></li>
-<li>Costing recovery is capped at the <code>97.17%</code> literature anchor</li>
+<li>The stage chain is source-regressed from Rezaee Li/Na responses.</li>
+<li>The Smackover row is a feed-context projection, not a measured Arkansas extraction experiment.</li>
+<li>The result is strong enough for PrOMMiS/IDAES handoff, not investment-grade TEA.</li>
 </ul>
 </div>
 </div></div>
 <aside class="notes">
-<p>The near-total stage-three value is useful as a design signal, not as a final physical claim. In the costing tables it is capped to the Shan/Gando three-stage anchor.</p>
+<p>The three-stage value is useful as a design signal and bridge output. It should not be presented as direct published-constant ePC-SAFT LLE closure.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1003,8 +1049,8 @@ Chemical engineering technical review
 </tr>
 <tr class="even">
 <td>Selectivity</td>
-<td>(S_{Li/Na}), later (S_{Li/Mg}), (S_{Li/Ca})</td>
-<td>Separation constraints and solvent screening</td>
+<td>(S_{Li/Na})</td>
+<td>Separation constraint for the active Li/Na showcase</td>
 </tr>
 </tbody>
 </table>
@@ -1057,8 +1103,8 @@ Chemical engineering technical review
 <td>Controls staged transfer in material balance equations</td>
 </tr>
 <tr class="odd">
-<td>(S_{Li/Na}), (S_{Li/Mg}), (S_{Li/Ca})</td>
-<td>Selectivity ratios from stage/phase outputs</td>
+<td>(S_{Li/Na})</td>
+<td>Selectivity ratio from stage/phase outputs</td>
 <td>Enables solvent and design comparison without refitting fixed coefficients</td>
 </tr>
 <tr class="even">
@@ -1147,17 +1193,17 @@ Chemical engineering technical review
 </tr>
 <tr class="odd">
 <td>Extraction/contacting</td>
-<td>three-stage HBTA/TOPO reactive-stage solve</td>
+<td>three-stage Rezaee DES/TOPO Li/Na bridge</td>
 <td>contactor sizing, residence time, solvent inventory</td>
 </tr>
 <tr class="even">
 <td>Solvent makeup/loss</td>
 <td>low/base/high placeholder per m3 feed</td>
-<td>HBTA/TOPO/diluent prices and loss rate</td>
+<td>DES/TOPO prices and solvent-loss rate</td>
 </tr>
 <tr class="odd">
 <td>Concentration and Li2CO3 precipitation</td>
-<td>product-purity anchor <code>99.28%</code>; recovery capped at <code>97.17%</code></td>
+<td>bridge recovery <code>83.6925%</code></td>
 <td>evaporation duty, carbonate reagent, product spec</td>
 </tr>
 </tbody>
@@ -1183,8 +1229,25 @@ Chemical engineering technical review
           display:block!important;
       }</style></aside>
 </section>
+<section id="mscontactorcosting-readiness-check" class="slide level2 tight">
+<h2>4.5 MSContactor/Costing Readiness Check</h2>
+
+<img data-src="../analyses/rezaee_2026_pcsaft_epcsaft/results/uq_surrogate/figures/calibrated_costing_scenarios.png" class="quarto-figure quarto-figure-center r-stretch" style="width:86.0%"><aside class="notes">
+<p>The Rezaee clean Li/Na transfer table now drives a PrOMMiS-side IDAES/Pyomo costing block with stress, base, and favorable cases. This verifies the handoff shape and cost-accounting hooks; the calibrated surrogate will replace the scaffold response values.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="implementation-requirements" class="slide level2">
-<h2>4.5 Implementation Requirements</h2>
+<h2>4.6 Implementation Requirements</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="panel">
@@ -1229,7 +1292,7 @@ Chemical engineering technical review
       }</style></aside>
 </section>
 <section id="remaining-engineering-work" class="slide level2">
-<h2>4.6 Remaining Engineering Work</h2>
+<h2>4.7 Remaining Engineering Work</h2>
 <table class="caption-top">
 <colgroup>
 <col style="width: 33%">
@@ -1246,23 +1309,28 @@ Chemical engineering technical review
 <tbody>
 <tr class="odd">
 <td>1</td>
-<td>Extract Zhang 2017 distribution, O/A, temperature, and capacity data</td>
-<td>Improves identifiability of the Li/Na transfer law</td>
+<td>Resolve the Rezaee activity-reference gap</td>
+<td>Determines whether direct published-constant reactive equilibrium can replace the bridge</td>
 </tr>
 <tr class="even">
 <td>2</td>
-<td>Add explicit HBTA, TOPO, diluent, and Li-complex parameter regression</td>
-<td>Moves from source-regressed transfer to reactive ePC-SAFT closure</td>
+<td>Validate high-Na/Li extraction data</td>
+<td>Tests the main extrapolation warning beyond the Rezaee DOE range</td>
 </tr>
 <tr class="odd">
 <td>3</td>
-<td>Build a PrOMMiS MSContactor validation case</td>
+<td>Upgrade the Rezaee-named PrOMMiS MSContactor case from algebraic transfer to unit-model validation</td>
 <td>Tests convergence and material-balance consistency under staged operation</td>
 </tr>
 <tr class="even">
 <td>4</td>
 <td>Replace Class-5 costing assumptions with engineering ranges</td>
 <td>Improves economic credibility before TEA-style interpretation</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Keep legacy solvent artifacts in the archive</td>
+<td>Preserves traceability without confusing the active Rezaee chain</td>
 </tr>
 </tbody>
 </table>
@@ -1288,7 +1356,7 @@ Chemical engineering technical review
 <section id="next-step-sensitivity-expansion" class="slide level2 backup-slide small-text">
 <h2>5.1 Next-Step Sensitivity Expansion</h2>
 <ul>
-<li>Re-run the selective case across basin-style feed envelopes:
+<li>Re-run the Rezaee bridge across basin-style feed envelopes:
 <ul>
 <li>Appalachian high-Li case</li>
 <li>Permian volume-driven low-grade case</li>
@@ -1296,6 +1364,7 @@ Chemical engineering technical review
 <li>Smackover premium-brine case</li>
 </ul></li>
 <li>Keep the next design-of-experiments table in Markdown so trust-region bounds and surrogate regions are explicit.</li>
+<li>Start from the scaffold response table and replace the response columns with calibrated model outputs.</li>
 <li>Add a PrOMMiS/IDAES interface table for every generated variable: units, species basis, source basis, and validity limits.</li>
 <li>Keep the narrative in one place: screening, thermodynamics, selective result, and process-design interface.</li>
 </ul>
@@ -1317,7 +1386,7 @@ Chemical engineering technical review
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-<p>Lithium Extraction with ePC-SAFT</p>
+
 </div>
 </div></div>
 
@@ -1342,8 +1411,8 @@ Chemical engineering technical review
       // Full list of configuration options available at:
       // https://revealjs.com/config/
       Reveal.initialize({
-'controlsAuto': false,
-'previewLinksAuto': true,
+'controlsAuto': true,
+'previewLinksAuto': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
@@ -1353,7 +1422,7 @@ Chemical engineering technical review
 'smaller': false,
  
         // Display controls in the bottom right corner
-        controls: true,
+        controls: false,
 
         // Help the user learn the controls by providing hints, for example by
         // bouncing the down arrow when they first encounter a vertical slide
@@ -1370,7 +1439,7 @@ Chemical engineering technical review
         progress: true,
 
         // Display the page number of the current slide
-        slideNumber: 'c/t',
+        slideNumber: false,
 
         // 'all', 'print', or 'speaker'
         showSlideNumber: 'all',
@@ -1475,7 +1544,7 @@ Chemical engineering technical review
         previewLinks: false,
 
         // Transition style (none/fade/slide/convex/concave/zoom)
-        transition: 'fade',
+        transition: 'none',
 
         // Transition speed (default/fast/slow)
         transitionSpeed: 'default',

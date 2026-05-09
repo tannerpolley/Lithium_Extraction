@@ -11,7 +11,7 @@ epcsaft_dependency:
     - Reactive-wrapper path is the preferred reproduced figure path.
     - Direct package path remains a diagnostic for ePC-SAFT LLE behavior.
 inputs:
-  - path: data/pcsaft_parameters/yu_2024/
+  - path: data/reference/epcsaft_parameters/2024_Yu/
     kind: parameter_inputs
   - path: analyses/yu_2024_figure6/data/input/figure6_digitized_points.csv
     kind: curated_digitized_input

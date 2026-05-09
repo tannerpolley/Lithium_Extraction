@@ -67,7 +67,7 @@ def _write_markdown(result, config_payload: dict) -> None:
     lines.append('')
     lines.append('## Basis')
     lines.append('')
-    lines.append(f'- Config: `{DEFAULT_CONFIG_JSON}`')
+    lines.append(f'- Config: `{DEFAULT_CONFIG_JSON.relative_to(REPO_ROOT).as_posix()}`')
     lines.append('- Mechanism: external Li-selective HBTA/TOPO chelation wrapper applied outside the bare PC-SAFT phase split.')
     lines.append('- Purpose: preserve lithium-specific extraction in the showcase chain while keeping sodium extraction low.')
     lines.append(f'- Feed: Li = {LI_FEED_MG_L:.3f} mg/L, Na = {NA_FEED_MG_L:.3f} mg/L, O/A = {OA_RATIO:.3f}, TOP = {TOP_MOL_L:.6f} mol/L.')

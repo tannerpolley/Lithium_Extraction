@@ -1,0 +1,63 @@
+\documentclass[a4paper,fleqn]{styles/cas-sc}
+
+\usepackage[numbers]{natbib}
+\usepackage[version=4]{mhchem}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{siunitx}
+\usepackage{tabularx}
+\usepackage{xspace}
+\usepackage{hyperref}
+\usepackage{cleveref}
+
+\graphicspath{{Figures/}}
+
+\newcommand{\LiIon}{\ce{Li+}\xspace}
+\newcommand{\NaIon}{\ce{Na+}\xspace}
+\newcommand{\DES}{DES\xspace}
+\newcommand{\TOPO}{TOPO\xspace}
+\newcommand{\Smackover}{Smackover\xspace}
+\newcommand{\Prommis}{PrOMMiS\xspace}
+\newcommand{\IDAES}{IDAES\xspace}
+\newcommand{\Dli}{D_{\mathrm{Li}}}
+\newcommand{\Dna}{D_{\mathrm{Na}}}
+\newcommand{\Slin}{S_{\mathrm{Li/Na}}}
+
+\begin{document}
+
+\let\WriteBookmarks\relax
+\def\floatpagepagefraction{1}
+\def\textpagefraction{.001}
+
+\shorttitle{Produced-Water Lithium Extraction Case Study}
+\shortauthors{Polley et al.}
+
+\title[mode=title]{Rezaee-Calibrated Workflow for Produced-Water Lithium Extraction}
+
+\author[1]{Tanner W. Polley}
+\ead{tannerwpolley@gmail.com}
+
+\begin{abstract}
+Produced waters are attractive but chemically severe lithium resources because lithium can occur at tens to hundreds of milligrams per liter while sodium and divalent cations dominate the ionic background. This first-draft manuscript scaffolds a case study that treats a pretreated \Smackover source brine as a clean \LiIon/\NaIon extraction feed and uses the Rezaee hydrophobic \DES plus \TOPO chemistry as the active solvent basis. The current workflow converts Rezaee extraction evidence into distribution coefficients, evaluates a 523-row total-dissolved-solids, lithium-grade, and organic-to-aqueous screening matrix, and carries the resulting transfer variables into \Prommis/\IDAES process and costing artifacts. The manuscript intentionally distinguishes the calibrated distribution surrogate from a fully accepted direct reactive liquid--liquid ePC-SAFT split. It is written as a scaffold for a later complete paper once the high-\NaIon/\LiIon validation, staged contactor solution, and final techno-economic assumptions are fixed.
+\end{abstract}
+
+\begin{keywords}
+lithium extraction\sep{}produced water\sep{}deep eutectic solvent\sep{}TOPO\sep{}ePC-SAFT\sep{}PrOMMiS\sep{}IDAES
+\end{keywords}
+
+\maketitle
+
+\input{sections/introduction}
+\input{sections/source_basis_and_case_definition}
+\input{sections/thermodynamic_surrogate_method}
+\input{sections/produced_water_screening_results}
+\input{sections/process_handoff_and_costing}
+\input{sections/limitations_and_next_work}
+
+\clearpage
+\bibliographystyle{styles/model1-num-names}
+\bibliography{references}
+
+\end{document}

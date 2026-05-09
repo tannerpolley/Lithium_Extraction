@@ -2,11 +2,11 @@
 
 ## Basis
 
-- Dataset directory: C:\Users\Tanner\Documents\git\Lithium_Extraction\data\pcsaft_parameters\yu_2024
-- Digitized experimental points: C:\Users\Tanner\Documents\git\Lithium_Extraction\analyses\yu_2024_figure6\data\input\figure6_digitized_points.csv
+- Dataset directory: C:\Users\Tanner\Documents\git\ePC-SAFT\.worktrees\downstreams\Lithium_Extraction\data\reference\epcsaft_parameters\2024_Yu
+- Digitized experimental points: C:\Users\Tanner\Documents\git\ePC-SAFT\.worktrees\downstreams\Lithium_Extraction\analyses\yu_2024_figure6\data\input\figure6_digitized_points.csv
 - Runtime: installed `epcsaft` package through `scripts.epcsaft_compat`.
-- Imported pcsaft module: C:\Users\Tanner\Documents\git\Lithium_Extraction\scripts\epcsaft_compat.py
-- Effective user options: `{"debug": false, "elec_model": {"DH_model": {"bjeruum_treatment": false, "d_ion_mode": 1, "mu_DH_model": {"comp_dep_rel_perm": true, "differential_mode": "analytical", "include_sum_term": true}}, "born_model": {"bulk_mode": "mix", "d_Born_mode": 3, "dielectric_saturation": true, "mu_born_model": {"comp_dep_delta_d": true, "comp_dep_rel_perm": true, "differential_mode": "numerical", "include_sum_term": true}, "solvation_shell_model": true}, "include_born_model": true, "rel_perm": {"differential_mode": "numerical", "rule": "empirical"}}}`
+- Imported pcsaft module: C:\Users\Tanner\Documents\git\ePC-SAFT\.worktrees\downstreams\Lithium_Extraction\scripts\epcsaft_compat.py
+- Effective user options: `{"elec_model": {"DH_model": {"bjeruum_treatment": false, "d_ion_mode": 1, "mu_DH_model": {"comp_dep_rel_perm": true, "differential_mode": "analytical", "include_sum_term": true}}, "born_model": {"bulk_mode": "mix", "d_Born_mode": 3, "dielectric_saturation": true, "mu_born_model": {"comp_dep_delta_d": true, "comp_dep_rel_perm": true, "differential_mode": "numerical", "include_sum_term": true}, "solvation_shell_model": true}, "include_born_model": true, "rel_perm": {"differential_mode": "numerical", "rule": "empirical"}}}`
 - Assumed aqueous density for the reported g/L brine basis: `1.000 kg/L`
 - Fitted effective TOP concentration used to convert O/A volume ratio into feed moles: `1.900000 mol/L organic`
 

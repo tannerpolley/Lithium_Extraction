@@ -1,0 +1,20 @@
+temperature_C,aqueous_pH,TOPO_wt_pct_in_organic,Na_Li_mass_ratio,Li_feed_mg_L,organic_to_aqueous_mass_ratio,TDS_feature_mg_L,residual_divalent_mg_L,case_id,purpose
+23.0,10.4,10.0,5.0,1000.0,1.0,0.0,0.0,rezaee_paper_nominal,Paper selected operating point on the clean Li/Na basis.
+23.0,10.4,10.0,381.54761904761904,168.0,1.0,305000.0,0.0,ms2_clean_li_na_nominal,Selected Smackover MS-2 clean Li/Na base case.
+20.0,10.4,10.0,381.54761904761904,168.0,1.0,305000.0,0.0,temperature_C_low,One-factor low bound for temperature_C.
+35.0,10.4,10.0,381.54761904761904,168.0,1.0,305000.0,0.0,temperature_C_high,One-factor high bound for temperature_C.
+23.0,9.5,10.0,381.54761904761904,168.0,1.0,305000.0,0.0,aqueous_pH_low,One-factor low bound for aqueous_pH.
+23.0,10.8,10.0,381.54761904761904,168.0,1.0,305000.0,0.0,aqueous_pH_high,One-factor high bound for aqueous_pH.
+23.0,10.4,10.0,381.54761904761904,168.0,1.0,305000.0,0.0,TOPO_wt_pct_in_organic_low,One-factor low bound for TOPO_wt_pct_in_organic.
+23.0,10.4,30.0,381.54761904761904,168.0,1.0,305000.0,0.0,TOPO_wt_pct_in_organic_high,One-factor high bound for TOPO_wt_pct_in_organic.
+23.0,10.4,10.0,190.0,168.0,1.0,305000.0,0.0,Na_Li_mass_ratio_low,One-factor low bound for Na_Li_mass_ratio.
+23.0,10.4,10.0,575.0,168.0,1.0,305000.0,0.0,Na_Li_mass_ratio_high,One-factor high bound for Na_Li_mass_ratio.
+23.0,10.4,10.0,381.54761904761904,100.0,1.0,305000.0,0.0,Li_feed_mg_L_low,One-factor low bound for Li_feed_mg_L.
+23.0,10.4,10.0,381.54761904761904,300.0,1.0,305000.0,0.0,Li_feed_mg_L_high,One-factor high bound for Li_feed_mg_L.
+23.0,10.4,10.0,381.54761904761904,168.0,0.5,305000.0,0.0,organic_to_aqueous_mass_ratio_low,One-factor low bound for organic_to_aqueous_mass_ratio.
+23.0,10.4,10.0,381.54761904761904,168.0,1.5,305000.0,0.0,organic_to_aqueous_mass_ratio_high,One-factor high bound for organic_to_aqueous_mass_ratio.
+23.0,10.4,10.0,381.54761904761904,168.0,1.0,152500.0,0.0,TDS_feature_mg_L_low,One-factor low bound for TDS_feature_mg_L.
+23.0,10.4,10.0,381.54761904761904,168.0,1.0,340000.0,0.0,TDS_feature_mg_L_high,One-factor high bound for TDS_feature_mg_L.
+23.0,10.4,10.0,575.0,168.0,0.5,340000.0,0.0,stress_high_na_high_tds_low_oa,"Produced-water stress point for high sodium, high salinity, and low solvent inventory."
+20.0,10.4,10.0,381.54761904761904,168.0,1.5,305000.0,0.0,best_practical_selectivity_corner,"Lower-temperature, controlled-pH, nominal TOPO corner for selectivity."
+23.0,10.4,10.0,381.54761904761904,168.0,1.0,305000.0,430.0,pretreatment_leakage_guardrail,Same Li/Na basis with residual divalent leakage carried only as a guardrail.

@@ -1,6 +1,8 @@
 # Zotero MCP Refresh And Case-Study Continuation Handoff
 
 Date: 2026-05-07  
+
+> Superseded context, 2026-05-08: this handoff predates the Rezaee Phase 0-9 pivot. Treat HBTA/TOPO-first instructions below as historical. Current work should start from `docs/plans/lithium_project_status_handoff_2026_05_08.md` and `analyses/rezaee_2026_pcsaft_epcsaft/README.md`.
 Repo: `C:\Users\Tanner\Documents\git\Lithium_Extraction`  
 Primary upstream package repo: `C:\Users\Tanner\Documents\git\ePC-SAFT`  
 Downstream integration repos mentioned in the project: `pcsaft-pse`, `prommis`, `idaes-pse`
@@ -48,7 +50,7 @@ The user specifically does not want a shallow answer. Continue until the goal is
    - Other candidates can be ranked as backup or comparison cases.
 
 3. Do not claim true predictive reactive HBTA/TOPO ePC-SAFT is complete.
-   - Missing: HBTA parameters, TOPO parameters if not defensibly available, sulfonated kerosene or diluent parameters, Li-ligand complex parameters, competing divalent-complex parameters, binary interactions, and reaction-equilibrium constants.
+   - Missing: HBTA parameters, TOPO parameters if not defensibly available, sulfonated kerosene or diluent parameters, Li-ligand complex parameters, binary interactions, and Li/Na reaction-equilibrium constants. Divalent-complex parameters are out of scope for the active Li/Na-after-pretreatment objective.
    - Current HBTA/TOPO model is a calibrated reactive-stage bridge, not a final predictive ePC-SAFT LLE model.
 
 4. Do not claim Shan/Gando field water is Smackover.
@@ -501,7 +503,7 @@ REE status:
 
 ```text
 scripts/case_study/hbta_topo_reactive_stage_solve.py
-data/pcsaft_parameters/gando_2025/hbta_topo_reactive_fit.json
+data/reference/extraction_models/gando_2025/hbta_topo_reactive_fit.json
 data/reference/produced_water/hbta_topo_reactive_fit_parameters.csv
 data/reference/produced_water/hbta_topo_reactive_stage_results.csv
 data/reference/produced_water/hbta_topo_reactive_prommis_stage_table.csv
@@ -559,7 +561,7 @@ data/reference/produced_water/rezaee_2026_des_density_fit_records.csv
 data/reference/produced_water/rezaee_2026_des_parameter_fit_summary.csv
 data/reference/produced_water/rezaee_2026_epcsaft_parameter_smoke_report.md
 data/reference/produced_water/rezaee_2026_epcsaft_phase_equilibrium_smoke.json
-data/pcsaft_parameters/rezaee_2026/des_nonassoc_fit.json
+data/reference/epcsaft_parameter_fits/rezaee_2026/des_nonassoc_fit.json
 ```
 
 Validated earlier:
@@ -726,7 +728,7 @@ Current downstream finding:
 This is not primarily an API-absence problem anymore. The package already has reactive-speciation and staged reactive-equilibrium APIs. The bigger issue is missing parameter/regression support for the solvent-extraction systems needed by the case study:
 
 1. HBTA/TOPO/sulfonated kerosene flagship parameters are missing.
-2. Li-BTA-TOPO and competing divalent complex parameters are missing.
+2. Li-BTA-TOPO complex parameters are missing; competing divalent complex parameters are out of active scope because divalent ions are assumed pretreated away.
 3. Binary interactions and reaction-equilibrium constants are missing.
 4. D2EHDTPA/BuPhen, TBP/FeCl3, D2EHPA/TBP backup systems also lack complete local parameter payloads.
 5. Public regression is still incomplete for this use case:

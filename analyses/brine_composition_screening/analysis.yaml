@@ -1,0 +1,30 @@
+id: brine_composition_screening
+title: Brine Composition Screening For Rezaee DES/TOPO Lithium Extraction
+status: active
+summary: Cross-brine composition screening with produced water as the primary candidate group for 90 wt pct DES plus 10 wt pct TOPO Li/Na extraction.
+owner: project
+boundary:
+  objective: Compare common lithium-bearing brine classes by Li, TDS, sodium, common monovalent/divalent interferents, critical minerals, and REE reporting status.
+  not_objectives:
+    - Full reserve estimation.
+    - Claiming REE recoverability without source-reported REE concentrations.
+    - Replacing detailed geochemical datasets with the screening table.
+inputs:
+  - path: data/reference/produced_water/smackover_usgs_clean_observation_summary.csv
+    kind: local_clean_summary
+  - path: data/reference/produced_water/smackover_li_tds_sensitivity_basis.csv
+    kind: local_clean_rows
+  - path: analyses/rezaee_2026_pcsaft_epcsaft/data/input/rezaee_2025_real_brine_extraction.csv
+    kind: source_transcription
+outputs:
+  - path: analyses/brine_composition_screening/data/processed/brine_composition_screening_table.csv
+    kind: generated_screening_table
+  - path: analyses/brine_composition_screening/data/processed/produced_water_rezaee_candidate_scores.csv
+    kind: generated_candidate_scores
+  - path: analyses/brine_composition_screening/results/brine_composition_screening_report.md
+    kind: generated_report
+commands:
+  validate:
+    - uv run python analyses/brine_composition_screening/scripts/build_brine_screening_study.py
+runtime:
+  quick_seconds: 20

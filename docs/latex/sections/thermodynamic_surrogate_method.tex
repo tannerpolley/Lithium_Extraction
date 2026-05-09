@@ -1,0 +1,26 @@
+\section{Thermodynamic Surrogate Method}
+\label{sec:method}
+
+The current case study uses a calibrated distribution surrogate rather than a direct claim of complete reactive ePC-SAFT LLE closure. Rezaee extraction responses are translated into species distribution coefficients using the organic-to-aqueous phase ratio,
+\begin{equation}
+    D_i = \frac{E_i/(100-E_i)}{O/A},
+    \label{eq:distribution}
+\end{equation}
+where $E_i$ is the single-stage extraction percentage of species $i$ and $O/A$ is the organic-to-aqueous mass or phase-ratio basis used by the screening row. The lithium-to-sodium selectivity is then
+\begin{equation}
+    \Slin = \frac{\Dli}{\Dna}.
+    \label{eq:selectivity}
+\end{equation}
+
+The current implementation fits lightweight response surfaces in log-distribution space and evaluates a 523-row screening matrix. The active input variables are total dissolved solids, lithium feed concentration, and organic-to-aqueous ratio at fixed Rezaee chemistry settings. The current scaffold should be updated later with the exact regression form, cross-validation diagnostics, and uncertainty propagation once the final surrogate file is locked.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.86\linewidth]{rezaee_surrogate_input_ranges.png}
+    \caption{Recommended clean \LiIon/\NaIon surrogate input ranges used to create the current screening matrix.}
+    \label{fig:input-ranges}
+\end{figure}
+
+\subsection{ePC-SAFT role}
+
+The Rezaee supporting information provides organic pseudo-component, binary-interaction, reaction-constant, and density evidence that is useful for an ePC-SAFT-facing model. In the current case study, those inputs are used as traceable thermodynamic evidence and as a package-facing bridge. The direct ePC-SAFT reactive-LLE solve remains a validation target, not the accepted physical split used for the current process deck. This distinction is preserved in the manuscript because it controls how strongly the process and cost results may be interpreted.

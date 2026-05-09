@@ -1,0 +1,35 @@
+{
+  "row_count": 523,
+  "random_seed": 20260508,
+  "model_basis": "calibrated_rezaee_section32_doe_basis_surface_distribution_surrogate",
+  "upstream_rezaee_rows": "C:\\Users\\Tanner\\Documents\\git\\ePC-SAFT\\analyses\\2026_rezaee\\data\\processed\\rezaee_2026_section32_revised_31_run_results.csv",
+  "upstream_training_rows": 31,
+  "surrogate_feature_names": [
+    "intercept",
+    "T_centered_30C_scaled_5C",
+    "pH_centered_10_scaled_0p5",
+    "TOPO_wt_pct_centered_30_scaled_10",
+    "ln_Na_Li_mass_ratio_over_10",
+    "pH_x_TOPO",
+    "pH_x_ln_Na_Li",
+    "TOPO_x_ln_Na_Li"
+  ],
+  "training_Na_Li_min": 5.0,
+  "training_Na_Li_max": 25.0,
+  "finite_outputs": true,
+  "nominal_ms2_count": 1,
+  "max_sodium_derivation_abs_error": 0.0,
+  "max_na_li_ratio_abs_error": 0.0,
+  "li_extraction_min": 30.17693394720056,
+  "li_extraction_max": 61.38068769101696,
+  "na_extraction_min": 2.672356257728575,
+  "na_extraction_max": 9.757851030025167,
+  "D_Li_phase_ratio_corrected_min": 0.8119575988610949,
+  "D_Li_phase_ratio_corrected_max": 1.1525905995940833,
+  "D_Na_phase_ratio_corrected_min": 0.054914639972279834,
+  "D_Na_phase_ratio_corrected_max": 0.07208642629045973,
+  "validity_flags": {
+    "calibrated_surface_with_warnings": 523
+  },
+  "status": "passed"
+}

@@ -2,9 +2,9 @@
 
 ## Basis
 
-- Dataset directory: C:\Users\Tanner\Documents\git\Lithium_Extraction\data\pcsaft_parameters\yu_2024
-- Digitized experimental points: C:\Users\Tanner\Documents\git\Lithium_Extraction\analyses\yu_2024_figure6\data\input\figure6_digitized_points.csv
-- Reactive wrapper config: C:\Users\Tanner\Documents\git\Lithium_Extraction\data\pcsaft_parameters\yu_2024\reactive_eq11.json
+- Dataset directory: `data/reference/epcsaft_parameters/2024_Yu`
+- Digitized experimental points: `analyses/yu_2024_figure6/data/input/figure6_digitized_points.csv`
+- Reactive wrapper config: `data/reference/epcsaft_parameters/2024_Yu/reaction/reactive_eq11.json`
 - Paper mechanism used in the wrapper: Eq. 11 with 1:1:1 Li exchange stoichiometry and a separate low-affinity Mg exchange branch.
 - The current 2025 yu_2024 electrolyte preset is retained as the dataset basis; the reaction is represented outside the core pcsaft flash because the direct six-species flash collapsed to a trivial split under the current build.
 

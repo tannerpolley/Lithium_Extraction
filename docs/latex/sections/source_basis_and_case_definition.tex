@@ -1,0 +1,34 @@
+\section{Source Basis and Case Definition}
+\label{sec:source-basis}
+
+\subsection{Produced-water screening}
+
+The project screening table compares common brine classes by lithium concentration, total dissolved solids, sodium load, and divalent-cation interference. The active candidate basis is a \Smackover produced-water row because it combines a high lithium grade with a hypersaline operating envelope. The current source table ranks the high-observed \Smackover case at \SI{252}{mg/L} lithium and the MS-2 base case at \SI{168}{mg/L} lithium. The MS-2 base row is used as the nominal process-screening feed because it has a complete clean \LiIon/\NaIon handoff row in the current artifacts.
+
+\begin{figure}
+    \centering
+    \begin{subfigure}{0.48\linewidth}
+        \includegraphics[width=\linewidth]{brine_li_tds_scatter.png}
+        \caption{Lithium grade versus salinity for screened brine classes.}
+        \label{fig:brine-scatter}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\linewidth}
+        \includegraphics[width=\linewidth]{produced_water_candidate_scores.png}
+        \caption{Produced-water candidate ranking for the Rezaee solvent basis.}
+        \label{fig:candidate-scores}
+    \end{subfigure}
+    \caption{Composition screening figures copied from the project analysis artifacts. The score is a screening metric, not a resource estimate.}
+    \label{fig:composition-screening}
+\end{figure}
+
+\subsection{Pretreatment boundary}
+
+The process basis assumes that divalent cations are removed before solvent extraction. Calcium, magnesium, strontium, and barium are therefore pretreatment and costing variables, not competitive species in the current Rezaee \DES/\TOPO extraction surrogate. This boundary is essential because the Rezaee calibration basis is strongest for a clean \LiIon/\NaIon transfer model, while the raw produced-water composition contains additional ions that would require a larger validated reactive liquid--liquid model.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.85\linewidth]{process_bridge_diagram.png}
+    \caption{Active case-study boundary from raw \Smackover brine to pretreated \LiIon/\NaIon extraction feed and \Prommis/\IDAES handoff.}
+    \label{fig:process-boundary}
+\end{figure}

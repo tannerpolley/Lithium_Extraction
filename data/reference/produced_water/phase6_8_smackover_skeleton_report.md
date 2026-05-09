@@ -2,7 +2,7 @@
 
 ## Scope
 
-These outputs use the source-regressed Li/Na HBTA/TOPO reactive-stage model with 2 HBTA : 1 TOPO : 1 Li stoichiometry and ePC-SAFT aqueous activity coefficients when available. They are transfer-variable and costing scaffold artifacts, not full multication reactive HBTA/TOPO ePC-SAFT LLE predictions.
+These outputs use the source-regressed Li/Na HBTA/TOPO reactive-stage model with 2 HBTA : 1 TOPO : 1 Li stoichiometry and ePC-SAFT aqueous activity coefficients when available. They assume divalent pretreatment and are transfer-variable and costing scaffold artifacts, not full organic-phase HBTA/TOPO ePC-SAFT LLE predictions.
 
 ## Generated Files
 

@@ -2,6 +2,18 @@
 
 Date: 2026-05-07
 
+## Later Verification Update
+
+After upstream budget controls were available in the local ePC-SAFT install, the timeout-enabled Hubach single-point diagnostic returned structured package diagnostics instead of hanging:
+
+```powershell
+uv run python analyses\electrolyte_lle_literature\scripts\_debug_hubach_single_point.py --timeout-seconds 8 --out-json analyses\electrolyte_lle_literature\results\debug\hubach_single_point_debug_8s_20260507.json
+```
+
+Both option rows returned `status=SolutionError`, `acceptance_gate=predictive_budget_exhausted`, and `budget_trigger=timeout_seconds` in about five seconds per option. This closes the immediate "no bounded failure contract" symptom for the timeout-enabled wrapper path. It does not close the scientific hard case: Hubach still does not converge to an accepted fixed-species electrolyte LLE split under the tested options.
+
+Treat the older timeout evidence below as the pre-budget-control baseline and the JSON file above as the current reproduction artifact.
+
 ## Scope
 
 This note records why the Lithium_Extraction LLE scripts can time out before they return useful phase-equilibrium diagnostics, and what the upstream ePC-SAFT package should add to make these workflows robust enough for PrOMMiS/IDAES handoff work.

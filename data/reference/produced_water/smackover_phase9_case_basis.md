@@ -46,19 +46,17 @@ This row is selected because its `TDS = 305,000 mg/L`, which matches the clean l
 
 This selected Smackover row is the source-composition basis.
 
-The HBTA/TOPO extraction basis remains Shan/Gando 2025:
+The active Li/Na bridge chemistry is the Rezaee 2026 TBAC/decanoic-acid DES + TOPO system:
 
-- HBTA extractant.
-- TOPO synergist.
-- Sulfonated kerosene diluent.
-- 100% saponification.
-- `O/A = 1:1`.
-- `6 min` contact time.
-- Three-stage field-water process anchor above 97% lithium extraction after impurity removal.
+- DES: tetrabutylammonium chloride + decanoic acid at a 1:2 molar ratio.
+- Coextractant: TOPO.
+- Active model scope: Li/Na extraction after divalent pretreatment.
+- Rezaee source evidence: Li/Na extraction responses, SI aqueous/organic equilibrium-composition rows, organic PC-SAFT-style DES/TOPO/RLi/RNa parameters, organic binary interactions, and reaction constants.
+- Transfer-variable basis: source-regressed Li/Na distribution coefficients and Smackover Na/TDS/OA sensitivity rows generated under `analyses/rezaee_2026_pcsaft_epcsaft/`.
 
-The current repository does not contain a Smackover-specific HBTA/TOPO extraction experiment. Therefore the deck should say:
+The current repository does not contain a Smackover-specific Rezaee DES/TOPO extraction experiment. Therefore the deck should say:
 
-> The source feed is Smackover-specific; the extraction chemistry is Shan/Gando HBTA/TOPO; the current model is a source-regressed Li/Na stage model coupled to a literature-backed non-ionic extraction chemistry.
+> The source feed is Smackover-specific; the extraction chemistry is Rezaee DES/TOPO; the current model is a source-regressed Li/Na distribution bridge with ePC-SAFT density, stability, and bounded LLE diagnostic support.
 
 ## Phase 9 Use
 
@@ -70,4 +68,4 @@ Use this file to ground:
 4. The cost-basis and product-rate scaffold.
 5. The limitation slide.
 
-Do not use it to claim final full multication Smackover extraction performance until the HBTA/TOPO parameter and reaction-constant gaps are closed. The current source-regressed Li/Na stage model is acceptable for the case-study handoff only when labeled with its trust-region caveats.
+Do not use it to claim divalent extraction or full direct ePC-SAFT reactive LLE closure. Direct accepted ePC-SAFT phase splits remain a future package-hardening target. The current Rezaee source-regressed Li/Na bridge after divalent pretreatment is acceptable for the case-study handoff only when labeled with its trust-region caveats.

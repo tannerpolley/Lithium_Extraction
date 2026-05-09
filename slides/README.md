@@ -1,20 +1,29 @@
-# Quarto Slide Workflow
+# Presentation Workflow
 
-This directory is the repo-local **source of truth** for slide authoring.
+This directory is the repo-local presentation workspace. The controlling policy
+is `..\PRESENTATIONS.md`, which extends the global policy at
+`C:\Users\Tanner\.codex\PRESENTATIONS.md`.
 
 ## Canonical Files
 
-- `deck.qmd`: slide content, structure, speaker notes, images, and commands
-- `theme.scss`: shared revealjs styling and layout conventions
-- `_quarto.yml`: default Quarto revealjs render settings
+- `deck.qmd`: broad project deck source for Quarto iteration.
+- `theme.scss`: shared revealjs styling and layout conventions.
+- `_quarto.yml`: default Quarto revealjs render settings.
+- `final_rezaee_calibrated_case_study_2026_05_08/`: active final case-study
+  package with `deck.tex`, `references.bib`, `figures/`, and Beamer PDF output.
 
 ## Authoring Rules
 
-- Edit the `.qmd`, not a `.pptx`, for first-pass deck creation.
-- Keep one slide per heading.
-- Keep speaker notes inline with `::: {.notes}` blocks.
-- Reference figures and tables from files already tracked in the repo.
-- Change deck-wide look and layout conventions in `theme.scss`, not slide by slide.
+- Edit text-first sources first: `.qmd` for drafting and `.tex` for final
+  technical PDF decks.
+- Do not touch `.pptx` files for the active Rezaee case-study package unless the
+  user explicitly reopens PowerPoint work.
+- Keep one slide concept per heading/frame.
+- Keep speaker notes inline with `::: {.notes}` blocks when using Quarto.
+- Reference figures and tables from tracked repo files or the presentation
+  package `figures/` folder.
+- Change deck-wide look and layout conventions in `theme.scss`, not slide by
+  slide.
 
 ## Render Commands
 
@@ -36,15 +45,8 @@ If `quarto` is not yet visible on `PATH` in the current shell, use the installed
 
 That generates the HTML slide deck next to `deck.qmd` unless you later add an output directory.
 
-For PDF sharing, render the revealjs deck and print the generated HTML deck to PDF from the browser.
-
-Optional later:
-
-```powershell
-quarto render .\slides\deck.qmd --to pptx
-```
-
-If PPTX becomes a real deliverable, add a branded `reference.pptx` template in this folder and wire it through Quarto instead of making PowerPoint the primary authoring surface.
+For PDF sharing from the broad Quarto deck, render the revealjs deck and print
+the generated HTML deck to PDF from the browser.
 
 ## Current Validation Status
 
@@ -54,12 +56,14 @@ If PPTX becomes a real deliverable, add a branded `reference.pptx` template in t
 
 ## Default Workflow Decision
 
-- Primary artifact: web slides and PDF sharing
-- Canonical source: Markdown plus theme/template files
-- PowerPoint: secondary export path only
-- LaTeX/Beamer: only for formula-dense, PDF-first decks
-- Marp: optional lighter alternative, but Quarto is the richer default
+- First-draft source: Quarto.
+- Final technical source: Beamer PDF when the presentation is engineering- or
+  equation-heavy.
+- PowerPoint: out of scope for the active Rezaee case-study package unless
+  explicitly requested.
+- Current final case-study package:
+  `final_rezaee_calibrated_case_study_2026_05_08/`.
 
 ## Current Starter Deck
 
-`deck.qmd` is seeded with the produced-water lithium extraction case study already being developed in this repo. It uses existing Gando selective-showcase figures under `data/multiphase/` so the Markdown-first workflow starts with real project content rather than placeholder slides.
+`deck.qmd` is the current produced-water lithium extraction deck source. As of 2026-05-08, the active case-study basis is the Rezaee DES/TOPO Li/Na bridge after divalent pretreatment. Older Gando/HBTA/TOPO figures remain comparison or historical assets only unless a slide explicitly marks them as current.

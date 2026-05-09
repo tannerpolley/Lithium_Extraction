@@ -24,7 +24,7 @@ if str(REPO_ROOT) not in sys.path:
 
 import scripts.epcsaft_compat as pcs
 
-DATASET_DIR = REPO_ROOT / "data" / "pcsaft_parameters" / "yu_2024"
+DATASET_DIR = REPO_ROOT / "data" / "reference" / "epcsaft_parameters" / "2024_Yu"
 ANALYSIS_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_DIGITIZED_CSV = ANALYSIS_ROOT / "data" / "input" / "figure6_digitized_points.csv"
 DEFAULT_OUTPUT_DIR = ANALYSIS_ROOT / "results" / "figure6"
@@ -109,12 +109,21 @@ def _parse_scalar(raw: str, field: str, component: str) -> Any:
     return value
 
 
+def _pure_parameter_path(dataset_dir: Path) -> Path:
+    return dataset_dir / "pure" / "any_solvent.csv"
+
+
+def _binary_matrix_path(dataset_dir: Path, name: str) -> Path:
+    return dataset_dir / "mixed" / "binary_interaction" / name
+
+
 def _load_dataset(dataset_dir: Path) -> tuple[dict[str, dict[str, Any]], dict[tuple[str, str], float], dict[tuple[str, str], float], dict[tuple[str, str], float], dict[str, Any]]:
-    pure_rows = _read_csv_rows(dataset_dir / "pure.csv")
+    pure_path = _pure_parameter_path(dataset_dir)
+    pure_rows = _read_csv_rows(pure_path)
     by_component = {row["component"].strip(): row for row in pure_rows}
     missing = [comp for comp in SPECIES if comp not in by_component]
     if missing:
-        raise ValueError(f"pure.csv missing components: {missing}")
+        raise ValueError(f"{pure_path} missing components: {missing}")
 
     user_params: dict[str, dict[str, Any]] = {}
     for comp in SPECIES:
@@ -125,7 +134,7 @@ def _load_dataset(dataset_dir: Path) -> tuple[dict[str, dict[str, Any]], dict[tu
         user_params[comp] = entry
 
     def _load_matrix(name: str) -> dict[tuple[str, str], float]:
-        rows = _read_csv_rows(dataset_dir / "binary_interaction" / name)
+        rows = _read_csv_rows(_binary_matrix_path(dataset_dir, name))
         cols = [c for c in rows[0] if c != "component"]
         if cols != SPECIES:
             raise ValueError(f"{name} columns do not match {SPECIES}: {cols}")
