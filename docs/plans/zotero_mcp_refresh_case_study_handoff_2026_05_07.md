@@ -402,7 +402,7 @@ Validated in the downstream `Lithium_Extraction` environment:
 
 ```powershell
 uv sync --reinstall-package epcsaft
-uv run python scripts\case_study\rezaee_des_epcsaft_parameter_smoke.py
+uv run python analyses\\rezaee_2026_pcsaft_epcsaft\\scripts\\rezaee_des_epcsaft_parameter_smoke.py
 ```
 
 Upstream package fix and downstream validation:
@@ -410,8 +410,8 @@ Upstream package fix and downstream validation:
 ```powershell
 uv sync --reinstall-package epcsaft
 uv run python -c "import epcsaft, json; print(epcsaft.__git_commit__); print(json.dumps(epcsaft.capabilities(), indent=2))"
-uv run python scripts\case_study\rezaee_des_epcsaft_parameter_smoke.py
-uv run python scripts\case_study\hbta_topo_reactive_stage_solve.py
+uv run python analyses\\rezaee_2026_pcsaft_epcsaft\\scripts\\rezaee_des_epcsaft_parameter_smoke.py
+uv run python legacy HBTA/TOPO stage command removed during cleanup
 ```
 
 Current outcome after upstream PR #33:
@@ -515,7 +515,7 @@ data/reference/produced_water/hbta_topo_reactive_model_report.md
 Validated earlier:
 
 ```powershell
-uv run python scripts\case_study\hbta_topo_reactive_stage_solve.py
+uv run python legacy HBTA/TOPO stage command removed during cleanup
 ```
 
 Current model status:
@@ -567,7 +567,7 @@ data/reference/epcsaft_parameter_fits/rezaee_2026/des_nonassoc_fit.json
 Validated earlier:
 
 ```powershell
-uv run python scripts\case_study\rezaee_des_epcsaft_parameter_smoke.py
+uv run python analyses\\rezaee_2026_pcsaft_epcsaft\\scripts\\rezaee_des_epcsaft_parameter_smoke.py
 ```
 
 Current result:
@@ -592,8 +592,8 @@ This successfully exercises package parameter fitting and electrolyte-stability 
 
 ```text
 scripts/lle/jang_2017_stage2_li_na_tbp_d2ehpa.py
-data/multiphase/jang_2017_stage2_li_na_summary.md
-data/multiphase/jang_2017_stage2_li_na_summary.csv
+legacy Jang generated summary removed during cleanup
+legacy Jang generated summary CSV removed during cleanup
 ```
 
 Known issue:
@@ -633,7 +633,7 @@ The user asked this thread to stop and produce this handoff before the scorecard
 Suggested command:
 
 ```powershell
-uv run python scripts\case_study\solvent_candidate_scorecard.py
+uv run python legacy solvent scorecard command removed during cleanup
 ```
 
 Then validate:
@@ -672,8 +672,8 @@ Known unrelated or pre-existing dirty changes:
 
 ```text
 .idea/Lithium_Extraction.iml
-data/multiphase/gando_2025_* generated PNGs
-data/multiphase/gando_2025_stage3_efficiency_plot.png
+analysis-local Gando generated PNGs under analyses/electrolyte_lle_literature/results/
+analyses/electrolyte_lle_literature/results/gando_2025_stage3/gando_2025_stage3_efficiency_plot.png
 ```
 
 Many new files are untracked from the ongoing case-study work. Do not clean them. They are part of the in-progress branch handoff.
@@ -691,8 +691,8 @@ uv sync --dev
 uv sync --reinstall-package epcsaft
 uv run python -m compileall -q scripts data
 uv run python -c "import epcsaft; from epcsaft import ePCSAFTMixture; print(epcsaft.__file__)"
-uv run python scripts\case_study\hbta_topo_reactive_stage_solve.py
-uv run python scripts\case_study\rezaee_des_epcsaft_parameter_smoke.py
+uv run python legacy HBTA/TOPO stage command removed during cleanup
+uv run python analyses\\rezaee_2026_pcsaft_epcsaft\\scripts\\rezaee_des_epcsaft_parameter_smoke.py
 ```
 
 Quarto deck render:
@@ -751,9 +751,9 @@ Suggested discussion body should include:
 
 1. Downstream repo path.
 2. Exact commands:
-   - `uv run python scripts\case_study\rezaee_des_epcsaft_parameter_smoke.py`
-   - `uv run python scripts\case_study\hbta_topo_reactive_stage_solve.py`
-   - `uv run python scripts\case_study\solvent_candidate_scorecard.py`
+   - `uv run python analyses\\rezaee_2026_pcsaft_epcsaft\\scripts\\rezaee_des_epcsaft_parameter_smoke.py`
+   - `uv run python legacy HBTA/TOPO stage command removed during cleanup`
+   - `uv run python legacy solvent scorecard command removed during cleanup`
 3. Current model boundary.
 4. Needed package support:
    - public associating-neutral parameter regression suitable for HBTA/TOPO-class solvents;
@@ -853,7 +853,7 @@ rg -n "HBTA|TOPO|D2EHDTPA|BuPhen|TBP|FeCl3|D2EHPA|kerosene|produced water|PC-SAF
 Run:
 
 ```powershell
-uv run python scripts\case_study\solvent_candidate_scorecard.py
+uv run python legacy solvent scorecard command removed during cleanup
 ```
 
 Inspect outputs:
@@ -871,14 +871,14 @@ Fix the script if it fails or if Zotero MCP evidence changes the ranking.
 Run the two robust current scripts:
 
 ```powershell
-uv run python scripts\case_study\hbta_topo_reactive_stage_solve.py
-uv run python scripts\case_study\rezaee_des_epcsaft_parameter_smoke.py
+uv run python legacy HBTA/TOPO stage command removed during cleanup
+uv run python analyses\\rezaee_2026_pcsaft_epcsaft\\scripts\\rezaee_des_epcsaft_parameter_smoke.py
 ```
 
 Optional slow baseline:
 
 ```powershell
-uv run python scripts\lle\jang_2017_stage2_li_na_tbp_d2ehpa.py
+uv run python analyses\\electrolyte_lle_literature\\scripts\\jang_2017_stage2_li_na_tbp_d2ehpa.py
 ```
 
 Use a timeout if needed. Existing artifacts are acceptable if the script times out.
@@ -996,3 +996,4 @@ It should say:
 ```text
 This case study shows why ePC-SAFT belongs in the PrOMMiS/IDAES ecosystem. A real high-TDS produced-water source and a source-backed non-ionic extraction chemistry require equilibrium, speciation, selectivity, and phase-split calculations that fixed recovery factors cannot defend. The current repository already generates bridge transfer variables and costing skeletons, while the unresolved parameter/regression work defines the exact package capability needed to turn the bridge into a predictive thermodynamic model.
 ```
+

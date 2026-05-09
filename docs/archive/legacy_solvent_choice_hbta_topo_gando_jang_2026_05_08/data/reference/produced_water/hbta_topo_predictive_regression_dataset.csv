@@ -1,9 +1,0 @@
-observable_id,zotero_key,source,doi,observable,target_value,units,fit_role
-gando_table4_stage1_li_cumulative,JUNBXVTI,Shan/Gando 2025 Table 4,10.3390/w17152258,primary Li cumulative extraction after Ca/Mg/Ba precipitation,54.95,percent,least_squares_target
-gando_table4_stage2_li_cumulative,JUNBXVTI,Shan/Gando 2025 Table 4,10.3390/w17152258,secondary Li cumulative extraction after Ca/Mg/Ba precipitation,85.6,percent,least_squares_target
-gando_table4_stage3_li_cumulative,JUNBXVTI,Shan/Gando 2025 Table 4,10.3390/w17152258,tertiary Li cumulative extraction after Ca/Mg/Ba precipitation,97.17,percent,least_squares_target_and_costing_cap
-zhang2017_li_na_selectivity_lower_bound,9LJWDC7E,Zhang et al. 2017 abstract/McCabe-Thiele result,10.1016/j.seppur.2017.07.028,Li/Na separation factor lower-bound anchor,2100.0,dimensionless,conservative_lower_bound_used_as_numeric_anchor
-derived_stage1_na_from_li_selectivity,9LJWDC7E,Derived from Zhang 2017 selectivity and Shan/Gando stage-1 Li target,10.1016/j.seppur.2017.07.028,stage-1 Na extraction consistent with Li/Na selectivity,0.0580498933286992,percent,least_squares_target_derived_not_direct_measurement
-zhang2017_stoichiometry,9LJWDC7E,Zhang et al. 2017 slope analysis,10.1016/j.seppur.2017.07.028,HBTA:TOPO:Li complex stoichiometry,2:1:1,molar ratio,fixed_model_structure
-zhang2018_process_scale,AEL6ZEPG,Zhang et al. 2018 mixer-settler operation,10.1016/j.hydromet.2017.10.029,HBTA/TOPO/kerosene multistage process support,96.0,percent Li extraction,process_support_not_fit_target
-gando_product_purity,JUNBXVTI,Shan/Gando 2025 lithium carbonate preparation,10.3390/w17152258,Li2CO3 product purity after extraction/back-extraction/concentration/precipitation,99.28,percent,costing_and_deck_anchor_not_fit_target

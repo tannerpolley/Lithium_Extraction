@@ -118,7 +118,7 @@ uv run python analyses\rezaee_2026_pcsaft_epcsaft\scripts\rezaee_surrogate_input
 uv run python analyses\rezaee_2026_pcsaft_epcsaft\scripts\rezaee_tds_li_oa_calibrated_surrogate.py
 ```
 
-The older `analyses\hbta_topo_case_study\scripts\rezaee_des_epcsaft_parameter_smoke.py` and `scripts\case_study\rezaee_des_epcsaft_parameter_smoke.py` paths remain compatibility wrappers.
+The older `legacy HBTA/TOPO command removed during cleanup` and `analyses\\rezaee_2026_pcsaft_epcsaft\\scripts\\rezaee_des_epcsaft_parameter_smoke.py` paths remain compatibility wrappers.
 
 ## Remaining For Extraction-Percent Comparison
 
@@ -135,4 +135,6 @@ The older `analyses\hbta_topo_case_study\scripts\rezaee_des_epcsaft_parameter_sm
 - Latest convention scan: the source-supported Eq. 14/15 activity variant has combined median absolute ln residual `35.0461`. The best simple numerical variant is `paper_eq14_no_activity_vs_inverse_k`, but it is not source-supported and still leaves combined median absolute ln residual `9.5066`. This means the direct closure is not fixed by a simple sign, reciprocal-K, gamma on/off, water, hydroxide, hydrogen, ammonium, or TOPO convention change.
 - Source-data audit: the local machine-readable SI extraction contains `26` equilibrium-composition rows. Treat the 2026 paper text saying `36` equilibrium data points as a clerical mismatch unless a source-backed original calculation sheet is later found.
 - Acceptance criteria for comparing paper extraction percentages to package outputs without treating a diagnostic pseudo-DES density fit or a source-regressed bridge as a complete predictive model.
+
+
 

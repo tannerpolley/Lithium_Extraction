@@ -36,7 +36,7 @@ Use these checks after setup:
 
 ```powershell
 uv run python -c "import epcsaft; from epcsaft import ePCSAFTMixture; print(epcsaft.__file__)"
-uv run python -m compileall -q scripts data
+uv run python -m compileall -q scripts analyses data
 ```
 
 The Quarto deck is still rendered with the installed Quarto binary:
@@ -50,9 +50,9 @@ The Quarto deck is still rendered with the installed Quarto binary:
 Run Python scripts through `uv run`:
 
 ```powershell
-uv run python scripts\lle\gando_2025_three_stage_crossflow.py
-uv run python scripts\lle\gando_2025_one_stage_assets.py
-uv run python scripts\lle\gando_2025_slide_assets.py
+uv run python analyses\brine_composition_screening\scripts\build_brine_screening_study.py
+uv run python analyses\rezaee_2026_pcsaft_epcsaft\scripts\rezaee_surrogate_input_space.py
+uv run python analyses\electrolyte_lle_literature\scripts\gando_2025_three_stage_crossflow.py
 ```
 
 If the local ePC-SAFT checkout changes native code, rerun:

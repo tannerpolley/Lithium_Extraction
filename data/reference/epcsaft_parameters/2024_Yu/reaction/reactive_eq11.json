@@ -1,6 +1,6 @@
 {
   "model": "eq11_reactive_wrapper",
-  "fit_timestamp_utc": "2026-05-08T04:11:37Z",
+  "fit_timestamp_utc": "2026-05-09T01:36:14Z",
   "basis": {
     "paper_equation": "Eq. 11",
     "paper_mechanism": "1 IL + 1 TOP + 1 Li <-> 1 aqueous [HOEMIM]+ + 1 organic Li complex",

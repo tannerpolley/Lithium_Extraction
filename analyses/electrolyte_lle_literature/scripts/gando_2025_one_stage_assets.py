@@ -17,7 +17,7 @@ if str(REPO_ROOT) not in sys.path:
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-from analyses.gando_2025_pcsaft_repro.scripts.gando_2025_selective_model import (
+from analyses.electrolyte_lle_literature.scripts.gando_2025_selective_model import (
     DEFAULT_CONFIG_JSON,
     MW,
     load_payload,
@@ -26,7 +26,7 @@ from analyses.gando_2025_pcsaft_repro.scripts.gando_2025_selective_model import 
     solve_selective_stage,
 )
 
-OUT_DIR = REPO_ROOT / "data" / "multiphase" / "gando_2025_one_stage_assets"
+OUT_DIR = REPO_ROOT / "analyses" / "electrolyte_lle_literature" / "results" / "gando_2025_one_stage_assets"
 LI_FEED_MG_L = 60.0
 NA_FEED_MG_L = 10900.0
 TOP_MOL_L = 0.015

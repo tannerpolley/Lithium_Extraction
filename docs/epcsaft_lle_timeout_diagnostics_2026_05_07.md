@@ -25,18 +25,18 @@ This note records why the Lithium_Extraction LLE scripts can time out before the
 Command inspected:
 
 ```powershell
-uv run python scripts\lle\_debug_hubach_single_point.py --timeout-seconds 20 --out-json data\multiphase\hubach_2024_single_point_debug_short_2026_05_07.json
+uv run python analyses\\electrolyte_lle_literature\\scripts\\_debug_hubach_single_point.py --timeout-seconds 20 --out-json analyses\electrolyte_lle_literature\results\debug\hubach_2024_single_point_debug_short_2026_05_07.json
 ```
 
 Result:
 
 - The command exceeded a 70 s outer runner limit before writing the requested JSON.
 - The spawned process chain was still alive after the runner timeout and had to be stopped.
-- This is not just an outer script loop problem: `scripts\lle\_debug_hubach_single_point.py` already wraps each option in a subprocess and calls `terminate()`/`kill()` after its option timeout.
+- This is not just an outer script loop problem: `analyses\\electrolyte_lle_literature\\scripts\\_debug_hubach_single_point.py` already wraps each option in a subprocess and calls `terminate()`/`kill()` after its option timeout.
 
 Relevant downstream call path:
 
-- `scripts\lle\hubach_2024_figure7_rwoa_replication.py::_solve_point`
+- `analyses\\electrolyte_lle_literature\\scripts\\hubach_2024_figure7_rwoa_replication.py::_solve_point`
 - `scripts\epcsaft_compat.py::pcsaft_multiphase_lle`
 - `ePCSAFTMixture.equilibrium(kind="electrolyte_lle")`
 
@@ -47,17 +47,17 @@ The Hubach script tries every Table S11 row. For each row, the stable profile se
 Command inspected:
 
 ```powershell
-uv run python scripts\lle\jang_2017_stage2_li_na_tbp_d2ehpa.py --mode single
+uv run python analyses\\electrolyte_lle_literature\\scripts\\jang_2017_stage2_li_na_tbp_d2ehpa.py --mode single
 ```
 
 Result:
 
 - A 45 s supervised single-contact probe timed out with no stdout or stderr.
-- The fallback in `scripts\lle\jang_2017_stage2_li_na_tbp_d2ehpa.py::_contact_fallback` is only reached after the ePC-SAFT call returns a non-two-phase result. If the package call does not return promptly, the script cannot fall back.
+- The fallback in `analyses\\electrolyte_lle_literature\\scripts\\jang_2017_stage2_li_na_tbp_d2ehpa.py::_contact_fallback` is only reached after the ePC-SAFT call returns a non-two-phase result. If the package call does not return promptly, the script cannot fall back.
 
 Relevant downstream call path:
 
-- `scripts\lle\jang_2017_stage2_li_na_tbp_d2ehpa.py::_solve_lle_with_retries`
+- `analyses\\electrolyte_lle_literature\\scripts\\jang_2017_stage2_li_na_tbp_d2ehpa.py::_solve_lle_with_retries`
 - `scripts\epcsaft_compat.py::pcsaft_multiphase_lle`
 - `ePCSAFTMixture.equilibrium(kind="electrolyte_lle")`
 
@@ -177,10 +177,10 @@ Interpretation:
 Commands that passed:
 
 ```powershell
-uv run python scripts\case_study\hbta_topo_reactive_stage_solve.py
-uv run python scripts\case_study\rezaee_des_epcsaft_parameter_smoke.py
-uv run python scripts\lle\gando_2025_three_stage_crossflow.py
-uv run python scripts\case_study\solvent_candidate_scorecard.py
+uv run python legacy HBTA/TOPO stage command removed during cleanup
+uv run python analyses\\rezaee_2026_pcsaft_epcsaft\\scripts\\rezaee_des_epcsaft_parameter_smoke.py
+uv run python analyses\\electrolyte_lle_literature\\scripts\\gando_2025_three_stage_crossflow.py
+uv run python legacy solvent scorecard command removed during cleanup
 ```
 
 Observed:
@@ -207,8 +207,8 @@ Observed:
 Downstream hard-script retest:
 
 ```powershell
-uv run python scripts\lle\_debug_hubach_single_point.py --timeout-seconds 30 --out-json data\multiphase\hubach_2024_single_point_debug_retry_2026_05_07.json
-uv run python scripts\lle\jang_2017_stage2_li_na_tbp_d2ehpa.py --mode single
+uv run python analyses\\electrolyte_lle_literature\\scripts\\_debug_hubach_single_point.py --timeout-seconds 30 --out-json analyses\electrolyte_lle_literature\results\debug\hubach_2024_single_point_debug_retry_2026_05_07.json
+uv run python analyses\\electrolyte_lle_literature\\scripts\\jang_2017_stage2_li_na_tbp_d2ehpa.py --mode single
 ```
 
 Observed:
@@ -242,10 +242,10 @@ Downstream Lithium_Extraction workflows are timing out before ePC-SAFT returns d
 
 Observed downstream probes:
 
-- `uv run python scripts\lle\_debug_hubach_single_point.py --timeout-seconds 20 --out-json data\multiphase\hubach_2024_single_point_debug_short_2026_05_07.json`
+- `uv run python analyses\\electrolyte_lle_literature\\scripts\\_debug_hubach_single_point.py --timeout-seconds 20 --out-json analyses\electrolyte_lle_literature\results\debug\hubach_2024_single_point_debug_short_2026_05_07.json`
   - Outer 70 s runner timed out before JSON was written.
   - This script already supervises each option in a subprocess.
-- `uv run python scripts\lle\jang_2017_stage2_li_na_tbp_d2ehpa.py --mode single`
+- `uv run python analyses\\electrolyte_lle_literature\\scripts\\jang_2017_stage2_li_na_tbp_d2ehpa.py --mode single`
   - A 45 s supervised single-contact probe timed out with no stdout/stderr.
 
 Relevant package route:
@@ -277,11 +277,12 @@ Downstream validation need:
 
 After the package change, Lithium_Extraction should be able to rerun:
 
-- `uv run python scripts\lle\_debug_hubach_single_point.py --timeout-seconds 20`
-- `uv run python scripts\lle\jang_2017_stage2_li_na_tbp_d2ehpa.py --mode single`
+- `uv run python analyses\\electrolyte_lle_literature\\scripts\\_debug_hubach_single_point.py --timeout-seconds 20`
+- `uv run python analyses\\electrolyte_lle_literature\\scripts\\jang_2017_stage2_li_na_tbp_d2ehpa.py --mode single`
 - the HBTA/TOPO case-study solve and PrOMMiS/IDAES handoff checks
 
 Expected behavior:
 
 Each hard case should return a valid two-phase result or a structured diagnostic failure within the configured budget.
 ```
+

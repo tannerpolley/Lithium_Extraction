@@ -2,9 +2,13 @@
 
 Created: 2026-05-08
 
-This folder holds generated artifacts, scripts, and old presentation files from the HBTA/TOPO, Gando 2025, Jang 2017, and early solvent-scorecard lanes.
+This folder records the historical HBTA/TOPO, Gando 2025, Jang 2017, and early
+solvent-scorecard lanes.
 
-These materials are retained for traceability and comparison, but they are no longer the active presentation chain.
+The bulky generated artifacts, copied scripts, old PowerPoint files, and
+duplicated data payloads were removed during the project cleanup. They remain
+recoverable from git history if needed, but they are no longer part of the
+active working tree.
 
 ## Active Case-Study Chain
 

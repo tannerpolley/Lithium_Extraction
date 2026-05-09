@@ -253,10 +253,10 @@ Implement a focused Hubach seed test in the ePC-SAFT repo:
 Generated debug artifacts in the lithium repo:
 
 ```text
-data/multiphase/hubach_single_point_option1_nfev20.json
-data/multiphase/hubach_single_point_option1_nfev80.json
-data/multiphase/hubach_single_point_row2_nfev20.json
-data/multiphase/hubach_single_point_row4_nfev20.json
+removed debug run: hubach_single_point_option1_nfev20.json
+removed debug run: hubach_single_point_option1_nfev80.json
+removed debug run: hubach_single_point_row2_nfev20.json
+removed debug run: hubach_single_point_row4_nfev20.json
 ```
 
 Useful code paths:

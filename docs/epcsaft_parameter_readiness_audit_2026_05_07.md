@@ -50,7 +50,7 @@ This project should use Python 3.13 for local path installs against `C:\Users\Ta
 - Diagnostic parameter-fit payloads that are not complete ePC-SAFT datasets live in `data/reference/epcsaft_parameter_fits/`.
 - `data/reference/epcsaft_parameter_catalog/legacy_epcsaft_properties/` is the legacy copied default catalog used by `data/epcsaft_properties.py` for fallback/default components. It is intentionally separated from complete runtime-style datasets under `data/reference/epcsaft_parameters/<DatasetName>/`.
 - New reusable datasets should live in the package-style `data/reference/epcsaft_parameters/<DatasetName>/` layout or under analysis-local `data/input/parameters/` when not reusable.
-- Generated retry/debug outputs should move out of `data/multiphase/` over time and into analysis-local `results/<plot_set_or_run>/`.
+- Generated retry/debug outputs should move out of `analyses/electrolyte_lle_literature/results/` over time and into analysis-local `results/<plot_set_or_run>/`.
 
 ## User Options Findings
 

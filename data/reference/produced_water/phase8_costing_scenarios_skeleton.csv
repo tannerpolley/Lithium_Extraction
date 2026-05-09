@@ -1,4 +1,0 @@
-scenario,feed_flow_m3_day,operating_hours_year,Li_feed_mg_L,TDS_mg_L,Li_recovery_pct_used,Li_recovery_pct_costing_capped,Li_feed_kg_year,Li_recovered_kg_year,Li2CO3_product_t_year,cost_status,notes
-flow_100_m3_day,100.0,8000.0,168.0,305000.0,99.99998957530654,97.17,5600.0,5441.52,28.968253193083576,missing_prices_and_capex,"Skeleton throughput only; not a TEA until prices, solvent loss, reagent doses, and equipment sizing are approved."
-flow_1000_m3_day,1000.0,8000.0,168.0,305000.0,99.99998957530654,97.17,56000.0,54415.2,289.6825319308357,missing_prices_and_capex,"Skeleton throughput only; not a TEA until prices, solvent loss, reagent doses, and equipment sizing are approved."
-flow_10000_m3_day,10000.0,8000.0,168.0,305000.0,99.99998957530654,97.17,560000.0,544152.0,2896.8253193083574,missing_prices_and_capex,"Skeleton throughput only; not a TEA until prices, solvent loss, reagent doses, and equipment sizing are approved."

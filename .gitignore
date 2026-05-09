@@ -2,3 +2,23 @@
 __pycache__/
 *.py[cod]
 ~$*
+
+# Local/generated workflow outputs
+build/
+tmp/
+slides/deck_files/
+slides/deck.html
+slides/deck.pdf
+slides/deck.pptx
+docs/Slides/template_render_check/
+docs/Slides/template_rezaee_filled_preview/
+docs/Slides/*Working Copy*.pptx
+
+# LaTeX/Beamer intermediates
+*.aux
+*.log
+*.nav
+*.out
+*.snm
+*.toc
+*.vrb

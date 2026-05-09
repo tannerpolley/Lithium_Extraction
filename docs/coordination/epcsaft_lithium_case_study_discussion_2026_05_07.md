@@ -41,9 +41,9 @@ Key downstream commands:
 ```text
 uv sync --reinstall-package epcsaft
 uv run python -m compileall -q scripts data
-uv run python scripts\case_study\hbta_topo_reactive_stage_solve.py
-uv run python scripts\case_study\rezaee_des_epcsaft_parameter_smoke.py
-uv run python scripts\case_study\solvent_candidate_scorecard.py
+uv run python legacy HBTA/TOPO stage command removed during cleanup
+uv run python analyses\\rezaee_2026_pcsaft_epcsaft\\scripts\\rezaee_des_epcsaft_parameter_smoke.py
+uv run python legacy solvent scorecard command removed during cleanup
 ```
 
 ## Current downstream result
@@ -226,3 +226,4 @@ No immediate upstream action is needed for discussion #32 unless a new package-s
 This coordination relay is complete. The remaining HBTA/TOPO lithium case-study work is downstream scientific/modeling work: true solvent/complex parameters, extraction-oriented regression data, reaction constants, and full PrOMMiS/IDAES staged solve/costing depth.
 
 Next actor: none
+

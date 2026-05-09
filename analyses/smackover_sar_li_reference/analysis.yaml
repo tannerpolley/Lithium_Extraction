@@ -1,0 +1,14 @@
+id: smackover_sar_li_reference
+title: Smackover SAR Lithium Reference Workflow
+status: reference
+epcsaft_dependency: none
+primary_scripts:
+  - scripts/prepare_sar_li_data.py
+  - scripts/train_sar_li_random_forest.R
+  - scripts/estimate_sar_li_uncertainty.py
+  - scripts/estimate_sar_li_grid.py
+reference_data:
+  - ../../data/reference/smackover_sar_li
+notes: >
+  External Smackover SAR lithium mapping workflow retained for source-data
+  traceability. Generated outputs are excluded from the tracked repository.

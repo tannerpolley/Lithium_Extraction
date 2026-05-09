@@ -15,10 +15,14 @@ inputs:
   - path: data/reference/extraction_models/gando_2025/
     kind: selective_model_parameter_inputs
 outputs:
-  - path: data/multiphase/
-    kind: generated_benchmark_outputs
-  - path: analyses/electrolyte_lle_literature/results/debug/hubach_single_point_debug_8s_20260507.json
-    kind: generated_bounded_hubach_diagnostic
+  - path: analyses/electrolyte_lle_literature/results/gando_2025_stage3/
+    kind: generated_gando_crossflow_outputs
+  - path: analyses/electrolyte_lle_literature/results/gando_2025_one_stage_assets/
+    kind: generated_gando_one_stage_outputs
+  - path: analyses/electrolyte_lle_literature/results/hubach_2024_figure7/
+    kind: curated_hubach_replication_snapshot
+  - path: analyses/electrolyte_lle_literature/results/debug/
+    kind: ignored_bounded_diagnostic_runs
 commands:
   validate:
     - uv run python analyses/electrolyte_lle_literature/scripts/gando_2025_three_stage_crossflow.py

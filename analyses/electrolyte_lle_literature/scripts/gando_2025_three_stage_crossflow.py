@@ -15,14 +15,14 @@ if str(REPO_ROOT) not in sys.path:
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-from analyses.gando_2025_pcsaft_repro.scripts.gando_2025_selective_model import (
+from analyses.electrolyte_lle_literature.scripts.gando_2025_selective_model import (
     DEFAULT_CONFIG_JSON,
     load_payload,
     load_selective_config,
     run_three_stage_crossflow,
 )
 
-OUT_DIR = REPO_ROOT / 'data' / 'multiphase'
+OUT_DIR = REPO_ROOT / 'analyses' / 'electrolyte_lle_literature' / 'results' / 'gando_2025_stage3'
 OUT_CSV = OUT_DIR / 'gando_2025_stage3_comparison.csv'
 OUT_MD = OUT_DIR / 'gando_2025_stage3_comparison.md'
 OUT_PNG = OUT_DIR / 'gando_2025_stage3_efficiency_plot.png'

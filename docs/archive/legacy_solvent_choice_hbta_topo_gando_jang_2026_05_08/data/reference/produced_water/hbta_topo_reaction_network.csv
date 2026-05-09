@@ -1,7 +1,0 @@
-reaction_id,reaction,role,current_status,parameter_needed,modeling_level_now,modeling_level_target
-R1,"HBTA_org + NaOH_aq -> NaBTA_org_or_aq + H2O",saponification_or_deprotonation,stoichiometry_known_K_missing,equilibrium_constant_or_saponification_extent,assume_100_percent_saponification_from_literature,reactive_speciation
-R2,"Li+_aq + BTA-_org + n TOPO_org <-> Li(BTA)(TOPO)n_org",lithium_extraction_complexation,mechanism_expected_K_missing,complex stoichiometry n and equilibrium constant,source_regressed_li_na_stage_model,true_reactive_LLE_or_speciation_handoff
-R3,"Na+_aq + BTA-_org + n TOPO_org <-> Na(BTA)(TOPO)n_org",weak_sodium_coextraction,not_reported_directly,equilibrium constant or rejection factor,weak calibrated spectator extraction,true selectivity prediction
-R4,"Ca2+_aq + 2 BTA-_org + n TOPO_org <-> Ca(BTA)2(TOPO)n_org",calcium_competition,mechanism_expected_K_missing,equilibrium constant and complex parameters,pretreatment removes_or_flags Ca,true competitive reactive extraction
-R5,"Mg2+_aq + 2 BTA-_org + n TOPO_org <-> Mg(BTA)2(TOPO)n_org",magnesium_competition,mechanism_expected_K_missing,equilibrium constant and complex parameters,pretreatment removes_or_flags Mg,true competitive reactive extraction
-R6,"Li(BTA)(TOPO)n_org + H+_aq <-> Li+_aq + HBTA_org + n TOPO_org",acid_stripping,process_step_known_K_missing,stripping equilibrium constant and acid basis,process hook only,closed extraction/stripping cycle

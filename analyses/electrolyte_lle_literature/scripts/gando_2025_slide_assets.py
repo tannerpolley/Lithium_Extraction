@@ -16,7 +16,7 @@ if str(REPO_ROOT) not in sys.path:
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-from analyses.gando_2025_pcsaft_repro.scripts.gando_2025_selective_model import (
+from analyses.electrolyte_lle_literature.scripts.gando_2025_selective_model import (
     DEFAULT_CONFIG_JSON,
     MW,
     load_payload,
@@ -25,7 +25,7 @@ from analyses.gando_2025_pcsaft_repro.scripts.gando_2025_selective_model import 
     solve_selective_stage,
 )
 
-OUT_DIR = REPO_ROOT / "data" / "multiphase" / "gando_2025_slide_assets"
+OUT_DIR = REPO_ROOT / "analyses" / "electrolyte_lle_literature" / "results" / "gando_2025_slide_assets"
 TABLE4_CUM = np.array([54.95, 85.60, 97.17], dtype=float)
 FIG3_NA_MG_L = np.array([0.0, 2000.0, 4000.0, 6000.0, 8000.0, 10900.0], dtype=float)
 FIG3_LI_TARGET = np.array([49.82, np.nan, np.nan, np.nan, np.nan, 51.82], dtype=float)

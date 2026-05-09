@@ -1,12 +1,12 @@
 # Root Scripts
 
-Root `scripts/` is kept for repository-level helpers and backwards-compatible commands.
+Root `scripts/` is reserved for repository-level helpers shared by multiple
+analyses.
 
-The study-specific implementation scripts now live under `analyses/<analysis_id>/scripts/`. The files under these legacy paths are thin wrappers:
+Study workflows belong under `analyses/<analysis_id>/scripts/`. Do not add
+paper-specific, figure-specific, or case-study execution scripts here.
 
-- `scripts/case_study/*` -> `analyses/hbta_topo_case_study/scripts/*`
-- `scripts/lle/*` -> `analyses/electrolyte_lle_literature/scripts/*`
-- `scripts/gando_2025_pcsaft_repro/*` -> `analyses/gando_2025_pcsaft_repro/scripts/*`
-- `scripts/Yu_2024_analysis/*` -> `analyses/yu_2024_figure6/scripts/*`
+## Current Root Helpers
 
-New Codex agents should edit the `analyses/` implementation files, not the wrappers, unless they are intentionally changing the compatibility layer.
+- `epcsaft_compat.py` - compatibility bridge for the local ePC-SAFT package
+  surface used by several analysis workflows.

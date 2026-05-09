@@ -1,7 +1,0 @@
-stage,stream,Li_mg_L,Na_mg_L,notes
-0,aqueous_feed,168.0,64100.0,"Selected MS-2 base feed before pretreatment/extraction."
-0,after_pretreatment,168.0,64100.0,"Skeleton assumes Li/Na unchanged by pretreatment; Ca/Mg/Sr removal is tracked separately in future flowsheet."
-1,raffinate,121.5020,64032.6172,"Computed from wrapper stage-1 transfer at O/A=1; extrapolative skeleton."
-1,loaded_organic_basis,46.4980,67.3828,"Organic concentration basis is transfer amount per aqueous feed volume, not a full organic-phase composition."
-3,final_raffinate,45.3538,63844.0435,"Computed from cumulative three-stage wrapper transfer at O/A=1; extrapolative skeleton."
-3,cumulative_loaded_organic_basis,122.6462,255.9565,"Cumulative transfer amount per aqueous feed volume."

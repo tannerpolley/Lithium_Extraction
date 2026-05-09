@@ -92,8 +92,8 @@ These are input contracts, not surrogate response data. The next concrete script
 The current branch organizes work under analysis folders:
 
 - `analyses/rezaee_2026_pcsaft_epcsaft/`
-- `analyses/hbta_topo_case_study/`
-- `analyses/gando_2025_pcsaft_repro/`
+- `legacy HBTA/TOPO analysis removed during cleanup: `
+- `legacy standalone Gando analysis removed during cleanup: `
 - `analyses/electrolyte_lle_literature/`
 - `analyses/yu_2024_figure6/`
 
@@ -207,9 +207,9 @@ Current state:
 Important files:
 
 ```text
-analyses/hbta_topo_case_study/README.md
-analyses/hbta_topo_case_study/scripts/hbta_topo_reactive_stage_solve.py
-analyses/hbta_topo_case_study/scripts/solvent_candidate_scorecard.py
+legacy HBTA/TOPO analysis removed during cleanup: README.md
+legacy HBTA/TOPO analysis removed during cleanup: scripts/hbta_topo_reactive_stage_solve.py
+legacy HBTA/TOPO analysis removed during cleanup: scripts/solvent_candidate_scorecard.py
 data/reference/extraction_models/gando_2025/hbta_topo_reactive_fit.json
 data/reference/produced_water/hbta_topo_reactive_stage_results.csv
 data/reference/produced_water/hbta_topo_reactive_model_report.md
@@ -231,11 +231,11 @@ The Gando reproduction runner works and produces a compact nine-row result table
 Important files:
 
 ```text
-analyses/gando_2025_pcsaft_repro/README.md
-analyses/gando_2025_pcsaft_repro/scripts/reproduce_gando_2025_pcsaft.py
-data/multiphase/gando_2025_pcsaft_repro.csv
-data/multiphase/gando_2025_pcsaft_repro.md
-data/multiphase/gando_2025_pcsaft_repro.png
+legacy standalone Gando analysis removed during cleanup: README.md
+legacy standalone Gando analysis removed during cleanup: scripts/reproduce_gando_2025_pcsaft.py
+legacy generated Gando PC-SAFT repro CSV removed during cleanup
+legacy generated Gando PC-SAFT repro report removed during cleanup
+legacy generated Gando PC-SAFT repro figure removed during cleanup
 ```
 
 ### Bounded ePC-SAFT Hard-Case Diagnostics
@@ -256,7 +256,7 @@ Important files:
 
 ```text
 docs/epcsaft_lle_timeout_diagnostics_2026_05_07.md
-analyses/hbta_topo_case_study/scripts/epcsaft_equilibrium_retry_matrix_2026_05_07.py
+legacy HBTA/TOPO analysis removed during cleanup: scripts/epcsaft_equilibrium_retry_matrix_2026_05_07.py
 analyses/electrolyte_lle_literature/scripts/_debug_hubach_single_point.py
 analyses/electrolyte_lle_literature/results/debug/hubach_single_point_debug_8s_20260507.json
 data/reference/produced_water/epcsaft_equilibrium_retry_matrix_2026_05_07.md
@@ -309,9 +309,9 @@ uv run python analyses\rezaee_2026_pcsaft_epcsaft\scripts\rezaee_section32_basis
 uv run python analyses\rezaee_2026_pcsaft_epcsaft\scripts\rezaee_section32_equilibrium_replication.py
 uv run python analyses\rezaee_2026_pcsaft_epcsaft\scripts\rezaee_li_na_distribution_bridge.py
 uv run python analyses\rezaee_2026_pcsaft_epcsaft\scripts\rezaee_tds_li_oa_calibrated_surrogate.py
-uv run python analyses\hbta_topo_case_study\scripts\hbta_topo_reactive_stage_solve.py
-uv run python analyses\hbta_topo_case_study\scripts\solvent_candidate_scorecard.py
-uv run python analyses\gando_2025_pcsaft_repro\scripts\reproduce_gando_2025_pcsaft.py
+uv run python legacy HBTA/TOPO command removed during cleanup
+uv run python legacy HBTA/TOPO command removed during cleanup
+uv run python analyses\\electrolyte_lle_literature\\scripts\\gando_2025_three_stage_crossflow.py
 ```
 
 PrOMMiS-side calibrated result mirror:
@@ -380,4 +380,5 @@ git diff --stat
 ```
 
 Commit only high-signal docs, source inputs, scripts, and curated final outputs. Avoid committing huge raw solver diagnostics unless the handoff explicitly requires that snapshot.
+
 

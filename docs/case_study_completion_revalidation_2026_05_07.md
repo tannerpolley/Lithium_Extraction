@@ -49,19 +49,19 @@ Scope: HBTA/TOPO source-regressed Li/Na case study, broader Lithium Recovery Zot
 
 | Command | Result |
 |---|---|
-| `uv run python scripts\case_study\zotero_lithium_recovery_deep_review.py` | Passed; regenerated Zotero evidence and candidate artifacts. |
-| `uv run python scripts\case_study\hbta_topo_reactive_stage_solve.py` | Passed; regenerated source-regressed HBTA/TOPO model artifacts. |
-| `uv run python scripts\case_study\rezaee_des_epcsaft_parameter_smoke.py` | Passed; density fit succeeded, ePC-SAFT LLE remains diagnostic error. |
-| `uv run python scripts\case_study\smackover_phase6_8_skeleton.py` | Passed; regenerated Smackover transfer and PrOMMiS handoff skeletons. |
-| `uv run python scripts\case_study\solvent_candidate_scorecard.py` | Passed; regenerated active scorecard and run matrix. |
-| `uv run python scripts\Yu_2024_analysis\yu_2024_figure6_digitized_recreation.py` | Passed. |
-| `uv run python scripts\Yu_2024_analysis\yu_2024_figure6_reactive_replication.py` | Passed. |
-| `uv run python scripts\gando_2025_pcsaft_repro\reproduce_gando_2025_pcsaft.py` | Passed. |
-| `uv run python scripts\lle\gando_2025_three_stage_crossflow.py` | Passed. |
-| `uv run python scripts\lle\gando_2025_one_stage_assets.py` | Passed. |
-| `uv run python scripts\lle\gando_2025_slide_assets.py` | Passed. |
-| `uv run python scripts\lle\_debug_hubach_single_point.py` | Timed out at 180 seconds; stopped the two remaining child PIDs. |
-| `uv run python scripts\lle\jang_2017_stage2_li_na_tbp_d2ehpa.py` | Timed out at 180 seconds; stopped the two remaining child PIDs. |
+| `uv run python legacy Zotero review command removed during cleanup` | Passed; regenerated Zotero evidence and candidate artifacts. |
+| `uv run python legacy HBTA/TOPO stage command removed during cleanup` | Passed; regenerated source-regressed HBTA/TOPO model artifacts. |
+| `uv run python analyses\\rezaee_2026_pcsaft_epcsaft\\scripts\\rezaee_des_epcsaft_parameter_smoke.py` | Passed; density fit succeeded, ePC-SAFT LLE remains diagnostic error. |
+| `uv run python analyses\\rezaee_2026_pcsaft_epcsaft\\scripts\\rezaee_surrogate_input_space.py` | Passed; regenerated Smackover transfer and PrOMMiS handoff skeletons. |
+| `uv run python legacy solvent scorecard command removed during cleanup` | Passed; regenerated active scorecard and run matrix. |
+| `uv run python analyses\\yu_2024_figure6\\scripts\\yu_2024_figure6_digitized_recreation.py` | Passed. |
+| `uv run python analyses\\yu_2024_figure6\\scripts\\yu_2024_figure6_reactive_replication.py` | Passed. |
+| `uv run python analyses\\electrolyte_lle_literature\\scripts\\gando_2025_three_stage_crossflow.py` | Passed. |
+| `uv run python analyses\\electrolyte_lle_literature\\scripts\\gando_2025_three_stage_crossflow.py` | Passed. |
+| `uv run python analyses\\electrolyte_lle_literature\\scripts\\gando_2025_one_stage_assets.py` | Passed. |
+| `uv run python analyses\\electrolyte_lle_literature\\scripts\\gando_2025_slide_assets.py` | Passed. |
+| `uv run python analyses\\electrolyte_lle_literature\\scripts\\_debug_hubach_single_point.py` | Timed out at 180 seconds; stopped the two remaining child PIDs. |
+| `uv run python analyses\\electrolyte_lle_literature\\scripts\\jang_2017_stage2_li_na_tbp_d2ehpa.py` | Timed out at 180 seconds; stopped the two remaining child PIDs. |
 | `uv run python -m compileall -q scripts data` | Passed. |
 | `C:\ProgramData\Miniconda3\envs\prommis\python.exe -m prommis.solvent_extraction.pcsaft_integration.hbta_topo_idaes_costing` | Passed. |
 | `C:\ProgramData\Miniconda3\envs\prommis\python.exe -m pytest src\prommis\solvent_extraction\pcsaft_integration\tests -q` | Passed: `144 passed, 3 skipped`. |
@@ -82,3 +82,4 @@ Scope: HBTA/TOPO source-regressed Li/Na case study, broader Lithium Recovery Zot
 3. Use Zhang 2018 mixer-settler data as process-scale validation for stage count, residence, and concentration behavior.
 4. Build a true PrOMMiS MSContactor solve against the source-regressed transfer table, then propagate uncertainty bands instead of point values only.
 5. Replace Class-5 costing assumptions with solvent price/loss, acid/base regeneration, pretreatment reagent, concentration-energy, and contactor-sizing ranges.
+

@@ -42,9 +42,9 @@ The current thread's Zotero MCP transport returned `Transport closed` after the 
 | Article | Current artifact | Status | Next action |
 |---|---|---|---|
 | Yu 2024 | `scripts/Yu_2024_analysis/output/yu_2024_figure6_reactive_replication.png` | existing_recreation_and_package_diagnostic | Re-run digitized and reactive scripts; keep direct ePC-SAFT collapse as diagnostic if it remains. |
-| Hubach 2024 | `data/multiphase/hubach_2024_figure7_replication.png` | existing_replication_with_native_ePC-SAFT_failure_diagnostics | Run bounded single-point checks only; full run can hang. |
-| Gando/Shan 2025 | `data/multiphase/gando_2025_slide_assets/gando_2025_stagewise_extraction_bars.png` | existing selective-stage assets and source-regressed HBTA/TOPO model | Add Zhang 2017 D/isotherm data before changing the fit. |
-| Jang 2017 | `data/multiphase/jang_2017_stage2_li_na_efficiency_plot.png` | existing limitation-baseline output; script may be slow | Run with timeout; retain existing output if it exceeds practical runtime. |
+| Hubach 2024 | `analyses/electrolyte_lle_literature/results/hubach_2024_figure7/hubach_2024_figure7_replication.png` | existing_replication_with_native_ePC-SAFT_failure_diagnostics | Run bounded single-point checks only; full run can hang. |
+| Gando/Shan 2025 | `analyses/electrolyte_lle_literature/results/gando_2025_slide_assets/gando_2025_stagewise_extraction_bars.png` | existing selective-stage assets and source-regressed HBTA/TOPO model | Add Zhang 2017 D/isotherm data before changing the fit. |
+| Jang 2017 | `legacy Jang generated figure removed during cleanup` | existing limitation-baseline output; script may be slow | Run with timeout; retain existing output if it exceeds practical runtime. |
 | Zhang 2017 | `not_yet_digitized` | highest_value_new_figure_target | Digitize pH, O/A/isotherm, and temperature plots to improve HBTA/TOPO fit. |
 
 ## Recommendation

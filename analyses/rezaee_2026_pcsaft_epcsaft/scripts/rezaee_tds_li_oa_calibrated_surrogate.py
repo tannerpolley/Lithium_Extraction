@@ -42,16 +42,23 @@ N_LHS = 500
 NA_FRACTION_OF_TDS = 64100.0 / 305000.0
 LI2CO3_PER_LI = 73.891 / (2.0 * 6.94)
 OPERATING_HOURS_YEAR = 8000.0
-UPSTREAM_REZAEE_ROWS = (
-    Path(os.environ["EPCSAFT_REZAEE_SECTION32_ROWS"])
-    if "EPCSAFT_REZAEE_SECTION32_ROWS" in os.environ
-    else Path(__file__).resolve().parents[6]
-    / "analyses"
-    / "2026_rezaee"
-    / "data"
-    / "processed"
-    / "rezaee_2026_section32_revised_31_run_results.csv"
-)
+
+
+def _default_upstream_rezaee_rows() -> Path:
+    if "EPCSAFT_REZAEE_SECTION32_ROWS" in os.environ:
+        return Path(os.environ["EPCSAFT_REZAEE_SECTION32_ROWS"])
+    return (
+        REPO_ROOT.parent
+        / "ePC-SAFT"
+        / "analyses"
+        / "2026_rezaee"
+        / "data"
+        / "processed"
+        / "rezaee_2026_section32_revised_31_run_results.csv"
+    )
+
+
+UPSTREAM_REZAEE_ROWS = _default_upstream_rezaee_rows()
 SURROGATE_FEATURE_NAMES = [
     "intercept",
     "T_centered_30C_scaled_5C",

@@ -1,4 +1,0 @@
-row_index=0 rw_oa=0.522 exp=75.39 s11_calc=78.16
-pcsaft module: C:\Users\Tanner\Documents\git\Lithium_Extraction\scripts\epcsaft_compat.py
-direct result: converged=False n_phases=1 status=SolutionError wall=143.01617590000023
-wrote C:\Users\Tanner\Documents\git\Lithium_Extraction\data\multiphase\hubach_single_point_option1_nfev80.json

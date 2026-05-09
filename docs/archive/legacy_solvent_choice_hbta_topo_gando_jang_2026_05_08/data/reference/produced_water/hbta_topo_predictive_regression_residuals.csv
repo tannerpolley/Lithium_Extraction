@@ -1,6 +1,0 @@
-residual_id,zotero_key,target_value,predicted_value,residual,units,acceptance_tolerance
-gando_table4_stage1_li_cumulative,JUNBXVTI,54.95,54.88823452664332,-0.06176547335667948,percent,"source-regressed, report residual; not an independent validation point"
-gando_table4_stage2_li_cumulative,JUNBXVTI,85.6,85.72243516766177,0.1224351676617772,percent,"source-regressed, report residual; not an independent validation point"
-gando_table4_stage3_li_cumulative,JUNBXVTI,97.17,97.03852212607971,-0.1314778739202893,percent,"source-regressed, report residual; not an independent validation point"
-derived_stage1_na_from_li_selectivity,9LJWDC7E,0.05804989332869919,0.05790511662354193,-0.0001447767051572582,percent,derived lower-bound selectivity anchor
-zhang2017_li_na_selectivity_lower_bound,9LJWDC7E,2100.0,2100.0079845672117,0.00798456721167895,dimensionless,predicted value should stay above conservative lower bound
