@@ -1,0 +1,12 @@
+variable,kind,unit,lower_bound,upper_bound,fixed_value,allowed_values,role,notes
+Li_feed_mg_L,continuous,mg/L,80,300,,,"Produced-water lithium grade range","Covers Smackover, Marcellus-like, and Bakken-relevant grades without drifting into weak Permian as the main case."
+TDS_feature_mg_L,continuous,mg/L,80000,360000,,,"Salinity and process feature","Used as a feature and cost/process stress variable; not a standalone fitted extraction response unless Agent 2 validates it."
+Na_Li_mass_ratio,continuous,mass ratio,75,850,,,"Primary Li/Na selectivity stress variable","Use log or stratified sampling because the selected feeds span low-comparison to high-stress sodium burden."
+organic_to_aqueous_mass_ratio,continuous,mass ratio,0.5,2.0,,,"Stage capacity and recovery sensitivity","Use mass-ratio basis unless Agent 2 explicitly replaces it with a density-corrected convention."
+temperature_C,continuous,deg C,20,35,,,"Near-domain operating variable","Keeps sampling near the source-paper domain and avoids broad thermal extrapolation."
+aqueous_pH,continuous,pH,9.5,10.8,,,"Reaction and phase-behavior variable","Avoids pH above 11 because the roadmap flags third-phase or emulsion risk."
+TOPO_wt_pct_in_organic,fixed,wt pct,,,10,10,"Fixed official solvent formulation","Do not vary TOPO in the main case-study design."
+TBAC_to_DA_molar_ratio,fixed,molar ratio,,,1:2,1:2,"Fixed DES formulation","Do not vary TBAC:DA in the main case-study design."
+stage_count,integer,count,1,5,,1;2;3;4;5,"Process and screening-TEA variable","Integer stage count for staged extraction and costing sensitivity."
+residual_divalent_mg_L,continuous,mg/L,0,500,,,"Pretreatment leakage guardrail only","Nonzero values flag residual Ca/Mg/Sr/Ba risk; they are not active extraction species."
+feed_id,categorical,identifier,,,,smackover_ms2_main;smackover_high_observed_sensitivity;marcellus_ne_pa_comparison;bakken_high_na_stress,"Feed selection variable","Permian remains landscape context only unless new high-Li data are added."
