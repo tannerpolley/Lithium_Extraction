@@ -1,0 +1,206 @@
+version: 2
+
+goal:
+  title: "Agent 2 ePC-SAFT Surrogate"
+  slug: "agent-2-epcsaft-surrogate"
+  kind: existing_plan
+  tranche: "Prepare the Agent 2 board; later execute ePC-SAFT diagnostics, phase-inventory scans, and transfer-variable artifacts from the prompt."
+  status: done
+  intake:
+    original_request: "Prep the goal to follow docs/plans/AGENT_2_EPCSAFT_SURROGATE_PROMPT.md and read docs/plans/MASTER_CASE_STUDY_CONTEXT_ROADMAP.md for context."
+    interpreted_outcome: "Create a GoalBuddy board that will execute the Agent 2 ePC-SAFT surrogate and transfer-variable slice with correct case-study language and validation boundaries."
+    input_shape: existing_plan
+    audience: "Internal KeyLogic/government-contracted technical management and project leads"
+    authority: requested
+    proof_type: artifact
+    completion_proof: "Agent 2 prompt deliverables exist, validation passes or blockers are documented, and transfer-variable outputs are ready for Agent 3."
+    likely_misfire: "Starting model/surrogate work without first reading the Agent 2 prompt and master roadmap or without preserving Agent 1 naming/feed boundaries."
+    blind_spots_considered:
+      - "Direct reactive-LLE closure may remain unresolved and must not be overclaimed."
+      - "High-Na/Li produced-water rows are extrapolations beyond the source-paper low-Na/Li design space."
+      - "Phase-inventory / reaction-coordinate reference-state convention may be the main unresolved diagnostic."
+      - "Transfer-table and costing-stage recoveries may differ and must not be blended without labels."
+      - "Mutable local ePC-SAFT worktree use is not allowed for stable/final downstream mode."
+    existing_plan_facts:
+      - "Controlling prompt: docs/plans/AGENT_2_EPCSAFT_SURROGATE_PROMPT.md."
+      - "Context roadmap: docs/plans/MASTER_CASE_STUDY_CONTEXT_ROADMAP.md."
+      - "Agent 1 outputs define the case-study framing, selected feeds, and TBAC/DA/TOPO LHS/LHC ranges."
+      - "Agent 2 owns ePC-SAFT, phase-inventory diagnostics, and Li/Na transfer variables."
+      - "Agent 3 owns PrOMMiS/IDAES staged extraction, screening TEA, and deck revision."
+
+rules:
+  pm_owns_state: true
+  one_active_task: true
+  max_write_workers: 1
+  no_implementation_without_worker_or_pm_task: true
+  no_completion_without_judge_or_pm_audit: true
+  planning_is_not_completion: true
+  queued_required_worker_blocks_completion: true
+  continuous_until_full_outcome: true
+  missing_input_or_credentials_do_not_stop_goal: true
+  preserve_and_validate_existing_plan: true
+  intake_misfire_must_be_audited: true
+  slice_policy:
+    max_consecutive_tiny_tasks: 2
+    prefer_vertical_slices: true
+    judge_picks_largest_safe_slice: true
+    worker_completes_whole_slice: true
+
+agents:
+  scout: installed
+  worker: installed
+  judge: installed
+
+visual_board:
+  selected: local
+  local:
+    status: live
+    url: "http://127.0.0.1:41737/agent-2-epcsaft-surrogate/"
+    command: "& C:\\Users\\Tanner\\Documents\\git\\codex-maintenance\\scripts\\start-goalbuddy-board.ps1 -Goal docs/goals/agent-2-epcsaft-surrogate"
+  github_projects:
+    status: not_requested
+    url: null
+    command: "npx goalbuddy extend github-projects"
+    missing: []
+
+active_task: null
+
+tasks:
+  - id: T001
+    type: pm
+    assignee: PM
+    status: done
+    reasoning_hint: high
+    objective: "Read the Agent 2 prompt and master roadmap, then validate the execution plan against Agent 1 outputs and current repo state."
+    inputs:
+      - "docs/plans/AGENT_2_EPCSAFT_SURROGATE_PROMPT.md"
+      - "docs/plans/MASTER_CASE_STUDY_CONTEXT_ROADMAP.md"
+      - "docs/case_study_tbac_da_topo_storyboard.md"
+      - "docs/case_study_claims_and_boundaries.md"
+      - "data/reference/produced_water/selected_case_study_feeds.csv"
+      - "data/reference/produced_water/tbac_da_topo_lhs_input_ranges.csv"
+    constraints:
+      - "Use the named skills only after the /goal execution starts and only when they help the active task."
+      - "Apply chemical solvent labels and internal screening-TEA language."
+      - "Do not edit model or generated data files during this plan-validation task unless the board is advanced to a Worker task."
+      - "Do not switch epcsaft to a mutable local worktree."
+    expected_output:
+      - "Validated Agent 2 task breakdown."
+      - "Allowed files for the first Worker slice."
+      - "Verification commands and stop conditions."
+      - "Any blocked or missing evidence paths."
+    receipt:
+      result: done
+      evidence:
+        - "Read Agent 2 prompt, master roadmap, Agent 1 storyboard/boundary docs, selected feeds, and LHS input ranges."
+        - "Confirmed Agent 2 can proceed as a downstream stable-mode artifact slice without switching epcsaft to a mutable local worktree."
+        - "Existing source-paper bridge and calibrated surrogate outputs are present under analyses/rezaee_2026_pcsaft_epcsaft/data/processed."
+        - "Direct reactive-LLE diagnostics remain a bounded diagnostic; no direct_epcsaft_v1 transfer variables may be promoted unless closure validation passes."
+      worker_slice: "Generate prompt-named tbac_da_topo design, phase-inventory convention scan, Li/Na transfer-variable table, model report, and changelog from Agent 1 inputs plus existing calibrated/direct diagnostic outputs."
+      blocked: []
+
+  - id: T002
+    type: worker
+    assignee: Worker
+    status: done
+    reasoning_hint: high
+    objective: "Generate Agent 2 tbac_da_topo artifacts from Agent 1 inputs and existing calibrated/direct diagnostic outputs, preserving model-basis labels and direct-LLE claim boundaries."
+    allowed_files:
+      - "analyses/rezaee_2026_pcsaft_epcsaft/scripts/tbac_da_topo_agent2_transfer_artifacts.py"
+      - "data/processed/tbac_da_topo_lhs_design.csv"
+      - "data/processed/tbac_da_topo_phase_inventory_convention_scan.csv"
+      - "data/processed/tbac_da_topo_li_na_transfer_variables.csv"
+      - "data/reference/produced_water/tbac_da_topo_lhs_design.csv"
+      - "data/reference/produced_water/tbac_da_topo_phase_inventory_convention_scan.csv"
+      - "data/reference/produced_water/tbac_da_topo_li_na_transfer_variables.csv"
+      - "results/tbac_da_topo_phase_inventory_convention_scan.md"
+      - "results/tbac_da_topo_li_na_surrogate_report.md"
+      - "docs/case_study_tbac_da_topo_agent2_changelog.md"
+      - "docs/goals/agent-2-epcsaft-surrogate/state.yaml"
+    verify:
+      - "uv run python analyses/rezaee_2026_pcsaft_epcsaft/scripts/tbac_da_topo_agent2_transfer_artifacts.py"
+      - "uv run python -m compileall -q analyses/rezaee_2026_pcsaft_epcsaft/scripts"
+      - "uv run python scripts/check_epcsaft_integration.py --mode final"
+      - "uv run node C:/Users/Tanner/.codex/plugins/cache/goalbuddy/goalbuddy/0.3.6/skills/goalbuddy/scripts/check-goal-state.mjs docs/goals/agent-2-epcsaft-surrogate/state.yaml"
+    stop_if:
+      - "Need files outside allowed_files."
+      - "Agent 2 prompt conflicts with Agent 1 accepted framing."
+      - "ePC-SAFT package source resolves to a mutable local worktree in stable or final mode."
+      - "Direct reactive-LLE evidence is incomplete but would be required for a claim."
+      - "Verification fails twice with the same unresolved root cause."
+    receipt:
+      result: done
+      summary:
+        - "Generated 19 prompt-bounded design rows, 10 convention-scan rows, and 19 Li/Na transfer-variable rows."
+        - "Nominal Smackover MS-2 row: 50.659% one-stage Li extraction, 5.667% one-stage Na extraction, and 87.988% three-stage Li recovery."
+        - "Produced-water rows use surrogate_v1_calibrated_surface; source-paper anchors use bridge_v0_source_regressed; direct_epcsaft_v1 is not promoted."
+      changed_files:
+        - "analyses/rezaee_2026_pcsaft_epcsaft/scripts/tbac_da_topo_agent2_transfer_artifacts.py"
+        - "data/processed/tbac_da_topo_lhs_design.csv"
+        - "data/processed/tbac_da_topo_phase_inventory_convention_scan.csv"
+        - "data/processed/tbac_da_topo_li_na_transfer_variables.csv"
+        - "data/reference/produced_water/tbac_da_topo_lhs_design.csv"
+        - "data/reference/produced_water/tbac_da_topo_phase_inventory_convention_scan.csv"
+        - "data/reference/produced_water/tbac_da_topo_li_na_transfer_variables.csv"
+        - "results/tbac_da_topo_phase_inventory_convention_scan.md"
+        - "results/tbac_da_topo_li_na_surrogate_report.md"
+        - "docs/case_study_tbac_da_topo_agent2_changelog.md"
+      commands:
+        - command: "uv run python analyses/rezaee_2026_pcsaft_epcsaft/scripts/tbac_da_topo_agent2_transfer_artifacts.py"
+          status: pass
+        - command: "uv run python -m compileall -q analyses/rezaee_2026_pcsaft_epcsaft/scripts"
+          status: pass
+        - command: "uv run python scripts/check_epcsaft_integration.py --mode final"
+          status: pass
+        - command: "custom artifact validation"
+          status: pass
+        - command: "Select-String over new data/results for author-name shorthand"
+          status: pass
+      blocked: []
+
+  - id: T999
+    type: judge
+    assignee: Judge
+    status: done
+    reasoning_hint: high
+    objective: "Audit whether Agent 2 deliverables satisfy the prompt and are ready for Agent 3."
+    inputs:
+      - "All done task receipts"
+      - "Agent 2 prompt acceptance checks"
+      - "Current diff"
+      - "Validation output"
+    constraints:
+      - "Reject completion if transfer variables lack basis labels or validity flags."
+      - "Reject completion if direct reactive-LLE is overclaimed."
+      - "Reject completion if author-name solvent shorthand appears in new executive-facing artifacts."
+      - "Reject completion if generated rows cannot be traced to prompt-approved feed/range inputs."
+    expected_output:
+      - "complete | not_complete"
+      - "full_outcome_complete: true | false"
+      - "missing evidence"
+      - "next task if not complete"
+    receipt:
+      result: done
+      decision: complete
+      full_outcome_complete: true
+      summary:
+        - "Agent 2 prompt deliverables exist under data/processed, data/reference/produced_water, results, docs, and the analysis scripts folder."
+        - "Transfer variables preserve model-basis labels: surrogate_v1_calibrated_surface for produced-water rows and bridge_v0_source_regressed for source-paper anchors."
+        - "Direct ePC-SAFT is not overclaimed; phase-inventory diagnostics keep direct_epcsaft_v1 as not promoted."
+      evidence:
+        - "Generated nominal Smackover MS-2 row reports 50.659% one-stage Li extraction, 5.667% one-stage Na extraction, and 87.988% three-stage Li recovery."
+        - "All generated transfer rows have validity_flag and extrapolation_flag values."
+        - "TOPO_wt_pct_in_organic is fixed at 10.0 and TBAC_to_DA_molar_ratio is fixed at 1:2 in every generated transfer row."
+        - "High-Na/Li produced-water rows are flagged outside the low-Na/Li source-paper design space."
+        - "Final ePC-SAFT integration check passed in final mode using pinned_git epcsaft 1.5.2."
+      missing_evidence: []
+      residual_risk:
+        - "Marcellus comparison feed lacks Na_mg_L and Na_Li_mass_ratio, so the transfer row uses the prompt lower-bound Na/Li and labels the imputation."
+        - "Temperature and pH are retained in the design; the current calibrated transfer bridge response is the nominal T/pH surface until source-row calibration is refreshed."
+
+checks:
+  dirty_fingerprint: unknown
+  last_verification:
+    result: unknown
+    task: null
+    commands: []
