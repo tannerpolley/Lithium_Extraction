@@ -7,20 +7,24 @@
   "des_mw_kg_mol": 0.20748,
   "des_mw_note": "Average formula-unit molecular weight for TBAC + 2 decanoic acid divided by 3. This is a diagnostic pseudo-component basis for the density fit, not a general DES molecular definition.",
   "fit_result": {
+    "active_bounds": [],
     "backend": "least_squares_native",
     "cost": 5.3081250411304765e-05,
-    "finite_difference_fallback_count": 0,
+    "derivative_backend": "cppad_implicit",
+    "final_parameters": {},
     "fitted_values": {
       "e": 311.1917999999999,
       "m": 11.319494,
       "s": 3.09386
     },
+    "gradient_norm": NaN,
     "hessian_available": false,
     "hessian_backend": "not_implemented",
     "hessian_fallback_reason": "Hessian support is a skeleton for future IPOPT-compatible optimizer integration.",
     "hessian_fallback_used": false,
+    "initial_parameters": {},
     "jacobian_available": true,
-    "jacobian_backend": "autodiff",
+    "jacobian_backend": "cppad_implicit",
     "jacobian_fallback_reason": "",
     "jacobian_fallback_used": false,
     "message": "Levenberg-Marquardt terminated early by user request.",
@@ -28,9 +32,22 @@
       "density": 0.010303518856323288,
       "pure_vle_fugacity_balance": 0.0
     },
+    "n_jacobian_evaluations": 1,
+    "n_residual_evaluations": 2,
     "nfev": 3,
+    "not_available_reason": "",
+    "objective_final": 5.3081250411304765e-05,
+    "objective_initial": 5.308125041130658e-05,
+    "optimizer_backend": "least_squares_native",
+    "parameter_map": {
+      "e": 311.1917999999999,
+      "m": 11.319494,
+      "s": 3.09386
+    },
+    "parameter_movement": {},
     "problem": {
       "assoc_scheme": "",
+      "bounds": {},
       "component": "Rezaee_DES",
       "dataset": null,
       "fit_targets": [
@@ -76,12 +93,14 @@
         "m": 10.9898,
         "s": 3.157
       },
+      "loss": "linear",
       "mode": "pure_neutral",
       "optimization_parameters": [
         "m",
         "s",
         "e"
       ],
+      "output_report": false,
       "pair": null,
       "pure_file_hint": "any_solvent.csv",
       "records": [
@@ -143,6 +162,8 @@
         }
       ],
       "solvent": null,
+      "solver_options": {},
+      "target_dataset": null,
       "temperature_model": "constant",
       "terms": [
         {
@@ -271,17 +292,33 @@
           "term_type": "pure_vle_fugacity_balance",
           "weight": 1.0
         }
-      ]
+      ],
+      "weights": {}
     },
     "provenance_report": {},
+    "python_objective_used": false,
     "rendered_values": {
       "e": 311.1917999999999,
       "m": 11.319494,
       "s": 3.09386
     },
+    "residual_block_norms": {},
     "residual_norm": 0.010303518856323286,
+    "row_diagnostics": [
+      {
+        "metric": 0.010303518856323288,
+        "row_family": "density"
+      },
+      {
+        "metric": 0.0,
+        "row_family": "pure_vle_fugacity_balance"
+      }
+    ],
+    "source_summaries": {},
     "status": 9,
-    "success": false
+    "step_norm": NaN,
+    "success": false,
+    "target_family_summaries": {}
   },
   "model_status": "nonassociating_diagnostic_fit",
   "reported_rezaee_parameters": {

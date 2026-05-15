@@ -1,6 +1,6 @@
 # Rezaee 2026 Li/Na Distribution Bridge
 
-Last updated: 2026-05-08
+Last updated: 2026-05-15
 
 ## Status
 
@@ -50,7 +50,7 @@ Last updated: 2026-05-08
 - Na logit RMSE: `0.1615`.
 - ePC-SAFT electrolyte stability status: `success`.
 - ePC-SAFT minimum TPD: `-0.5346836582364658`.
-- ePC-SAFT LLE status: `success`.
+- ePC-SAFT LLE status: `not_accepted`.
 - ePC-SAFT split detected: `False`.
 - Reactive convention-scan status: `source_reference_state_gap`.
 - Source-supported reactive variant: `paper_eq14_with_activity_vs_paper_k`.

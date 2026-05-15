@@ -1,6 +1,6 @@
 # Rezaee 2026 ePC-SAFT Parameter Smoke Report
 
-Last updated: 2026-05-08
+Last updated: 2026-05-15
 
 ## Boundary
 
@@ -24,7 +24,12 @@ The 2026 supporting information supplies the reaction constants, Gibbs-energy ba
 - Electrolyte stability status: `success`.
 - Stable flag: `False`.
 - Minimum TPD: `-0.5346836582364658`.
-- Electrolyte LLE status: `success`.
+- Electrolyte LLE status: `not_accepted`.
+- Electrolyte LLE accepted: `False`.
+- Electrolyte LLE split detected: `False`.
+- Electrolyte LLE residual norm: `0.557920816285403`.
+- Electrolyte LLE acceptance gate: `predictive_budget_exhausted`.
+- Electrolyte LLE best-effort phases returned: `True`.
 
 ## Source-Gated Extraction Comparison
 

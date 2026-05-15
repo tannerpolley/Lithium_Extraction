@@ -1,20 +1,76 @@
 {
   "electrolyte_lle": {
+    "acceptance_tolerance": 1e-06,
+    "accepted": false,
     "diagnostics": {
       "acceptance_gate": "predictive_budget_exhausted",
+      "accepted_transformed_variables_feasible": false,
       "algorithm_reference": {
         "authors": "Ascani, Sadowski, and Held",
         "doi": "10.1021/acs.jced.1c00866",
         "title": "Calculation of Multiphase Equilibria Containing Mixed Solvents and Mixed Electrolytes",
         "year": 2022
       },
+      "anion_species_count": 1,
+      "anion_species_indices": [
+        2.0
+      ],
+      "association_solver_status": "not_available_if_active",
+      "basis_model": "charge_neutral_salt_pair_coordinates",
       "basis_rank": 1,
-      "best_effort_phases_returned": false,
-      "best_failure_reason": "Gibbs split was not favored by current thermodynamic surface",
-      "best_noncollapsed_candidate": "none",
+      "basis_vector_cols": 4,
+      "basis_vector_model": "salt_pair_stoichiometry_rows_by_public_species",
+      "basis_vector_rows": 1,
+      "basis_vectors_row_major": [
+        0.0,
+        1.0,
+        1.0,
+        0.0
+      ],
+      "best_candidate_aq_formula": [
+        0.7985602659306147,
+        0.20023829034652948,
+        0.0012014437228558576
+      ],
+      "best_candidate_beta_formula": 5.876400140093353e-17,
+      "best_candidate_beta_org": 5.869348448254675e-17,
+      "best_candidate_org_formula": [
+        0.08486045550835129,
+        0.9151395444896526,
+        1.996089614991428e-12
+      ],
+      "best_effort_phases_returned": true,
+      "best_failure_reason": "nonlinear residual did not converge",
+      "best_noncollapsed_candidate": "available",
+      "best_noncollapsed_candidate_aq": [
+        0.7976019920239601,
+        0.0012000019879999603,
+        0.0012000019879999603,
+        0.1999980040000399
+      ],
+      "best_noncollapsed_candidate_org": [
+        0.0848604555081819,
+        1.9960896149874436e-12,
+        1.9960896149874436e-12,
+        0.9151395444878259
+      ],
+      "best_state": {
+        "phase_count": 2,
+        "source": "native_equilibrium_result"
+      },
+      "best_state_available": true,
       "budget_exceeded": true,
-      "budget_trigger": "max_seed_attempts",
+      "budget_trigger": "timeout_seconds",
+      "cation_species_count": 1,
+      "cation_species_indices": [
+        1.0
+      ],
       "charge_balance_error": 0.0,
+      "charged_species_count": 2,
+      "charged_species_indices": [
+        1.0,
+        2.0
+      ],
       "composition_basis": "mole_fraction",
       "coupled_density_lle_attempted": false,
       "default_auto_uses_ipopt": false,
@@ -28,6 +84,14 @@
       "density_scan_summary": {},
       "density_validity_gate": "not_evaluated",
       "density_warm_start_source": "",
+      "derivative_available": true,
+      "derivative_backend": "cppad_implicit",
+      "derivative_backend_by_block": {
+        "density_root": "implicit_density_root",
+        "eos_state_properties": "analytic",
+        "lle_residual": "cppad_implicit"
+      },
+      "derivative_status": "cppad_implicit",
       "e_matrix": [
         [
           1.0,
@@ -37,43 +101,110 @@
       "effective_max_iterations": 180,
       "equilibrium_route": "electrolyte_lle",
       "experimental_coupled_density_lle": false,
+      "explicit_public_species_reported": true,
+      "explicit_species_count": 4,
       "feed_composition": [
         0.7976019920239601,
         0.0012000019879999603,
         0.0012000019879999603,
         0.19999800400003998
       ],
-      "fugacity_residual": [
-        4.493738714472784e-12,
-        5.030642569181509e-12,
-        9.777068044058979e-12
+      "formula_feed": [
+        0.7985602659306146,
+        0.2002382903465295,
+        0.0012014437228558574
       ],
-      "fugacity_residual_norm": 9.777068044058979e-12,
-      "gibbs_delta": 1.1883827255587676e-12,
+      "formula_phase_positivity_enforced_by_transform": true,
+      "formula_variable_count": 3,
+      "fugacity_residual": [
+        0.07967665915219602,
+        -0.557920816285403,
+        0.02252337963551554
+      ],
+      "fugacity_residual_norm": 0.557920816285403,
+      "gibbs_delta": 2.163602630389505e-12,
       "gibbs_feed": -10.38368108764703,
       "gibbs_seed_method": "native_golden_section",
-      "gibbs_split": -10.383681087645842,
+      "gibbs_split": -10.383681087644867,
+      "hessian_fallback_used": false,
       "ignored_legacy_options": [],
-      "iterations": 5,
+      "implicit_sensitivity_blocks": [],
+      "ionic_equilibrium_residual_norm": 0.02252337963551554,
+      "iterations": 13,
+      "jacobian_available": true,
+      "jacobian_backend": "cppad_implicit",
+      "jacobian_fallback_used": false,
+      "jacobian_scope": "transformed_variables_phase_state_implicit_density",
       "legacy_candidate_mode": "auto",
       "legacy_candidate_residual_tolerance": 0.2,
       "legacy_candidate_split_tolerance": 0.0001,
+      "material_balance_enforced_by_formula_transform": true,
       "material_balance_error": 1.1102230246251565e-16,
+      "material_balance_norm": 1.1102230246251565e-16,
+      "material_balance_residual": [
+        -1.1102230246251565e-16,
+        -2.168404344971009e-19,
+        -2.168404344971009e-19,
+        -5.551115123125783e-17
+      ],
       "max_density_failures": 0,
       "max_seed_attempts": 4,
       "max_total_objective_evaluations": 8000,
       "message": "electrolyte LLE flash stopped after a configured work budget was exhausted",
       "native_entrypoint": "_solve_equilibrium_native",
-      "objective_evaluation_count": 1442,
-      "phase_distance": 2.3037127760971998e-14,
+      "neutral_fugacity_residual_norm": 0.557920816285403,
+      "neutral_species_count": 2,
+      "neutral_species_indices": [
+        0.0,
+        3.0
+      ],
+      "objective_evaluation_count": 282,
+      "phase_charge_balance": {
+        "aq": 0.0,
+        "feed": 0.0,
+        "max_abs": 0.0,
+        "org": 0.0
+      },
+      "phase_charge_balance_aq": 0.0,
+      "phase_charge_balance_feed": 0.0,
+      "phase_charge_balance_max_abs": 0.0,
+      "phase_charge_balance_norm": 0.0,
+      "phase_charge_balance_org": 0.0,
+      "phase_charge_enforced_by_basis": true,
+      "phase_distance": 0.715141540487786,
       "phase_equilibrium_model": "electrolyte_lle_v5_native_charge_constrained_solve",
+      "phase_equilibrium_residual_norm": 0.557920816285403,
       "repeated_stability_iterations": 1,
       "requested_hessian_strategy": "gauss_newton",
+      "requested_jacobian_backend": "auto",
       "requested_max_iterations": 180,
       "requested_solver_backend": "auto",
       "requested_timeout_seconds": 8.0,
+      "residual_norm": 0.557920816285403,
+      "residual_norm_by_block": {
+        "charge_balance": 0.0,
+        "fugacity": 0.557920816285403,
+        "material_balance": 1.1102230246251565e-16,
+        "solver": 0.557920816285403
+      },
+      "residual_surface_derivative_backend": "cppad_implicit",
+      "residual_surface_jacobian_backend": "cppad_implicit",
       "return_best_effort": true,
       "route_reason": "ion-containing mixture",
+      "row_failure_count": 0,
+      "salt_pair_anion_indices": [
+        2.0
+      ],
+      "salt_pair_anion_stoich": [
+        1.0
+      ],
+      "salt_pair_cation_indices": [
+        1.0
+      ],
+      "salt_pair_cation_stoich": [
+        1.0
+      ],
+      "salt_pair_count": 1,
       "salt_pairs": [
         {
           "anion": 2,
@@ -85,70 +216,98 @@
           "label": "LiCl"
         }
       ],
-      "seed_attempt_count": 4,
+      "scaled_solver_residual_norm": 0.557920816285403,
+      "seed_attempt_count": 3,
       "seed_attempts": [
         {
-          "beta_org": 1.0563668718069532e-58,
+          "beta_org": 0.20082710456788935,
           "charge_balance_error": 0.0,
-          "gibbs_delta": 3.945288540307956e-12,
-          "iterations": 34,
-          "material_balance_error": 0.0,
-          "phase_distance": 0.7451793856710369,
+          "gibbs_delta": -0.49212818222513555,
+          "iterations": 46,
+          "material_balance_error": 1.1102230246251565e-16,
+          "phase_distance": 0.9958706819778513,
           "rejection_reason": "nonlinear residual did not converge",
           "seed_name": "initial_phases",
-          "solver_residual_norm": 0.5497485998515828
+          "solver_residual_norm": 2.359750191692001
         },
         {
-          "beta_org": 9.84784491230623e-305,
-          "charge_balance_error": 0.0,
-          "gibbs_delta": 1.6648016298859147e-11,
-          "iterations": 50,
-          "material_balance_error": 0.0,
-          "phase_distance": 0.7451795297654065,
+          "beta_org": 0.5,
+          "charge_balance_error": 1e+300,
+          "gibbs_delta": 0.0,
+          "iterations": 0,
+          "material_balance_error": 1e+300,
+          "phase_distance": 0.0,
           "rejection_reason": "nonlinear residual did not converge",
           "seed_name": "native_tpd_trial",
-          "solver_residual_norm": 0.5497485563395657
+          "solver_residual_norm": 1e+300
         },
         {
-          "beta_org": 9.84784491230623e-305,
+          "beta_org": 5.869348448254675e-17,
           "charge_balance_error": 0.0,
-          "gibbs_delta": 1.6648016298859147e-11,
-          "iterations": 46,
-          "material_balance_error": 0.0,
-          "phase_distance": 0.7451793858187788,
+          "gibbs_delta": 2.163602630389505e-12,
+          "iterations": 13,
+          "material_balance_error": 1.1102230246251565e-16,
+          "phase_distance": 0.715141540487786,
           "rejection_reason": "nonlinear residual did not converge",
           "seed_name": "native_gibbs_tpd_trial",
-          "solver_residual_norm": 0.5497485998185425
-        },
-        {
-          "beta_org": 0.020006280679589428,
-          "charge_balance_error": 0.0,
-          "gibbs_delta": 1.1883827255587676e-12,
-          "iterations": 5,
-          "material_balance_error": 1.1102230246251565e-16,
-          "phase_distance": 2.3037127760971998e-14,
-          "rejection_reason": "Gibbs split was not favored by current thermodynamic surface",
-          "seed_name": "formula_feed_b2",
-          "solver_residual_norm": 9.777068044058979e-12
+          "solver_residual_norm": 0.557920816285403
         }
       ],
-      "selected_solver_backend": "native",
+      "selected_solver_backend": "ceres",
+      "solved_internal_states": [
+        "density_roots",
+        "charge_constrained_formula_basis",
+        "phase_compositions"
+      ],
+      "solver_backend": "ceres",
       "solver_language": "c++",
-      "solver_method": "native_transformed_newton",
-      "solver_residual_norm": 9.777068044058979e-12,
-      "solver_seed_name": "formula_feed_b2",
+      "solver_method": "ceres_trust_region_residual_solve",
+      "solver_residual_norm": 0.557920816285403,
+      "solver_seed_name": "native_gibbs_tpd_trial",
       "solver_selection_reason": "default_native",
+      "species_charge_vector": [
+        0.0,
+        1.0,
+        -1.0,
+        0.0
+      ],
       "stability_analysis": "electrolyte_tpd",
       "stability_checked": true,
       "stability_min_tpd": -0.5346836544394622,
       "stability_stable": false,
+      "thermodynamic_backend": "epcsaft_state_fugacity_activity_property_api",
       "tpd_method": "native_tpd_global_search",
+      "transformed_variable_candidate_available": true,
+      "transformed_variable_count": 3,
+      "unscaled_solver_residual_norm": 0.557920816285403,
       "unstable_feed_collapsed_all_candidates": false,
       "variable_model": "ascani_transformed_salt_pairs"
     },
-    "phases": [],
+    "phases": [
+      {
+        "composition": [
+          0.7976019920239601,
+          0.0012000019879999603,
+          0.0012000019879999603,
+          0.1999980040000399
+        ],
+        "label": "aq",
+        "phase_fraction": 0.9999999999999999
+      },
+      {
+        "composition": [
+          0.0848604555081819,
+          1.9960896149874436e-12,
+          1.9960896149874436e-12,
+          0.9151395444878259
+        ],
+        "label": "org",
+        "phase_fraction": 5.869348448254675e-17
+      }
+    ],
+    "residual_norm": 0.557920816285403,
     "split_detected": false,
-    "status": "success"
+    "status": "not_accepted"
   },
   "electrolyte_stability": {
     "diagnostics": {
@@ -158,8 +317,18 @@
         "title": "Calculation of Multiphase Equilibria Containing Mixed Solvents and Mixed Electrolytes",
         "year": 2022
       },
+      "association_solver_status": "not_available_if_active",
       "basis_rank": 1,
+      "best_state_available": false,
       "composition_basis": "mole_fraction",
+      "derivative_available": false,
+      "derivative_backend": "not_available",
+      "derivative_backend_by_block": {
+        "density_root": "not_available",
+        "eos_state_properties": "analytic",
+        "tpd_trial_residual": "not_available"
+      },
+      "derivative_status": "not_available",
       "e_matrix": [
         [
           1.0,
@@ -167,8 +336,14 @@
         ]
       ],
       "effective_max_iterations": 180,
+      "equilibrium_route": "electrolyte_lle",
+      "hessian_fallback_used": false,
+      "implicit_sensitivity_blocks": [],
+      "jacobian_available": false,
+      "jacobian_fallback_used": false,
       "min_tpd": -0.5346836582364658,
       "native_entrypoint": "_solve_equilibrium_native",
+      "not_available_reason": "not_available: equilibrium sensitivities are not implemented for this route.",
       "parent_phases": [
         "liq",
         "vap"
@@ -179,7 +354,11 @@
       },
       "phase_charge_balance_feed": 0.0,
       "phase_charge_balance_trial": 0.0,
+      "requested_jacobian_backend": "auto",
       "requested_max_iterations": 180,
+      "residual_norm_by_block": {},
+      "route_reason": "requested electrolyte stability path",
+      "row_failure_count": 0,
       "salt_pairs": [
         {
           "anion": 2,
@@ -192,10 +371,17 @@
         }
       ],
       "seed_name": "polished_partition_seed",
+      "solved_internal_states": [
+        "density_roots",
+        "charge_constrained_formula_basis",
+        "tpd_trial_compositions"
+      ],
+      "solver_backend": "native",
       "solver_language": "c++",
       "stability_analysis": "electrolyte_tpd",
       "stability_checked": true,
       "stability_stable": false,
+      "thermodynamic_backend": "epcsaft_state_fugacity_activity_property_api",
       "tpd_best_seed_name": "polished_partition_seed",
       "tpd_method": "native_tpd_global_search",
       "tpd_multistart_count": 14,

@@ -13,7 +13,7 @@ eta_na_stage3_pct,24.588316262004838,percent,Rezaee source-regressed bridge,flow
 median_source_D_Li,0.601667468334135,dimensionless,Rezaee extraction targets,surrogate_prior[Li]
 median_source_D_Na,0.1257311893354996,dimensionless,Rezaee extraction targets,surrogate_prior[Na]
 epcsaft_stability_min_tpd,-0.5346836582364658,dimensionless,ePC-SAFT diagnostic smoke,validity_diagnostic
-epcsaft_lle_status,success,label,ePC-SAFT diagnostic smoke,validity_diagnostic
+epcsaft_lle_status,not_accepted,label,ePC-SAFT diagnostic smoke,validity_diagnostic
 epcsaft_lle_split_detected,False,boolean,ePC-SAFT diagnostic smoke,validity_diagnostic
 direct_reactive_closure_status,source_reference_state_gap,label,Rezaee published-constant convention scan,validity_diagnostic
 direct_reactive_source_variant,paper_eq14_with_activity_vs_paper_k,label,Rezaee published-constant convention scan,validity_diagnostic

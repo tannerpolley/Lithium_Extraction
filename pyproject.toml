@@ -1,3 +1,7 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "lithium-extraction"
 version = "0.1.0"
@@ -5,10 +9,14 @@ description = "Produced-water lithium extraction analyses, ePC-SAFT case-study a
 readme = "slides/README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "epcsaft @ git+https://github.com/tannerpolley/ePC-SAFT.git@255ca07fbce7a2842aaea353fd626ab297af6067",
+    "epcsaft @ git+https://github.com/tannerpolley/ePC-SAFT.git@869e3354ddc0b52075ddc9efe687b34d6aa98316",
+    "ipykernel>=6.29",
     "matplotlib>=3.8",
+    "nbclient>=0.10",
+    "nbformat>=5.10",
     "numpy>=1.26",
     "pandas>=2.2",
+    "prommis @ git+https://github.com/tannerpolley/prommis.git@f2be79b8878edb2c6e56be6998f4d9388aa1a348",
     "scipy>=1.12",
 ]
 
@@ -17,5 +25,6 @@ dev = [
     "pytest>=8.0",
 ]
 
-[tool.uv]
-package = false
+[tool.setuptools.packages.find]
+where = ["src"]
+namespaces = true

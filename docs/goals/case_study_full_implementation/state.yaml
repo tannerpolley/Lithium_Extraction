@@ -1,0 +1,554 @@
+version: 2
+
+goal:
+  title: "Case Study Full Implementation"
+  slug: "case_study_full_implementation"
+  kind: existing_plan
+  tranche: "Implement the master success-only Lithium_Extraction case-study specification end to end."
+  status: done
+  intake:
+    original_request: "Prep plan first with GoalBuddy, then fully implement the attached master Lithium case-study spec with no diagnostic failures, no fake results, and periodic ePC-SAFT main checks."
+    interpreted_outcome: "Prepare a GoalBuddy board so the later /goal run implements the master success-only produced-water lithium extraction case study through environment, source data, stage response, ALAMO, real PrOMMiS/IDAES, notebook, TEA, rendered deck, and final all-pass success report."
+    input_shape: existing_plan
+    audience: "Internal KeyLogic/government-contracted technical management and project leads"
+    authority: requested
+    proof_type: artifact
+    completion_proof: "All master-spec success gates pass; final artifacts include executed notebook, ALAMO JSON, real PrOMMiS/IDAES stage results, screening TEA outputs, rendered deck, and results/tbac_da_topo_success_gate_report.md with only passing gates."
+    likely_misfire: "Treating prior diagnostic case-study outputs, algebraic prechecks, or failed direct ePC-SAFT diagnostics as accepted final deliverables."
+    hard_constraints:
+      - "Final deliverables must be success artifacts only."
+      - "No diagnostic failure outputs may be submitted as completion evidence."
+      - "No fake final results."
+      - "The only permitted synthetic/non-factual data is source-anchored generated demonstration stage-response data for ALAMO/PrOMMiS/TEA propagation when accepted direct ePC-SAFT output is not available."
+      - "Synthetic demonstration data must be labeled with backend_name=synthetic_source_anchored_demo, model_basis=source_paper_anchored_synthetic_stage_response, synthetic_demo_data=true, and direct_epcsaft_closure=false."
+      - "Use real PrOMMiS imports and unit models for anything called PrOMMiS/IDAES output."
+      - "Do not copy PrOMMiS source into Lithium_Extraction."
+      - "Preserve the original PrOMMiS notebook and revise only the Lithium_Extraction copy."
+      - "Do not include Trust Region Framework content."
+      - "Periodically check ePC-SAFT origin/main for new commits or a merged PR that enables accepted direct closure."
+    blind_spots_considered:
+      - "The repo already contains Agent 1/2/3 artifacts that may be useful evidence but do not automatically satisfy this stricter master spec."
+      - "PrOMMiS, IDAES, Pyomo, ALAMO, notebook execution, and Quarto/PPT/PDF rendering may fail independently and must be gated separately."
+      - "A direct ePC-SAFT path may become viable if upstream main advances; the board must poll before each major implementation phase."
+      - "If direct ePC-SAFT remains unavailable, only the narrow source-anchored stage-response fallback is allowed."
+      - "Final docs/deck/notebook-facing text must avoid forbidden diagnostic language while still preserving honest technical boundaries."
+      - "Incomplete feed rows may be comparison-only unless source-filled or explicitly isolated as synthetic demonstration data."
+      - "Algebraic prechecks are not PrOMMiS output."
+      - "The final success report cannot contain failed gates."
+    existing_plan_facts:
+      - "Controlling spec: docs/plans/MASTER_LITHIUM_CASE_STUDY_SUCCESS_ONLY_AGENT_SPEC.md."
+      - "Active chemistry: TBAC(1):DA(2) hydrophobic DES + 10 wt% TOPO."
+      - "Active extraction species: Li and Na."
+      - "Pretreatment/context species include Ca, Mg, Sr, Ba, K, organics, oil, suspended solids, and H2S if relevant."
+      - "Main ALAMO inputs must be li_mg_L, na_mg_L, o_to_a_ratio, topo_wt_pct."
+      - "Primary ALAMO outputs must be logit_k_Li and logit_k_Na."
+      - "Two design domains are required: source-paper-valid and produced-water-centered."
+      - "PrOMMiS must be installed as a pinned Git dependency; do not copy its source tree."
+      - "Required local namespace is src/lithium_extraction/prommis_case_study/."
+      - "Copied notebook path is docs/tutorials/tbac_da_topo_produced_water_case_study.ipynb."
+      - "Required success report path is results/tbac_da_topo_success_gate_report.md."
+      - "Required tests include stage response, ALAMO contract, PrOMMiS MSContactor, TEA schema, and forbidden diagnostic scans."
+
+rules:
+  pm_owns_state: true
+  one_active_task: true
+  max_write_workers: 1
+  no_implementation_without_worker_or_pm_task: true
+  no_completion_without_judge_or_pm_audit: true
+  planning_is_not_completion: true
+  queued_required_worker_blocks_completion: true
+  continuous_until_full_outcome: true
+  missing_input_or_credentials_do_not_stop_goal: true
+  preserve_and_validate_existing_plan: true
+  intake_misfire_must_be_audited: true
+  success_only_final_artifacts: true
+  no_fake_final_results: true
+  periodic_epcsaft_main_polling_required: true
+  slice_policy:
+    max_consecutive_tiny_tasks: 2
+    prefer_vertical_slices: true
+    judge_picks_largest_safe_slice: true
+    worker_completes_whole_slice: true
+
+agents:
+  scout: installed
+  worker: installed
+  judge: installed
+
+visual_board:
+  selected: local
+  local:
+    status: live
+    url: "http://127.0.0.1:41737/case-study-full-implementation/"
+    command: "& C:\\Users\\Tanner\\Documents\\git\\codex-maintenance\\scripts\\start-goalbuddy-board.ps1 -Goal docs/goals/case_study_full_implementation"
+  github_projects:
+    status: not_requested
+    url: null
+    command: "npx goalbuddy extend github-projects"
+    missing: []
+
+active_task: null
+
+tasks:
+  - id: T001
+    type: pm
+    assignee: PM
+    status: done
+    reasoning_hint: high
+    objective: "Validate the master spec against current repo state, dirty tree, dependency state, prior Agent artifacts, and current ePC-SAFT origin/main before any implementation writes."
+    inputs:
+      - "docs/plans/MASTER_LITHIUM_CASE_STUDY_SUCCESS_ONLY_AGENT_SPEC.md"
+      - "docs/goals/case_study_full_implementation/goal.md"
+      - "current Lithium_Extraction git status"
+      - "current pyproject.toml and uv.lock"
+      - "current docs/goals/agent-* receipts and generated artifacts"
+      - "C:/Users/Tanner/Documents/git/ePC-SAFT origin/main"
+    constraints:
+      - "Read-only except GoalBuddy state updates."
+      - "Do not implement product files in this task."
+      - "Fetch or inspect ePC-SAFT main only enough to decide whether direct accepted ePC-SAFT closure should be retried now."
+      - "Do not accept prior diagnostic outputs as final deliverables."
+      - "Record the current dirty tree and identify user/prior-run artifacts to preserve."
+      - "If the ePC-SAFT PR/main change is present, make the next Worker prefer accepted direct ePC-SAFT stage-response generation; otherwise keep the approved source-anchored demonstration backend available."
+    expected_output:
+      - "Spec-to-repo gap map."
+      - "Current upstream ePC-SAFT main status and whether accepted direct closure should be attempted first."
+      - "Validated implementation sequence and any blocked prerequisites."
+      - "Allowed files for T002 confirmed or narrowed."
+      - "Receipt that activates T002 or blocks with an explicit reason."
+    receipt:
+      result: done
+      summary:
+        - "Validated the master success-only spec, current Lithium repo state, dependency state, prior Agent artifacts, and ePC-SAFT origin/main before implementation writes."
+        - "Lithium pyproject currently pins epcsaft at 255ca07fbce7a2842aaea353fd626ab297af6067 and does not yet include prommis, idaes, pyomo, nbclient, nbformat, or ipykernel."
+        - "Current Lithium environment imports epcsaft 1.5.2 from a pinned Git install; prommis, idaes, and pyomo are absent."
+        - "ePC-SAFT origin/main is f3ce3cc332bc06e8504ece122e478c8396bc27b8, and the pinned Lithium commit is an ancestor of origin/main."
+        - "The local ePC-SAFT branch #116-117 HEAD 53d99d6f41219b809f665e714c9bbc9ffe0e319a is not contained in origin/main, so the issue 116/117 implementation work is not merged into main."
+        - "Prior Lithium Agent artifacts are useful inputs but do not satisfy the master spec: source register, copied notebook, models folder, local src package, ALAMO artifacts, real PrOMMiS tests, and success-gate report are missing."
+        - "Direct ePC-SAFT closure is not accepted for the final case study at this point; T002 must keep the source-anchored generated demonstration stage-response backend available and may only promote direct ePC-SAFT if it passes the master acceptance criteria."
+      evidence:
+        - "GoalBuddy state checker passed with active task T001 before this receipt."
+        - "git status shows pre-existing deleted docs/plans/AGENT_* prompt files, untracked .idea/editor.xml, and untracked docs/goals/case_study_full_implementation plus the master spec."
+        - "scripts/check_epcsaft_integration.py --mode final passed for the current pinned epcsaft install."
+        - "results/tbac_da_topo_phase_inventory_convention_scan.md says direct reactive-LLE remains a validity diagnostic and is not promoted."
+        - "data/reference/produced_water/selected_case_study_feeds.csv exists but uses the older Agent schema instead of the full master feed/source-register schema."
+        - "data/processed contains older Agent 2/3 transfer, stage, reconciliation, and screening-TEA tables."
+      blocked: []
+
+  - id: T002
+    type: worker
+    assignee: Worker
+    status: done
+    reasoning_hint: high
+    objective: "Implement the environment, source/feed registers, notebook copy, two-domain design, and bounded stage-response foundation."
+    allowed_files:
+      - "pyproject.toml"
+      - "uv.lock"
+      - "docs/tutorials/tbac_da_topo_produced_water_case_study.ipynb"
+      - "docs/plans/tbac_da_topo_success_only_case_study_spec.md"
+      - "data/reference/produced_water/selected_case_study_feeds.csv"
+      - "data/reference/produced_water/produced_water_feed_source_register.csv"
+      - "data/processed/tbac_da_topo_two_domain_lhs_design.csv"
+      - "data/processed/tbac_da_topo_stage_response_data.csv"
+      - "data/processed/tbac_da_topo_alamo_training_data.csv"
+      - "data/processed/tbac_da_topo_alamo_validation_data.csv"
+      - "src/lithium_extraction/prommis_case_study/__init__.py"
+      - "src/lithium_extraction/prommis_case_study/backend.py"
+      - "src/lithium_extraction/prommis_case_study/stage_response_generator.py"
+      - "tests/test_tbac_da_topo_stage_response.py"
+      - "tests/test_case_study_no_forbidden_diagnostics.py"
+    verify:
+      - "uv sync"
+      - "uv run python -c \"import prommis, idaes, pyomo; print('imports ok')\""
+      - "uv run python -c \"import epcsaft; print('epcsaft import ok')\""
+      - "uv run python -m pytest tests/test_tbac_da_topo_stage_response.py tests/test_case_study_no_forbidden_diagnostics.py -q"
+      - "custom data/schema gate for selected feeds, source register, two-domain design, and stage-response labels"
+    stop_if:
+      - "Need files outside allowed_files."
+      - "PrOMMiS cannot be pinned or imported and no local fix is safe."
+      - "Stage-response data would be unlabeled, arbitrary, non-deterministic, unbounded, or not source-anchored."
+      - "Accepted direct ePC-SAFT results are claimed without passing the master-spec acceptance criteria."
+      - "Original PrOMMiS notebook would have to be edited."
+    receipt:
+      result: done
+      summary:
+        - "Updated the project environment so Lithium_Extraction is installed from src and PrOMMiS is pinned as a Git dependency at f2be79b8878edb2c6e56be6998f4d9388aa1a348."
+        - "uv sync installed/imported PrOMMiS, IDAES 2.11.0, Pyomo 6.10.0, epcsaft 1.5.2, nbformat, nbclient, and ipykernel."
+        - "Created the local prommis_case_study package foundation with backend labels and a deterministic stage-response generator."
+        - "Replaced the selected feed table with the master-schema feed register and added the produced-water source register."
+        - "Generated a two-domain design with 625 source-paper-valid LHS rows, 625 produced-water-centered LHS rows, 3 source anchors, 2 nominal Smackover rows, and 16 produced-water corner/stress rows."
+        - "Generated bounded stage-response data plus ALAMO training and validation CSVs using the required labels for the approved source-anchored generated demonstration path."
+        - "Created the Lithium_Extraction notebook copy scaffold at docs/tutorials/tbac_da_topo_produced_water_case_study.ipynb and copied the controlling success-only spec to docs/plans/tbac_da_topo_success_only_case_study_spec.md."
+        - "Polled ePC-SAFT origin/main after implementation; origin/main remains f3ce3cc332bc06e8504ece122e478c8396bc27b8 and local HEAD is still not an ancestor, so direct accepted ePC-SAFT closure is not newly available from main."
+      evidence:
+        - "python src/lithium_extraction/prommis_case_study/stage_response_generator.py wrote 5 feed rows, 5 source-register rows, 1271 design rows, 1271 stage rows, 1017 training rows, and 254 validation rows."
+        - "uv sync completed and installed prommis==0.0+gf2be79b88 from the pinned Git commit."
+        - "uv run python -c \"import prommis, idaes, pyomo; print('imports ok')\" passed."
+        - "uv run python -c \"import epcsaft; print('epcsaft import ok')\" passed."
+        - "uv run python -m pytest tests/test_tbac_da_topo_stage_response.py tests/test_case_study_no_forbidden_diagnostics.py -q passed with 7 tests."
+        - "Custom schema gate confirmed feed/source/design/stage/training/validation row counts and required source-anchored demonstration labels."
+      changed_files:
+        - "pyproject.toml"
+        - "uv.lock"
+        - "docs/tutorials/tbac_da_topo_produced_water_case_study.ipynb"
+        - "docs/plans/tbac_da_topo_success_only_case_study_spec.md"
+        - "data/reference/produced_water/selected_case_study_feeds.csv"
+        - "data/reference/produced_water/produced_water_feed_source_register.csv"
+        - "data/processed/tbac_da_topo_two_domain_lhs_design.csv"
+        - "data/processed/tbac_da_topo_stage_response_data.csv"
+        - "data/processed/tbac_da_topo_alamo_training_data.csv"
+        - "data/processed/tbac_da_topo_alamo_validation_data.csv"
+        - "src/lithium_extraction/prommis_case_study/__init__.py"
+        - "src/lithium_extraction/prommis_case_study/backend.py"
+        - "src/lithium_extraction/prommis_case_study/stage_response_generator.py"
+        - "tests/test_tbac_da_topo_stage_response.py"
+        - "tests/test_case_study_no_forbidden_diagnostics.py"
+      commands:
+        - command: "python src/lithium_extraction/prommis_case_study/stage_response_generator.py"
+          status: pass
+        - command: "uv sync"
+          status: pass
+        - command: "uv run python -c \"import prommis, idaes, pyomo; print('imports ok')\""
+          status: pass
+        - command: "uv run python -c \"import epcsaft; print('epcsaft import ok')\""
+          status: pass
+        - command: "uv run python -m pytest tests/test_tbac_da_topo_stage_response.py tests/test_case_study_no_forbidden_diagnostics.py -q"
+          status: pass
+        - command: "custom CSV schema gate for feed/source/design/stage/training/validation artifacts"
+          status: pass
+        - command: "git -C C:/Users/Tanner/Documents/git/ePC-SAFT fetch origin main --prune"
+          status: pass
+      blocked: []
+
+  - id: T003
+    type: judge
+    assignee: Judge
+    status: done
+    reasoning_hint: high
+    objective: "Audit the foundation slice, poll ePC-SAFT origin/main again, and decide whether the ALAMO/PrOMMiS slice can proceed."
+    inputs:
+      - "T001 receipt"
+      - "T002 receipt"
+      - "Generated source/feed/design/stage-response artifacts"
+      - "Current ePC-SAFT origin/main status"
+    constraints:
+      - "Read-only except GoalBuddy state updates."
+      - "Reject if synthetic demonstration data is unlabeled or used outside the permitted stage-response role."
+      - "Reject if imports, schema checks, or boundedness checks are red."
+      - "Reject if prior diagnostics are presented as final success artifacts."
+      - "Fetch or inspect ePC-SAFT main enough to decide whether T004 must switch to direct accepted ePC-SAFT output."
+    expected_output:
+      - "approved | rejected | blocked"
+      - "Direct ePC-SAFT path decision for the next phase."
+      - "Remaining gaps before ALAMO/PrOMMiS work."
+      - "Updated T004 allowed files or stop conditions if needed."
+    receipt:
+      result: done
+      decision: approved
+      summary:
+        - "Approved T002 for T004: dependency pins/imports, source/feed schemas, design counts, stage-response labels/bounds, ALAMO train/validation contract, and final-facing diagnostic scan are acceptable."
+        - "Direct ePC-SAFT output is not accepted from current main evidence; T004 should keep the source-anchored demonstration stage-response path unless a later poll plus acceptance run proves bounded, finite, source-anchor-reproducing direct closure."
+        - "Notebook provenance is weak because the Lithium notebook is currently a generated scaffold rather than a content-derived copy of the original PrOMMiS tutorial; T006 must resolve notebook provenance/execution before final completion."
+      evidence:
+        - "pyproject.toml and uv.lock pin prommis at f2be79b8878edb2c6e56be6998f4d9388aa1a348; uv.lock brings idaes-pse and pyomo."
+        - "Import check passed: prommis 0.0+gf2be79b88, idaes 2.11.0, pyomo 6.10.0, epcsaft 1.5.2."
+        - "selected_case_study_feeds.csv has 5 rows with required schema; two Smackover rows are simulation_allowed=true and incomplete rows are simulation_allowed=false."
+        - "two-domain design has 1271 rows: 625 source-paper-valid LHS, 625 produced-water-centered LHS, 3 source anchors, 2 nominal Smackover rows, and 16 corner/stress rows."
+        - "stage-response data has 1271 rows with zero non-anchor label violations; all rows have direct_epcsaft_closure=false."
+        - "Stage-response bounds are finite: k_Li 0.23544525-0.62897096 and k_Na 0.0510656-0.21598526, with Li extraction greater than Na extraction for all rows."
+        - "ALAMO files contain 1017 training rows and 254 validation rows with finite li_mg_L, na_mg_L, o_to_a_ratio, topo_wt_pct, logit_k_Li, and logit_k_Na."
+        - "Current final-facing forbidden phrase scan found no hits in notebook, deck.qmd, or deck.html candidates."
+        - "ePC-SAFT origin/main remains f3ce3cc332bc06e8504ece122e478c8396bc27b8 and the local checked HEAD is not an ancestor of origin/main."
+      blocked: []
+
+  - id: T004
+    type: worker
+    assignee: Worker
+    status: done
+    reasoning_hint: high
+    objective: "Implement the IDAES ALAMO trainer/loader, SurrogateBlock integration, and real PrOMMiS/IDAES SolventExtraction/MSContactor wrapper with accepted stage results."
+    allowed_files:
+      - "models/tbac_da_topo_alamo_surrogate.json"
+      - "results/tbac_da_topo_alamo_validation.md"
+      - "results/tbac_da_topo_prommis_stage_results.md"
+      - "data/processed/tbac_da_topo_prommis_stage_results.csv"
+      - "figures/alamo_parity_logit_k_Li.png"
+      - "figures/alamo_parity_logit_k_Na.png"
+      - "figures/alamo_residual_logit_k_Li.png"
+      - "figures/alamo_residual_logit_k_Na.png"
+      - "src/lithium_extraction/prommis_case_study/alamo_surrogate.py"
+      - "src/lithium_extraction/prommis_case_study/alamo_bridge.py"
+      - "src/lithium_extraction/prommis_case_study/tbac_da_topo_aq_properties.py"
+      - "src/lithium_extraction/prommis_case_study/tbac_da_topo_org_properties.py"
+      - "src/lithium_extraction/prommis_case_study/tbac_da_topo_transfer_reactions.py"
+      - "src/lithium_extraction/prommis_case_study/tbac_da_topo_mscontactor.py"
+      - "tests/test_tbac_da_topo_alamo_contract.py"
+      - "tests/test_tbac_da_topo_prommis_mscontactor.py"
+    verify:
+      - "uv run python -m pytest tests/test_tbac_da_topo_alamo_contract.py tests/test_tbac_da_topo_prommis_mscontactor.py -q"
+      - "uv run python -c \"from lithium_extraction.prommis_case_study.tbac_da_topo_mscontactor import run_nominal_case; print(run_nominal_case())\""
+      - "custom ALAMO JSON load and SurrogateBlock smoke check"
+      - "custom PrOMMiS gate: real imports, SolventExtraction object, MSContactor object, active Li/Na transfer constraints, Cl inactive, DOF zero, finite outlet streams, mass-balance residual within tolerance"
+    stop_if:
+      - "Need files outside allowed_files."
+      - "ALAMO cannot train and no frozen JSON can load."
+      - "A hand-coded polynomial would become the main surrogate instead of IDAES ALAMO/AlamoSurrogate JSON."
+      - "The implementation cannot construct real PrOMMiS/IDAES objects."
+      - "PrOMMiS DOF is not zero or Li/Na material-transfer constraints are inactive."
+      - "Only algebraic postprocessing is available for process results."
+      - "Mass balance residual exceeds tolerance after two focused repair attempts."
+    receipt:
+      result: done
+      summary:
+        - "Implemented the IDAES frozen AlamoSurrogate path with required inputs li_mg_L, na_mg_L, o_to_a_ratio, and topo_wt_pct, and outputs logit_k_Li and logit_k_Na."
+        - "Generated models/tbac_da_topo_alamo_surrogate.json, validation report, and four ALAMO parity/residual figures."
+        - "Implemented a SurrogateBlock bridge that loads the IDAES AlamoSurrogate JSON and verifies near-zero constraint residuals."
+        - "Implemented local simplified TBAC/DA DES + TOPO Li/Na/Cl property and transfer packages for the PrOMMiS case-study wrapper."
+        - "Implemented and ran the real PrOMMiS/IDAES SolventExtraction/MSContactor wrapper with active Li and Na material-transfer constraints, chloride transfer held inactive, DOF zero, optimal termination, finite outlets, and mass-balance residual below tolerance."
+        - "Generated accepted PrOMMiS stage-result CSV and markdown report for 1-, 3-, and 5-stage Smackover nominal cases plus a 3-stage high-Li Smackover sensitivity."
+        - "Polled ePC-SAFT origin/main after implementation; origin/main remains f3ce3cc332bc06e8504ece122e478c8396bc27b8 and the local ePC-SAFT HEAD is still not an ancestor of origin/main."
+      evidence:
+        - "uv run python -m lithium_extraction.prommis_case_study.alamo_surrogate produced validation R2 values of 0.997919 for logit_k_Li and 0.996647 for logit_k_Na."
+        - "SurrogateBlock smoke check passed with two constraints and residuals of approximately 2.8e-17 and 4.4e-16."
+        - "uv run python -m lithium_extraction.prommis_case_study.tbac_da_topo_mscontactor wrote 12 PrOMMiS stage-result rows."
+        - "run_nominal_case returned _ScalarSolventExtraction, _ScalarMSContactor, degrees_of_freedom=0, termination_condition=optimal, 3-stage Li recovery 83.77014433520455%, 3-stage Na co-transfer 29.007640877157403%, and max residual 4.547473508864641e-13 mol/h."
+        - "uv run python -m pytest tests/test_tbac_da_topo_alamo_contract.py tests/test_tbac_da_topo_prommis_mscontactor.py -q passed with 7 tests."
+        - "Custom gate confirmed AlamoSurrogate JSON load, SurrogateBlock pass, real SolventExtraction/MSContactor objects, active Li/Na/Cl transfer constraints, DOF zero, finite outlet streams, chloride inactive, optimal results, and max residual below 1e-8 mol/h."
+        - "Forbidden phrase scan returned no hits for T004 model, result, and report artifacts."
+      changed_files:
+        - "models/tbac_da_topo_alamo_surrogate.json"
+        - "results/tbac_da_topo_alamo_validation.md"
+        - "results/tbac_da_topo_prommis_stage_results.md"
+        - "data/processed/tbac_da_topo_prommis_stage_results.csv"
+        - "figures/alamo_parity_logit_k_Li.png"
+        - "figures/alamo_parity_logit_k_Na.png"
+        - "figures/alamo_residual_logit_k_Li.png"
+        - "figures/alamo_residual_logit_k_Na.png"
+        - "src/lithium_extraction/prommis_case_study/alamo_surrogate.py"
+        - "src/lithium_extraction/prommis_case_study/alamo_bridge.py"
+        - "src/lithium_extraction/prommis_case_study/tbac_da_topo_aq_properties.py"
+        - "src/lithium_extraction/prommis_case_study/tbac_da_topo_org_properties.py"
+        - "src/lithium_extraction/prommis_case_study/tbac_da_topo_transfer_reactions.py"
+        - "src/lithium_extraction/prommis_case_study/tbac_da_topo_mscontactor.py"
+        - "tests/test_tbac_da_topo_alamo_contract.py"
+        - "tests/test_tbac_da_topo_prommis_mscontactor.py"
+      commands:
+        - command: "uv run python -m lithium_extraction.prommis_case_study.alamo_surrogate"
+          status: pass
+        - command: "uv run python -c \"from lithium_extraction.prommis_case_study.alamo_bridge import surrogate_block_smoke; print(surrogate_block_smoke())\""
+          status: pass
+        - command: "uv run python -m lithium_extraction.prommis_case_study.tbac_da_topo_mscontactor"
+          status: pass
+        - command: "uv run python -m pytest tests/test_tbac_da_topo_alamo_contract.py tests/test_tbac_da_topo_prommis_mscontactor.py -q"
+          status: pass
+        - command: "uv run python -c \"from lithium_extraction.prommis_case_study.tbac_da_topo_mscontactor import run_nominal_case; print(run_nominal_case())\""
+          status: pass
+        - command: "custom ALAMO JSON load, SurrogateBlock, PrOMMiS object, DOF, active transfer, finite outlet, and mass-balance gate"
+          status: pass
+        - command: "rg forbidden diagnostic phrases across T004 artifacts"
+          status: pass
+        - command: "git -C C:/Users/Tanner/Documents/git/ePC-SAFT fetch origin main --prune"
+          status: pass
+      blocked: []
+
+  - id: T005
+    type: judge
+    assignee: Judge
+    status: done
+    reasoning_hint: high
+    objective: "Audit ALAMO, SurrogateBlock, and real PrOMMiS/IDAES results, poll ePC-SAFT origin/main again, and decide whether the final notebook/TEA/deck slice can proceed."
+    inputs:
+      - "T004 receipt"
+      - "ALAMO JSON and validation report"
+      - "PrOMMiS stage results and test output"
+      - "Current ePC-SAFT origin/main status"
+    constraints:
+      - "Read-only except GoalBuddy state updates."
+      - "Reject if PrOMMiS outputs are not from real PrOMMiS/IDAES objects."
+      - "Reject if ALAMO JSON does not load or if SurrogateBlock is not exercised."
+      - "Reject if any final-facing text contains forbidden diagnostic terms."
+      - "Poll ePC-SAFT main and record whether any merged change requires rerunning direct stage-response generation."
+    expected_output:
+      - "approved | rejected | blocked"
+      - "Whether process outputs are accepted for notebook/TEA/deck use."
+      - "Any mandatory fixes before T006."
+    receipt:
+      result: done
+      decision: approved
+      summary:
+        - "Approved T004 for T006. ALAMO JSON loads through IDAES AlamoSurrogate, plots/report exist, SurrogateBlock is exercised, and the PrOMMiS path constructs real SolventExtraction/MSContactor objects with DOF zero, active Li/Na transfer, chloride held at zero transfer, finite optimal staged outlets, and mass-balance residual below tolerance."
+        - "T006 may use T004 ALAMO and PrOMMiS outputs for notebook, TEA, deck, and final success-gate work."
+      evidence:
+        - "GoalBuddy checker passed with active_task T005 and no state errors."
+        - "models/tbac_da_topo_alamo_surrogate.json loads with IDAES AlamoSurrogate; inputs are li_mg_L, na_mg_L, o_to_a_ratio, topo_wt_pct; outputs are logit_k_Li and logit_k_Na."
+        - "ALAMO validation report exists with R2 0.997919 for logit_k_Li and 0.996647 for logit_k_Na; four ALAMO PNG plots exist and are nontrivial size."
+        - "SurrogateBlock smoke passed with 2 constraints and residuals 2.78e-17 and 4.44e-16."
+        - "run_nominal_case(write_artifacts=False) returned _ScalarSolventExtraction, _ScalarMSContactor, DOF 0, optimal, 12 rows, and max residual 4.55e-13 mol/h."
+        - "Model inspection showed active Li and Na material-transfer constraints; chloride transfer is constrained to zero with chloride_transfer_allowed=false."
+        - "CSV/report rows are labeled synthetic_source_anchored_demo, source_paper_anchored_synthetic_stage_response, direct_epcsaft_closure=false."
+        - "pytest passed with 7 tests across test_tbac_da_topo_alamo_contract.py and test_tbac_da_topo_prommis_mscontactor.py."
+        - "Forbidden diagnostic phrase scan over T004 model/result/report/code/test artifacts returned no hits."
+        - "ePC-SAFT origin/main remains f3ce3cc332bc06e8504ece122e478c8396bc27b8; local HEAD is not an ancestor of origin/main."
+      blocked: []
+
+  - id: T006
+    type: worker
+    assignee: Worker
+    status: done
+    reasoning_hint: high
+    objective: "Execute the copied notebook, implement screening TEA/UQ, revise and render the deck, and generate the all-pass success-gate report."
+    allowed_files:
+      - "docs/tutorials/tbac_da_topo_produced_water_case_study.ipynb"
+      - "data/reference/tea/tbac_da_topo_tea_assumption_register.csv"
+      - "data/processed/tbac_da_topo_screening_tea_results.csv"
+      - "results/tbac_da_topo_screening_tea.md"
+      - "results/tbac_da_topo_success_gate_report.md"
+      - "src/lithium_extraction/prommis_case_study/screening_tea.py"
+      - "slides/case_study_tbac_da_topo_produced_water/deck.qmd"
+      - "slides/case_study_tbac_da_topo_produced_water/deck.html"
+      - "slides/case_study_tbac_da_topo_produced_water/figures/**"
+      - "tests/test_tbac_da_topo_tea_schema.py"
+      - "tests/test_case_study_no_forbidden_diagnostics.py"
+    verify:
+      - "uv run python -m pytest tests/test_tbac_da_topo_tea_schema.py tests/test_case_study_no_forbidden_diagnostics.py -q"
+      - "uv run python -m nbclient docs/tutorials/tbac_da_topo_produced_water_case_study.ipynb"
+      - "$env:LOCALAPPDATA/Apps/Quarto/bin/quarto.exe render slides/case_study_tbac_da_topo_produced_water/deck.qmd --to revealjs"
+      - "custom notebook gate: copied notebook exists, original notebook unmodified, no failed cell outputs, exported training/ALAMO/PrOMMiS/TEA/figures evidence"
+      - "custom deck gate: map, feed variance, ALAMO, PrOMMiS workflow, screening TEA/UQ, CMM/REE table, hydrocarbon backup, no Trust Region Framework"
+      - "custom success-gate report validator: only passing final gates"
+    stop_if:
+      - "Need files outside allowed_files."
+      - "Notebook cannot execute end to end in train_alamo or load_frozen_alamo mode."
+      - "TEA output would imply investment-grade, vendor-grade, design-grade, or commercial readiness."
+      - "Deck cannot render after two focused repair attempts."
+      - "Success report would need to include a failed gate."
+      - "Forbidden diagnostic terms remain in final-facing artifacts."
+    receipt:
+      result: done
+      summary:
+        - "Implemented screening TEA/UQ from accepted PrOMMiS/IDAES stage results and wrote the TEA assumption register, TEA result table, and screening TEA report."
+        - "Generated final deck figures for basin map, feed variance, ALAMO validation, PrOMMiS staged recovery, screening TEA/UQ, ePC-SAFT roadmap, CMM/REE extension, and hydrocarbon VLE/LLE extension."
+        - "Rewrote the Quarto deck source around the success-only ALAMO/PrOMMiS/TEA workflow and rendered the Reveal.js deck."
+        - "Rewrote and executed the copied Lithium_Extraction notebook; notebook metadata records the original PrOMMiS tutorial SHA-256 and 22-cell provenance, and the original upstream notebook was not edited."
+        - "Generated results/tbac_da_topo_success_gate_report.md with nine passing success gates."
+        - "The installed nbclient package has no nbclient.__main__, so the literal board command uv run python -m nbclient is not supported by this package; the notebook was executed with the nbclient API and the nbclient.cli module entry point ran cleanly."
+        - "Polled ePC-SAFT origin/main after implementation; origin/main remains f3ce3cc332bc06e8504ece122e478c8396bc27b8 and local ePC-SAFT HEAD is still not an ancestor of origin/main."
+      evidence:
+        - "uv run python -m lithium_extraction.prommis_case_study.screening_tea generated 7 TEA scenarios and recorded original PrOMMiS notebook cell count 22."
+        - "uv run python -m pytest tests/test_tbac_da_topo_tea_schema.py -q passed with 4 tests."
+        - "Notebook execution via nbclient.NotebookClient completed and wrote the executed notebook with 11 cells, 5 outputs, and no error outputs."
+        - "$env:LOCALAPPDATA/Apps/Quarto/bin/quarto.exe render slides/case_study_tbac_da_topo_produced_water/deck.qmd --to revealjs passed and wrote deck.html."
+        - "uv run python -m pytest tests/test_tbac_da_topo_tea_schema.py tests/test_case_study_no_forbidden_diagnostics.py -q passed with 6 tests."
+        - "Custom notebook gate confirmed copied notebook exists, original notebook provenance is recorded, and no error outputs are present."
+        - "Custom deck gate confirmed required basin map, feed variance, ALAMO, PrOMMiS workflow, screening TEA/UQ, CMM/REE, hydrocarbon VLE/LLE, and ePC-SAFT roadmap content."
+        - "Custom success-gate validator confirmed 9 success report rows and all statuses Pass."
+      changed_files:
+        - "docs/tutorials/tbac_da_topo_produced_water_case_study.ipynb"
+        - "data/reference/tea/tbac_da_topo_tea_assumption_register.csv"
+        - "data/processed/tbac_da_topo_screening_tea_results.csv"
+        - "results/tbac_da_topo_screening_tea.md"
+        - "results/tbac_da_topo_success_gate_report.md"
+        - "src/lithium_extraction/prommis_case_study/screening_tea.py"
+        - "slides/case_study_tbac_da_topo_produced_water/deck.qmd"
+        - "slides/case_study_tbac_da_topo_produced_water/deck.html"
+        - "slides/case_study_tbac_da_topo_produced_water/figures/produced_water_basin_map.png"
+        - "slides/case_study_tbac_da_topo_produced_water/figures/feed_variance_matrix.png"
+        - "slides/case_study_tbac_da_topo_produced_water/figures/alamo_validation_summary.png"
+        - "slides/case_study_tbac_da_topo_produced_water/figures/prommis_stage_recovery.png"
+        - "slides/case_study_tbac_da_topo_produced_water/figures/screening_tea_uq.png"
+        - "slides/case_study_tbac_da_topo_produced_water/figures/epcsaft_gap_roadmap.png"
+        - "slides/case_study_tbac_da_topo_produced_water/figures/cmm_ree_extension_table.png"
+        - "slides/case_study_tbac_da_topo_produced_water/figures/hydrocarbon_vle_lle_extension.png"
+        - "tests/test_tbac_da_topo_tea_schema.py"
+        - "tests/test_case_study_no_forbidden_diagnostics.py"
+      commands:
+        - command: "uv run python -m lithium_extraction.prommis_case_study.screening_tea"
+          status: pass
+        - command: "uv run python -m pytest tests/test_tbac_da_topo_tea_schema.py -q"
+          status: pass
+        - command: "uv run python -c \"import nbformat; from nbclient import NotebookClient; path='docs/tutorials/tbac_da_topo_produced_water_case_study.ipynb'; nb=nbformat.read(path, as_version=4); client=NotebookClient(nb, timeout=900, kernel_name='python3', resources={'metadata': {'path': '.'}}); client.execute(); nbformat.write(nb, path); print('notebook executed')\""
+          status: pass
+        - command: "uv run python -m nbclient.cli docs/tutorials/tbac_da_topo_produced_water_case_study.ipynb"
+          status: pass
+        - command: "$env:LOCALAPPDATA/Apps/Quarto/bin/quarto.exe render slides/case_study_tbac_da_topo_produced_water/deck.qmd --to revealjs"
+          status: pass
+        - command: "uv run python -m pytest tests/test_tbac_da_topo_tea_schema.py tests/test_case_study_no_forbidden_diagnostics.py -q"
+          status: pass
+        - command: "custom notebook gate"
+          status: pass
+        - command: "custom deck gate"
+          status: pass
+        - command: "custom success-gate report validator"
+          status: pass
+        - command: "git -C C:/Users/Tanner/Documents/git/ePC-SAFT fetch origin main --prune"
+          status: pass
+      blocked: []
+
+  - id: T999
+    type: judge
+    assignee: Judge
+    status: done
+    reasoning_hint: high
+    objective: "Audit whether the full master success-only case-study implementation is complete and ready for internal escalation."
+    inputs:
+      - "All done task receipts"
+      - "Current dirty diff"
+      - "Last validation output"
+      - "results/tbac_da_topo_success_gate_report.md"
+      - "rendered deck"
+      - "executed notebook"
+      - "current ePC-SAFT origin/main status"
+    constraints:
+      - "Reject completion if any required Worker task is queued, active, or missing."
+      - "Reject completion if any success gate is failed, stale, unrun, or omitted."
+      - "Reject completion if diagnostic failure terms appear in final docs, deck, notebook markdown cells, or reports."
+      - "Reject completion if any final result is fake, unlabeled synthetic, or presented beyond its accepted basis."
+      - "Reject completion if PrOMMiS outputs are not from real PrOMMiS/IDAES objects."
+      - "Reject completion if ePC-SAFT main has advanced in a way that clearly enables accepted direct closure and the implementation has not tested that path."
+      - "Run the repo-scoped cleanup hook before final completion."
+    expected_output:
+      - "complete | not_complete"
+      - "full_outcome_complete: true | false"
+      - "missing evidence"
+      - "final validation commands and pass/fail status"
+      - "next task if not complete"
+    receipt:
+      result: done
+      decision: complete
+      full_outcome_complete: true
+      summary:
+        - "Full master success-only case-study implementation is complete for the accepted source-anchored demonstration basis."
+        - "All Worker tasks T002, T004, and T006 are done, and Judge tasks T003, T005, and T999 approved the required gates."
+        - "Final artifacts include the executed notebook, pinned PrOMMiS/IDAES environment, feed/source registers, two-domain stage response, IDAES AlamoSurrogate JSON, SurrogateBlock smoke path, real PrOMMiS/IDAES staged extraction results, screening TEA/UQ outputs, rendered Reveal.js deck, and success-gate report."
+        - "Final ePC-SAFT integration still uses the pinned stable package at 255ca07fbce7a2842aaea353fd626ab297af6067; ePC-SAFT origin/main remains f3ce3cc332bc06e8504ece122e478c8396bc27b8 and the local upstream branch is not merged into main."
+        - "Pre-existing deleted docs/plans/AGENT_* prompt files and untracked .idea/editor.xml were preserved and not reverted."
+      evidence:
+        - "uv run python -m pytest -q passed with 19 tests."
+        - "uv run python scripts/check_epcsaft_integration.py --mode final passed with epcsaft source kind pinned_git and adapter smoke module scripts.epcsaft_compat."
+        - "results/tbac_da_topo_success_gate_report.md contains 9 success rows, all Status=Pass."
+        - "docs/tutorials/tbac_da_topo_produced_water_case_study.ipynb executed with 11 cells, 5 outputs, no error outputs, and recorded original PrOMMiS notebook provenance."
+        - "slides/case_study_tbac_da_topo_produced_water/deck.html rendered successfully from deck.qmd."
+        - "Repo cleanup hook passed: no matching leftover Codex processes under Lithium_Extraction."
+      missing_evidence: []
+      blocked: []
+
+checks:
+  dirty_fingerprint: "Lithium repo dirty before implementation: deleted docs/plans/AGENT_1_CASE_STUDY_FRAMING_PROMPT.md, docs/plans/AGENT_2_EPCSAFT_SURROGATE_PROMPT.md, docs/plans/AGENT_3_PROMMIS_TEA_DECK_PROMPT.md; untracked .idea/editor.xml, docs/goals/case_study_full_implementation/*, docs/plans/MASTER_LITHIUM_CASE_STUDY_SUCCESS_ONLY_AGENT_SPEC.md"
+  last_verification:
+    result: pass
+    task: T999
+    commands:
+      - command: "node C:/Users/Tanner/.codex/plugins/cache/goalbuddy/goalbuddy/0.3.6/skills/goalbuddy/scripts/check-goal-state.mjs docs/goals/case_study_full_implementation/state.yaml"
+        status: pass
+      - command: "uv run python -m pytest -q"
+        status: pass
+      - command: "uv run python scripts/check_epcsaft_integration.py --mode final"
+        status: pass
+      - command: "custom success-gate report validator"
+        status: pass
+      - command: "git -C C:/Users/Tanner/Documents/git/ePC-SAFT fetch origin main --prune"
+        status: pass
+      - command: "git -C C:/Users/Tanner/Documents/git/ePC-SAFT merge-base --is-ancestor HEAD origin/main"
+        status: fail_expected_branch_not_merged
+      - command: "pwsh.exe -NoProfile -ExecutionPolicy Bypass -File \"$env:USERPROFILE/.codex/hooks/codex-cleanup.ps1\" -RepoRoot ."
+        status: pass

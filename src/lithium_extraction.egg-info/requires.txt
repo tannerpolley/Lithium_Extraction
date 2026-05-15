@@ -1,0 +1,9 @@
+epcsaft @ git+https://github.com/tannerpolley/ePC-SAFT.git@869e3354ddc0b52075ddc9efe687b34d6aa98316
+ipykernel>=6.29
+matplotlib>=3.8
+nbclient>=0.10
+nbformat>=5.10
+numpy>=1.26
+pandas>=2.2
+prommis @ git+https://github.com/tannerpolley/prommis.git@f2be79b8878edb2c6e56be6998f4d9388aa1a348
+scipy>=1.12

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import csv
 import json
+import math
 import sys
 import traceback
 from dataclasses import asdict, is_dataclass
@@ -229,6 +230,7 @@ def _summarize_stability(result: Any) -> dict[str, Any]:
 
 
 def _summarize_lle_result(result: Any) -> dict[str, Any]:
+    diagnostics = _strip_volatile_diagnostics(getattr(result, "diagnostics", {}))
     phases = []
     for phase in getattr(result, "phases", []):
         phases.append(
@@ -238,11 +240,33 @@ def _summarize_lle_result(result: Any) -> dict[str, Any]:
                 "composition": _jsonable(getattr(phase, "composition", None)),
             }
         )
+    residual_norm = diagnostics.get("residual_norm", diagnostics.get("solver_residual_norm", math.inf))
+    try:
+        residual_norm = float(residual_norm)
+    except (TypeError, ValueError):
+        residual_norm = math.inf
+    tolerance = diagnostics.get("acceptance_tolerance", diagnostics.get("requested_tolerance", 1.0e-6))
+    try:
+        tolerance = max(float(tolerance), 1.0e-6)
+    except (TypeError, ValueError):
+        tolerance = 1.0e-6
+    split_detected = bool(getattr(result, "split_detected", False))
+    accepted = (
+        split_detected
+        and residual_norm <= tolerance
+        and not bool(diagnostics.get("best_effort_phases_returned", False))
+        and not bool(diagnostics.get("budget_exceeded", False))
+        and str(diagnostics.get("acceptance_gate", "")).strip().lower()
+        not in {"predictive_budget_exhausted", "predictive_solve_failed"}
+    )
     return {
-        "status": "success",
-        "split_detected": bool(getattr(result, "split_detected", False)),
+        "status": "accepted" if accepted else "not_accepted",
+        "accepted": accepted,
+        "split_detected": split_detected,
+        "residual_norm": residual_norm,
+        "acceptance_tolerance": tolerance,
         "phases": _jsonable(phases),
-        "diagnostics": _strip_volatile_diagnostics(getattr(result, "diagnostics", {})),
+        "diagnostics": diagnostics,
     }
 
 
@@ -322,12 +346,13 @@ def _phase_smoke(fitted: dict[str, float]) -> dict[str, Any]:
 
 
 def _write_report(path: Path, fit_result: Any, phase_payload: dict[str, Any]) -> None:
-    lle_status = phase_payload.get("electrolyte_lle", {}).get("status", "not_run")
+    lle = phase_payload.get("electrolyte_lle", {})
+    lle_status = lle.get("status", "not_run")
     stability = phase_payload.get("electrolyte_stability", {})
     lines = [
         "# Rezaee 2026 ePC-SAFT Parameter Smoke Report",
         "",
-        "Last updated: 2026-05-08",
+        "Last updated: 2026-05-15",
         "",
         "## Boundary",
         "",
@@ -352,6 +377,11 @@ def _write_report(path: Path, fit_result: Any, phase_payload: dict[str, Any]) ->
         f"- Stable flag: `{stability.get('stable')}`.",
         f"- Minimum TPD: `{stability.get('min_tpd')}`.",
         f"- Electrolyte LLE status: `{lle_status}`.",
+        f"- Electrolyte LLE accepted: `{lle.get('accepted')}`.",
+        f"- Electrolyte LLE split detected: `{lle.get('split_detected')}`.",
+        f"- Electrolyte LLE residual norm: `{lle.get('residual_norm')}`.",
+        f"- Electrolyte LLE acceptance gate: `{lle.get('diagnostics', {}).get('acceptance_gate')}`.",
+        f"- Electrolyte LLE best-effort phases returned: `{lle.get('diagnostics', {}).get('best_effort_phases_returned')}`.",
         "",
         "## Source-Gated Extraction Comparison",
         "",
@@ -430,6 +460,7 @@ def main() -> int:
             "density_metric": fit_result.metrics_by_term.get("density"),
             "stability_min_tpd": phase_payload.get("electrolyte_stability", {}).get("min_tpd"),
             "lle_status": phase_payload.get("electrolyte_lle", {}).get("status"),
+            "lle_accepted": phase_payload.get("electrolyte_lle", {}).get("accepted"),
             "source_gated_extraction_rows": "Rezaee2025",
         }
     )

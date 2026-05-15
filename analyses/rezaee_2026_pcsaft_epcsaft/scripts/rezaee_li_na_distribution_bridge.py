@@ -603,7 +603,7 @@ def _write_report(
     lines = [
         "# Rezaee 2026 Li/Na Distribution Bridge",
         "",
-        "Last updated: 2026-05-08",
+        "Last updated: 2026-05-15",
         "",
         "## Status",
         "",

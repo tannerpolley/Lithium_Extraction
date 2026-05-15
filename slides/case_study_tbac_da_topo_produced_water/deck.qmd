@@ -1,4 +1,8 @@
 ---
+title: "Produced-Water Lithium Extraction Case Study"
+subtitle: "TBAC/DA DES + TOPO to ALAMO to PrOMMiS/IDAES"
+author: "Tanner Polley"
+date: today
 format:
   revealjs:
     theme: simple
@@ -9,141 +13,173 @@ format:
     transition: none
 ---
 
-## Internal Project Ask
+## Internal Decision
 
-Approve an internal integration sprint that connects produced-water feed chemistry, ePC-SAFT-calibrated Li/Na transfer variables, PrOMMiS/IDAES staged extraction, and screening TEA.
+Approve the next integration sprint around a working produced-water lithium extraction workflow:
 
-![Workflow handoff](figures/prommis_idaes_workflow.png)
+- source-backed feed register
+- TBAC/DA DES + TOPO Li/Na stage response
+- IDAES AlamoSurrogate and SurrogateBlock
+- PrOMMiS/IDAES staged solvent extraction
+- screening TEA and uncertainty propagation
 
-Decision target: formalize the ePC-SAFT-to-PrOMMiS/IDAES case-study workflow and fund the validation work needed to replace calibrated transfer variables with direct closure when the phase-inventory convention is resolved.
+The request is model maturation and integration, not project sanction.
 
-## Why Produced Water
+## Produced-Water Locations
 
-Produced water is a lithium-bearing waste stream with existing handling infrastructure, but feed chemistry controls whether extraction is credible.
+![Produced-water basin map](figures/produced_water_basin_map.png)
 
-![Candidate ranking](figures/produced_water_candidate_ranking.png)
+Smackover is the main case because it combines meaningful lithium grade with source-backed major-ion chemistry. Marcellus, Bakken, Permian, and Salton Sea remain comparison or context cases.
 
-The case study prioritizes feed quality, salinity severity, and interference burden over volume-only opportunity claims.
+## Feed Variance Controls Credibility
 
-## Candidate Screening
+![Feed variance matrix](figures/feed_variance_matrix.png)
 
-Smackover, Marcellus, Bakken, and Permian do not play the same process role.
+High water volume alone does not make a lithium resource. The case-study table separates simulation-ready Smackover rows from incomplete comparison rows.
 
-| Candidate | Case-study role | Decision |
+## Feed Role Register
+
+| Feed | Role | Simulation use |
 |---|---|---|
-| Smackover MS-2 | main flowsheet case | high-salinity hard case with source-backed major ions |
-| Smackover high observed | sensitivity | high-Li sensitivity, not the base case |
-| Marcellus NE PA | comparison card | lower-burden comparison until missing ions are sourced |
-| Bakken high Na | stress test | high-Na validity stress, not the flagship |
-
-## Selected Feed Cases
-
-![Feed card](figures/smackover_marcellus_feed_card.png)
-
-Smackover MS-2 is the main flowsheet case. Marcellus NE PA remains a comparison card because Na, Ca, Sr, and Ba are not source-complete in the current feed table.
+| Smackover MS-2 | main flowsheet and TEA case | yes |
+| Smackover high observed | high-Li sensitivity | yes |
+| Marcellus NE PA | comparison card | no |
+| Bakken high Na | stress context | no |
+| Permian / Wolfcamp | volume and location context | no |
 
 ## Pretreatment Boundary
 
 ![Pretreatment boundary](figures/pretreatment_boundary.png)
 
-Raw produced water is not the extraction feed. Ca, Mg, Sr, Ba, suspended solids, oil, organics, and pretreatment Li loss sit upstream of the Li/Na solvent-extraction model.
+Raw produced water is not the Li/Na extraction feed. Ca, Mg, Sr, Ba, suspended solids, oil, organics, and pretreatment Li loss sit upstream of the Li/Na solvent-extraction model.
 
-## Solvent System
+## Active Solvent System
 
 ![Solvent mechanism](figures/tbac_da_topo_mechanism.png)
 
-`90 wt% TBAC/DA DES + 10 wt% TOPO` is fixed for the main case-study basis. TOPO is fixed at 10 wt% and TBAC:DA is fixed at 1:2.
+The active chemistry is TBAC(1):DA(2) hydrophobic DES + TOPO.
 
-## ePC-SAFT Role
+- nominal organic phase: 90 wt% TBAC/DA DES + 10 wt% TOPO
+- TBAC:DA molar ratio: 1:2
+- temperature: 23 C
+- aqueous pH: 10.4
 
-ePC-SAFT supplies activity, density, distribution, selectivity, and validity information that process models can consume.
+## Two-Domain Stage-Response Design
 
-| Role | Main-deck message |
+| Domain | Rows | Purpose |
+|---|---:|---|
+| source-paper-valid LHS | 625 | protect source-anchor credibility |
+| produced-water-centered LHS | 625 | support Smackover UQ and management case |
+| source anchors | 3 | preserve reported Li/Na extraction anchors |
+| nominal/corner rows | 18 | connect feeds and stress bounds |
+
+Stage-response rows are labeled as source-anchored generated demonstration data when they are not direct ePC-SAFT output.
+
+## IDAES ALAMO Surrogate
+
+![ALAMO validation summary](figures/alamo_validation_summary.png)
+
+The surrogate artifact is an IDAES `AlamoSurrogate` JSON.
+
+| Contract | Value |
 |---|---|
-| Transfer variables | Process models consume D_Li, D_Na, stage count, O/A, recovery, and validity flags. |
-| Validity gate | High Na/Li rows remain extrapolation-flagged. |
-| Direct closure | Direct reactive-LLE is not the model of record until the phase-inventory convention closes. |
-
-## Base Extraction Result
-
-![Base extraction result](figures/base_extraction_result_card.png)
-
-The Smackover MS-2 transfer table gives `87.988%` extraction-step Li recovery. The staged process value used in the deck is `85.348%` overall Li recovery after pretreatment Li loss.
-
-## Surrogate And Validity Gate
-
-![Validity gate](figures/surrogate_validity_gate.png)
-
-Produced-water Na/Li ratios exceed the low-Na/Li source-paper design space. PrOMMiS/IDAES should carry the extrapolation flag instead of treating high-Na rows as fully validated.
+| Inputs | `li_mg_L`, `na_mg_L`, `o_to_a_ratio`, `topo_wt_pct` |
+| Outputs | `logit_k_Li`, `logit_k_Na` |
+| Load path | IDAES `AlamoSurrogate.load_from_file` |
+| Process embedding | IDAES `SurrogateBlock` |
 
 ## PrOMMiS/IDAES Workflow
 
 ![PrOMMiS/IDAES workflow](figures/prommis_idaes_workflow.png)
 
-The process layer consumes the transfer table, applies pretreatment Li loss, stages the Li/Na extraction, and hands reconciled recovery values to screening TEA.
+The process layer uses real PrOMMiS `SolventExtraction` objects containing IDAES `MSContactor` units. Li and Na transfer terms are active. Chloride transfer is held at zero inside the Li/Na extraction boundary.
 
-Recovery reconciliation: `same stage count as transfer table; PrOMMiS/IDAES-style recovery includes pretreatment Li loss`.
+## Staged Extraction Result
 
-## Screening TEA
+![PrOMMiS staged recovery](figures/prommis_stage_recovery.png)
 
-![Screening TEA scenarios](figures/screening_tea_scenarios.png)
+For the Smackover MS-2 case at O/A = 1 and 10 wt% TOPO, the 3-stage PrOMMiS/IDAES run gives 83.77% cumulative Li recovery and 29.01% Na co-transfer before the screening TEA pretreatment-loss adjustment.
 
-Base screening breakeven is `11.84 USD/kg Li2CO3-equivalent screening breakeven`. Stress and favorable cases bracket the current scaffold at `23.23 USD/kg Li2CO3-equivalent screening breakeven` and `7.92 USD/kg Li2CO3-equivalent screening breakeven`.
+## Screening TEA and UQ
 
-All economics are screening TEA values for internal project formalization.
+![Screening TEA UQ](figures/screening_tea_uq.png)
 
-## Roadmap And Ask
+Base Smackover screening intensity is 9.18 USD/kg Li2CO3-equivalent after pretreatment loss, with the sensitivity envelope driven by feed grade, stage count, solvent makeup, and fixed annual charges.
 
-| Workstream | Proof artifact | Stop condition |
-|---|---|---|
-| Direct ePC-SAFT closure | phase-inventory convention scan | direct closure passes validation or remains bounded |
-| PrOMMiS/IDAES integration | staged contactor implementation | transfer variables match reconciled recovery table |
-| Screening TEA maturation | approved assumption table | solvent loss, regeneration, and equipment basis are reviewed |
+## TEA Assumption Boundary
 
-Project ask: fund the integration and validation sprint, not commercialization or plant-ready economics.
-
-## Backup: ePC-SAFT Theory Details
-
-ePC-SAFT contributes activity coefficients, fugacity diagnostics, density support, and phase-stability evidence. The current deck uses calibrated transfer variables because direct reactive-LLE closure is not promoted.
-
-## Backup: Solvent-Extraction Definitions
-
-| Quantity | Definition |
+| Assumption group | Current role |
 |---|---|
-| D_Li | Li distribution ratio consumed by staged extraction. |
-| D_Na | Na distribution ratio consumed by staged extraction. |
-| O/A | organic-to-aqueous mass ratio in the transfer table. |
-| Selectivity | D_Li divided by D_Na. |
+| pretreatment loss | upstream Li loss sensitivity |
+| pretreatment cost | produced-water cleanup burden |
+| solvent loss | TBAC/DA DES + TOPO makeup sensitivity |
+| annualized charge | normalized project-scale comparison |
 
-## Backup: Source-Paper Benchmark Details
+These values support internal prioritization and assumption testing.
 
-The source-paper benchmark layer includes 10 wt% TOPO anchor rows with optimized Li extraction near 48.57% and a model-brine Li/Na extraction row near 51.63% Li and 9.97% Na.
+## ePC-SAFT Bridge Roadmap
 
-These rows are bridge anchors, not produced-water process simulations.
+![ePC-SAFT bridge roadmap](figures/epcsaft_gap_roadmap.png)
 
-## Backup: Phase-Inventory Diagnostics
+The current workflow proves the process-facing path. The next thermodynamic milestone is accepted direct ePC-SAFT Li/Na transfer generation that can replace the source-anchored stage-response layer.
 
-The active diagnostic term is phase-inventory / reaction-coordinate reference-state convention.
+## External Function Path
 
-The convention scan reports no promoted direct reactive-LLE closure; the case-study deck therefore uses calibrated transfer variables and carries validity flags.
-
-## Backup: Literature Scorecard
-
-| Evidence layer | Deck use | Boundary |
+| Layer | Current artifact | Next interface |
 |---|---|---|
-| Produced-water feed table | Smackover and comparison-feed basis | missing values remain flagged |
-| Solvent extraction benchmark | Li/Na extraction anchor | not Smackover experimental validation |
-| ePC-SAFT diagnostics | transfer-variable credibility | direct closure not promoted |
-| Process and TEA scaffold | internal project ask | screening TEA only |
+| thermodynamics | ePC-SAFT package pin | external function or ePC-SAFT-PSE block |
+| surrogate | IDAES AlamoSurrogate JSON | retrain or replace from direct transfer rows |
+| process | PrOMMiS/IDAES MSContactor | staged process sensitivity and TEA |
+| governance | success-gate report | refreshed gates after direct transfer generation |
 
-## Backup: Full TEA Assumption Table
+## CMM/REE Extension
 
-| Scenario | Li recovery (%) | Solvent loss rate | Stage count | Breakeven metric |
-|---|---:|---:|---:|---|
-| base_smackover_ms2 | 85.348 | 0.005 | 3 | 11.84 USD/kg Li2CO3-equivalent screening breakeven |
-| stress_bakken_high_na | 85.688 | 0.008 | 3 | 23.23 USD/kg Li2CO3-equivalent screening breakeven |
-| favorable_smackover_high_li | 85.189 | 0.004 | 3 | 7.92 USD/kg Li2CO3-equivalent screening breakeven |
-| comparison_marcellus_card | 79.229 | 0.005 | 3 | 10.21 USD/kg Li2CO3-equivalent screening breakeven |
-| sensitivity_pretreatment_li_loss | 80.949 | 0.005 | 3 | 12.35 USD/kg Li2CO3-equivalent screening breakeven |
-| sensitivity_solvent_loss | 85.348 | 0.020 | 3 | 30.51 USD/kg Li2CO3-equivalent screening breakeven |
-| sensitivity_stage_count_5 | 94.163 | 0.005 | 5 | 11.70 USD/kg Li2CO3-equivalent screening breakeven |
+![CMM and REE extension table](figures/cmm_ree_extension_table.png)
+
+The present case is Li/Na only. Divalent ions and potential co-products remain registered as pretreatment burden, extension targets, or future species sets.
+
+## Hydrocarbon VLE/LLE Extension
+
+![Hydrocarbon VLE/LLE extension](figures/hydrocarbon_vle_lle_extension.png)
+
+Hydrocarbon-bearing produced water adds a separate VLE/LLE screening need before the solvent extraction model is treated as broadly portable.
+
+## Case-Study Package
+
+| Artifact | Status |
+|---|---|
+| feed and source registers | pass |
+| two-domain stage response | pass |
+| IDAES AlamoSurrogate JSON | pass |
+| SurrogateBlock smoke check | pass |
+| PrOMMiS/IDAES staged extraction | pass |
+| screening TEA/UQ | pass |
+| executed notebook | pass |
+| rendered deck | pass |
+
+## Recommended Next Step
+
+Fund a focused integration sprint to replace the generated stage-response layer with accepted direct ePC-SAFT transfer values, then rerun the same ALAMO, PrOMMiS/IDAES, notebook, and TEA gates.
+
+## Backup: Source Anchors
+
+| Anchor | Value retained |
+|---|---:|
+| optimized one-stage Li extraction | 48.57% |
+| optimized source-definition selectivity | 4.41 |
+| model-brine Li extraction | 51.63% |
+| model-brine Na extraction | 9.97% |
+
+These anchors bound the stage-response surface used to propagate the downstream workflow.
+
+## Backup: Screening TEA Scenarios
+
+| Scenario | Basis |
+|---|---|
+| base Smackover MS-2 | 3-stage nominal case |
+| high-Li Smackover | feed-grade sensitivity |
+| one-stage and five-stage Smackover | stage-count sensitivity |
+| high pretreatment loss | upstream loss sensitivity |
+| high solvent loss | solvent makeup sensitivity |
+| lower throughput | fixed-charge sensitivity |
+
