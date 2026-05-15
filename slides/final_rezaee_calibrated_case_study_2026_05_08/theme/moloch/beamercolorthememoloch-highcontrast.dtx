@@ -1,0 +1,55 @@
+% \iffalse meta-comment -------------------------------------------------------
+% Copyright 2015 Matthias Vogelgesang and the LaTeX community. A full list of
+% contributors can be found at
+%
+%     https://github.com/matze/mtheme/graphs/contributors
+%
+% and the original template was based on the HSRM theme by Benjamin Weiss.
+%
+% This work is licensed under a Creative Commons Attribution-ShareAlike 4.0
+% International License (https://creativecommons.org/licenses/by-sa/4.0/).
+%% --------------------------------------------------------------------------- 
+%% Copyright 2025 Johan Larsson and contributors
+% ------------------------------------------------------------------------- \fi
+% \iffalse
+%<*package>
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamercolorthememoloch-highcontrast}[2025-12-18 v2.1.0 Moloch high-contrast color theme]
+%</package>
+% \fi
+% \CheckSum{0}
+% \StopEventually{}
+% \iffalse
+%<*package>
+% ------------------------------------------------------------------------- \fi
+%
+% \textbf{DEPRECATED:} This color theme is deprecated and will be removed in a
+% future version. Please use \verb|\usecolortheme{moloch}| with
+% \verb|\molochset{colortheme=highcontrast}| instead.
+%
+% This is a high-contrast variant of the Moloch color theme. It provides better
+% readability for users with visual impairments by using stark color contrasts.
+%
+% This file now simply loads the base color theme and applies the highcontrast preset.
+%
+% \begin{macrocode}
+\PackageWarning{beamercolorthememoloch-highcontrast}{%
+  This color theme is deprecated and will be removed in a future version.\MessageBreak
+  Please use \string\usecolortheme{moloch} with \string\molochset{colortheme=highcontrast} instead%
+}
+
+\usecolortheme{moloch}
+
+% Apply highcontrast theme with light variant (default behavior)
+\moloch@colortheme@highcontrast
+\moloch@colors@light
+
+\mode<all>
+% \end{macrocode}
+%
+% \iffalse
+%</package>
+% \fi
+% \Finale
+\endinput
+

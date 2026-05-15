@@ -1,0 +1,167 @@
+% \iffalse meta-comment -------------------------------------------------------
+% Copyright 2015 Matthias Vogelgesang and the LaTeX community. A full list of
+% contributors can be found at
+%
+%     https://github.com/matze/mtheme/graphs/contributors
+%
+% and the original template was based on the HSRM theme by Benjamin Weiss.
+%
+% This work is licensed under a Creative Commons Attribution-ShareAlike 4.0
+% International License (https://creativecommons.org/licenses/by-sa/4.0/).
+% ------------------------------------------------------------------------- \fi
+% \iffalse
+%<*package>
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerthememoloch}[2025-12-18 v2.1.0 Moloch theme]
+%</package>
+% \fi
+% \CheckSum{0}
+% \StopEventually{}
+% \iffalse
+%<*package>
+% ------------------------------------------------------------------------- \fi
+%
+% \subsection{Moloch Parent Theme}
+%
+% The primary job of this package is to load the component sub-packages of the
+% Moloch theme and route the theme options accordingly. It also
+% provides some custom commands and environments for the user.
+%
+%
+%
+% \subsection{Package Dependencies}
+%
+%    \begin{macrocode}
+\RequirePackage{pgfopts}
+%    \end{macrocode}
+%
+%
+%
+% \subsection{Options}
+%
+% Most options are passed off to the component sub-packages.
+%
+%    \begin{macrocode}
+\pgfkeys{/moloch/.cd,
+  .search also={
+      /moloch/inner,
+      /moloch/outer,
+      /moloch/color,
+      /moloch/font,
+    }
+}
+%    \end{macrocode}
+%
+% Route color theme options to the new color system.
+%
+%    \begin{macrocode}
+\pgfkeys{/moloch/.cd,
+  colortheme/.code=\pgfkeysalso{/moloch/colors/theme=#1},
+  colorthemevariant/.code=\pgfkeysalso{/moloch/colors/variant=#1},
+  colortheme variant/.code=\pgfkeysalso{/moloch/colors/variant=#1},
+}
+%    \end{macrocode}
+%
+% \begin{macro}{titleformat plain}
+%    Controls the formatting of the text on standout ``plain'' frames.
+%    \begin{macrocode}
+\pgfkeys{
+  /moloch/titleformat plain/.cd,
+  .is choice,
+  regular/.code={%
+      \let\moloch@plaintitleformat\@empty%
+      \setbeamerfont{standout}{shape=\normalfont}%
+    },
+  smallcaps/.code={%
+      \let\moloch@plaintitleformat\@empty%
+      \setbeamerfont{standout}{shape=\scshape}%
+    },
+  allsmallcaps/.code={%
+      \let\moloch@plaintitleformat\MakeLowercase%
+      \setbeamerfont{standout}{shape=\scshape}%
+    },
+  allcaps/.code={%
+      \let\moloch@plaintitleformat\MakeUppercase%
+      \setbeamerfont{standout}{shape=\normalfont}%
+    },
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{titleformat}
+%    Sets a standard format for titles, subtitles, section titles, frame
+%    titles, and the text on standout ``plain'' frames.
+%    \begin{macrocode}
+\pgfkeys{
+  /moloch/titleformat/.code=\pgfkeysalso{
+    font/titleformat title=#1,
+    font/titleformat subtitle=#1,
+    font/titleformat section=#1,
+    font/titleformat frame=#1,
+    titleformat plain=#1,
+  }
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% Set default values for options.
+%
+%    \begin{macrocode}
+\newcommand{\moloch@setdefaults}{
+  \pgfkeys{/moloch/.cd,
+    titleformat plain=regular,
+  }
+}
+%    \end{macrocode}
+%
+% \subsection{Component Sub-Packages}
+%
+% Having processed the options, we can now load the component sub-packages of
+% the theme.
+%
+%    \begin{macrocode}
+\useinnertheme{moloch}
+\useoutertheme{moloch}
+\usecolortheme{moloch}
+\usefonttheme{moloch}
+%    \end{macrocode}
+%
+% \subsection{Custom Commands}
+%
+% The parent theme defines custom commands as their proper usage may depend
+% on multiple sub-packages.
+%
+% \begin{macro}{\molochset}
+%    Allows the user to change options midway through a presentation.
+%    \begin{macrocode}
+\newcommand{\molochset}[1]{\pgfkeys{/moloch/.cd,#1}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \textbf{DEPRECATED: } The following command is deprecated and will be
+% removed in a future version.
+%
+% \begin{macro}{\mreducelistspacing}
+%    \begin{macrocode}
+\newcommand{\mreducelistspacing}{%
+  \PackageWarning{beamerthememoloch}{%
+    \string\mreducelistspacing\space is deprecated and will be removed in a future version}%
+  \vspace{-\topsep}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+%
+% \subsection{Process Package Options}
+%
+%    \begin{macrocode}
+\moloch@setdefaults
+\ProcessPgfOptions{/moloch}
+%    \end{macrocode}
+%
+% \iffalse
+%</package>
+% \fi
+% \Finale
+\endinput

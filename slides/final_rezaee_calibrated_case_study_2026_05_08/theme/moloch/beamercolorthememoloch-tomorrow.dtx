@@ -1,0 +1,57 @@
+% \iffalse meta-comment -------------------------------------------------------
+% Copyright 2015 Matthias Vogelgesang and the LaTeX community. A full list of
+% contributors can be found at
+%
+%     https://github.com/matze/mtheme/graphs/contributors
+%
+% and the original template was based on the HSRM theme by Benjamin Weiss.
+%
+% This work is licensed under a Creative Commons Attribution-ShareAlike 4.0
+% International License (https://creativecommons.org/licenses/by-sa/4.0/).
+%% --------------------------------------------------------------------------- 
+%% Copyright 2024 Johan Larsson and contributors
+% ------------------------------------------------------------------------- \fi
+% \iffalse
+%<*package>
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamercolorthememoloch-tomorrow}[2025-12-18 v2.1.0 Moloch tomorrow color theme]
+%</package>
+% \fi
+% \CheckSum{0}
+% \StopEventually{}
+% \iffalse
+%<*package>
+% ------------------------------------------------------------------------- \fi
+%
+% \subsection{Moloch Tomorrow Color Theme}
+%
+% \textbf{DEPRECATED:} This color theme is deprecated and will be removed in a
+% future version. Please use |verb\usecolortheme{moloch}| with
+% |verb\molochset{colortheme=tomorrow}| instead.
+%
+% The Moloch Tomorrow color theme provides a color scheme based on the
+% ``Tomorrow'' color scheme created by Chris Kempson. 
+%
+% This file now simply loads the base color theme and applies the tomorrow preset.
+%
+% \begin{macrocode}
+\PackageWarning{beamercolorthememoloch-tomorrow}{%
+  This color theme is deprecated and will be removed in a future version.\MessageBreak
+  Please use \string\usecolortheme{moloch} with \string\molochset{colortheme=tomorrow} instead%
+}
+
+\usecolortheme{moloch}
+
+% Apply tomorrow theme with light variant (default behavior)
+\moloch@colortheme@tomorrow
+\moloch@colors@light
+
+\mode<all>
+% \end{macrocode}
+%
+% \iffalse
+%</package>
+% \fi
+% \Finale
+\endinput
+

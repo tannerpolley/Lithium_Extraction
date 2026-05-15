@@ -1,0 +1,801 @@
+% \iffalse meta-comment -------------------------------------------------------
+% Copyright 2015 Matthias Vogelgesang and the LaTeX community. A full list of
+% contributors can be found at
+%
+%     https://github.com/matze/mtheme/graphs/contributors
+%
+% and the original template was based on the HSRM theme by Benjamin Weiss.
+%
+% This work is licensed under a Creative Commons Attribution-ShareAlike 4.0
+% International License (https://creativecommons.org/licenses/by-sa/4.0/).
+%% --------------------------------------------------------------------------- 
+%% Copyright 2024 Johan Larsson and contributors
+% ------------------------------------------------------------------------- \fi
+% \iffalse
+%<*package>
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerinnerthememoloch}[2025-12-18 v2.1.0 Moloch inner theme]
+%</package>
+% \fi
+% \CheckSum{0}
+% \StopEventually{}
+% \iffalse
+%<*package>
+% ------------------------------------------------------------------------- \fi
+%
+% The \verb|beamer| inner theme dictates the style of the frame elements traditionally
+% set in the ``body'' of each slide. 
+%
+% \subsection{Package Dependencies}
+%
+%    \begin{macrocode}
+\RequirePackage{keyval}
+\RequirePackage{calc}
+\RequirePackage{pgfopts}
+\RequirePackage{tikz}
+%    \end{macrocode}
+%
+% \subsection{Memoization and Tikz Externalization}
+%
+% See the documentation for the correspondign section under the outer theme for
+% more information on the following lines.
+%
+%    \begin{macrocode}
+\providecommand{\tikzexternalenable}{}
+\providecommand{\tikzexternaldisable}{}
+\providecommand{\mmzUnmemoizable}{}
+%    \end{macrocode}
+%
+% \subsection{Options}
+%
+% \begin{macro}{sectionpage}
+%    Optionally add a slide marking the beginning of each section.
+%    \begin{macrocode}
+\pgfkeys{
+  /moloch/inner/sectionpage/.cd,
+  .is choice,
+  none/.code=\moloch@disablesectionpage,
+  simple/.code={%
+      \moloch@enablesectionpage%
+      \setbeamertemplate{section page}[simple]%
+    },
+  progressbar/.code={%
+      \moloch@enablesectionpage%
+      \setbeamertemplate{section page}[progressbar]%
+    },
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{subsectionpage}
+%    Optionally add a slide marking the beginning of each subsection.
+%    \begin{macrocode}
+\pgfkeys{
+  /moloch/inner/subsectionpage/.cd,
+  .is choice,
+  none/.code=\moloch@disablesubsectionpage,
+  simple/.code={%
+      \moloch@enablesubsectionpage%
+      \setbeamertemplate{section page}[simple]%
+    },
+  progressbar/.code={%
+      \moloch@enablesubsectionpage%
+      \setbeamertemplate{section page}[progressbar]%
+    },
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{standoutnumbering}
+%    Whether or not to number standout pages. Option \verb|none| means that 
+%    standout pages are not numbered (do not count as frames). \verb|hide| means
+%    that they do count as frames, but that the footer with the number is
+%    not shown. Option \verb|show| means that they both count as frames and
+%    that the footer with a frame count is shown.
+%    \begin{macrocode}
+\providebool{moloch@enableStandoutFooter}
+\providebool{moloch@enableStandoutNumbering}
+\pgfkeys{
+  /moloch/inner/standoutnumbering/.cd,
+  .is choice,
+  none/.code={
+      \boolfalse{moloch@enableStandoutNumbering}
+      \boolfalse{moloch@enableStandoutFooter}
+    },
+  show/.code={
+      \booltrue{moloch@enableStandoutNumbering}
+      \booltrue{moloch@enableStandoutFooter}
+    },
+  hide/.code={
+      \booltrue{moloch@enableStandoutNumbering}
+      \boolfalse{moloch@enableStandoutFooter}
+    }
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{titleseparator linewidth}
+%    Set the width of the line separating the title from the author.
+%    \begin{macrocode}
+\newlength{\moloch@titleseparator@linewidth}
+\pgfkeys{
+  /moloch/inner/.cd,
+  titleseparatorlinewidth/.code={\setlength{\moloch@titleseparator@linewidth}{#1}},
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{titleseparator aliases}
+%    Allows \verb|titleseparator linewidth| to be used in \verb|\usetheme|.
+%    \begin{macrocode}
+\pgfkeys{
+  /moloch/inner/.cd,
+  titleseparator linewidth/.code=\pgfkeysalso{titleseparatorlinewidth=#1},
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{titlepage}
+%    Select which title page template to use.
+%    \begin{macrocode}
+\pgfkeys{
+  /moloch/inner/titlepage/.cd,
+  .is choice,
+  moloch/.code={%
+      \setbeamertemplate{title page}[moloch]%
+      \setbeamertemplate{title}[moloch]%
+      \setbeamertemplate{subtitle}[moloch]%
+      \setbeamertemplate{author}[moloch]%
+      \setbeamertemplate{institute}[moloch]%
+      \setbeamertemplate{date}[moloch]%
+      \setbeamertemplate{title graphic}[moloch]%
+    },
+  plain/.code={%
+      \setbeamertemplate{title page}[plain]%
+      \setbeamertemplate{title}[plain]%
+      \setbeamertemplate{subtitle}[plain]%
+      \setbeamertemplate{author}[plain]%
+      \setbeamertemplate{institute}[plain]%
+      \setbeamertemplate{date}[plain]%
+      \setbeamertemplate{title graphic}[plain]%
+    },
+  split/.code={%
+      \setbeamerfont{date}{size=\footnotesize}
+      \setbeamertemplate{title page}[split]%
+      \setbeamertemplate{title}[split]%
+      \setbeamertemplate{subtitle}[split]%
+      \setbeamertemplate{author}[split]%
+      \setbeamertemplate{institute}[split]%
+      \setbeamertemplate{date}[split]%
+      \setbeamertemplate{title graphic}[split]%
+    },
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\moloch@inner@setdefaults}
+% Set default values for inner theme options.
+%    \begin{macrocode}
+\newcommand{\moloch@inner@setdefaults}{
+  \pgfkeys{/moloch/inner/.cd,
+    sectionpage=progressbar,
+    subsectionpage=none,
+    standoutnumbering=none,
+    titleseparator linewidth=0.5pt,
+    titlepage=moloch,
+  }
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+%
+% \subsection{Title Page}
+%
+% \begin{macro}{title page}
+% Template for the title page. The moloch variant uses Moloch's custom layout
+% with golden ratio spacing and a title separator. The plain variant mimics
+% Beamer's default title page layout.
+%
+% \subsubsection{Moloch Variant}
+%    \begin{macrocode}
+\defbeamertemplate*{title page}{moloch}{
+  \null%
+  \vspace{0pt plus 1.618fil}%
+  \vfil%
+  \ifx\inserttitlegraphic\@empty\else\usebeamertemplate*{title graphic}\fi
+  \ifx\inserttitle\@empty\else\usebeamertemplate*{title}\fi
+  \ifx\insertsubtitle\@empty\else\usebeamertemplate*{subtitle}\fi
+  \usebeamertemplate*{title separator}
+  \expandafter\ifblank\expandafter{\beamer@andstripped}{}{%
+    \usebeamertemplate*{author}%
+  }
+  \ifx\insertinstitute\@empty\else\usebeamertemplate*{institute}\fi
+  \ifx\insertdate\@empty\else\usebeamertemplate*{date}\fi
+  \vspace{0pt plus 1fil}%
+  \null
+}
+%    \end{macrocode}
+%
+% \subsubsection{Plain (Beamer-like) Variant}
+%    \begin{macrocode}
+\defbeamertemplate{title page}{plain}{
+  \null%
+  \vspace{0pt plus 1fil}%
+  \vfil%
+  \begingroup
+  \centering
+  \usebeamertemplate*{title}
+  \expandafter\ifblank\expandafter{\beamer@andstripped}{}{%
+    \usebeamertemplate*{author}%
+  }
+  \ifx\insertinstitute\@empty\else\usebeamertemplate*{institute}\fi
+  \ifx\insertdate\@empty\else\usebeamertemplate*{date}\fi
+  \ifx\inserttitlegraphic\@empty\else\usebeamertemplate*{title graphic}\fi
+  \endgroup
+  \vspace{0pt plus 1fil}%
+  \null
+}
+%    \end{macrocode}
+%
+% \subsubsection{Split (Two-column) Variant}
+%    \begin{macrocode}
+\defbeamertemplate{title page}{split}{
+  \null%
+  \vspace{0pt plus 3fil}%
+  \vfil%
+  \begin{columns}[c,onlytextwidth]
+    \begin{column}[t]{0.45\textwidth}
+      \raggedright
+      \ifx\inserttitle\@empty\else\usebeamertemplate*{title}\fi
+      \ifx\insertsubtitle\@empty\else
+        \usebeamertemplate*{subtitle}
+      \fi%
+    \end{column}%
+    \hfill%
+    \usebeamertemplate*{title separator vertical}%
+    \hfill%
+    \begin{column}[t]{0.45\textwidth}
+      \expandafter\ifblank\expandafter{\beamer@andstripped}{}{%
+        \usebeamertemplate*{author}%
+      }
+      \ifx\insertinstitute\@empty\else
+        \usebeamertemplate*{institute}
+      \fi
+      \ifx\insertdate\@empty\else
+        \usebeamertemplate*{date}
+      \fi
+      \ifx\inserttitlegraphic\@empty\else
+        \usebeamertemplate*{title graphic}%
+      \fi%
+    \end{column}
+  \end{columns}
+  \vfil%
+  \vspace{0pt plus 1fil}%
+  \null%
+}
+%    \end{macrocode}
+% \end{macro}%
+%
+% Normal people should use \verb|\maketitle| or \verb|\titlepage| instead of using the
+% \verb|title page| beamer template directly. Beamer already defines these macros,
+% but we patch them here to make the title page \verb|[plain]| by default
+% and ensure the title frame number doesn't count.
+%
+% \begin{macro}{\maketitle}
+%
+% Inserts the title frame, or causes the current frame to use the
+% \verb|title page| template. Since we want to remove the footnote rule
+% from the title page, we have to store and restore it around the call to
+% \verb|\frame|.
+%
+% \begin{macrocode}
+\def\maketitle{%
+  \ifbeamer@inframe
+    \titlepage
+  \else
+    \let\beamer@saved@footnoterule\footnoterule%
+    \renewcommand\footnoterule{}%
+    \frame[plain,noframenumbering]{\titlepage}%
+    \let\footnoterule\beamer@saved@footnoterule%
+  \fi
+}
+% \end{macrocode}
+% \end{macro}
+%
+% Also patch \verb|\titlepage| to ensure that footnotes on the title page 
+% are formatted correctly.
+%
+% \begin{macro}{\titlepage}
+%
+%   Inserts the title page using the \verb|title page| beamer template.
+%
+%   \begin{macrocode}
+\def\titlepage{%
+  % Apply title-page specific footnote settings
+  \renewcommand{\@makefntext}[1]{%
+    {\par\usebeamercolor[fg]{thanks}\usebeamerfont{thanks}$^{\@thefnmark}$##1\medskip}%
+  }
+
+  % Process the title page
+  \usebeamertemplate{title page}\@thanks
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{title graphic}
+%   Set the title graphic. Default variant for moloch titlepage.
+%    \begin{macrocode}
+\defbeamertemplate{title graphic}{moloch}{
+  \inserttitlegraphic%
+  \par%
+  \vspace*{1em}
+}
+\defbeamertemplate{title graphic}{plain}{
+\vskip0.5em%
+{\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\par}
+}
+\defbeamertemplate{title graphic}{split}{
+  \vskip2em%
+  \inserttitlegraphic%
+  \par%
+}
+\setbeamertemplate{title graphic}[moloch]
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{title}
+%   Set the title on the title page. Default variant for moloch titlepage.
+%    \begin{macrocode}
+\defbeamertemplate{title}{moloch}{
+  \raggedright%
+  \moloch@titleformat{\inserttitle}%
+  \par%
+}
+\defbeamertemplate{title}{plain}{
+  \begin{beamercolorbox}[sep=8pt,center]{title}
+    \usebeamerfont{title}\inserttitle\par%
+    \ifx\insertsubtitle\@empty\else\usebeamertemplate*{subtitle}\fi%
+  \end{beamercolorbox}%
+  \vskip0.5em%
+}
+\defbeamertemplate{title}{split}{
+  \raggedright%
+  \moloch@titleformat{\inserttitle}%
+  \par%
+}
+\setbeamertemplate{title}[moloch]
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{subtitle}
+%   Set the subtitle on the title page. Default variant for moloch titlepage.
+%    \begin{macrocode}
+\defbeamertemplate{subtitle}{moloch}{
+  \vspace*{0.3em}
+  \raggedright%
+  \moloch@subtitleformat{\insertsubtitle}%
+  \par%
+}
+\defbeamertemplate{subtitle}{split}{
+  \vspace*{0.5em}
+  \raggedright%
+  \moloch@subtitleformat{\insertsubtitle}%
+  \par%
+}
+\defbeamertemplate{subtitle}{plain}{%
+\vskip0.25em%
+{\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+}
+\setbeamertemplate{subtitle}[moloch]
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{title separator}
+%   Template to set the title separator (horizontal).
+%    \begin{macrocode}
+\setbeamertemplate{title separator}{
+  \tikzexternaldisable%
+  \begin{tikzpicture}[baseline=(current bounding box.north)]
+    \mmzUnmemoizable%
+    \fill[fg] (0,0) rectangle (\textwidth, \moloch@titleseparator@linewidth);
+    \useasboundingbox (0,0) rectangle (\textwidth,-\moloch@titleseparator@linewidth);
+  \end{tikzpicture}%
+  \tikzexternalenable%
+  \par%
+  \vspace*{0.8em}
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{title separator vertical}
+%   Template for a vertical title separator.
+%    \begin{macrocode}
+\setbeamertemplate{title separator vertical}{%
+  {\usebeamercolor[fg]{title separator}%
+      \vrule width \moloch@titleseparator@linewidth}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{author}
+%   Set the author on the title page. Default variant for moloch titlepage.
+%    \begin{macrocode}
+\defbeamertemplate{author}{moloch}{
+  \raggedright%
+  \insertauthor%
+  \par%
+  \vspace*{0.5em}
+}
+\defbeamertemplate{author}{plain}{
+  \begin{beamercolorbox}[sep=8pt,center]{author}
+    \usebeamerfont{author}\insertauthor
+  \end{beamercolorbox}
+}
+\defbeamertemplate{author}{split}{
+  \raggedright%
+  \insertauthor%
+  \par%
+}
+\setbeamertemplate{author}[moloch]
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{institute}
+%   Set the institute on the title page. Default variant for moloch titlepage.
+%    \begin{macrocode}
+\defbeamertemplate{institute}{moloch}{
+  \insertinstitute%
+  \par%
+  \vspace*{1em}
+}
+\defbeamertemplate{institute}{plain}{
+  \begin{beamercolorbox}[sep=8pt,center]{institute}
+    \usebeamerfont{institute}\insertinstitute
+  \end{beamercolorbox}
+}
+\defbeamertemplate{institute}{split}{
+  \vskip0.5em%
+  \raggedright%
+  \insertinstitute%
+  \par%
+}
+\setbeamertemplate{institute}[moloch]
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{date}
+%   Set the date on the title page. Default variant for moloch titlepage.
+%    \begin{macrocode}
+\defbeamertemplate{date}{moloch}{
+  \insertdate%
+  \par%
+}
+\defbeamertemplate{date}{plain}{
+  \begin{beamercolorbox}[sep=8pt,center]{date}
+    \usebeamerfont{date}\insertdate
+  \end{beamercolorbox}
+}
+\defbeamertemplate{date}{split}{
+  \vskip0.5em%
+  \raggedright%
+  \insertdate%
+  \par%
+}
+\setbeamertemplate{date}[moloch]
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \subsection{Section Pages}
+%
+% \begin{macro}{section Page}
+%
+%   Template for the section title slide at the beginning of each section.
+%
+%    \begin{macrocode}
+\defbeamertemplate{section page}{simple}{
+  \begin{center}
+    \usebeamercolor[fg]{section title}
+    \usebeamerfont{section title}
+    \moloch@sectiontitleformat{\insertsectionhead}\par
+    \usebeamercolor[fg]{subsection title}%
+    \usebeamerfont{subsection title}%
+    \strut%
+    \ifx\insertsubsectionhead\@empty\else%
+      \insertsubsectionhead%
+    \fi
+  \end{center}
+  \vspace{\baselineskip - 1ex + \moloch@titleseparator@linewidth}
+}
+\defbeamertemplate{section page}{progressbar}{
+  \centering
+  \begin{minipage}{0.7875\linewidth}
+    \raggedright
+    \usebeamercolor[fg]{section title}
+    \usebeamerfont{section title}
+    \moloch@sectiontitleformat{\insertsectionhead}\\[-0.5\baselineskip]
+    \usebeamertemplate*{progress bar in section page}
+    \par
+    \usebeamercolor[fg]{subsection title}%
+    \usebeamerfont{subsection title}%
+    \strut%
+    \ifx\insertsubsectionhead\@empty\else%
+      \insertsubsectionhead%
+    \fi
+  \end{minipage}
+  \par
+}
+\newcommand{\moloch@disablesectionpage}{
+  \AtBeginSection{
+    % intentionally empty
+  }
+}
+\newcommand{\moloch@enablesectionpage}{
+  \AtBeginSection{
+    \ifbeamer@inframe
+      \sectionpage
+    \else
+      \frame[plain,c,noframenumbering]{\sectionpage}
+    \fi
+  }
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{subsection page}
+%
+%   Template for the subsection title slide that can optionally be added to
+%   at the beginning of each subsection.
+%
+%    \begin{macrocode}
+\setbeamertemplate{subsection page}{%
+  \usebeamertemplate*{section page}
+}
+\newcommand{\moloch@disablesubsectionpage}{
+  \AtBeginSubsection{
+    % intentionally empty
+  }
+}
+\newcommand{\moloch@enablesubsectionpage}{
+  \AtBeginSubsection{
+    \ifbeamer@inframe
+      \subsectionpage
+    \else
+      \frame[plain,c,noframenumbering]{\subsectionpage}
+    \fi
+  }
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{progress bar in section page}
+%
+%   Template for the progress bar displayed by default on the section page.
+%   This code is duplicated in large part in the outer theme's template
+%   \verb|progress bar in head/foot|.
+%
+%    \begin{macrocode}
+\setbeamertemplate{progress bar in section page}{
+  \pgfmathsetlength{\moloch@progressonsectionpage}{
+    \textwidth * min(1,\insertframenumber/max(1,\inserttotalframenumber))
+  }%
+  \tikzexternaldisable%
+  \begin{tikzpicture}[baseline=(current bounding box.north)]
+    \mmzUnmemoizable%
+    \fill[bg]
+    (0,0)
+    rectangle
+    (\textwidth, \moloch@progressonsectionpage@linewidth);
+    \fill[fg]
+    (0,0)
+    rectangle
+    (\moloch@progressonsectionpage,
+    \moloch@progressonsectionpage@linewidth);
+    \useasboundingbox (0,0) rectangle (\textwidth,-\moloch@progressonsectionpage@linewidth);
+  \end{tikzpicture}%
+  \tikzexternalenable%
+}
+%    \end{macrocode}
+%
+%   The code above assumes that \verb|\insertframenumber| is less than or equal to
+%   \verb|\inserttotalframenumber|. However, this is not true on the first compile;
+%   in the absence of an \verb|.aux| file, \verb|\inserttotalframenumber| defaults to 1.
+%   This behaviour could cause fatal errors for long presentations, as
+%   \verb|\moloch@progressonsectionpage| would exceed \TeX's maximum length
+%   (16383.99999pt, roughly 5.75 metres or 18.9 feet).
+%   To avoid this, we increase the default value for \verb|\inserttotalframenumber|;
+%   presentations with over 4000 slides will still break on first compile, but
+%   users in that situation likely have deeper problems to solve.
+%
+%    \begin{macrocode}
+\def\inserttotalframenumber{100}
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsection{Lists and Floats}
+%
+% Moloch uses custom symbols for the \verb|itemize| environment. The symbols
+% are defined as below, using \verb|pgf| commands to draw the shapes.
+% This is slightly different than what beamer does by default, which is
+% to use font glyphs from the math font. But we want to avoid
+% this reliance on the math font, which may have somewhat
+% surprising side effects.
+%
+% By default, we use a filled circle for the first-level \verb|itemize| items,
+% a filled square for the second level, and a filled triangle for
+% the third level. Since the triangle tapers to a point, we add a slight
+% overhang to it so that it visually aligns better with the other symbols.
+% We do the same for the circle, but to a lower extent.
+%
+%    \begin{macrocode}
+\newcommand{\mitemover}[2]{\makebox[0pt][r]{#1}\kern-#2}
+\newcommand{\mitem}[1]{\mitemover{#1}{0pt}}
+
+\newcommand{\overhangSquare}{0pt}
+\newcommand{\overhangCircle}{0.05ex}
+\newcommand{\overhangTriangle}{0.25ex}
+
+\newcommand{\moloch@circle}{
+  \begin{pgfpicture}
+    \pgfsetbaseline{-0.7ex}
+    \pgfpathcircle{\pgfpoint{0}{0}}{0.16em}
+    \pgfusepath{fill}
+  \end{pgfpicture}%
+}
+%
+\newcommand{\moloch@square}{
+  \begin{pgfpicture}
+    \pgfsetbaseline{-0.7ex}
+    \pgfpathrectangle{\pgfpoint{-0.165em}{-0.165em}}{\pgfpoint{0.31em}{0.31em}}
+    \pgfusepath{fill}
+  \end{pgfpicture}%
+}
+%
+\newcommand{\moloch@triangle}{
+  \begin{pgfpicture}
+    \pgfsetbaseline{-0.7ex}
+    \pgfpathmoveto{\pgfpoint{0.21em}{0}}       % right vertex (tip)
+    \pgfpathlineto{\pgfpoint{-0.21em}{0.21em}}  % top left
+    \pgfpathlineto{\pgfpoint{-0.21em}{-0.21em}} % bottom left
+    \pgfpathclose
+    \pgfusepath{fill}
+  \end{pgfpicture}%
+}
+%    \end{macrocode}
+%
+%    Next, we set the itemize templates to use these symbols.
+%
+%    \begin{macrocode}
+% \setbeamertemplate{itemize item}[circle]
+\setbeamertemplate{itemize item}{\mitemover{\moloch@circle}{\overhangCircle}}
+\setbeamertemplate{itemize subitem}{\mitemover{\moloch@square}{\overhangSquare}}
+\setbeamertemplate{itemize subsubitem}{\mitemover{\moloch@triangle}{\overhangTriangle}}
+\setbeamertemplate{caption label separator}{: }
+\setbeamertemplate{caption}[numbered]
+%    \end{macrocode}
+%
+%
+%
+% \subsection{Footnotes}
+%    \begin{macrocode}
+\setbeamertemplate{footnote}{%
+  \parindent 0em\noindent\raggedright \usebeamercolor{footnote}\hbox to
+  0.8em{\hfil\insertfootnotemark}\insertfootnotetext%%%
+  \par%
+}
+%    \end{macrocode}
+%
+%
+%
+% \subsection{Text and Spacing Settings}
+%
+%
+% By default, Beamer frames offer the \verb|c| option to \textit{almost} vertically
+% center the text, but the placement is a little too high. To fix this, we
+% redefine the \verb|c| option to equalize \verb|\beamer@frametopskip| and
+% \verb|\beamer@framebottomskip|. This solution was suggested by Enrico Gregorio in
+% an answer to \href{http://tex.stackexchange.com/questions/247826/}{this
+% Stack Exchange question}.
+%
+%    \begin{macrocode}
+\define@key{beamerframe}{c}[true]{% centered
+  \beamer@frametopskip=0pt plus 1fil\relax%
+  \beamer@framebottomskip=0pt plus 1fil\relax%
+  \beamer@frametopskipautobreak=0pt plus .4\paperheight\relax%
+  \beamer@framebottomskipautobreak=0pt plus .6\paperheight\relax%
+  \def\beamer@initfirstlineunskip{}%
+}
+%    \end{macrocode}
+%
+%
+%
+% \subsection{Standout Frames}
+%
+% Moloch offers a custom frame format with large, centered text and an
+% inverted background. To use it, add the key \verb|standout| to the frame:
+%
+% \verb|\begin{frame}[standout] ... \end{frame}|.
+%
+% \begin{macro}{standout}
+%
+%     Optional arguments to Beamer's frames are implemented using
+%     \verb|\define@key| from the \verb|keyval| package, which will execute code when the
+%     defined option is called. For the \verb|standout| option, we begin a group,
+%     change the colors and set frame options.
+%
+%    \begin{macrocode}
+\providebool{moloch@standout}
+\define@key{beamerframe}{standout}[true]{%
+  \booltrue{moloch@standout}
+  \begingroup
+  \setkeys{beamerframe}{c}
+  \ifbool{moloch@enableStandoutNumbering}{}{%
+    \setkeys{beamerframe}{noframenumbering}}
+  \ifbeamercolorempty[bg]{standout}{
+    \setbeamercolor{background canvas}{
+      use=standout,
+      bg=-standout.fg
+    }
+  }{
+    \setbeamercolor{background canvas}{
+      use=standout,
+      bg=standout.bg
+    }
+  }
+  \setbeamercolor{local structure}{
+    fg=standout.fg
+  }
+  \usebeamercolor[fg]{standout}
+  \setbeamercolor{page number in head/foot}{
+    use=standout,
+    fg=standout.fg
+  }
+  \ifbool{moloch@enableStandoutFooter}{}{\setbeamertemplate{footline}{}}
+}
+%    \end{macrocode}
+%
+%    Then we just have to close the group after the standout slide is finished
+%    in order to restore the colours and fonts for the rest of the
+%    presentation. Unfortunately, we cannot use \verb|\AfterEndEnvironment{frame}| for
+%    this (see \url{http://tex.stackexchange.com/questions/226319/}).
+%    Instead, we prepend the \verb|\endgroup| to \verb|\beamer@reseteecodes|, which is run
+%    exactly once at the end of each slide.
+%
+%    \begin{macrocode}
+\pretocmd{\beamer@reseteecodes}{%
+  \ifbool{moloch@standout}{
+    \endgroup
+    \boolfalse{moloch@standout}
+  }{}
+}{}{}
+%    \end{macrocode}
+%
+%    We set the fonts and the \verb|\centering| alignment on the inner content,
+%    in such a way that the speaker's note layout isn't affected by the custom
+%    formatting.
+%
+%    \begin{macrocode}
+\AtBeginEnvironment{beamer@frameslide}{
+  \ifbool{moloch@standout}{
+    \centering
+    \usebeamerfont{standout}
+  }{}
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsection{Process Package Options}
+%
+%    \begin{macrocode}
+\moloch@inner@setdefaults
+\ProcessPgfPackageOptions{/moloch/inner}
+%    \end{macrocode}
+%
+% \iffalse
+%</package>
+% \fi
+% \Finale
+\endinput

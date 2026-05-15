@@ -3,34 +3,6 @@
   <component name="CsvFileAttributes">
     <option name="attributeMap">
       <map>
-        <entry key="\data\multiphase\gando_2025_one_stage_assets\gando_2025_one_stage_anchor_rows.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="\data\multiphase\gando_2025_one_stage_assets\gando_2025_one_stage_nominal.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="\data\multiphase\gando_2025_slide_assets\gando_2025_na_sweep.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="\data\multiphase\gando_2025_stage3_comparison.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
         <entry key="\docs\epcsaft_parameter_summary.csv">
           <value>
             <Attribute>
@@ -39,34 +11,6 @@
           </value>
         </entry>
         <entry key="\docs\epcsaft_parameter_summary_ppt.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="\scripts\Yu_2024_analysis\figure6_digitized_calc_curve.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="\scripts\Yu_2024_analysis\figure6_digitized_points.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="\scripts\Yu_2024_analysis\output\yu_2024_figure6_reactive_replication.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="\scripts\Yu_2024_analysis\output\yu_2024_figure6_replication.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />

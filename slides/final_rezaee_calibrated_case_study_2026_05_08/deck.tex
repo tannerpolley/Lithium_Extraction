@@ -1,9 +1,15 @@
 \documentclass[aspectratio=169]{beamer}
 
-\usetheme{Madrid}
-\usecolortheme{default}
-\setbeamertemplate{navigation symbols}{}
-\setbeamertemplate{footline}[frame number]
+\makeatletter
+\def\input@path{{theme/moloch/}{theme/}}
+\makeatother
+\usetheme[
+  sectionpage=progressbar,
+  subsectionpage=none,
+  block=fill,
+  progressbar=frametitle,
+  titleformat=regular
+]{moloch}
 
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -11,37 +17,35 @@
 \usepackage{graphicx}
 \usepackage[version=4]{mhchem}
 \usepackage{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,calc,shapes.geometric}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
 
-\definecolor{netlgreen}{RGB}{137,190,49}
-\definecolor{netlnavy}{RGB}{20,31,46}
-\definecolor{netlteal}{RGB}{20,101,116}
-\setbeamercolor{structure}{fg=netlteal}
-\setbeamercolor{title}{fg=white,bg=netlteal}
-\setbeamercolor{subtitle}{fg=white}
-\setbeamercolor{frametitle}{fg=white,bg=netlteal}
-\setbeamercolor{block title}{fg=white,bg=netlteal}
-\setbeamercolor{block body}{fg=netlnavy,bg=black!3}
+\input{theme/presentation_theme.tex}
 
 \graphicspath{{figures/}}
 
 \title{Produced-Water Lithium Extraction}
 \subtitle{Rezaee DES/TOPO Li/Na bridge for PrOMMiS and IDAES integration}
 \author{Chemical engineering technical review}
+\institute{Smackover brine basis $\rightarrow$ divalent pretreatment $\rightarrow$ Rezaee DES/TOPO Li/Na bridge $\rightarrow$ PrOMMiS/IDAES handoff}
 \date{May 8, 2026}
+\titlegraphic{\coverprocessmark}
 
 \newcommand{\DLi}{D_{\mathrm{Li}}}
 \newcommand{\DNa}{D_{\mathrm{Na}}}
 \newcommand{\SLiNa}{S_{\mathrm{Li/Na}}}
+\newcommand{\sourcefoot}[1]{\vfill{\scriptsize\color{netlgray}#1}}
+\newcommand{\slidetag}[1]{{\scriptsize\bfseries\color{netlteal}#1}\par\vspace{0.12cm}}
 
 \begin{document}
 
-\begin{frame}
-  \titlepage
-  \vspace{-0.3cm}
-  \begin{center}
-    \small Source chain: Smackover brine basis $\rightarrow$ divalent pretreatment
-    $\rightarrow$ Rezaee DES/TOPO Li/Na bridge $\rightarrow$ PrOMMiS/IDAES handoff.
-  \end{center}
+\maketitle
+
+\begin{frame}[standout]
+Traceable Li/Na transfer variables are the bridge from produced-water chemistry
+to process economics.
 \end{frame}
 
 \section{Case Basis}
@@ -53,10 +57,10 @@
       \includegraphics[width=\linewidth]{brine_li_tds_scatter.png}
     \end{column}
     \begin{column}{0.41\textwidth}
-      \begin{block}{Engineering premise}
+      \begin{alertblock}{Engineering premise}
         Southern Arkansas Smackover brine couples high lithium value with
         hypersaline electrolyte severity.
-      \end{block}
+      \end{alertblock}
       \begin{itemize}
         \item Selected clean-feed basis: \SI{168}{mg/L} Li and
           \SI{64100}{mg/L} Na.
@@ -64,8 +68,7 @@
         \item Raw divalents are pretreatment context, not active solvent-model
           competitors.
       \end{itemize}
-      \vfill
-      {\scriptsize Sources: USGS Smackover data release; local screening table.}
+      \sourcefoot{Sources: USGS Smackover data release; local screening table.}
     \end{column}
   \end{columns}
 \end{frame}
@@ -76,7 +79,7 @@
       \includegraphics[width=\linewidth]{rezaee_surrogate_input_ranges.png}
     \end{column}
     \begin{column}{0.43\textwidth}
-      \includegraphics[width=\linewidth]{process_bridge_diagram.png}
+      \processbridge{0.86}
       \vspace{0.2cm}
       \begin{itemize}
         \item The solvent model sees a clean Li/Na stream.
@@ -91,6 +94,7 @@
 \section{Thermodynamic Bridge}
 
 \begin{frame}{Rezaee DES/TOPO Becomes A Transfer-Variable Bridge}
+  \slidetag{THERMODYNAMIC SURROGATE CONTRACT}
   \begin{center}
     \includegraphics[width=0.82\linewidth]{rezaee_surrogate_pipeline.png}
   \end{center}
@@ -102,7 +106,7 @@
     \item Model-basis and validity flags are carried into downstream process
       tables.
   \end{itemize}
-  {\scriptsize Sources: Rezaee et al. 2025 extraction data; Rezaee et al. 2026 parameter and reaction-equilibrium support.}
+  \sourcefoot{Sources: Rezaee et al. 2025 extraction data; Rezaee et al. 2026 parameter and reaction-equilibrium support.}
 \end{frame}
 
 \begin{frame}{Distribution Coefficients Are The Process Contract}
@@ -114,10 +118,10 @@
       \[
         \SLiNa = \frac{\DLi}{\DNa}
       \]
-      \begin{block}{Nominal MS-2, $O/A=1$}
+      \begin{exampleblock}{Nominal MS-2, $O/A=1$}
         $E_{\mathrm{Li}}=50.66\%$, $E_{\mathrm{Na}}=5.67\%$,
         $\SLiNa=17.09$.
-      \end{block}
+      \end{exampleblock}
     \end{column}
     \begin{column}{0.49\textwidth}
       \includegraphics[width=\linewidth]{nominal_transfer_math_card.png}
@@ -164,9 +168,9 @@
   \small
   \begin{columns}[T,onlytextwidth]
     \begin{column}{0.52\textwidth}
-      \includegraphics[width=0.92\linewidth]{process_bridge_diagram.png}
-      \vspace{0.10cm}
-      \includegraphics[width=0.86\linewidth]{calibrated_costing_scenarios.png}
+      \processbridge{0.96}
+      \vspace{0.15cm}
+      \costingplot
     \end{column}
     \begin{column}{0.45\textwidth}
       \begin{itemize}
@@ -183,13 +187,13 @@
 \begin{frame}{Validation Boundary}
   \begin{columns}[T,onlytextwidth]
     \begin{column}{0.56\textwidth}
-      \includegraphics[width=\linewidth]{na_li_validation_boundary.png}
+      \validationriskplot
     \end{column}
     \begin{column}{0.40\textwidth}
-      \begin{block}{Boundary condition}
+      \begin{alertblock}{Boundary condition}
         Every produced-water row is flagged as outside the original Rezaee Na/Li
         DOE training domain.
-      \end{block}
+      \end{alertblock}
       \begin{itemize}
         \item Process screening is appropriate.
         \item Final physical acceptance requires high-Na validation.
@@ -197,6 +201,11 @@
       \end{itemize}
     \end{column}
   \end{columns}
+\end{frame}
+
+\begin{frame}[standout]
+The case study is ready for PrOMMiS/IDAES integration when $D_i$,
+$\SLiNa$, and validity flags remain traceable from the Rezaee basis.
 \end{frame}
 
 \begin{frame}{Final Technical Message}

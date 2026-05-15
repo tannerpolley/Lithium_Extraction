@@ -1,0 +1,52 @@
+{
+  "package": {
+    "name": "epcsaft",
+    "minimum_version": "1.5.2",
+    "default_mode": "stable",
+    "allowed_sources": {
+      "stable": [
+        "pinned_git",
+        "release"
+      ],
+      "dev": [
+        "live_worktree"
+      ],
+      "final": [
+        "release",
+        "pinned_git",
+        "repo_owned_data"
+      ]
+    },
+    "shared_checkout_root": "C:/Users/Tanner/Documents/git/ePC-SAFT",
+    "dev_worktree_root": "C:/Users/Tanner/.codex/worktrees/epcsaft-dev/ePC-SAFT"
+  },
+  "required_public_symbols": [
+    "ePCSAFTMixture",
+    "capabilities",
+    "runtime_build_info"
+  ],
+  "forbidden_import_prefixes": [
+    "epcsaft._"
+  ],
+  "allowed_direct_import_paths": [
+    "scripts/epcsaft_compat.py",
+    "analyses/rezaee_2026_pcsaft_epcsaft/scripts/rezaee_section32_equilibrium_replication.py",
+    "analyses/rezaee_2026_pcsaft_epcsaft/scripts/rezaee_reactive_equilibrium_replay.py",
+    "analyses/rezaee_2026_pcsaft_epcsaft/scripts/rezaee_reactive_equilibrium_fit.py",
+    "analyses/rezaee_2026_pcsaft_epcsaft/scripts/rezaee_reactive_epcsaft_option_scan.py",
+    "analyses/rezaee_2026_pcsaft_epcsaft/scripts/rezaee_des_epcsaft_parameter_smoke.py"
+  ],
+  "scan_roots": [
+    "scripts",
+    "analyses"
+  ],
+  "smoke": {
+    "kind": "adapter_import",
+    "module": "scripts.epcsaft_compat",
+    "required_callables": [
+      "pcsaft_den",
+      "pcsaft_lnfugcoef",
+      "pcsaft_multiphase_lle"
+    ]
+  }
+}
