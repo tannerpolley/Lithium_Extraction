@@ -37,6 +37,8 @@ def _existing_final_facing_paths() -> list[Path]:
         ROOT / "results/tbac_da_topo_success_gate_report.md",
         ROOT / "slides/case_study_tbac_da_topo_produced_water/deck.qmd",
         ROOT / "slides/case_study_tbac_da_topo_produced_water/deck.html",
+        ROOT / "slides/final_rezaee_calibrated_case_study_2026_05_08/README.md",
+        ROOT / "slides/final_rezaee_calibrated_case_study_2026_05_08/deck.tex",
     ]
     return [path for path in candidates if path.exists()]
 

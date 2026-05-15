@@ -24,3 +24,9 @@ The package can evaluate the aqueous ePC-SAFT and organic PC-SAFT activity terms
 The direct cause is now quantified: matching the SI RLi/RNa mole fractions while holding the published Table 2 constants would require organic complex activity coefficients many orders of magnitude smaller than the package computes from the published Table 8/9 parameters.
 
 The constants-free fit is diagnostic only: it shows that the remaining gap is a source/reference-state or implementation-convention issue, because the fitted constants move far away from Table 2. Do not present that constants-free fit as the published Rezaee thermodynamic model.
+
+## Generated Files
+
+- `data\processed\rezaee_2026_reactive_equilibrium_fit.csv`
+- `results\reaction_equilibrium\rezaee_2026_reactive_equilibrium_fit_summary.json`
+- `data\processed\rezaee_2026_reactive_equilibrium_paper_k_calibration.json`

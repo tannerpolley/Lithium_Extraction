@@ -1,0 +1,35 @@
+{
+  "equilibrium_constants": {
+    "Li": 3.2983e-09,
+    "Na": 1.1476e-12
+  },
+  "metrics": {
+    "max_abs_ln_residual": 5.385099469559602,
+    "mean_abs_ln_residual": 1.5569707657701175,
+    "median_abs_ln_residual": 1.2822520386159937,
+    "rms_ln_residual": 1.9668747778503808
+  },
+  "parameters": {
+    "RLi": {
+      "epsilon_over_k_K": 463.9584028347081,
+      "m": 12.986372653297082,
+      "sigma_A": 4.060752108460565
+    },
+    "RNa": {
+      "epsilon_over_k_K": 499.3367298753936,
+      "m": 12.982505238894863,
+      "sigma_A": 4.213360583811065
+    },
+    "organic_binary_interactions": {
+      "DES_RLi": -0.08271028517950448,
+      "DES_RNa": -0.08934264380027039,
+      "DES_TOPO": 0.12116893501649247,
+      "RLi_RNa": -0.14188992688415733,
+      "TOPO_RLi": -0.05200936084012693,
+      "TOPO_RNa": -0.07886985312861108
+    }
+  },
+  "row_count": 26,
+  "source_summary": "results\\reaction_equilibrium\\rezaee_2026_reactive_equilibrium_fit_summary.json",
+  "status": "paper_constants_refit_calibration"
+}
