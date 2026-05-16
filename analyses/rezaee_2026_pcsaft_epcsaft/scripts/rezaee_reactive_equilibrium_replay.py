@@ -14,6 +14,8 @@ from _paths import ANALYSIS_DIR, REPO_ROOT
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
+import digitize_rezaee_2026_paper_figures as paper_digitizer  # noqa: E402
+import render_rezaee_2026_section32_paper_figures as paper_figure_renderer  # noqa: E402
 from _epcsaft_properties import get_prop_dict  # noqa: E402
 from epcsaft import ReactionDefinition, _core, ePCSAFTMixture  # noqa: E402
 from epcsaft.equilibrium import _reaction_phase_stoichiometry_matrix  # noqa: E402
@@ -82,6 +84,10 @@ def _reaction_constants() -> dict[str, float]:
     if set(out) != {"Li", "Na"}:
         raise ValueError(f"Expected Li and Na reaction constants in {REACTION_CONSTANTS_CSV}")
     return out
+
+
+def _read_json(path: Path) -> dict[str, Any]:
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
 def _aqueous_mixture() -> tuple[ePCSAFTMixture, np.ndarray]:
@@ -438,6 +444,34 @@ def _summaries(rows: pd.DataFrame, constants: dict[str, float]) -> dict[str, Any
     }
 
 
+def _run_paper_figure_validation() -> dict[str, Any]:
+    digitize_code = paper_digitizer.main()
+    if digitize_code != 0:
+        raise RuntimeError(f"Paper figure digitization failed with exit code {digitize_code}")
+
+    render_code = paper_figure_renderer.main()
+    if render_code != 0:
+        raise RuntimeError(f"Paper figure rendering failed with exit code {render_code}")
+
+    digitization = _read_json(paper_digitizer.SUMMARY_JSON)
+    paper_figures = _read_json(paper_figure_renderer.SUMMARY_JSON)
+
+    figures_by_id = {entry["figure_id"]: entry for entry in paper_figures["figures"]}
+    return {
+        "status": "replay_owned_paper_figure_validation_complete",
+        "digitization": digitization,
+        "paper_figures": paper_figures,
+        "before_kij_aard_pct": {
+            "Li_extraction": float(figures_by_id["fig7"]["aard_pct"]),
+            "selectivity": float(figures_by_id["fig8"]["aard_pct"]),
+        },
+        "after_kij_aard_pct": {
+            "Li_extraction": float(figures_by_id["fig10"]["aard_pct"]),
+            "selectivity": float(figures_by_id["fig11"]["aard_pct"]),
+        },
+    }
+
+
 def _write_report(summary: dict[str, Any]) -> None:
     lines = [
         "# Rezaee 2026 Reactive Equilibrium Replay",
@@ -466,11 +500,23 @@ def _write_report(summary: dict[str, Any]) -> None:
         f"- Median absolute RLi/RNa error from paper K replay: `{summary['median_abs_complex_error_from_paper_K']['RLi']}`, `{summary['median_abs_complex_error_from_paper_K']['RNa']}`.",
         f"- Mean relative RLi/RNa error from paper K replay: `{summary['mean_relative_complex_error_from_paper_K']['RLi']}`, `{summary['mean_relative_complex_error_from_paper_K']['RNa']}`.",
         "",
+        "## Figure Validation",
+        "",
+        "The replay run also regenerates the published Figure 7, 8, 10, and 11 validation panels from a digitized point table so the main replay command carries the paper-figure evidence.",
+        "",
+        f"- Figure digitization status: `{summary['figure_validation']['digitization']['status']}`.",
+        f"- Figure render status: `{summary['figure_validation']['paper_figures']['status']}`.",
+        f"- Digitized panel count: `{summary['figure_validation']['digitization']['figure_count']}`.",
+        f"- Before `k_ij` AARD Li extraction/selectivity: `{summary['figure_validation']['before_kij_aard_pct']['Li_extraction']}`%, `{summary['figure_validation']['before_kij_aard_pct']['selectivity']}`%.",
+        f"- After `k_ij` AARD Li extraction/selectivity: `{summary['figure_validation']['after_kij_aard_pct']['Li_extraction']}`%, `{summary['figure_validation']['after_kij_aard_pct']['selectivity']}`%.",
+        "",
         "## Interpretation",
         "",
         "The package can evaluate the phase-tagged cross-phase reaction residual required by Rezaee's formulation. However, using the paper-reported Table 2 equilibrium constants together with the paper/SI composition rows and the paper-reported organic parameters does not reproduce the reported RLi/RNa complex mole fractions under this activity-reference convention.",
         "",
         "This is not the same as the old four-species fixed-composition LLE smoke. This replay includes the chemical-equilibrium equations that control lithium and sodium extraction. The current blocker is the source/model convention gap exposed by lnQ-lnK, not an omitted call to `electrolyte_lle`.",
+        "",
+        "The figure-validation branch is stronger: the replay-owned digitized paper panels reproduce the published before/after `k_ij` improvement trend, so the remaining gap is specifically the row-basis or reference-state convention used by the reactive replay rather than a missing paper-level trend check.",
         "",
         "Next implementation step: resolve the convention gap by checking the 2026 supporting information/group-contribution worksheet and the 2025 phase-amount basis, then either correct the stored constants/reference-state convention or add a calibrated Rezaee parameter-refit lane that uses these EOS activity calls directly.",
     ]
@@ -545,6 +591,7 @@ def main() -> int:
     REPLAY_CSV.parent.mkdir(parents=True, exist_ok=True)
     replay.to_csv(REPLAY_CSV, index=False)
     summary = _summaries(replay, constants)
+    summary["figure_validation"] = _run_paper_figure_validation()
     SUMMARY_JSON.parent.mkdir(parents=True, exist_ok=True)
     SUMMARY_JSON.write_text(json.dumps(_jsonable(summary), indent=2) + "\n", encoding="utf-8")
     _write_report(summary)

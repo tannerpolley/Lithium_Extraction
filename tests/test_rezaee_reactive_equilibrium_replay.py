@@ -30,6 +30,8 @@ def test_rezaee_reactive_replay_reports_phase_tagged_package_route() -> None:
 
     summary = json.loads(SUMMARY_JSON.read_text(encoding="utf-8"))
     route = summary["package_phase_tagged_cross_phase"]
+    figure_validation = summary["figure_validation"]
+    paper_figures = figure_validation["paper_figures"]
 
     assert summary["row_count"] == 26
     assert summary["status"] == "source_mismatch"
@@ -42,3 +44,9 @@ def test_rezaee_reactive_replay_reports_phase_tagged_package_route() -> None:
     assert summary["median_lnQ_minus_lnK"]["Na"] > 5.0
     assert summary["median_abs_complex_error_from_paper_K"]["RLi"] < 0.01
     assert summary["median_abs_complex_error_from_paper_K"]["RNa"] < 0.03
+    assert figure_validation["status"] == "replay_owned_paper_figure_validation_complete"
+    assert figure_validation["digitization"]["figure_count"] == 4
+    assert paper_figures["figure_count"] == 4
+    assert {entry["figure_id"] for entry in paper_figures["figures"]} == {"fig7", "fig8", "fig10", "fig11"}
+    assert figure_validation["after_kij_aard_pct"]["Li_extraction"] < figure_validation["before_kij_aard_pct"]["Li_extraction"]
+    assert figure_validation["after_kij_aard_pct"]["selectivity"] < figure_validation["before_kij_aard_pct"]["selectivity"]

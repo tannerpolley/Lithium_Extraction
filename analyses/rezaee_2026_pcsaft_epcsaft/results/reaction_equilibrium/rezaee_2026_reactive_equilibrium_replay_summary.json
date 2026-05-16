@@ -50,5 +50,146 @@
     "Li_geomean": 528594.1660138565,
     "Na_geomean": 44328.52942986643
   },
-  "status": "source_mismatch"
+  "status": "source_mismatch",
+  "figure_validation": {
+    "status": "replay_owned_paper_figure_validation_complete",
+    "digitization": {
+      "status": "paper_figure_digitization_complete",
+      "figure_count": 4,
+      "digitized_points_csv": "data\\processed\\rezaee_2026_paper_figure_digitized_points.csv",
+      "figures": [
+        {
+          "figure_id": "fig7",
+          "paper_label": "Fig. 7",
+          "row_count": 34,
+          "source_image": "C:\\Users\\Tanner\\Documents\\git\\Lithium_Extraction\\analyses\\rezaee_2026_pcsaft_epcsaft\\results\\reaction_equilibrium\\figure_digitization\\source_images\\fig7_source.jpg",
+          "overlay": "C:\\Users\\Tanner\\Documents\\git\\Lithium_Extraction\\analyses\\rezaee_2026_pcsaft_epcsaft\\results\\reaction_equilibrium\\figure_digitization\\overlays\\fig7_overlay.png",
+          "axis_max": 60.0,
+          "x_min": 20.08684859721435,
+          "x_max": 49.064186805087274,
+          "y_min": 11.329510689472245,
+          "y_max": 58.28134387449017,
+          "line_calibration": {
+            "x_min": 152.0,
+            "x_max": 1087.0,
+            "y_at_x_min": 740.5266457532042,
+            "y_at_x_max": 86.05308338417024,
+            "slope": -0.6999717244588599,
+            "intercept": 846.922347870951
+          }
+        },
+        {
+          "figure_id": "fig8",
+          "paper_label": "Fig. 8",
+          "row_count": 32,
+          "source_image": "C:\\Users\\Tanner\\Documents\\git\\Lithium_Extraction\\analyses\\rezaee_2026_pcsaft_epcsaft\\results\\reaction_equilibrium\\figure_digitization\\source_images\\fig8_source.jpg",
+          "overlay": "C:\\Users\\Tanner\\Documents\\git\\Lithium_Extraction\\analyses\\rezaee_2026_pcsaft_epcsaft\\results\\reaction_equilibrium\\figure_digitization\\overlays\\fig8_overlay.png",
+          "axis_max": 6.0,
+          "x_min": 1.2547373685056524,
+          "x_max": 4.507903055848261,
+          "y_min": 1.8721966783900044,
+          "y_max": 5.766363716535869,
+          "line_calibration": {
+            "x_min": 133.0,
+            "x_max": 1082.0,
+            "y_at_x_min": 750.0763277162494,
+            "y_at_x_max": 43.05974131555149,
+            "slope": -0.745012209062906,
+            "intercept": 849.1629515216158
+          }
+        },
+        {
+          "figure_id": "fig10",
+          "paper_label": "Fig. 10",
+          "row_count": 27,
+          "source_image": "C:\\Users\\Tanner\\Documents\\git\\Lithium_Extraction\\analyses\\rezaee_2026_pcsaft_epcsaft\\results\\reaction_equilibrium\\figure_digitization\\source_images\\fig10_source.jpg",
+          "overlay": "C:\\Users\\Tanner\\Documents\\git\\Lithium_Extraction\\analyses\\rezaee_2026_pcsaft_epcsaft\\results\\reaction_equilibrium\\figure_digitization\\overlays\\fig10_overlay.png",
+          "axis_max": 60.0,
+          "x_min": 20.039985627286043,
+          "x_max": 49.347620021188405,
+          "y_min": 16.5472747248012,
+          "y_max": 56.302934743488365,
+          "line_calibration": {
+            "x_min": 147.0,
+            "x_max": 1080.0,
+            "y_at_x_min": 735.7200730508658,
+            "y_at_x_max": 41.20247854520744,
+            "slope": -0.7443918483447571,
+            "intercept": 845.1456747575452
+          }
+        },
+        {
+          "figure_id": "fig11",
+          "paper_label": "Fig. 11",
+          "row_count": 28,
+          "source_image": "C:\\Users\\Tanner\\Documents\\git\\Lithium_Extraction\\analyses\\rezaee_2026_pcsaft_epcsaft\\results\\reaction_equilibrium\\figure_digitization\\source_images\\fig11_source.jpg",
+          "overlay": "C:\\Users\\Tanner\\Documents\\git\\Lithium_Extraction\\analyses\\rezaee_2026_pcsaft_epcsaft\\results\\reaction_equilibrium\\figure_digitization\\overlays\\fig11_overlay.png",
+          "axis_max": 6.0,
+          "x_min": 1.2546816152118634,
+          "x_max": 4.460567823343848,
+          "y_min": 1.6834800161815737,
+          "y_max": 4.972090228650435,
+          "line_calibration": {
+            "x_min": 133.0,
+            "x_max": 1084.0,
+            "y_at_x_min": 750.8777940006137,
+            "y_at_x_max": 42.91726600688639,
+            "slope": -0.744437989478157,
+            "intercept": 849.8880466012085
+          }
+        }
+      ]
+    },
+    "paper_figures": {
+      "status": "section32_paper_figures_rendered_from_digitized_points",
+      "source_rows": "data\\processed\\rezaee_2026_paper_figure_digitized_points.csv",
+      "figure_count": 4,
+      "figures": [
+        {
+          "figure_id": "fig7",
+          "paper_label": "Fig. 7",
+          "row_count": 34,
+          "aard_pct": 15.076734918338135,
+          "png": "C:\\Users\\Tanner\\Documents\\git\\Lithium_Extraction\\analyses\\rezaee_2026_pcsaft_epcsaft\\results\\reaction_equilibrium\\figures\\rezaee_2026_section32_paper_figures\\fig7.png",
+          "svg": "C:\\Users\\Tanner\\Documents\\git\\Lithium_Extraction\\analyses\\rezaee_2026_pcsaft_epcsaft\\results\\reaction_equilibrium\\figures\\rezaee_2026_section32_paper_figures\\fig7.svg",
+          "caption": "Deviation of calculated extraction percentage from experimental data [17]."
+        },
+        {
+          "figure_id": "fig8",
+          "paper_label": "Fig. 8",
+          "row_count": 32,
+          "aard_pct": 17.871733495213796,
+          "png": "C:\\Users\\Tanner\\Documents\\git\\Lithium_Extraction\\analyses\\rezaee_2026_pcsaft_epcsaft\\results\\reaction_equilibrium\\figures\\rezaee_2026_section32_paper_figures\\fig8.png",
+          "svg": "C:\\Users\\Tanner\\Documents\\git\\Lithium_Extraction\\analyses\\rezaee_2026_pcsaft_epcsaft\\results\\reaction_equilibrium\\figures\\rezaee_2026_section32_paper_figures\\fig8.svg",
+          "caption": "Deviation of calculated selectivity from experimental data [17]."
+        },
+        {
+          "figure_id": "fig10",
+          "paper_label": "Fig. 10",
+          "row_count": 27,
+          "aard_pct": 9.204927345864292,
+          "png": "C:\\Users\\Tanner\\Documents\\git\\Lithium_Extraction\\analyses\\rezaee_2026_pcsaft_epcsaft\\results\\reaction_equilibrium\\figures\\rezaee_2026_section32_paper_figures\\fig10.png",
+          "svg": "C:\\Users\\Tanner\\Documents\\git\\Lithium_Extraction\\analyses\\rezaee_2026_pcsaft_epcsaft\\results\\reaction_equilibrium\\figures\\rezaee_2026_section32_paper_figures\\fig10.svg",
+          "caption": "Deviation of calculated lithium extraction percentage from experimental data [17] using $k_{ij}$."
+        },
+        {
+          "figure_id": "fig11",
+          "paper_label": "Fig. 11",
+          "row_count": 28,
+          "aard_pct": 10.475494176274777,
+          "png": "C:\\Users\\Tanner\\Documents\\git\\Lithium_Extraction\\analyses\\rezaee_2026_pcsaft_epcsaft\\results\\reaction_equilibrium\\figures\\rezaee_2026_section32_paper_figures\\fig11.png",
+          "svg": "C:\\Users\\Tanner\\Documents\\git\\Lithium_Extraction\\analyses\\rezaee_2026_pcsaft_epcsaft\\results\\reaction_equilibrium\\figures\\rezaee_2026_section32_paper_figures\\fig11.svg",
+          "caption": "Deviation of calculated selectivity from experimental data [17] using $k_{ij}$."
+        }
+      ]
+    },
+    "before_kij_aard_pct": {
+      "Li_extraction": 15.076734918338135,
+      "selectivity": 17.871733495213796
+    },
+    "after_kij_aard_pct": {
+      "Li_extraction": 9.204927345864292,
+      "selectivity": 10.475494176274777
+    }
+  }
 }
