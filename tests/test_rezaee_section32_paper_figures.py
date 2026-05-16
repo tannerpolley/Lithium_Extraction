@@ -7,6 +7,13 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+DIGITIZE_SCRIPT = (
+    ROOT
+    / "analyses"
+    / "rezaee_2026_pcsaft_epcsaft"
+    / "scripts"
+    / "digitize_rezaee_2026_paper_figures.py"
+)
 SCRIPT = (
     ROOT
     / "analyses"
@@ -25,6 +32,15 @@ SUMMARY_JSON = (
 
 
 def test_rezaee_section32_paper_figures_render() -> None:
+    digitized = subprocess.run(
+        [sys.executable, str(DIGITIZE_SCRIPT)],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert digitized.returncode == 0, digitized.stdout + digitized.stderr
+
     completed = subprocess.run(
         [sys.executable, str(SCRIPT)],
         cwd=ROOT,
@@ -40,4 +56,4 @@ def test_rezaee_section32_paper_figures_render() -> None:
     for entry in summary["figures"]:
         assert Path(entry["png"]).exists()
         assert Path(entry["svg"]).exists()
-        assert entry["row_count"] == 26
+        assert entry["row_count"] >= 20

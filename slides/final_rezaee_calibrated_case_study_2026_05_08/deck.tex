@@ -48,7 +48,7 @@
 \newcommand{\SLiNa}{S_{\mathrm{Li/Na}}}
 \newcommand{\sourcefoot}[1]{\vfill{\scriptsize\color{netlgray}#1}}
 \newcommand{\slidetag}[1]{{\scriptsize\bfseries\color{netlteal}#1}\par\vspace{0.12cm}}
-\newcommand{\sectiondivider}[1]{%
+\newcommand{\sectiondivider}[2]{%
   \begin{frame}[plain,noframenumbering]
     \vspace*{0.42\textheight}
     {\Large\bfseries\MakeUppercase{#1}}\par
@@ -57,6 +57,7 @@
       \draw[netlgreen,line width=0.55pt] (0,0) -- (0.34\textwidth,0);
       \draw[netlgray!42,line width=0.45pt] (0.34\textwidth,0) -- (0.82\textwidth,0);
     \end{tikzpicture}
+    \note{#2}
   \end{frame}
 }
 
@@ -107,8 +108,8 @@
       ymajorgrids,
       grid style={netlgray!12},
     ]
-      \addplot[very thick,mark=*,color=netlteal] coordinates {(1,45.681) (3,83.770) (5,95.100)};
-      \addplot[very thick,mark=square*,color=netlwarning] coordinates {(1,10.714) (3,29.008) (5,43.740)};
+      \addplot[very thick,mark=*,color=netlteal] coordinates {(1,19.508) (3,47.850) (5,66.212)};
+      \addplot[very thick,mark=square*,color=netlwarning] coordinates {(1,7.065) (3,19.734) (5,30.675)};
       \legend{Li recovery,Na co-transfer}
     \end{axis}
   \end{tikzpicture}%
@@ -122,10 +123,10 @@
       ybar,
       bar width=11pt,
       ymin=0,
-      ymax=19,
+      ymax=18,
       ylabel={\scriptsize USD/kg LCE},
-      xtick={1,2,3,4,5,6,7},
-      xticklabels={Base,High Li,1 stage,5 stages,High pretreat,High solvent,Lower flow},
+      xtick={1,2,3},
+      xticklabels={Stress,Base,Favorable},
       x tick label style={font=\tiny,rotate=32,anchor=east,text=netlnavy},
       y tick label style={font=\scriptsize,text=netlnavy},
       label style={font=\scriptsize,text=netlgray},
@@ -136,13 +137,9 @@
       every node near coord/.append style={font=\tiny,text=netlnavy,rotate=90,anchor=west},
     ]
       \addplot[fill=netlteal!78,draw=netlteal] coordinates {
-        (1,9.18)
-        (2,6.11)
-        (3,16.84)
-        (4,8.09)
-        (5,9.69)
-        (6,9.75)
-        (7,13.75)
+        (1,16.09)
+        (2,8.34)
+        (3,5.44)
       };
     \end{axis}
   \end{tikzpicture}%
@@ -153,11 +150,16 @@
 \begin{frame}[plain]
   \titlepage
   \note{
-    Open by naming the purpose: this is an internal technical package for
-    connecting Smackover produced-water chemistry to staged extraction and
-    screening economics. Emphasize that the talk is about traceable integration:
-    feed basis, pretreatment boundary, TBAC/DA DES + TOPO, ALAMO, PrOMMiS/IDAES,
-    and TEA.
+    I am going to walk through a produced-water lithium case study as an
+    integration package, not as a broad market overview. The chain is deliberately
+    narrow: start with a Smackover feed, define what pretreatment removes, map
+    the Rezaee TBAC/DA DES plus TOPO Li/Na response into compact transfer terms,
+    route those terms through an ALAMO surrogate, and then carry them into
+    PrOMMiS/IDAES staged extraction and screening TEA. The reason to keep the
+    chain this explicit is that each layer has a different job. Feed chemistry
+    defines the severity. The solvent response defines selectivity. The process
+    model defines staged recovery. The economics tell us which improvements are
+    worth chasing first.
   }
 \end{frame}
 
@@ -165,15 +167,25 @@
 A pretreated Smackover Li/Na stream connects realistic produced-water chemistry
 to staged extraction and screening-level economics.
 \note{
-  Use this as the one-sentence thesis. The audience should hear that the
-  case study starts from a realistic produced-water feed, removes non-extraction
-  burdens at the pretreatment boundary, and carries only Li/Na transfer variables
-  into the process and cost layers.
+  The thesis is that the useful technical unit is not a raw brine and not a
+  stand-alone extractant number. The useful unit is a pretreated Li/Na stream
+  whose transfer behavior can be propagated through stages and costs. That is
+  why the case study starts from produced-water chemistry, but it does not try
+  to put every raw-brine component into the contactor. The divalent and oil-side
+  burdens are handled at the boundary. What moves forward is the Li/Na transfer
+  problem: how much lithium moves, how much sodium follows, and how those two
+  numbers change the process result.
 }
 \end{frame}
 
 \section{Case Basis}
-\sectiondivider{Case Basis}
+\sectiondivider{Case Basis}{
+  I am starting with the feed because that is the part of the story where
+  produced-water realism matters most. Lithium extraction can look artificially
+  clean if the feed basis is vague. Here, the feed basis is tied to a southern
+  Arkansas Smackover row, and the rest of the section explains why that row is a
+  useful main case rather than just another sensitivity point.
+}
 
 \begin{frame}{Smackover Is The Main Produced-Water Case}
   \small
@@ -197,10 +209,16 @@ to staged extraction and screening-level economics.
     \end{column}
   \end{columns}
   \note{
-    The point is not that Smackover is the only possible brine. It is the
-    strongest primary case because it combines meaningful lithium with major-ion
-    severity. The MS-2 row gives the main feed basis, and the high-Li Smackover
-    row is kept as a clean sensitivity case rather than a new flowsheet.
+    The map is here to anchor the case geographically before we start talking
+    about extraction numbers. Smackover is not being treated as the only possible
+    produced-water lithium source. It is being treated as the strongest main
+    case for this package because it combines meaningful lithium grade with very
+    severe salinity. The MS-2 feed is the base row: 168 milligrams per liter
+    lithium, 64,100 milligrams per liter sodium, and 305,000 milligrams per
+    liter total dissolved solids. The high-observed Smackover row is kept as a
+    feed-grade sensitivity. That separation is important because it lets the
+    main case stay traceable while still showing what better lithium grade does
+    to the process.
   }
 \end{frame}
 
@@ -229,10 +247,15 @@ to staged extraction and screening-level economics.
     \end{column}
   \end{columns}
   \note{
-    Explain why the model role is narrow. MS-2 is the case, high-Li Smackover is
-    the feed-grade sensitivity, and the other basins provide context. This keeps
-    the presentation from becoming a general produced-water survey while still
-    showing why feed variance matters.
+    This matrix explains why I do not treat every brine row the same way. MS-2
+    is the main calculation basis because it has the complete chemistry needed
+    to carry a process case. The high-lithium Smackover row is a targeted
+    sensitivity because it answers a specific question: how much does feed grade
+    move the economics if the same extraction structure is used? The other
+    basins are useful context, but they are not allowed to dilute the main
+    calculation. That matters because feed variance is real, and a produced-water
+    model should show that variance without pretending that every comparison row
+    is equally ready for flowsheet use.
   }
 \end{frame}
 
@@ -251,15 +274,25 @@ to staged extraction and screening-level economics.
     \end{column}
   \end{columns}
   \note{
-    Say that raw produced water is not sent directly to the DES contactor. The
-    extraction model receives a Li/Na feed after divalent removal and oil/solids
-    handling. Pretreatment loss is still represented downstream in the TEA so the
-    boundary is not free.
+    The important boundary on this slide is that raw produced water is not the
+    extraction feed. The DES contactor sees a Li/Na-focused stream after the
+    obvious upstream burdens are removed or controlled: calcium, magnesium,
+    strontium, barium, suspended solids, oil, and organics. That does not make
+    pretreatment invisible. Lithium loss across pretreatment is carried into the
+    TEA sensitivity, so the boundary still has an economic cost. The purpose is
+    to avoid mixing two problems together. Pretreatment determines whether the
+    brine can be made suitable for contact. The extraction model then asks how
+    Li and Na transfer once that boundary has been crossed.
   }
 \end{frame}
 
 \section{Solvent And Transfer Surface}
-\sectiondivider{Solvent And Transfer Surface}
+\sectiondivider{Solvent And Transfer Surface}{
+  Now I am moving from feed realism to the transfer surface. The question in
+  this section is simple: once the pretreated Li/Na stream reaches the solvent,
+  what variables describe the extraction response well enough to drive a staged
+  process model?
+}
 
 \begin{frame}{TBAC/DA DES + TOPO Is The Active Solvent}
   \begin{columns}[T,onlytextwidth]
@@ -277,10 +310,15 @@ to staged extraction and screening-level economics.
     \end{column}
   \end{columns}
   \note{
-    This slide locks the chemistry. The active solvent is TBAC/DA DES with
-    10 wt\% TOPO at the reported pH and temperature. Keep the message simple:
-    the bridge is based on the Rezaee Li/Na extraction response for this solvent
-    system, not a generic extractant screen.
+    This is the solvent definition, and it should be read as a constraint on the
+    whole case study. The organic phase is not a generic solvent stand-in; it
+    is the Rezaee TBAC/DA deep eutectic solvent with 10 weight percent TOPO. The
+    TBAC to decanoic acid molar ratio is one to two, the temperature basis is
+    23 degrees Celsius, and the aqueous pH basis is 10.4. Those values matter
+    because selectivity is not only a property of lithium and sodium; it is a
+    property of the feed, solvent chemistry, pH, temperature, and phase ratio
+    together. This slide locks that chemistry before any surrogate or TEA number
+    is introduced.
   }
 \end{frame}
 
@@ -293,10 +331,10 @@ to staged extraction and screening-level economics.
         \toprule
         Domain & Rows & Use \\
         \midrule
-        source LHS & 625 & extraction anchors \\
-        Smackover LHS & 625 & feed sensitivity \\
-        reported anchors & 3 & Li/Na targets \\
-        nominal/corner rows & 18 & stress bounds \\
+        Rezaee DOE rows & 26 & Li/Na target surface \\
+        optimum rows & 5 & high-response anchors \\
+        real-brine row & 1 & high-Na/Li bound \\
+        process design & 523 & Smackover sensitivity \\
         \bottomrule
       \end{tabular}
     \end{column}
@@ -310,21 +348,27 @@ to staged extraction and screening-level economics.
         \end{tabular}
       \end{exampleblock}
       \begin{itemize}
-        \item Reported extraction responses define the transfer anchors.
-        \item Feed chemistry selects the Smackover case and validity bounds.
-        \item The process calculation reports this paper-anchor transfer basis.
+        \item The repaired package route evaluates 26 phase-tagged reactive rows.
+        \item The surrogate uses 31 finite DOE and optimum target rows.
+        \item Smackover MS-2 is outside the original Na/Li range and is marked as an extrapolated process case.
       \end{itemize}
     \end{column}
   \end{columns}
   \note{
-    Walk through the table as the data contract. The source LHS and Smackover
-    LHS span the response surface, and the reported anchors keep the model tied
-    to the Rezaee extraction values. The important phrase is paper-response
-    bridge: it is compact, traceable, and process-facing.
+    This table explains exactly what the current transfer surface is allowed to
+    say. The Rezaee DOE rows give the main Li and Na extraction response. The
+    five optimum rows keep the surface tied to the higher-response region near
+    the reported 48.57 percent lithium extraction and 4.41 Li over Na
+    selectivity. The real-brine row is retained because it is the only direct
+    high-sodium anchor. The repaired ePC-SAFT route now evaluates the 26
+    phase-tagged reactive rows, so the thermodynamic layer is active. The
+    Smackover process rows still stretch the Na over Li ratio far beyond the
+    original DOE range, so I read them as process sensitivities rather than as
+    a claim that the paper fully measured that brine.
   }
 \end{frame}
 
-\begin{frame}{IDAES ALAMO Surrogate Preserves Li/Na Transfer Trends}
+\begin{frame}{ALAMO-Ready Surrogate Carries The Current Li/Na Targets}
   \begin{columns}[T,onlytextwidth]
     \begin{column}{0.64\textwidth}
       \includegraphics[width=\linewidth]{alamo_surrogate_parity_panel.png}
@@ -332,26 +376,31 @@ to staged extraction and screening-level economics.
     \begin{column}{0.32\textwidth}
       \footnotesize
       \begin{itemize}
-        \item Inputs: Li concentration, Na concentration, O/A ratio, and TOPO loading.
-        \item Outputs: logit-transformed Li and Na transfer coefficients.
-        \item $R^2=0.9979$ for Li and $R^2=0.9966$ for Na on the held-out table.
+        \item Inputs: temperature, pH, TOPO loading, and Na/Li ratio.
+        \item Outputs: $\log \DLi$ and $\log \DNa$ for process transfer.
+        \item Current target-row fit: $R^2=0.780$ for Li and $R^2=0.613$ for Na.
       \end{itemize}
       \vspace{0.16cm}
       \begin{tabular}{@{}lcc@{}}
         \toprule
         Output & RMSE & max error \\
         \midrule
-        logit $k_{\mathrm{Li}}$ & 0.0173 & 0.0555 \\
-        logit $k_{\mathrm{Na}}$ & 0.0220 & 0.0779 \\
+        $\log \DLi$ & 0.110 & 0.239 \\
+        $\log \DNa$ & 0.144 & 0.367 \\
         \bottomrule
       \end{tabular}
     \end{column}
   \end{columns}
   \note{
-    The ALAMO result is here to justify the compact transfer surface. The
-    held-out parity is strong for both Li and Na in logit transfer space, so the
-    surrogate is appropriate for the staged extraction calculations. Do not
-    overstate this as a direct thermodynamic proof.
+    This plot is the current surrogate check after replacing the older transfer
+    values with the Rezaee target rows from the repaired package evaluation. The
+    surface is intentionally simple: temperature, pH, TOPO loading, and Na over
+    Li ratio go in, and log distribution terms for lithium and sodium come out.
+    Lithium fits more tightly than sodium, with an $R^2$ of 0.780 versus 0.613.
+    That matters for how I describe the result. I would not call this a final
+    thermodynamic closure. I would call it a current process surrogate that can
+    carry source-traced Li and Na transfer into PrOMMiS and IDAES while the
+    direct activity and fugacity route is connected.
   }
 \end{frame}
 
@@ -378,15 +427,26 @@ to staged extraction and screening-level economics.
     \end{column}
   \end{columns}
   \note{
-    This is the equation slide for the process bridge. Extraction percent is
-    converted to distribution coefficients, and Li/Na selectivity is the ratio
-    of those coefficients. The Rezaee anchors give the numerical grounding; the
-    flow diagram shows where the variables enter PrOMMiS/IDAES.
+    This is where extraction percentages become process variables. For each
+    species, the distribution coefficient is the extracted fraction divided by
+    the raffinate fraction, corrected by the organic-to-aqueous ratio. Once
+    $D_{\mathrm{Li}}$ and $D_{\mathrm{Na}}$ are defined, selectivity is just the
+    ratio of those two coefficients. That conversion is important because staged
+    extraction models do not need a paper table copied verbatim; they need
+    transfer terms that can be applied stage by stage. The Rezaee anchor at
+    $O/A=1$ gives 48.57 percent lithium extraction and 11.01 percent sodium
+    extraction for the optimized TOPO case, which is enough to define a
+    process-ready Li/Na transfer pair.
   }
 \end{frame}
 
 \section{Process And Economics}
-\sectiondivider{Process And Economics}
+\sectiondivider{Process And Economics}{
+  At this point the talk shifts from chemistry response to process consequence.
+  The next section asks what the Li/Na transfer pair means after one stage,
+  three stages, five stages, and then after the same recovery values are carried
+  into a screening TEA.
+}
 
 \begin{frame}{PrOMMiS/IDAES Uses Active Li And Na Transfer Terms}
   \small
@@ -398,9 +458,9 @@ to staged extraction and screening-level economics.
         \toprule
         Stages & Li recovery & Na co-transfer \\
         \midrule
-        1 & 45.681\% & 10.714\% \\
-        3 & 83.770\% & 29.008\% \\
-        5 & 95.100\% & 43.740\% \\
+        1 & 19.508\% & 7.065\% \\
+        3 & 47.850\% & 19.734\% \\
+        5 & 66.212\% & 30.675\% \\
         \bottomrule
       \end{tabular}
     \end{column}
@@ -414,15 +474,20 @@ to staged extraction and screening-level economics.
     \end{column}
   \end{columns}
   \note{
-    Emphasize the process-model handoff: Li and Na transfer are active terms,
-    while chloride is held outside the extraction boundary. The staged results
-    are not a standalone chemistry claim; they are what happens when the
-    paper-response transfer variables are carried into the PrOMMiS/IDAES stage
-    structure.
+    This is the transfer from process variables to unit operations. The process
+    layer uses PrOMMiS solvent-extraction objects with IDAES MSContactor units,
+    and the active material-transfer terms are lithium and sodium. Chloride is
+    held at zero transfer inside this Li/Na extraction boundary because the
+    immediate question is selectivity between the target ion and the major
+    co-transferred alkali ion. The table shows the effect of staging using the
+    refreshed source-row surrogate. One stage recovers 19.508 percent lithium.
+    Three stages recover 47.850 percent. Five stages recover 66.212 percent, but
+    sodium co-transfer rises to 30.675 percent. That is the process tradeoff the
+    economics has to price.
   }
 \end{frame}
 
-\begin{frame}{Three Stages Recover 83.77\% Lithium}
+\begin{frame}{Three Stages Recover 47.85\% Lithium}
   \begin{columns}[T,onlytextwidth]
     \begin{column}{0.61\textwidth}
       \stageplot
@@ -430,39 +495,48 @@ to staged extraction and screening-level economics.
     \begin{column}{0.36\textwidth}
       \begin{itemize}
         \item Smackover MS-2 at $O/A=1$ and 10 wt\% TOPO reaches
-          83.77\% cumulative lithium recovery after three stages.
-        \item Sodium co-transfer is 29.01\% at the same condition.
-        \item Five stages raise lithium recovery to 95.10\% with a larger
+          47.85\% cumulative lithium recovery after three stages.
+        \item Sodium co-transfer is 19.73\% at the same condition.
+        \item Five stages raise lithium recovery to 66.21\% with a larger
           sodium burden.
       \end{itemize}
     \end{column}
   \end{columns}
   \note{
-    This is the recovery slide. One stage gives the first extraction step, three
-    stages is the main design point, and five stages shows the recovery ceiling
-    with higher sodium co-transfer. The 83.77\% number is the main process result
-    to carry forward into the TEA.
+    The main read here is that staging improves lithium recovery, but it is not
+    free. One stage is useful as a baseline because it shows the single-contact
+    strength of the solvent response. Three stages is the main case because it
+    reaches 47.85 percent cumulative lithium recovery while keeping the
+    flowsheet compact. Five stages shows that more recovery is available,
+    reaching 66.21 percent lithium, but that extra recovery comes with a larger
+    sodium burden. For a process engineer, this plot is the point where chemistry
+    turns into an optimization question: how much lithium recovery is worth the
+    additional stage count and sodium loading?
   }
 \end{frame}
 
-\begin{frame}{Screening TEA Centers At 9.18 USD/kg LCE}
+\begin{frame}{Screening TEA Centers At 8.34 USD/kg LCE}
   \begin{columns}[T,onlytextwidth]
     \begin{column}{0.62\textwidth}
       \teaplot
     \end{column}
     \begin{column}{0.35\textwidth}
       \begin{itemize}
-        \item Base Smackover intensity is 9.18 USD/kg lithium carbonate equivalent.
-        \item High-Li feed sensitivity lowers the value to 6.11 USD/kg.
-        \item One stage raises the value to 16.84 USD/kg through lower recovery.
+        \item Base Smackover intensity is 8.34 USD/kg lithium carbonate equivalent.
+        \item Stress case rises to 16.09 USD/kg through lower Li feed and lower O/A.
+        \item Favorable case falls to 5.44 USD/kg through higher Li feed and higher O/A.
       \end{itemize}
     \end{column}
   \end{columns}
   \note{
-    Present the TEA as screening-level prioritization. The base case is
-    9.18 USD/kg LCE, high feed grade moves the number down, and one stage moves
-    it up by losing recovery. The value of the slide is ranking the levers, not
-    claiming plant cost certainty.
+    The TEA slide should be framed as prioritization. The base Smackover case is
+    8.34 dollars per kilogram lithium carbonate equivalent. The stress case
+    moves to 16.09 dollars per kilogram because the lower lithium feed and lower
+    organic-to-aqueous ratio reduce product mass. The favorable case moves to
+    5.44 dollars per kilogram because the high-lithium feed and higher phase
+    ratio recover more product from the same nominal flow. The message is not
+    that this is a final cost estimate. The message is that the model already
+    ranks the dominant levers: feed grade, phase ratio, and staged recovery.
   }
 \end{frame}
 
@@ -471,21 +545,17 @@ to staged extraction and screening-level economics.
   \begin{columns}[T,onlytextwidth]
     \begin{column}{0.58\textwidth}
       \resizebox{\linewidth}{!}{%
-      \begin{tabular}{@{}lrrr@{}}
+      \begin{tabular}{@{}lrrrr@{}}
         \toprule
-        Scenario & Recovery & Cost & p10--p90 \\
+        Scenario & Recovery & Cost & Product & Net \\
         \midrule
-        base Smackover & 79.58\% & 9.18 & 8.81--12.43 \\
-        high-Li Smackover & 79.72\% & 6.11 & 5.92--8.26 \\
-        one stage & 43.40\% & 16.84 & 16.15--22.52 \\
-        five stages & 90.35\% & 8.09 & 7.77--10.74 \\
-        high pretreatment loss & 75.39\% & 9.69 & 8.93--12.57 \\
-        high solvent loss & 79.58\% & 9.75 & 9.00--12.59 \\
-        lower throughput & 79.58\% & 13.75 & 12.65--18.96 \\
+        stress & 25.04\% & 16.09 & 44.43 & -0.18 \\
+        base Smackover & 47.85\% & 8.34 & 142.65 & 1.66 \\
+        favorable & 71.97\% & 5.44 & 383.13 & 11.33 \\
         \bottomrule
       \end{tabular}
       }%
-      \sourcefoot{Cost values in USD/kg lithium carbonate equivalent.}
+      \sourcefoot{Cost in USD/kg LCE; product in t/y; net in million USD/y.}
     \end{column}
     \begin{column}{0.38\textwidth}
       \begin{alertblock}{Screening boundary}
@@ -495,21 +565,114 @@ to staged extraction and screening-level economics.
       \end{alertblock}
       \begin{itemize}
         \item Feed lithium grade is the strongest favorable lever.
-        \item Stage count trades lithium recovery against sodium loading.
-        \item Fixed annual charges dominate the lower-throughput case.
+        \item O/A ratio shifts recovery and solvent-contacting cost together.
+        \item The stress case is not attractive at the assumed price basis.
       \end{itemize}
     \end{column}
   \end{columns}
   \note{
-    Use this slide to explain tradeoffs. Better lithium grade and enough stages
-    improve cost intensity; pretreatment loss, solvent loss, and lower throughput
-    move the result in the wrong direction. The p10--p90 band is useful for
-    showing that feed and stage choices dominate the screening sensitivity.
+    This table makes the current TEA sensitivity explicit. The stress case has
+    only 25.04 percent lithium recovery, 44.43 tonnes per year of lithium
+    carbonate equivalent, and a slightly negative net value at the assumed
+    price. The base Smackover case reaches 47.85 percent recovery and 142.65
+    tonnes per year. The favorable case reaches 71.97 percent recovery and
+    383.13 tonnes per year. The ranking is clear: higher lithium feed and better
+    transfer conditions move the economics more than small accounting choices.
   }
 \end{frame}
 
 \section{Thermodynamic Extension}
-\sectiondivider{Thermodynamic Extension}
+\sectiondivider{Thermodynamic Extension}{
+  The final section shows where ePC-SAFT enters the case study. The downstream
+  process structure is already shaped to receive activity and fugacity based
+  transfer rows without rebuilding the entire presentation.
+}
+
+\begin{frame}{ePC-SAFT Supplies Activity And Fugacity Terms}
+  \tiny
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.58\textwidth}
+      \[
+      \begin{aligned}
+      \tilde{a}^{\mathrm{res}} &=
+      \tilde{a}^{\mathrm{hc}}+\tilde{a}^{\mathrm{disp}}
+      +\tilde{a}^{\mathrm{assoc}}+\tilde{a}^{\mathrm{DH}}
+      +\tilde{a}^{\mathrm{Born}}\\
+      \tilde{a}^{\mathrm{DH}} &=
+      -\frac{\kappa e^{2}}{12\pi\varepsilon_{0}\varepsilon_{r}k_{B}T}
+      \sum_i x_i z_i^2\chi_i\\
+      \kappa &=
+      \sqrt{\frac{\rho e^{2}}{k_{B}T\varepsilon_{0}\varepsilon_{r}}
+      \sum_j x_j z_j^2}\\
+      \chi_i &=
+      \frac{3}{(\kappa d_i)^3}
+      \left[\frac32+\ln(1+\kappa d_i)-2(1+\kappa d_i)
+      +\frac12(1+\kappa d_i)^2\right]\\
+      \tilde{a}^{\mathrm{Born}} &=
+      -\frac{e^2}{4\pi\varepsilon_0 k_B T}
+      \sum_i x_i z_i^2\sum_{\delta\in\mathcal{D}}
+      \left(1-\frac{1}{\varepsilon_{r,m_\delta}}\right)
+      D_{i,\delta}^{(m_\delta)}
+      \end{aligned}
+      \]
+      \[
+      \begin{aligned}
+      D_{i,\mathrm{Born}}^{(\mathrm{bulk})}&=\frac{1}{d_i^{\mathrm{Born}}}\\
+      D_{i,\mathrm{SSM}}^{(\mathrm{bulk})}&=
+      \frac{1}{d_i^{\mathrm{Born}}+\Delta d_i}-\frac{1}{d_i^{\mathrm{Born}}}\\
+      D_{i,\mathrm{DS}}^{(\mathrm{ion})}&=
+      \frac{1}{d_i^{\mathrm{Born}}}-\frac{1}{d_i^{\mathrm{Born}}+\Delta d_i}
+      \end{aligned}
+      \]
+    \end{column}
+    \begin{column}{0.39\textwidth}
+      \begin{tikzpicture}[
+        box/.style={rounded corners=1.5pt,draw=netlteal!62,fill=netlmist,
+          line width=0.45pt,align=center,inner sep=3.2pt,font=\scriptsize,
+          text width=3.55cm},
+        arrow/.style={-{Latex[length=2mm]},line width=0.55pt,draw=netlteal!85},
+        node distance=0.26cm
+      ]
+        \node[box] (helm) {residual\\Helmholtz energy};
+        \node[box,below=of helm] (deriv) {$\mu_i^{\mathrm{res}}/RT$ and $Z$\\from composition and density derivatives};
+        \node[box,below=of deriv] (terms) {$\ln \phi_i$ and $\ln \gamma_i$\\fugacity and activity terms};
+        \node[box,below=of terms] (transfer) {reaction quotient $Q$\\and Li/Na transfer rows};
+        \draw[arrow] (helm) -- (deriv);
+        \draw[arrow] (deriv) -- (terms);
+        \draw[arrow] (terms) -- (transfer);
+      \end{tikzpicture}
+      \[
+        \tilde{\mu}_k^{\mathrm{res}} =
+        \tilde{a}^{\mathrm{res}}+
+        Z-1+
+        \left(\frac{\partial\tilde{a}^{\mathrm{res}}}{\partial x_k}\right)_{T,v,x_i}
+      \]
+      \[
+        \ln \varphi_k=\tilde{\mu}_k^{\mathrm{res}}-\ln Z,\qquad
+        a_i=\gamma_i x_i,\qquad
+        Q=\prod_i a_i^{\nu_i}
+      \]
+    \end{column}
+  \end{columns}
+  \vspace{0.02cm}
+  {\tiny\color{netlgray}Shown terms are the Debye--Huckel finite-ion-size and modular Born inverse-diameter forms used for Li/Na activity and fugacity terms.}
+  \note{
+    This slide is the thermodynamic map in one place. ePC-SAFT starts from the
+    residual Helmholtz energy and builds it from five physical contribution
+    families: hard-chain packing and connectivity, dispersion attractions,
+    association, Debye-Huckel electrolyte screening, and Born solvation or
+    dielectric work. The Debye-Huckel term uses the screening parameter
+    $\kappa$ and finite-size correction $\chi_i$ from the documented equation
+    set. The Born term is the modular form: it sums active Born, solvation
+    shell, and dielectric-saturation inverse-diameter terms through
+    $\mathcal{D}$. Once these terms are assembled, composition and density
+    derivatives give residual chemical potentials and the compressibility
+    factor. Those become fugacity coefficients and activity terms. For
+    extraction, the important output is the activity basis for the reaction
+    quotient and for the Li and Na transfer rows that the staged process model
+    consumes.
+  }
+\end{frame}
 
 \begin{frame}{Case-Study Coverage Matrix}
   \scriptsize
@@ -522,41 +685,46 @@ to staged extraction and screening-level economics.
       defines the main and feed-grade sensitivity cases \\
     paper-response bridge & Rezaee Li/Na extraction responses with $O/A$
       conversion & supplies $\DLi$, $\DNa$, and $\SLiNa$ for staged extraction \\
-    ALAMO surrogate & held-out parity for logit $k_{\mathrm{Li}}$ and logit
-      $k_{\mathrm{Na}}$ & provides the compact transfer surface used by the
-      process model \\
+    ALAMO-ready surrogate & current target-row fit for $\log \DLi$ and
+      $\log \DNa$ & provides the compact transfer surface used by the process
+      model \\
     PrOMMiS/IDAES stages & PrOMMiS/IDAES staged-extraction terms for Li and Na
       across 1, 3, and 5 stages & converts transfer variables to outlet
       recovery and raffinate behavior \\
-    screening TEA/UQ & feed grade, stage count, pretreatment loss, solvent
-      loss, and throughput & ranks operating levers for sprint approval \\
-    direct ePC-SAFT replacement path & accepted Li/Na transfer rows & replaces
-      the paper-response bridge without changing process inputs \\
+    screening TEA/UQ & stress, base, and favorable cases from the refreshed
+      transfer surface & ranks operating levers for integration approval \\
+    direct ePC-SAFT transfer path & \texttt{b4144c72} phase-tagged cross-phase
+      route; 26 Rezaee rows evaluated & supplies the activity/fugacity layer for
+      replacing the paper-response bridge \\
     \bottomrule
   \end{tabular}}
   \vspace{0.14cm}
   {\footnotesize\color{netlgray}
   Process-facing rows remain stable as the thermodynamic basis is exchanged.}
   \note{
-    This is the scope-control slide. The current package covers the feed basis,
-    paper-response bridge, ALAMO surrogate, PrOMMiS/IDAES stages, and screening
-    TEA/UQ. For interim ePC-SAFT support, cite the Rezaee 2026 26-row
-    reactive-equilibrium replay: the package evaluates the aqueous ePC-SAFT and
-    organic PC-SAFT activity terms, and the calibrated actual-row replay has
-    median $\ln Q-\ln K$ offsets of -0.23 for Li and 0.20 for Na. That supports
-    the replacement path, but it is not a direct Li/Na transfer-row result.
+    This matrix is the scope control for the whole talk. The first five rows
+    cover the feed basis, the paper-response bridge, the surrogate, the
+    PrOMMiS/IDAES stages, and screening TEA. The last row is now concrete: the
+    package commit used here evaluates 26 phase-tagged cross-phase Rezaee rows
+    and supplies the activity and fugacity layer. The remaining integration task
+    is to make that direct thermodynamic route feed the same process interface
+    that currently receives the paper-response bridge. That is why the slide
+    keeps the bridge and the direct route as separate rows.
   }
 \end{frame}
 
 \begin{frame}[standout]
 The case study is a screening-quality bridge from Smackover feed chemistry to
-PrOMMiS/IDAES staged extraction and TEA, ready to anchor an internal
-ePC-SAFT-to-PrOMMiS/IDAES integration sprint.
+PrOMMiS/IDAES staged extraction and TEA, with ePC-SAFT activity and fugacity
+terms ready for direct process integration.
 \note{
-  Say the ask plainly: approve a focused internal sprint that connects accepted
-  ePC-SAFT Li/Na transfer rows to the existing PrOMMiS/IDAES interface. The deck
-  is already organized so the paper-response bridge can be exchanged without
-  changing the process inputs.
+  The point of the package is now straightforward. The Smackover feed basis,
+  solvent response, surrogate, staged extraction model, and screening TEA are
+  already connected. The repaired ePC-SAFT route now gives the thermodynamic
+  layer that this process chain needs: activity and fugacity terms that can be
+  turned into direct Li and Na transfer rows. The practical next step is to make
+  that route feed the same PrOMMiS and IDAES interface cleanly, then compare the
+  staged recovery and TEA movement against the current paper-response bridge.
 }
 \end{frame}
 
@@ -566,19 +734,23 @@ ePC-SAFT-to-PrOMMiS/IDAES integration sprint.
       row defines the feed-grade sensitivity.
     \item TBAC/DA DES + 10 wt\% TOPO maps lithium and sodium transfer through
       ALAMO and into staged solvent extraction.
-    \item Three stages recover 83.77\% lithium before the TEA pretreatment-loss
+    \item Three stages recover 47.85\% lithium before the TEA pretreatment-loss
       adjustment.
-    \item The base screening TEA is 9.18 USD/kg LCE, with feed grade and stage
-      count controlling the largest movement.
+    \item The base screening TEA is 8.34 USD/kg LCE, with feed grade and phase
+      ratio controlling the largest movement.
     \item Ask: approve an internal ePC-SAFT-to-PrOMMiS/IDAES integration and
       validation sprint.
   \end{enumerate}
   \note{
-    Read this slide as the closing script. The first four bullets summarize the
-    technical chain and the fifth bullet is the decision request. If asked about
-    current ePC-SAFT data, use the results folder carefully: it supports
-    Rezaee-style activity-term replay and calibrated actual rows, while direct
-    transfer rows remain the next accepted input to the process bridge.
+    I would close on five points. First, Smackover MS-2 is the main feed basis,
+    and high-lithium Smackover is the feed-grade sensitivity. Second, the active
+    solvent basis is TBAC/DA DES with 10 weight percent TOPO, and that basis
+    maps Li and Na transfer through ALAMO into staged extraction. Third, the
+    three-stage case recovers 47.85 percent lithium before the TEA pretreatment
+    adjustment. Fourth, the base screening TEA is 8.34 dollars per kilogram LCE,
+    with feed grade and phase ratio driving the largest movement. Fifth, the
+    decision request is to approve an internal ePC-SAFT-to-PrOMMiS/IDAES
+    integration and validation sprint.
   }
 \end{frame}
 
@@ -617,11 +789,15 @@ ePC-SAFT-to-PrOMMiS/IDAES integration sprint.
   \end{columns}
   \sourcefoot{USGS Energy Waste Science; critical-mineral produced-water review; electrolyte PC-SAFT permittivity and ePC-SAFT Born/dielectric literature.}
   \note{
-    Keep this slide supplemental. It says CMM, REE, divalent ions, and
-    hydrocarbons are natural produced-water extensions, but each needs measured
-    composition, phase data, parameters, and extraction chemistry before joining
-    the case study. Do not imply these systems are already solved by the Li/Na
-    model.
+    This supplemental slide is here to keep the extension story honest. Produced
+    water is not only a lithium stream; it can contain critical-mineral ions,
+    divalent ions, and hydrocarbon contact risks that matter for thermodynamics
+    and operations. But none of those rows should be treated as solved by the
+    current Li/Na case. CMM and REE rows need measured composition, speciation,
+    and ion parameters. Divalent ions need pretreatment data and leakage bounds.
+    Hydrocarbons need oil-phase assay and phase-equilibrium data. ePC-SAFT gives
+    a credible thermodynamic route for extending the structure, but the data
+    requirements have to come first.
   }
 \end{frame}
 
@@ -636,14 +812,19 @@ ePC-SAFT-to-PrOMMiS/IDAES integration sprint.
       produced waters.
     \item Electrolyte PC-SAFT permittivity and ePC-SAFT Born/dielectric
       literature for the extension basis.
-    \item Produced-water feed table, ALAMO validation table, PrOMMiS/IDAES
+    \item Produced-water feed table, surrogate fit table, PrOMMiS/IDAES
       staged-extraction table, and screening TEA table from the case-study result tables.
   \end{itemize}
   \note{
-    Use sources only if the audience asks where the basis comes from. Rezaee
-    supplies extraction and thermodynamic-modeling inputs, USGS supplies the
-    produced-water context, and the case-study result tables supply the bridge,
-    stage, and TEA values used in the deck.
+    The sources are grouped by role. Rezaee supplies the extraction response and
+    the PC-SAFT/ePC-SAFT thermodynamic context. The USGS Smackover release
+    supplies the produced-water feed basis, including the selected southern
+    Arkansas row used in the main case. The USGS and produced-water mineral
+    recovery literature explain why these brines are technically interesting
+    beyond a single lithium number. The electrolyte PC-SAFT and ePC-SAFT
+    Born/dielectric literature supports the thermodynamic extension path. The
+    case-study tables are where the feed, surrogate, staged-extraction, and TEA
+    values used in this presentation are collected.
   }
 \end{frame}
 

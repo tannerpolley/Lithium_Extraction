@@ -8,28 +8,26 @@
 - 2026 supporting information: `papers/pdf/Rezaee et al. - 2026 - Supplementary material - Thermodynamic modeling of lithium extraction from synthetic brine using deep eutectic solvents.pdf`.
 - Searchable source text: `papers/md/Rezaee et al. - 2026 - Thermodynamic modeling of lithium extraction from synthetic brine using deep eutectic solvents A PC.md`.
 - The replay follows the paper's phase-specific reaction-equilibrium formulation rather than a conventional same-species LLE fugacity equality.
+- The package check uses `ReactionDefinition.phase_stoichiometry` and the native phase-tagged cross-phase residual block.
 - Aqueous phase: H2O, Li+, Na+, Cl-, H+, OH-, NH4+ with ePC-SAFT component activity coefficients.
 - Organic phase: DES, TOPO, RLi, RNa with PC-SAFT activity coefficients calculated as mixture fugacity coefficient over pure-component fugacity coefficient.
-- Calibrated actual-row replay uses `data\processed\rezaee_2026_reactive_equilibrium_paper_k_calibration.json` from the fixed-paper-K organic refit.
 
 ## Result
 
 - Rows replayed: `26`.
-- Status: `published_mismatch_but_calibrated_actual_rows_consistent`.
-- Published Table 8/9 median lnQ-lnK Li/Na: `32.33363244970333`, `37.758477412972525`.
-- Published Table 8/9 median absolute RLi/RNa error: `0.004442850658281856`, `0.020811015739249972`.
-- Calibrated paper-K median lnQ-lnK Li/Na: `-0.23055203253576018`, `0.20188825902796737`.
-- Calibrated paper-K median absolute RLi/RNa error: `0.0024493390000924417`, `0.007617085730106119`.
+- Status: `source_mismatch`.
+- Paper lnK Li/Na: `-19.52985865272526`, `-27.493348310803476`.
+- Median lnQ at experimental rows Li/Na: `12.986988440452834`, `10.479242476903497`.
+- Median lnQ-lnK Li/Na: `32.516847093178086`, `37.97259078770698`.
+- Package phase-tagged cross-phase rows evaluated: `26`.
+- Package native median cross-phase residual Li/Na: `408.03479797400666`, `396.5589577644374`.
+- Median absolute RLi/RNa error from paper K replay: `0.004442850658281856`, `0.020811015739249972`.
+- Mean relative RLi/RNa error from paper K replay: `0.9999999980654698`, `0.9999999980656575`.
 
 ## Interpretation
 
-The package can evaluate the phase-specific ePC-SAFT/PC-SAFT activity terms required by Rezaee's formulation. The published Table 2 constants together with the published Table 8/9 organic parameters still do not reproduce the SI RLi/RNa complex mole fractions under the current activity-reference convention.
+The package can evaluate the phase-tagged cross-phase reaction residual required by Rezaee's formulation. However, using the paper-reported Table 2 equilibrium constants together with the paper/SI composition rows and the paper-reported organic parameters does not reproduce the reported RLi/RNa complex mole fractions under this activity-reference convention.
 
-For actual-data replay, the fixed-paper-K organic refit closes the 26 SI equilibrium rows cleanly without changing the aqueous ePC-SAFT calls or the paper equilibrium constants. Treat that calibrated replay as the real-data result for this downstream workflow, and treat the published Table 8/9 mismatch as a documented source/convention gap rather than as missing package capability.
+This is not the same as the old four-species fixed-composition LLE smoke. This replay includes the chemical-equilibrium equations that control lithium and sodium extraction. The current blocker is the source/model convention gap exposed by lnQ-lnK, not an omitted call to `electrolyte_lle`.
 
-## Generated Files
-
-- `data\processed\rezaee_2026_reactive_equilibrium_replay.csv`
-- `results\reaction_equilibrium\rezaee_2026_reactive_equilibrium_replay_summary.json`
-- `results\reaction_equilibrium\rezaee_2026_reactive_equilibrium_replay.md`
-- `data\processed\rezaee_2026_reactive_equilibrium_paper_k_calibration.json`
+Next implementation step: resolve the convention gap by checking the 2026 supporting information/group-contribution worksheet and the 2025 phase-amount basis, then either correct the stored constants/reference-state convention or add a calibrated Rezaee parameter-refit lane that uses these EOS activity calls directly.

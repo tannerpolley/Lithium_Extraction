@@ -4,6 +4,9 @@
     "accepted": false,
     "diagnostics": {
       "acceptance_gate": "predictive_budget_exhausted",
+      "accepted_derivative_backend": "none",
+      "accepted_solver_backend": "none",
+      "accepted_solver_method": "none",
       "accepted_transformed_variables_feasible": false,
       "algorithm_reference": {
         "authors": "Ascani, Sadowski, and Held",
@@ -16,6 +19,11 @@
         2.0
       ],
       "association_solver_status": "not_available_if_active",
+      "attempted_derivative_available": true,
+      "attempted_derivative_backend": "cppad_implicit",
+      "attempted_jacobian_available": true,
+      "attempted_jacobian_backend": "cppad_implicit",
+      "attempted_solver_method": "ceres_trust_region_residual_solve",
       "basis_model": "charge_neutral_salt_pair_coordinates",
       "basis_rank": 1,
       "basis_vector_cols": 4,
@@ -28,31 +36,31 @@
         0.0
       ],
       "best_candidate_aq_formula": [
-        0.7985602659306147,
-        0.20023829034652948,
-        0.0012014437228558576
+        0.998496008345903,
+        1.7868268055204167e-07,
+        0.0015038129714164377
       ],
-      "best_candidate_beta_formula": 5.876400140093353e-17,
-      "best_candidate_beta_org": 5.869348448254675e-17,
+      "best_candidate_beta_formula": 0.2010683870320518,
+      "best_candidate_beta_org": 0.20082710456788935,
       "best_candidate_org_formula": [
-        0.08486045550835129,
-        0.9151395444896526,
-        1.996089614991428e-12
+        0.004129139607770018,
+        0.99587086039223,
+        1.0487613915127947e-34
       ],
       "best_effort_phases_returned": true,
       "best_failure_reason": "nonlinear residual did not converge",
       "best_noncollapsed_candidate": "available",
       "best_noncollapsed_candidate_aq": [
-        0.7976019920239601,
-        0.0012000019879999603,
-        0.0012000019879999603,
-        0.1999980040000399
+        0.9969967117583014,
+        0.0015015549136599817,
+        0.0015015549136599817,
+        1.7841437869507282e-07
       ],
       "best_noncollapsed_candidate_org": [
-        0.0848604555081819,
-        1.9960896149874436e-12,
-        1.9960896149874436e-12,
-        0.9151395444878259
+        0.004129139607770018,
+        1.0487613915127947e-34,
+        1.0487613915127947e-34,
+        0.99587086039223
       ],
       "best_state": {
         "phase_count": 2,
@@ -65,6 +73,7 @@
       "cation_species_indices": [
         1.0
       ],
+      "ceres_accepted_solve": false,
       "charge_balance_error": 0.0,
       "charged_species_count": 2,
       "charged_species_indices": [
@@ -84,14 +93,15 @@
       "density_scan_summary": {},
       "density_validity_gate": "not_evaluated",
       "density_warm_start_source": "",
-      "derivative_available": true,
-      "derivative_backend": "cppad_implicit",
+      "derivative_available": false,
+      "derivative_available_for_accepted_state": false,
+      "derivative_backend": "none",
       "derivative_backend_by_block": {
-        "density_root": "implicit_density_root",
+        "density_root": "not_available",
         "eos_state_properties": "analytic",
-        "lle_residual": "cppad_implicit"
+        "lle_residual": "none"
       },
-      "derivative_status": "cppad_implicit",
+      "derivative_status": "none",
       "e_matrix": [
         [
           1.0,
@@ -117,22 +127,23 @@
       "formula_phase_positivity_enforced_by_transform": true,
       "formula_variable_count": 3,
       "fugacity_residual": [
-        0.07967665915219602,
-        -0.557920816285403,
-        0.02252337963551554
+        -0.8616868141762608,
+        0.018480085009507263,
+        -2.359750191692001
       ],
-      "fugacity_residual_norm": 0.557920816285403,
-      "gibbs_delta": 2.163602630389505e-12,
+      "fugacity_residual_norm": 2.359750191692001,
+      "gibbs_delta": -0.49212818222513555,
       "gibbs_feed": -10.38368108764703,
       "gibbs_seed_method": "native_golden_section",
-      "gibbs_split": -10.383681087644867,
+      "gibbs_split": -10.875809269872166,
       "hessian_fallback_used": false,
       "ignored_legacy_options": [],
       "implicit_sensitivity_blocks": [],
-      "ionic_equilibrium_residual_norm": 0.02252337963551554,
-      "iterations": 13,
-      "jacobian_available": true,
-      "jacobian_backend": "cppad_implicit",
+      "ionic_equilibrium_residual_norm": 2.359750191692001,
+      "iterations": 46,
+      "jacobian_available": false,
+      "jacobian_available_for_accepted_state": false,
+      "jacobian_backend": "none",
       "jacobian_fallback_used": false,
       "jacobian_scope": "transformed_variables_phase_state_implicit_density",
       "legacy_candidate_mode": "auto",
@@ -142,9 +153,9 @@
       "material_balance_error": 1.1102230246251565e-16,
       "material_balance_norm": 1.1102230246251565e-16,
       "material_balance_residual": [
-        -1.1102230246251565e-16,
-        -2.168404344971009e-19,
-        -2.168404344971009e-19,
+        1.1102230246251565e-16,
+        2.168404344971009e-19,
+        2.168404344971009e-19,
         -5.551115123125783e-17
       ],
       "max_density_failures": 0,
@@ -152,13 +163,13 @@
       "max_total_objective_evaluations": 8000,
       "message": "electrolyte LLE flash stopped after a configured work budget was exhausted",
       "native_entrypoint": "_solve_equilibrium_native",
-      "neutral_fugacity_residual_norm": 0.557920816285403,
+      "neutral_fugacity_residual_norm": 0.8616868141762608,
       "neutral_species_count": 2,
       "neutral_species_indices": [
         0.0,
         3.0
       ],
-      "objective_evaluation_count": 282,
+      "objective_evaluation_count": 250,
       "phase_charge_balance": {
         "aq": 0.0,
         "feed": 0.0,
@@ -171,21 +182,21 @@
       "phase_charge_balance_norm": 0.0,
       "phase_charge_balance_org": 0.0,
       "phase_charge_enforced_by_basis": true,
-      "phase_distance": 0.715141540487786,
+      "phase_distance": 0.9958706819778513,
       "phase_equilibrium_model": "electrolyte_lle_v5_native_charge_constrained_solve",
-      "phase_equilibrium_residual_norm": 0.557920816285403,
+      "phase_equilibrium_residual_norm": 2.359750191692001,
       "repeated_stability_iterations": 1,
       "requested_hessian_strategy": "gauss_newton",
       "requested_jacobian_backend": "auto",
       "requested_max_iterations": 180,
       "requested_solver_backend": "auto",
       "requested_timeout_seconds": 8.0,
-      "residual_norm": 0.557920816285403,
+      "residual_norm": 2.359750191692001,
       "residual_norm_by_block": {
         "charge_balance": 0.0,
-        "fugacity": 0.557920816285403,
+        "fugacity": 2.359750191692001,
         "material_balance": 1.1102230246251565e-16,
-        "solver": 0.557920816285403
+        "solver": 2.359750191692001
       },
       "residual_surface_derivative_backend": "cppad_implicit",
       "residual_surface_jacobian_backend": "cppad_implicit",
@@ -216,7 +227,7 @@
           "label": "LiCl"
         }
       ],
-      "scaled_solver_residual_norm": 0.557920816285403,
+      "scaled_solver_residual_norm": 2.359750191692001,
       "seed_attempt_count": 3,
       "seed_attempts": [
         {
@@ -242,28 +253,31 @@
           "solver_residual_norm": 1e+300
         },
         {
-          "beta_org": 5.869348448254675e-17,
+          "beta_org": 0.16564594381156908,
           "charge_balance_error": 0.0,
-          "gibbs_delta": 2.163602630389505e-12,
-          "iterations": 13,
+          "gibbs_delta": -0.1960831576029598,
+          "iterations": 3,
           "material_balance_error": 1.1102230246251565e-16,
-          "phase_distance": 0.715141540487786,
+          "phase_distance": 0.8299610166061024,
           "rejection_reason": "nonlinear residual did not converge",
           "seed_name": "native_gibbs_tpd_trial",
-          "solver_residual_norm": 0.557920816285403
+          "solver_residual_norm": 3.1479288089763315
         }
       ],
-      "selected_solver_backend": "ceres",
+      "selected_solver_backend": "none",
+      "solution_accepted": false,
       "solved_internal_states": [
         "density_roots",
         "charge_constrained_formula_basis",
         "phase_compositions"
       ],
-      "solver_backend": "ceres",
+      "solver_attempt_result": "failed",
+      "solver_attempted": "ceres",
+      "solver_backend": "none",
       "solver_language": "c++",
-      "solver_method": "ceres_trust_region_residual_solve",
-      "solver_residual_norm": 0.557920816285403,
-      "solver_seed_name": "native_gibbs_tpd_trial",
+      "solver_method": "none",
+      "solver_residual_norm": 2.359750191692001,
+      "solver_seed_name": "initial_phases",
       "solver_selection_reason": "default_native",
       "species_charge_vector": [
         0.0,
@@ -279,33 +293,33 @@
       "tpd_method": "native_tpd_global_search",
       "transformed_variable_candidate_available": true,
       "transformed_variable_count": 3,
-      "unscaled_solver_residual_norm": 0.557920816285403,
+      "unscaled_solver_residual_norm": 2.359750191692001,
       "unstable_feed_collapsed_all_candidates": false,
       "variable_model": "ascani_transformed_salt_pairs"
     },
     "phases": [
       {
         "composition": [
-          0.7976019920239601,
-          0.0012000019879999603,
-          0.0012000019879999603,
-          0.1999980040000399
+          0.9969967117583014,
+          0.0015015549136599817,
+          0.0015015549136599817,
+          1.7841437869507282e-07
         ],
         "label": "aq",
-        "phase_fraction": 0.9999999999999999
+        "phase_fraction": 0.7991728954321107
       },
       {
         "composition": [
-          0.0848604555081819,
-          1.9960896149874436e-12,
-          1.9960896149874436e-12,
-          0.9151395444878259
+          0.004129139607770018,
+          1.0487613915127947e-34,
+          1.0487613915127947e-34,
+          0.99587086039223
         ],
         "label": "org",
-        "phase_fraction": 5.869348448254675e-17
+        "phase_fraction": 0.20082710456788935
       }
     ],
-    "residual_norm": 0.557920816285403,
+    "residual_norm": 2.359750191692001,
     "split_detected": false,
     "status": "not_accepted"
   },

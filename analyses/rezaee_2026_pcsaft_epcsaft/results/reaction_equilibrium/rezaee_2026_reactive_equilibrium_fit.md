@@ -8,14 +8,14 @@
 
 ## Diagnostic Results
 
-- Published-parameter median abs ln residual: `35.05766754566956`.
-- Published-parameter mean abs ln residual: `35.22329451228562`.
-- Refit with paper constants fixed median abs ln residual: `1.2822520386159937`.
-- Refit with paper constants fixed mean abs ln residual: `1.5569707657701175`.
-- Diagnostic refit with constants free median abs ln residual: `0.9225531387295298`.
-- Diagnostic refit with constants free fitted K Li/Na: `2.3366171740031277e+17`, `4051388828.268564`.
-- Median required/package gamma gap for RLi: `32.333632449703295` ln units.
-- Median required/package gamma gap for RNa: `37.75847741297254` ln units.
+- Published-parameter median abs ln residual: `35.28689485647523`.
+- Published-parameter mean abs ln residual: `35.45028348094276`.
+- Refit with paper constants fixed median abs ln residual: `1.3013791930260634`.
+- Refit with paper constants fixed mean abs ln residual: `1.5838802105088485`.
+- Diagnostic refit with constants free median abs ln residual: `0.922991353030767`.
+- Diagnostic refit with constants free fitted K Li/Na: `2.3460033093246832e+17`, `5342782821.731113`.
+- Median required/package gamma gap for RLi: `32.516847093178185` ln units.
+- Median required/package gamma gap for RNa: `37.97259078770697` ln units.
 
 ## Interpretation
 
@@ -24,9 +24,3 @@ The package can evaluate the aqueous ePC-SAFT and organic PC-SAFT activity terms
 The direct cause is now quantified: matching the SI RLi/RNa mole fractions while holding the published Table 2 constants would require organic complex activity coefficients many orders of magnitude smaller than the package computes from the published Table 8/9 parameters.
 
 The constants-free fit is diagnostic only: it shows that the remaining gap is a source/reference-state or implementation-convention issue, because the fitted constants move far away from Table 2. Do not present that constants-free fit as the published Rezaee thermodynamic model.
-
-## Generated Files
-
-- `data\processed\rezaee_2026_reactive_equilibrium_fit.csv`
-- `results\reaction_equilibrium\rezaee_2026_reactive_equilibrium_fit_summary.json`
-- `data\processed\rezaee_2026_reactive_equilibrium_paper_k_calibration.json`

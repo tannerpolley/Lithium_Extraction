@@ -18,7 +18,7 @@ SUMMARY_JSON = (
 )
 
 
-def test_rezaee_reactive_replay_reports_calibrated_actual_row_closure() -> None:
+def test_rezaee_reactive_replay_reports_phase_tagged_package_route() -> None:
     completed = subprocess.run(
         [sys.executable, str(SCRIPT)],
         cwd=ROOT,
@@ -29,12 +29,16 @@ def test_rezaee_reactive_replay_reports_calibrated_actual_row_closure() -> None:
     assert completed.returncode == 0, completed.stdout + completed.stderr
 
     summary = json.loads(SUMMARY_JSON.read_text(encoding="utf-8"))
-    published = summary["published"]
-    calibrated = summary["calibrated_paper_k"]
+    route = summary["package_phase_tagged_cross_phase"]
 
-    assert published["status"] == "source_mismatch"
-    assert calibrated["status"] == "source_replay_consistent"
-    assert abs(calibrated["median_lnQ_minus_lnK"]["Li"]) < 1.0
-    assert abs(calibrated["median_lnQ_minus_lnK"]["Na"]) < 1.0
-    assert calibrated["median_abs_complex_error"]["RLi"] < 0.005
-    assert calibrated["median_abs_complex_error"]["RNa"] < 0.01
+    assert summary["row_count"] == 26
+    assert summary["status"] == "source_mismatch"
+    assert route["evaluated_rows"] == 26
+    assert route["reaction_phase_scope"] == "phase_tagged_cross_phase"
+    assert route["native_reaction_residual_size"] == 2
+    assert route["max_element_balance_norm"] < 1.0e-12
+    assert route["max_phase_charge_balance_norm"] < 1.0e-5
+    assert summary["median_lnQ_minus_lnK"]["Li"] > 5.0
+    assert summary["median_lnQ_minus_lnK"]["Na"] > 5.0
+    assert summary["median_abs_complex_error_from_paper_K"]["RLi"] < 0.01
+    assert summary["median_abs_complex_error_from_paper_K"]["RNa"] < 0.03

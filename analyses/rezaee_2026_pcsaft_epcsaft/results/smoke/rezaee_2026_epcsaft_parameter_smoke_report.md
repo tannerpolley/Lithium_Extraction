@@ -27,7 +27,7 @@ The 2026 supporting information supplies the reaction constants, Gibbs-energy ba
 - Electrolyte LLE status: `not_accepted`.
 - Electrolyte LLE accepted: `False`.
 - Electrolyte LLE split detected: `False`.
-- Electrolyte LLE residual norm: `0.557920816285403`.
+- Electrolyte LLE residual norm: `2.359750191692001`.
 - Electrolyte LLE acceptance gate: `predictive_budget_exhausted`.
 - Electrolyte LLE best-effort phases returned: `True`.
 
@@ -40,4 +40,4 @@ The 2026 supporting information supplies the reaction constants, Gibbs-energy ba
 
 ## Interpretation
 
-The density regression and electrolyte-stability calls exercise the current ePC-SAFT package successfully. The direct LLE call is kept as a diagnostic: if it returns a collapsed/non-predictive candidate for this pseudo-DES system, that is recorded as model-support evidence rather than hidden behind the HBTA/TOPO bridge.
+The density regression and electrolyte-stability calls exercise the current ePC-SAFT package successfully. The direct LLE call is kept as a diagnostic: if it returns a collapsed/non-predictive candidate for this pseudo-DES system, that is recorded as model-support evidence rather than hidden behind downstream calibration.

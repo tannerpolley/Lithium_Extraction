@@ -14,10 +14,10 @@ This diagnostic scans simple activity, stoichiometry, and reference-constant con
 ## Source-Supported Result
 
 - Variant: `paper_eq14_with_activity_vs_paper_k`.
-- Li median ln residual: `32.3336`.
-- Na median ln residual: `37.7585`.
-- Li median absolute ln residual: `32.3336`.
-- Na median absolute ln residual: `37.7585`.
+- Li median ln residual: `32.5168`.
+- Na median ln residual: `37.9726`.
+- Li median absolute ln residual: `32.5168`.
+- Na median absolute ln residual: `37.9726`.
 
 ## Best Numerical Simple Variant
 
@@ -30,7 +30,7 @@ This diagnostic scans simple activity, stoichiometry, and reference-constant con
 
 No scanned simple convention closes the published-constant reactive equilibrium to a defensible tolerance for both Li and Na. The best numerical variant is not the equation stated in the paper, so it cannot be used as a published Rezaee reproduction claim.
 
-The practical workflow remains: use the source-regressed Li/Na distribution bridge for PrOMMiS/IDAES handoff, keep the ePC-SAFT activity and stability diagnostics in the validity layer, and treat direct published-constant closure as blocked until the missing source rows or reference-state convention are resolved.
+The practical package-validation workflow remains: keep the ePC-SAFT activity and stability diagnostics in the validity layer, and treat direct published-constant closure as blocked until the missing source rows or reference-state convention are resolved.
 
 ## Generated Files
 

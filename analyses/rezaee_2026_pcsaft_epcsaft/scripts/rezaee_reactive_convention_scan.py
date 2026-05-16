@@ -364,7 +364,7 @@ def _write_report(summary_rows: pd.DataFrame, summary: dict[str, Any]) -> None:
         "",
         "No scanned simple convention closes the published-constant reactive equilibrium to a defensible tolerance for both Li and Na. The best numerical variant is not the equation stated in the paper, so it cannot be used as a published Rezaee reproduction claim.",
         "",
-        "The practical workflow remains: use the source-regressed Li/Na distribution bridge for PrOMMiS/IDAES handoff, keep the ePC-SAFT activity and stability diagnostics in the validity layer, and treat direct published-constant closure as blocked until the missing source rows or reference-state convention are resolved.",
+        "The practical package-validation workflow remains: keep the ePC-SAFT activity and stability diagnostics in the validity layer, and treat direct published-constant closure as blocked until the missing source rows or reference-state convention are resolved.",
         "",
         "## Generated Files",
         "",

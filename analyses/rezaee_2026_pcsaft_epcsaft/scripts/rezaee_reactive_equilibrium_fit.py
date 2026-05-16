@@ -8,14 +8,15 @@ from typing import Any
 
 import numpy as np
 import pandas as pd
-from epcsaft import ePCSAFTMixture
 from scipy.optimize import least_squares
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 if str(SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPT_DIR))
 
+import _paths  # noqa: F401,E402
 import rezaee_reactive_equilibrium_replay as replay  # noqa: E402
+from epcsaft import ePCSAFTMixture  # noqa: E402
 
 ANALYSIS_DIR = Path(__file__).resolve().parents[1]
 PROCESSED_DIR = ANALYSIS_DIR / "data" / "processed"
@@ -24,7 +25,6 @@ RESULTS_DIR = ANALYSIS_DIR / "results" / "reaction_equilibrium"
 FIT_CSV = PROCESSED_DIR / "rezaee_2026_reactive_equilibrium_fit.csv"
 FIT_SUMMARY_JSON = RESULTS_DIR / "rezaee_2026_reactive_equilibrium_fit_summary.json"
 FIT_REPORT_MD = RESULTS_DIR / "rezaee_2026_reactive_equilibrium_fit.md"
-PAPER_K_CALIBRATION_JSON = PROCESSED_DIR / "rezaee_2026_reactive_equilibrium_paper_k_calibration.json"
 
 PAIRS = ((0, 1), (0, 2), (0, 3), (1, 2), (1, 3), (2, 3))
 BASE_VECTOR = np.asarray(
@@ -311,12 +311,6 @@ def _write_report(summary: dict[str, Any]) -> None:
         "The direct cause is now quantified: matching the SI RLi/RNa mole fractions while holding the published Table 2 constants would require organic complex activity coefficients many orders of magnitude smaller than the package computes from the published Table 8/9 parameters.",
         "",
         "The constants-free fit is diagnostic only: it shows that the remaining gap is a source/reference-state or implementation-convention issue, because the fitted constants move far away from Table 2. Do not present that constants-free fit as the published Rezaee thermodynamic model.",
-        "",
-        "## Generated Files",
-        "",
-        f"- `{FIT_CSV.relative_to(ANALYSIS_DIR)}`",
-        f"- `{FIT_SUMMARY_JSON.relative_to(ANALYSIS_DIR)}`",
-        f"- `{PAPER_K_CALIBRATION_JSON.relative_to(ANALYSIS_DIR)}`",
     ]
     FIT_REPORT_MD.parent.mkdir(parents=True, exist_ok=True)
     FIT_REPORT_MD.write_text("\n".join(lines) + "\n", encoding="utf-8")
@@ -407,19 +401,6 @@ def main() -> int:
         },
         "status": "source_reference_state_gap",
     }
-    paper_k_calibration = {
-        "status": "paper_constants_refit_calibration",
-        "row_count": len(rows),
-        "equilibrium_constants": constants,
-        "parameters": _parameter_payload(fixed_theta),
-        "metrics": _metrics(fixed_residual),
-        "source_summary": str(FIT_SUMMARY_JSON.relative_to(ANALYSIS_DIR)),
-    }
-    PAPER_K_CALIBRATION_JSON.parent.mkdir(parents=True, exist_ok=True)
-    PAPER_K_CALIBRATION_JSON.write_text(
-        json.dumps(_jsonable(paper_k_calibration), indent=2, sort_keys=True) + "\n",
-        encoding="utf-8",
-    )
     FIT_SUMMARY_JSON.parent.mkdir(parents=True, exist_ok=True)
     FIT_SUMMARY_JSON.write_text(json.dumps(_jsonable(summary), indent=2, sort_keys=True) + "\n", encoding="utf-8")
     _write_report(summary)

@@ -4,7 +4,7 @@ Version: 0.1.0
 Summary: Produced-water lithium extraction analyses, ePC-SAFT case-study assets, and PrOMMiS/IDAES bridge planning.
 Requires-Python: >=3.13
 Description-Content-Type: text/markdown
-Requires-Dist: epcsaft @ git+https://github.com/tannerpolley/ePC-SAFT.git@869e3354ddc0b52075ddc9efe687b34d6aa98316
+Requires-Dist: epcsaft @ git+https://github.com/tannerpolley/ePC-SAFT.git@b4144c72e580eaa2d2b7ebf19c2040063f1eddd7
 Requires-Dist: ipykernel>=6.29
 Requires-Dist: matplotlib>=3.8
 Requires-Dist: nbclient>=0.10

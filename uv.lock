@@ -214,7 +214,7 @@ wheels = [
 [[package]]
 name = "epcsaft"
 version = "1.5.2"
-source = { git = "https://github.com/tannerpolley/ePC-SAFT.git?rev=869e3354ddc0b52075ddc9efe687b34d6aa98316#869e3354ddc0b52075ddc9efe687b34d6aa98316" }
+source = { git = "https://github.com/tannerpolley/ePC-SAFT.git?rev=b4144c72e580eaa2d2b7ebf19c2040063f1eddd7#b4144c72e580eaa2d2b7ebf19c2040063f1eddd7" }
 dependencies = [
     { name = "numpy" },
     { name = "pandas" },
@@ -541,7 +541,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "epcsaft", git = "https://github.com/tannerpolley/ePC-SAFT.git?rev=869e3354ddc0b52075ddc9efe687b34d6aa98316" },
+    { name = "epcsaft", git = "https://github.com/tannerpolley/ePC-SAFT.git?rev=b4144c72e580eaa2d2b7ebf19c2040063f1eddd7" },
     { name = "ipykernel", specifier = ">=6.29" },
     { name = "matplotlib", specifier = ">=3.8" },
     { name = "nbclient", specifier = ">=0.10" },

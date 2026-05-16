@@ -9,7 +9,7 @@ description = "Produced-water lithium extraction analyses, ePC-SAFT case-study a
 readme = "slides/README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "epcsaft @ git+https://github.com/tannerpolley/ePC-SAFT.git@869e3354ddc0b52075ddc9efe687b34d6aa98316",
+    "epcsaft @ git+https://github.com/tannerpolley/ePC-SAFT.git@b4144c72e580eaa2d2b7ebf19c2040063f1eddd7",
     "ipykernel>=6.29",
     "matplotlib>=3.8",
     "nbclient>=0.10",

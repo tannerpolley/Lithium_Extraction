@@ -11,8 +11,8 @@ This benchmark follows the Section 3.2 reaction-coordinate idea directly from th
 - Best mode by Li extraction absolute error: `2025_born_no_ssm_empirical`.
 - Mean Li extraction absolute error: `35.8154` percentage points.
 - Mean Na extraction absolute error: `11.7562` percentage points.
-- Median calculated Li extraction: `3.47251e-10%`.
-- Median calculated Na extraction: `7.66339e-11%`.
+- Median calculated Li extraction: `3.47205e-10%`.
+- Median calculated Na extraction: `7.66336e-11%`.
 - Median initial OH/Li mole ratio from pH basis: `0.000694`.
 
 ## Interpretation

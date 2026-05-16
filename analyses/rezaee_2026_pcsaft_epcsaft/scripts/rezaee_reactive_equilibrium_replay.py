@@ -8,15 +8,16 @@ from typing import Any
 
 import numpy as np
 import pandas as pd
-from epcsaft import ePCSAFTMixture
 
-REPO_ROOT = Path(__file__).resolve().parents[3]
+from _paths import ANALYSIS_DIR, REPO_ROOT
+
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from data.epcsaft_properties import get_prop_dict  # noqa: E402
+from _epcsaft_properties import get_prop_dict  # noqa: E402
+from epcsaft import ReactionDefinition, _core, ePCSAFTMixture  # noqa: E402
+from epcsaft.equilibrium import _reaction_phase_stoichiometry_matrix  # noqa: E402
 
-ANALYSIS_DIR = Path(__file__).resolve().parents[1]
 INPUT_DIR = ANALYSIS_DIR / "data" / "input"
 PROCESSED_DIR = ANALYSIS_DIR / "data" / "processed"
 RESULTS_DIR = ANALYSIS_DIR / "results" / "reaction_equilibrium"
@@ -29,7 +30,6 @@ ORGANIC_KIJ_CSV = INPUT_DIR / "rezaee_2026_organic_binary_interactions.csv"
 REPLAY_CSV = PROCESSED_DIR / "rezaee_2026_reactive_equilibrium_replay.csv"
 SUMMARY_JSON = RESULTS_DIR / "rezaee_2026_reactive_equilibrium_replay_summary.json"
 REPORT_MD = RESULTS_DIR / "rezaee_2026_reactive_equilibrium_replay.md"
-CALIBRATION_JSON = PROCESSED_DIR / "rezaee_2026_reactive_equilibrium_paper_k_calibration.json"
 
 TEMPERATURE_K = 298.15
 PRESSURE_PA = 101325.0
@@ -85,6 +85,11 @@ def _reaction_constants() -> dict[str, float]:
 
 
 def _aqueous_mixture() -> tuple[ePCSAFTMixture, np.ndarray]:
+    params = _aqueous_parameter_payload()
+    return ePCSAFTMixture.from_params(params, species=AQ_LABELS), np.asarray(params["z"], dtype=float)
+
+
+def _aqueous_parameter_payload() -> dict[str, Any]:
     # Rezaee's SI rows contain trace NH4+. The package reference catalog has
     # an NH4+ ion parameter in the 2022 Ascani family; this local table does not,
     # so we carry the same simple cation form here to keep charge accounting explicit.
@@ -111,57 +116,10 @@ def _aqueous_mixture() -> tuple[ePCSAFTMixture, np.ndarray]:
     )
     for key in UNSUPPORTED_FLAT_ELECTROLYTE_KEYS:
         params.pop(key, None)
-    return ePCSAFTMixture.from_params(params, species=AQ_LABELS), np.asarray(params["z"], dtype=float)
+    return params
 
 
-def _build_pure_ln_phi(params: dict[str, Any]) -> np.ndarray:
-    pure_ln_phi: list[float] = []
-    for i, label in enumerate(ORG_LABELS):
-        pure_params: dict[str, Any] = {}
-        for key, value in params.items():
-            if key == "assoc_scheme":
-                pure_params[key] = [value[i]]
-            elif key == "k_ij":
-                pure_params[key] = np.zeros((1, 1), dtype=float)
-            else:
-                pure_params[key] = np.asarray([value[i]], dtype=float)
-        pure_mix = ePCSAFTMixture.from_params(pure_params, species=[label])
-        pure_state = pure_mix.state(T=TEMPERATURE_K, x=np.asarray([1.0]), P=PRESSURE_PA)
-        pure_ln_phi.append(float(pure_state.fugacity_coefficient()[0]))
-    return np.asarray(pure_ln_phi, dtype=float)
-
-
-def _apply_organic_override(params: dict[str, Any], override: dict[str, Any] | None) -> dict[str, Any]:
-    if override is None:
-        return params
-
-    out = dict(params)
-    out["m"] = np.asarray(params["m"], dtype=float).copy()
-    out["m"][2], out["m"][3] = float(override["RLi"]["m"]), float(override["RNa"]["m"])
-    out["s"] = np.asarray(params["s"], dtype=float).copy()
-    out["s"][2], out["s"][3] = float(override["RLi"]["sigma_A"]), float(override["RNa"]["sigma_A"])
-    out["e"] = np.asarray(params["e"], dtype=float).copy()
-    out["e"][2], out["e"][3] = (
-        float(override["RLi"]["epsilon_over_k_K"]),
-        float(override["RNa"]["epsilon_over_k_K"]),
-    )
-
-    kij = np.asarray(params["k_ij"], dtype=float).copy()
-    kij_names = {
-        (0, 1): "DES_TOPO",
-        (0, 2): "DES_RLi",
-        (0, 3): "DES_RNa",
-        (1, 2): "TOPO_RLi",
-        (1, 3): "TOPO_RNa",
-        (2, 3): "RLi_RNa",
-    }
-    for (i, j), name in kij_names.items():
-        kij[i, j] = kij[j, i] = float(override["organic_binary_interactions"][name])
-    out["k_ij"] = kij
-    return out
-
-
-def _organic_mixture(override: dict[str, Any] | None = None) -> tuple[ePCSAFTMixture, dict[str, Any], np.ndarray]:
+def _organic_mixture() -> tuple[ePCSAFTMixture, dict[str, Any], np.ndarray]:
     params_df = pd.read_csv(ORGANIC_PARAMS_CSV)
     species = list(params_df["component"])
     if species != ORG_LABELS:
@@ -171,7 +129,10 @@ def _organic_mixture(override: dict[str, Any] | None = None) -> tuple[ePCSAFTMix
     # site schemes. Keep the mapping explicit so one-site TOPO is not treated
     # as a two-site 2B component.
     assoc_scheme_by_count = {0: None, 1: "1", 2: "2B"}
-    assoc_scheme = [assoc_scheme_by_count.get(int(sites), "2B") for sites in params_df["association_sites"]]
+    assoc_scheme = [
+        assoc_scheme_by_count.get(int(sites), "2B")
+        for sites in params_df["association_sites"]
+    ]
     params: dict[str, Any] = {
         "m": params_df["m"].to_numpy(dtype=float),
         "s": params_df["sigma_A"].to_numpy(dtype=float),
@@ -188,10 +149,120 @@ def _organic_mixture(override: dict[str, Any] | None = None) -> tuple[ePCSAFTMix
         j = species_index[str(row.component_j)]
         kij[i, j] = kij[j, i] = float(row.kij)
     params["k_ij"] = kij
-    params = _apply_organic_override(params, override)
 
     mix = ePCSAFTMixture.from_params(params, species=species)
-    return mix, params, _build_pure_ln_phi(params)
+    pure_ln_phi = []
+    for i, label in enumerate(species):
+        pure_params: dict[str, Any] = {}
+        for key, value in params.items():
+            if key == "assoc_scheme":
+                pure_params[key] = [value[i]]
+            elif key == "k_ij":
+                pure_params[key] = np.zeros((1, 1), dtype=float)
+            else:
+                pure_params[key] = np.asarray([value[i]], dtype=float)
+        pure_mix = ePCSAFTMixture.from_params(pure_params, species=[label])
+        pure_state = pure_mix.state(T=TEMPERATURE_K, x=np.asarray([1.0]), P=PRESSURE_PA)
+        pure_ln_phi.append(float(pure_state.fugacity_coefficient()[0]))
+    return mix, params, np.asarray(pure_ln_phi, dtype=float)
+
+
+def _combined_rezaee_mixture(aqueous_params: dict[str, Any], organic_params: dict[str, Any]) -> ePCSAFTMixture:
+    n_aq = len(AQ_LABELS)
+    n_org = len(ORG_LABELS)
+    params: dict[str, Any] = {}
+    for key in ("m", "s", "e", "e_assoc", "vol_a"):
+        params[key] = np.concatenate(
+            [np.asarray(aqueous_params[key], dtype=float), np.asarray(organic_params[key], dtype=float)]
+        )
+    params["assoc_scheme"] = list(aqueous_params.get("assoc_scheme", [None] * n_aq)) + list(
+        organic_params["assoc_scheme"]
+    )
+    params["z"] = np.concatenate([np.asarray(aqueous_params["z"], dtype=float), np.zeros(n_org)])
+    params["dielc"] = np.concatenate(
+        [np.asarray(aqueous_params.get("dielc", np.full(n_aq, 78.0)), dtype=float), np.full(n_org, 8.0)]
+    )
+    params["d_born"] = np.concatenate(
+        [np.asarray(aqueous_params.get("d_born", np.full(n_aq, 3.0)), dtype=float), np.zeros(n_org)]
+    )
+    params["f_solv"] = np.concatenate(
+        [np.asarray(aqueous_params.get("f_solv", np.ones(n_aq)), dtype=float), np.ones(n_org)]
+    )
+    if "MW" in aqueous_params:
+        params["MW"] = np.concatenate([np.asarray(aqueous_params["MW"], dtype=float), np.full(n_org, 0.3)])
+    kij = np.zeros((n_aq + n_org, n_aq + n_org), dtype=float)
+    kij[n_aq:, n_aq:] = np.asarray(organic_params["k_ij"], dtype=float)
+    params["k_ij"] = kij
+    return ePCSAFTMixture.from_params(params, species=AQ_LABELS + ORG_LABELS)
+
+
+def _rezaee_phase_tagged_reactions(constants: dict[str, float]) -> list[ReactionDefinition]:
+    return [
+        ReactionDefinition.from_literature_constant(
+            {"Li+": -1.0, "OH-": -1.0, "DES": -1.0, "RLi": 1.0, "H2O": 1.0},
+            log_equilibrium_constant=math.log(constants["Li"]),
+            name="Rezaee_Li_cross_phase",
+            standard_state="mole_fraction_activity",
+            phase_stoichiometry={
+                "aq": {"H2O": 1.0, "Li+": -1.0, "OH-": -1.0},
+                "org": {"RLi": 1.0, "DES": -1.0},
+            },
+            source="Rezaee2026_SI_Table2",
+        ),
+        ReactionDefinition.from_literature_constant(
+            {"Na+": -1.0, "OH-": -1.0, "DES": -1.0, "RNa": 1.0, "H2O": 1.0},
+            log_equilibrium_constant=math.log(constants["Na"]),
+            name="Rezaee_Na_cross_phase",
+            standard_state="mole_fraction_activity",
+            phase_stoichiometry={
+                "aq": {"H2O": 1.0, "Na+": -1.0, "OH-": -1.0},
+                "org": {"RNa": 1.0, "DES": -1.0},
+            },
+            source="Rezaee2026_SI_Table2",
+        ),
+    ]
+
+
+def _package_cross_phase_residuals(
+    mixture: ePCSAFTMixture,
+    constants: dict[str, float],
+    aqueous_x: np.ndarray,
+    organic_x: np.ndarray,
+) -> tuple[np.ndarray, dict[str, Any]]:
+    species = AQ_LABELS + ORG_LABELS
+    n_aq = len(AQ_LABELS)
+    n_org = len(ORG_LABELS)
+    phase1 = np.concatenate([aqueous_x, np.full(n_org, 1.0e-14)])
+    phase1 = phase1 / float(np.sum(phase1))
+    phase2 = np.concatenate([np.full(n_aq, 1.0e-14), organic_x])
+    phase2 = phase2 / float(np.sum(phase2))
+    feed = 0.5 * phase1 + 0.5 * phase2
+    reactions = _rezaee_phase_tagged_reactions(constants)
+    reaction_matrix = np.asarray(
+        [[float(reaction.stoichiometry.get(label, 0.0)) for label in species] for reaction in reactions],
+        dtype=float,
+    )
+    phase_matrix, phase_scope = _reaction_phase_stoichiometry_matrix(species, reactions, "electrolyte_lle")
+    assert phase_matrix is not None
+    request = {
+        "T": TEMPERATURE_K,
+        "P": PRESSURE_PA,
+        "z": feed.tolist(),
+        "initial_phases": {"aq": phase1.tolist(), "org": phase2.tolist(), "phase_fraction": 0.5},
+        "balance_matrix": np.eye(len(species), dtype=float).reshape(-1).tolist(),
+        "balance_rows": len(species),
+        "total_vector": feed.tolist(),
+        "reaction_stoichiometry": reaction_matrix.reshape(-1).tolist(),
+        "reaction_rows": len(reactions),
+        "log_equilibrium_constants": [float(reaction.log_equilibrium_constant) for reaction in reactions],
+        "reaction_standard_states": [reaction.convention.native_standard_state_code for reaction in reactions],
+        "reaction_phase_stoichiometry": phase_matrix.reshape(-1).tolist(),
+        "options": {"min_composition": 1.0e-14, "tolerance": 1.0e-8},
+    }
+    payload = _core._evaluate_reactive_phase_equilibrium_residual_native(mixture._native, request)
+    diagnostics = dict(payload["diagnostics"])
+    diagnostics["python_phase_scope"] = phase_scope
+    return np.asarray(payload["reaction_residuals_cross_phase"], dtype=float), diagnostics
 
 
 def _aqueous_x(row: Any) -> np.ndarray:
@@ -211,7 +282,10 @@ def _aqueous_x(row: Any) -> np.ndarray:
 
 
 def _organic_x(row: Any) -> np.ndarray:
-    values = np.asarray([row.organic_x_DES, row.organic_x_TOPO, row.organic_x_RLi, row.organic_x_RNa], dtype=float)
+    values = np.asarray(
+        [row.organic_x_DES, row.organic_x_TOPO, row.organic_x_RLi, row.organic_x_RNa],
+        dtype=float,
+    )
     return values / float(np.sum(values))
 
 
@@ -301,77 +375,16 @@ def _predict_complexes_from_constants(
     return predicted, iteration, float(max_delta)
 
 
-def _load_paper_k_calibration() -> dict[str, Any]:
-    payload = json.loads(CALIBRATION_JSON.read_text(encoding="utf-8"))
-    parameters = payload.get("parameters")
-    if not isinstance(parameters, dict):
-        raise ValueError(f"Expected 'parameters' object in {CALIBRATION_JSON}")
-    return parameters
-
-
-def _evaluate_case(
-    case_id: str,
-    aqueous_mix: ePCSAFTMixture,
-    aqueous_charges: np.ndarray,
-    organic_mix: ePCSAFTMixture,
-    pure_ln_phi: np.ndarray,
-    constants: dict[str, float],
-) -> list[dict[str, Any]]:
-    records: list[dict[str, Any]] = []
-    for row in pd.read_csv(EQUILIBRIUM_CSV).itertuples(index=False):
-        aqueous_x = _aqueous_x(row)
-        organic_x_exp = _organic_x(row)
-        aqueous_state = aqueous_mix.state(T=TEMPERATURE_K, x=aqueous_x, P=PRESSURE_PA)
-        aqueous_gamma = aqueous_state.activity_coefficient(species=AQ_LABELS)
-        organic_gamma = _organic_activity_coefficients(organic_mix, pure_ln_phi, organic_x_exp)
-        ln_q_li, ln_q_na = _reaction_log_quotients(aqueous_x, organic_x_exp, aqueous_gamma, organic_gamma)
-        organic_x_calc, iterations, final_delta = _predict_complexes_from_constants(
-            aqueous_x,
-            organic_x_exp,
-            aqueous_gamma,
-            organic_mix,
-            pure_ln_phi,
-            constants,
-        )
-        records.append(
-            {
-                "parameter_case": case_id,
-                "experiment_no": int(row.experiment_no),
-                "aqueous_charge_residual": float(np.dot(aqueous_x, aqueous_charges)),
-                "x_RLi_exp": float(organic_x_exp[2]),
-                "x_RNa_exp": float(organic_x_exp[3]),
-                "x_RLi_calc_from_paper_K": float(organic_x_calc[2]),
-                "x_RNa_calc_from_paper_K": float(organic_x_calc[3]),
-                "x_RLi_abs_error_from_paper_K": float(abs(organic_x_calc[2] - organic_x_exp[2])),
-                "x_RNa_abs_error_from_paper_K": float(abs(organic_x_calc[3] - organic_x_exp[3])),
-                "lnQ_Li_at_exp": float(ln_q_li),
-                "lnQ_Na_at_exp": float(ln_q_na),
-                "lnQ_minus_lnK_Li": float(ln_q_li - math.log(constants["Li"])),
-                "lnQ_minus_lnK_Na": float(ln_q_na - math.log(constants["Na"])),
-                "gamma_H2O": float(aqueous_gamma["H2O"]),
-                "gamma_Li_plus": float(aqueous_gamma["Li+"]),
-                "gamma_Na_plus": float(aqueous_gamma["Na+"]),
-                "gamma_OH_minus": float(aqueous_gamma["OH-"]),
-                "gamma_DES": float(organic_gamma["DES"]),
-                "gamma_RLi": float(organic_gamma["RLi"]),
-                "gamma_RNa": float(organic_gamma["RNa"]),
-                "paper_K_fixed_point_iterations": int(iterations),
-                "paper_K_fixed_point_final_delta": float(final_delta),
-                "source": row.source,
-            }
-        )
-    return records
-
-
-def _case_summary(rows: pd.DataFrame, constants: dict[str, float]) -> dict[str, Any]:
+def _summaries(rows: pd.DataFrame, constants: dict[str, float]) -> dict[str, Any]:
     li_abs = np.abs(rows["x_RLi_calc_from_paper_K"] - rows["x_RLi_exp"])
     na_abs = np.abs(rows["x_RNa_calc_from_paper_K"] - rows["x_RNa_exp"])
     li_rel = li_abs / rows["x_RLi_exp"].clip(lower=1.0e-300)
     na_rel = na_abs / rows["x_RNa_exp"].clip(lower=1.0e-300)
     li_lnk_offset = rows["lnQ_Li_at_exp"] - math.log(constants["Li"])
     na_lnk_offset = rows["lnQ_Na_at_exp"] - math.log(constants["Na"])
+    native_li = rows["native_cross_phase_residual_Li"]
+    native_na = rows["native_cross_phase_residual_Na"]
     return {
-        "parameter_case": str(rows["parameter_case"].iloc[0]),
         "row_count": int(len(rows)),
         "paper_constants": constants,
         "paper_lnK": {"Li": math.log(constants["Li"]), "Na": math.log(constants["Na"])},
@@ -387,12 +400,27 @@ def _case_summary(rows: pd.DataFrame, constants: dict[str, float]) -> dict[str, 
             "Li": float(li_lnk_offset.median()),
             "Na": float(na_lnk_offset.median()),
         },
+        "package_phase_tagged_cross_phase": {
+            "evaluated_rows": int(rows["package_cross_phase_evaluated"].sum()),
+            "reaction_phase_scope": "phase_tagged_cross_phase",
+            "native_reaction_residual_size": int(rows["native_cross_phase_residual_size"].max()),
+            "median_native_cross_phase_residual": {
+                "Li": float(native_li.median()),
+                "Na": float(native_na.median()),
+            },
+            "median_abs_native_cross_phase_residual": {
+                "Li": float(native_li.abs().median()),
+                "Na": float(native_na.abs().median()),
+            },
+            "max_phase_charge_balance_norm": float(rows["native_phase_charge_balance_norm"].max()),
+            "max_element_balance_norm": float(rows["native_element_balance_norm"].max()),
+        },
         "max_abs_charge_residual": float(np.max(np.abs(rows["aqueous_charge_residual"]))),
-        "median_abs_complex_error": {
+        "median_abs_complex_error_from_paper_K": {
             "RLi": float(li_abs.median()),
             "RNa": float(na_abs.median()),
         },
-        "mean_relative_complex_error": {
+        "mean_relative_complex_error_from_paper_K": {
             "RLi": float(li_rel.mean()),
             "RNa": float(na_rel.mean()),
         },
@@ -404,35 +432,13 @@ def _case_summary(rows: pd.DataFrame, constants: dict[str, float]) -> dict[str, 
         },
         "status": (
             "source_mismatch"
-            if max(abs(float(li_lnk_offset.median())), abs(float(na_lnk_offset.median()))) > 5.0
+            if float(li_lnk_offset.median()) > 5.0 or float(na_lnk_offset.median()) > 5.0
             else "source_replay_consistent"
         ),
     }
 
 
-def _summaries(rows: pd.DataFrame, constants: dict[str, float]) -> dict[str, Any]:
-    published = _case_summary(rows.loc[rows["parameter_case"] == "published_table8_table9"].copy(), constants)
-    calibrated = _case_summary(rows.loc[rows["parameter_case"] == "paper_k_calibrated_actual_rows"].copy(), constants)
-    if published["status"] == "source_mismatch" and calibrated["status"] == "source_replay_consistent":
-        status = "published_mismatch_but_calibrated_actual_rows_consistent"
-    elif calibrated["status"] == "source_replay_consistent":
-        status = "source_replay_consistent"
-    else:
-        status = "source_mismatch"
-    return {
-        "status": status,
-        "row_count": int(rows["experiment_no"].nunique()),
-        "published": published,
-        "calibrated_paper_k": {
-            **calibrated,
-            "calibration_file": str(CALIBRATION_JSON.relative_to(ANALYSIS_DIR)),
-        },
-    }
-
-
 def _write_report(summary: dict[str, Any]) -> None:
-    published = summary["published"]
-    calibrated = summary["calibrated_paper_k"]
     lines = [
         "# Rezaee 2026 Reactive Equilibrium Replay",
         "",
@@ -444,31 +450,29 @@ def _write_report(summary: dict[str, Any]) -> None:
         "- 2026 supporting information: `papers/pdf/Rezaee et al. - 2026 - Supplementary material - Thermodynamic modeling of lithium extraction from synthetic brine using deep eutectic solvents.pdf`.",
         "- Searchable source text: `papers/md/Rezaee et al. - 2026 - Thermodynamic modeling of lithium extraction from synthetic brine using deep eutectic solvents A PC.md`.",
         "- The replay follows the paper's phase-specific reaction-equilibrium formulation rather than a conventional same-species LLE fugacity equality.",
+        "- The package check uses `ReactionDefinition.phase_stoichiometry` and the native phase-tagged cross-phase residual block.",
         "- Aqueous phase: H2O, Li+, Na+, Cl-, H+, OH-, NH4+ with ePC-SAFT component activity coefficients.",
         "- Organic phase: DES, TOPO, RLi, RNa with PC-SAFT activity coefficients calculated as mixture fugacity coefficient over pure-component fugacity coefficient.",
-        f"- Calibrated actual-row replay uses `{calibrated['calibration_file']}` from the fixed-paper-K organic refit.",
         "",
         "## Result",
         "",
         f"- Rows replayed: `{summary['row_count']}`.",
         f"- Status: `{summary['status']}`.",
-        f"- Published Table 8/9 median lnQ-lnK Li/Na: `{published['median_lnQ_minus_lnK']['Li']}`, `{published['median_lnQ_minus_lnK']['Na']}`.",
-        f"- Published Table 8/9 median absolute RLi/RNa error: `{published['median_abs_complex_error']['RLi']}`, `{published['median_abs_complex_error']['RNa']}`.",
-        f"- Calibrated paper-K median lnQ-lnK Li/Na: `{calibrated['median_lnQ_minus_lnK']['Li']}`, `{calibrated['median_lnQ_minus_lnK']['Na']}`.",
-        f"- Calibrated paper-K median absolute RLi/RNa error: `{calibrated['median_abs_complex_error']['RLi']}`, `{calibrated['median_abs_complex_error']['RNa']}`.",
+        f"- Paper lnK Li/Na: `{summary['paper_lnK']['Li']}`, `{summary['paper_lnK']['Na']}`.",
+        f"- Median lnQ at experimental rows Li/Na: `{summary['median_lnQ_at_experimental_rows']['Li']}`, `{summary['median_lnQ_at_experimental_rows']['Na']}`.",
+        f"- Median lnQ-lnK Li/Na: `{summary['median_lnQ_minus_lnK']['Li']}`, `{summary['median_lnQ_minus_lnK']['Na']}`.",
+        f"- Package phase-tagged cross-phase rows evaluated: `{summary['package_phase_tagged_cross_phase']['evaluated_rows']}`.",
+        f"- Package native median cross-phase residual Li/Na: `{summary['package_phase_tagged_cross_phase']['median_native_cross_phase_residual']['Li']}`, `{summary['package_phase_tagged_cross_phase']['median_native_cross_phase_residual']['Na']}`.",
+        f"- Median absolute RLi/RNa error from paper K replay: `{summary['median_abs_complex_error_from_paper_K']['RLi']}`, `{summary['median_abs_complex_error_from_paper_K']['RNa']}`.",
+        f"- Mean relative RLi/RNa error from paper K replay: `{summary['mean_relative_complex_error_from_paper_K']['RLi']}`, `{summary['mean_relative_complex_error_from_paper_K']['RNa']}`.",
         "",
         "## Interpretation",
         "",
-        "The package can evaluate the phase-specific ePC-SAFT/PC-SAFT activity terms required by Rezaee's formulation. The published Table 2 constants together with the published Table 8/9 organic parameters still do not reproduce the SI RLi/RNa complex mole fractions under the current activity-reference convention.",
+        "The package can evaluate the phase-tagged cross-phase reaction residual required by Rezaee's formulation. However, using the paper-reported Table 2 equilibrium constants together with the paper/SI composition rows and the paper-reported organic parameters does not reproduce the reported RLi/RNa complex mole fractions under this activity-reference convention.",
         "",
-        "For actual-data replay, the fixed-paper-K organic refit closes the 26 SI equilibrium rows cleanly without changing the aqueous ePC-SAFT calls or the paper equilibrium constants. Treat that calibrated replay as the real-data result for this downstream workflow, and treat the published Table 8/9 mismatch as a documented source/convention gap rather than as missing package capability.",
+        "This is not the same as the old four-species fixed-composition LLE smoke. This replay includes the chemical-equilibrium equations that control lithium and sodium extraction. The current blocker is the source/model convention gap exposed by lnQ-lnK, not an omitted call to `electrolyte_lle`.",
         "",
-        "## Generated Files",
-        "",
-        f"- `{REPLAY_CSV.relative_to(ANALYSIS_DIR)}`",
-        f"- `{SUMMARY_JSON.relative_to(ANALYSIS_DIR)}`",
-        f"- `{REPORT_MD.relative_to(ANALYSIS_DIR)}`",
-        f"- `{CALIBRATION_JSON.relative_to(ANALYSIS_DIR)}`",
+        "Next implementation step: resolve the convention gap by checking the 2026 supporting information/group-contribution worksheet and the 2025 phase-amount basis, then either correct the stored constants/reference-state convention or add a calibrated Rezaee parameter-refit lane that uses these EOS activity calls directly.",
     ]
     REPORT_MD.parent.mkdir(parents=True, exist_ok=True)
     REPORT_MD.write_text("\n".join(lines) + "\n", encoding="utf-8")
@@ -477,30 +481,65 @@ def _write_report(summary: dict[str, Any]) -> None:
 def main() -> int:
     constants = _reaction_constants()
     aqueous_mix, aqueous_charges = _aqueous_mixture()
-    published_mix, _published_params, published_pure_ln_phi = _organic_mixture()
-    calibrated_mix, _calibrated_params, calibrated_pure_ln_phi = _organic_mixture(_load_paper_k_calibration())
+    organic_mix, _organic_params, pure_ln_phi = _organic_mixture()
+    aqueous_params = _aqueous_parameter_payload()
+    combined_mixture = _combined_rezaee_mixture(aqueous_params, _organic_params)
 
     records: list[dict[str, Any]] = []
-    records.extend(
-        _evaluate_case(
-            "published_table8_table9",
-            aqueous_mix,
-            aqueous_charges,
-            published_mix,
-            published_pure_ln_phi,
+    for row in pd.read_csv(EQUILIBRIUM_CSV).itertuples(index=False):
+        aqueous_x = _aqueous_x(row)
+        organic_x_exp = _organic_x(row)
+        aqueous_state = aqueous_mix.state(T=TEMPERATURE_K, x=aqueous_x, P=PRESSURE_PA)
+        aqueous_gamma = aqueous_state.activity_coefficient(species=AQ_LABELS)
+        organic_gamma = _organic_activity_coefficients(organic_mix, pure_ln_phi, organic_x_exp)
+        ln_q_li, ln_q_na = _reaction_log_quotients(aqueous_x, organic_x_exp, aqueous_gamma, organic_gamma)
+        native_cross_phase_residuals, native_diagnostics = _package_cross_phase_residuals(
+            combined_mixture,
+            constants,
+            aqueous_x,
+            organic_x_exp,
+        )
+        organic_x_calc, iterations, final_delta = _predict_complexes_from_constants(
+            aqueous_x,
+            organic_x_exp,
+            aqueous_gamma,
+            organic_mix,
+            pure_ln_phi,
             constants,
         )
-    )
-    records.extend(
-        _evaluate_case(
-            "paper_k_calibrated_actual_rows",
-            aqueous_mix,
-            aqueous_charges,
-            calibrated_mix,
-            calibrated_pure_ln_phi,
-            constants,
+        records.append(
+            {
+                "experiment_no": int(row.experiment_no),
+                "aqueous_charge_residual": float(np.dot(aqueous_x, aqueous_charges)),
+                "x_RLi_exp": float(organic_x_exp[2]),
+                "x_RNa_exp": float(organic_x_exp[3]),
+                "x_RLi_calc_from_paper_K": float(organic_x_calc[2]),
+                "x_RNa_calc_from_paper_K": float(organic_x_calc[3]),
+                "x_RLi_abs_error_from_paper_K": float(abs(organic_x_calc[2] - organic_x_exp[2])),
+                "x_RNa_abs_error_from_paper_K": float(abs(organic_x_calc[3] - organic_x_exp[3])),
+                "lnQ_Li_at_exp": float(ln_q_li),
+                "lnQ_Na_at_exp": float(ln_q_na),
+                "lnQ_minus_lnK_Li": float(ln_q_li - math.log(constants["Li"])),
+                "lnQ_minus_lnK_Na": float(ln_q_na - math.log(constants["Na"])),
+                "package_cross_phase_evaluated": bool(native_diagnostics["cross_phase_reaction_residuals"]),
+                "native_reaction_phase_scope": str(native_diagnostics["reaction_phase_scope"]),
+                "native_cross_phase_residual_size": int(native_diagnostics["cross_phase_reaction_residual_size"]),
+                "native_cross_phase_residual_Li": float(native_cross_phase_residuals[0]),
+                "native_cross_phase_residual_Na": float(native_cross_phase_residuals[1]),
+                "native_phase_charge_balance_norm": float(native_diagnostics["phase_charge_balance_norm"]),
+                "native_element_balance_norm": float(native_diagnostics["element_balance_norm"]),
+                "gamma_H2O": float(aqueous_gamma["H2O"]),
+                "gamma_Li_plus": float(aqueous_gamma["Li+"]),
+                "gamma_Na_plus": float(aqueous_gamma["Na+"]),
+                "gamma_OH_minus": float(aqueous_gamma["OH-"]),
+                "gamma_DES": float(organic_gamma["DES"]),
+                "gamma_RLi": float(organic_gamma["RLi"]),
+                "gamma_RNa": float(organic_gamma["RNa"]),
+                "paper_K_fixed_point_iterations": int(iterations),
+                "paper_K_fixed_point_final_delta": float(final_delta),
+                "source": row.source,
+            }
         )
-    )
 
     replay = pd.DataFrame(records)
     REPLAY_CSV.parent.mkdir(parents=True, exist_ok=True)

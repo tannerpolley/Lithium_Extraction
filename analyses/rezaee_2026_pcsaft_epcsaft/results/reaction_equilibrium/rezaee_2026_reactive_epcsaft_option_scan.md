@@ -21,21 +21,21 @@ This scan keeps the Rezaee organic PC-SAFT parameters, organic binary interactio
 - Options scanned: `16`.
 - Unsupported/failed options recorded: `1`.
 - Best option: `2025_born_no_ssm_empirical`.
-- Best combined median absolute ln residual: `33.7572`.
+- Best combined median absolute ln residual: `33.9908`.
 - Baseline option: `package_struct_default_no_explicit_elec_model`.
-- Baseline combined median absolute ln residual: `35.0461`.
+- Baseline combined median absolute ln residual: `35.2447`.
 - Accepted direct closure threshold met: `False`.
 
 ## Top Options
 
-- `2025_born_no_ssm_empirical`: combined median abs ln residual `33.7572`; Li `31.1031`, Na `36.4113`.
-- `legacy_default_born_linear_mole`: combined median abs ln residual `35.0461`; Li `32.3336`, Na `37.7585`.
-- `package_struct_default_no_explicit_elec_model`: combined median abs ln residual `35.0461`; Li `32.3336`, Na `37.7585`.
-- `held_2020_born_no_ssm_linear_mole`: combined median abs ln residual `35.1768`; Li `32.4348`, Na `37.9189`.
-- `held_2014_s1_no_born_constant_eps`: combined median abs ln residual `35.1793`; Li `32.4625`, Na `37.8961`.
-- `held_2008_no_born_constant_eps`: combined median abs ln residual `35.1793`; Li `32.4625`, Na `37.8961`.
-- `2025_no_born_constant_eps`: combined median abs ln residual `35.2206`; Li `32.5097`, Na `37.9314`.
-- `2025_no_born_linear_mole`: combined median abs ln residual `35.301`; Li `32.5901`, Na `38.0119`.
+- `2025_born_no_ssm_empirical`: combined median abs ln residual `33.9908`; Li `31.3137`, Na `36.6679`.
+- `held_2020_born_no_ssm_linear_mole`: combined median abs ln residual `35.2447`; Li `32.5168`, Na `37.9726`.
+- `package_struct_default_no_explicit_elec_model`: combined median abs ln residual `35.2447`; Li `32.5168`, Na `37.9726`.
+- `legacy_default_born_linear_mole`: combined median abs ln residual `35.2447`; Li `32.5168`, Na `37.9726`.
+- `held_2005_no_born_constant_eps`: combined median abs ln residual `35.4487`; Li `32.7206`, Na `38.1768`.
+- `2025_no_born_constant_eps`: combined median abs ln residual `35.4487`; Li `32.7206`, Na `38.1768`.
+- `held_2014_s1_no_born_constant_eps`: combined median abs ln residual `35.4487`; Li `32.7206`, Na `38.1768`.
+- `held_2008_no_born_constant_eps`: combined median abs ln residual `35.4487`; Li `32.7206`, Na `38.1768`.
 
 ## Unsupported Options
 

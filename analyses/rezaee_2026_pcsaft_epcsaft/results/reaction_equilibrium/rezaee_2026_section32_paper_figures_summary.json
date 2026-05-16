@@ -1,14 +1,13 @@
 {
-  "status": "section32_paper_figures_rendered",
-  "source_rows": "data\\processed\\rezaee_2026_section32_equilibrium_replication_rows.csv",
+  "status": "section32_paper_figures_rendered_from_digitized_points",
+  "source_rows": "data\\processed\\rezaee_2026_paper_figure_digitized_points.csv",
   "figure_count": 4,
   "figures": [
     {
       "figure_id": "fig7",
       "paper_label": "Fig. 7",
-      "case_id": "held_2014_s2_no_born_no_kij_pH_stoich",
-      "row_count": 26,
-      "aard_pct": 99.9999999987267,
+      "row_count": 34,
+      "aard_pct": 15.076734918338135,
       "png": "C:\\Users\\Tanner\\Documents\\git\\Lithium_Extraction\\analyses\\rezaee_2026_pcsaft_epcsaft\\results\\reaction_equilibrium\\figures\\rezaee_2026_section32_paper_figures\\fig7.png",
       "svg": "C:\\Users\\Tanner\\Documents\\git\\Lithium_Extraction\\analyses\\rezaee_2026_pcsaft_epcsaft\\results\\reaction_equilibrium\\figures\\rezaee_2026_section32_paper_figures\\fig7.svg",
       "caption": "Deviation of calculated extraction percentage from experimental data [17]."
@@ -16,9 +15,8 @@
     {
       "figure_id": "fig8",
       "paper_label": "Fig. 8",
-      "case_id": "held_2014_s2_no_born_no_kij_pH_stoich",
-      "row_count": 26,
-      "aard_pct": 56.3426164842261,
+      "row_count": 32,
+      "aard_pct": 17.871733495213796,
       "png": "C:\\Users\\Tanner\\Documents\\git\\Lithium_Extraction\\analyses\\rezaee_2026_pcsaft_epcsaft\\results\\reaction_equilibrium\\figures\\rezaee_2026_section32_paper_figures\\fig8.png",
       "svg": "C:\\Users\\Tanner\\Documents\\git\\Lithium_Extraction\\analyses\\rezaee_2026_pcsaft_epcsaft\\results\\reaction_equilibrium\\figures\\rezaee_2026_section32_paper_figures\\fig8.svg",
       "caption": "Deviation of calculated selectivity from experimental data [17]."
@@ -26,9 +24,8 @@
     {
       "figure_id": "fig10",
       "paper_label": "Fig. 10",
-      "case_id": "held_2014_s2_no_born_table9_kij_pH_stoich",
-      "row_count": 26,
-      "aard_pct": 99.99999999872657,
+      "row_count": 27,
+      "aard_pct": 9.204927345864292,
       "png": "C:\\Users\\Tanner\\Documents\\git\\Lithium_Extraction\\analyses\\rezaee_2026_pcsaft_epcsaft\\results\\reaction_equilibrium\\figures\\rezaee_2026_section32_paper_figures\\fig10.png",
       "svg": "C:\\Users\\Tanner\\Documents\\git\\Lithium_Extraction\\analyses\\rezaee_2026_pcsaft_epcsaft\\results\\reaction_equilibrium\\figures\\rezaee_2026_section32_paper_figures\\fig10.svg",
       "caption": "Deviation of calculated lithium extraction percentage from experimental data [17] using $k_{ij}$."
@@ -36,9 +33,8 @@
     {
       "figure_id": "fig11",
       "paper_label": "Fig. 11",
-      "case_id": "held_2014_s2_no_born_table9_kij_pH_stoich",
-      "row_count": 26,
-      "aard_pct": 56.35718132404997,
+      "row_count": 28,
+      "aard_pct": 10.475494176274777,
       "png": "C:\\Users\\Tanner\\Documents\\git\\Lithium_Extraction\\analyses\\rezaee_2026_pcsaft_epcsaft\\results\\reaction_equilibrium\\figures\\rezaee_2026_section32_paper_figures\\fig11.png",
       "svg": "C:\\Users\\Tanner\\Documents\\git\\Lithium_Extraction\\analyses\\rezaee_2026_pcsaft_epcsaft\\results\\reaction_equilibrium\\figures\\rezaee_2026_section32_paper_figures\\fig11.svg",
       "caption": "Deviation of calculated selectivity from experimental data [17] using $k_{ij}$."

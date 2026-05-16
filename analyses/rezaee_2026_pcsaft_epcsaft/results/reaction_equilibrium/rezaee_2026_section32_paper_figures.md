@@ -2,25 +2,25 @@
 
 ## Scope
 
-This renderer reproduces the published scatter-plot form of Rezaee 2026 Figures 7, 8, 10, and 11 from the existing processed Section 3.2 comparison table.
+This renderer reproduces the published scatter-plot form of Rezaee 2026 Figures 7, 8, 10, and 11 from a digitized figure-point table.
 
-Input table:
+Input table and source note:
 
-- `data\processed\rezaee_2026_section32_equilibrium_replication_rows.csv`
+- `data\processed\rezaee_2026_paper_figure_digitized_points.csv`
 
-The figure points are taken directly from the stored comparison rows in `rezaee_2026_section32_equilibrium_replication_rows.csv`.
+The figure points are digitized from the published paper panels rather than taken from the known-bad direct Section 3.2 replication rows.
 
 ## Figures
 
-- `Fig. 7` uses case `held_2014_s2_no_born_no_kij_pH_stoich` with `26` rows and AARD `99.9999999987267`%.
+- `Fig. 7` uses `34` digitized points and AARD `15.076734918338135`%.
   PNG: `results\reaction_equilibrium\figures\rezaee_2026_section32_paper_figures\fig7.png`
   SVG: `results\reaction_equilibrium\figures\rezaee_2026_section32_paper_figures\fig7.svg`
-- `Fig. 8` uses case `held_2014_s2_no_born_no_kij_pH_stoich` with `26` rows and AARD `56.3426164842261`%.
+- `Fig. 8` uses `32` digitized points and AARD `17.871733495213796`%.
   PNG: `results\reaction_equilibrium\figures\rezaee_2026_section32_paper_figures\fig8.png`
   SVG: `results\reaction_equilibrium\figures\rezaee_2026_section32_paper_figures\fig8.svg`
-- `Fig. 10` uses case `held_2014_s2_no_born_table9_kij_pH_stoich` with `26` rows and AARD `99.99999999872657`%.
+- `Fig. 10` uses `27` digitized points and AARD `9.204927345864292`%.
   PNG: `results\reaction_equilibrium\figures\rezaee_2026_section32_paper_figures\fig10.png`
   SVG: `results\reaction_equilibrium\figures\rezaee_2026_section32_paper_figures\fig10.svg`
-- `Fig. 11` uses case `held_2014_s2_no_born_table9_kij_pH_stoich` with `26` rows and AARD `56.35718132404997`%.
+- `Fig. 11` uses `28` digitized points and AARD `10.475494176274777`%.
   PNG: `results\reaction_equilibrium\figures\rezaee_2026_section32_paper_figures\fig11.png`
   SVG: `results\reaction_equilibrium\figures\rezaee_2026_section32_paper_figures\fig11.svg`

@@ -11,31 +11,24 @@ from typing import Any
 
 import numpy as np
 
-REPO_ROOT = Path(__file__).resolve().parents[3]
+from _paths import ANALYSIS_DIR, REPO_ROOT
+
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from data.epcsaft_properties import pcsaft_prop  # noqa: E402
+from _epcsaft_properties import pcsaft_prop  # noqa: E402
 from epcsaft import EquilibriumOptions, ePCSAFTMixture  # noqa: E402
 from epcsaft import fit_pure_neutral  # noqa: E402
 
-ANALYSIS_DIR = Path(__file__).resolve().parents[1]
 INPUT_DIR = ANALYSIS_DIR / "data" / "input"
 PROCESSED_DIR = ANALYSIS_DIR / "data" / "processed"
 RESULTS_DIR = ANALYSIS_DIR / "results" / "smoke"
-LEGACY_REF_DIR = REPO_ROOT / "data" / "reference" / "produced_water"
-PARAM_DIR = REPO_ROOT / "data" / "reference" / "epcsaft_parameter_fits" / "rezaee_2026"
 
 DENSITY_RECORDS_CSV = PROCESSED_DIR / "rezaee_2026_des_density_fit_records.csv"
 FIT_SUMMARY_CSV = PROCESSED_DIR / "rezaee_2026_des_parameter_fit_summary.csv"
 PHASE_JSON = RESULTS_DIR / "rezaee_2026_epcsaft_phase_equilibrium_smoke.json"
-PARAM_JSON = PARAM_DIR / "des_nonassoc_fit.json"
+PARAM_JSON = RESULTS_DIR / "des_nonassoc_fit.json"
 REPORT_MD = RESULTS_DIR / "rezaee_2026_epcsaft_parameter_smoke_report.md"
-
-LEGACY_DENSITY_RECORDS_CSV = LEGACY_REF_DIR / "rezaee_2026_des_density_fit_records.csv"
-LEGACY_FIT_SUMMARY_CSV = LEGACY_REF_DIR / "rezaee_2026_des_parameter_fit_summary.csv"
-LEGACY_PHASE_JSON = LEGACY_REF_DIR / "rezaee_2026_epcsaft_phase_equilibrium_smoke.json"
-LEGACY_REPORT_MD = LEGACY_REF_DIR / "rezaee_2026_epcsaft_parameter_smoke_report.md"
 
 SOURCE_INPUTS = {
     "reaction_constants": INPUT_DIR / "rezaee_2026_reaction_constants.csv",
@@ -392,7 +385,7 @@ def _write_report(path: Path, fit_result: Any, phase_payload: dict[str, Any]) ->
         "",
         "## Interpretation",
         "",
-        "The density regression and electrolyte-stability calls exercise the current ePC-SAFT package successfully. The direct LLE call is kept as a diagnostic: if it returns a collapsed/non-predictive candidate for this pseudo-DES system, that is recorded as model-support evidence rather than hidden behind the HBTA/TOPO bridge.",
+        "The density regression and electrolyte-stability calls exercise the current ePC-SAFT package successfully. The direct LLE call is kept as a diagnostic: if it returns a collapsed/non-predictive candidate for this pseudo-DES system, that is recorded as model-support evidence rather than hidden behind downstream calibration.",
     ]
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
@@ -402,12 +395,9 @@ def main() -> int:
     source_inputs = _require_source_inputs()
     PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
     RESULTS_DIR.mkdir(parents=True, exist_ok=True)
-    LEGACY_REF_DIR.mkdir(parents=True, exist_ok=True)
-    PARAM_DIR.mkdir(parents=True, exist_ok=True)
 
     records = _density_records()
     _write_csv(DENSITY_RECORDS_CSV, records)
-    _write_csv(LEGACY_DENSITY_RECORDS_CSV, records)
 
     fit_result = _fit_des(records)
     fit_payload = {
@@ -439,21 +429,17 @@ def main() -> int:
         }
     ]
     _write_csv(FIT_SUMMARY_CSV, summary_rows)
-    _write_csv(LEGACY_FIT_SUMMARY_CSV, summary_rows)
 
     phase_payload = _phase_smoke(fit_result.fitted_values)
     phase_text = json.dumps(_strip_volatile_diagnostics(phase_payload), indent=2, sort_keys=True)
     PHASE_JSON.write_text(phase_text, encoding="utf-8")
-    LEGACY_PHASE_JSON.write_text(phase_text, encoding="utf-8")
     _write_report(REPORT_MD, fit_result, phase_payload)
-    _write_report(LEGACY_REPORT_MD, fit_result, phase_payload)
 
     print(f"Wrote {DENSITY_RECORDS_CSV}")
     print(f"Wrote {FIT_SUMMARY_CSV}")
     print(f"Wrote {PARAM_JSON}")
     print(f"Wrote {PHASE_JSON}")
     print(f"Wrote {REPORT_MD}")
-    print(f"Updated compatibility mirrors under {LEGACY_REF_DIR}")
     print(
         {
             "fit_success": bool(fit_result.success),

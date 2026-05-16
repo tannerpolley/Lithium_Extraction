@@ -17,13 +17,13 @@ The package is used only to compute activity coefficients. The first source-alig
 
 - Rows evaluated: `26`.
 - Paper reference AARD after Table 9 kij: `7.89%` for lithium extraction and `8.63%` for selectivity.
-- Direct Held-2014/Table-9/pH-stoichiometric Li extraction AARD: `99.99999999872657`.
-- Direct Held-2014/Table-9/pH-stoichiometric selectivity AARD: `56.35718132404997`.
+- Direct Held-2014/Table-9/pH-stoichiometric Li extraction AARD: `99.99999999872658`.
+- Direct Held-2014/Table-9/pH-stoichiometric selectivity AARD: `56.355517224120476`.
 - Best diagnostic case: `held_2014_s2_no_born_table9_kij_inverseK_diagnostic`.
-- Best diagnostic Li extraction AARD: `99.68916261276942`.
-- Best diagnostic selectivity AARD: `50852.87521587751`.
-- Best diagnostic median calculated Li extraction: `0.06914342754088704`.
-- Best diagnostic median calculated selectivity: `296.8491552320664`.
+- Best diagnostic Li extraction AARD: `99.68882522847255`.
+- Best diagnostic selectivity AARD: `185341.71632152237`.
+- Best diagnostic median calculated Li extraction: `0.06900526897908499`.
+- Best diagnostic median calculated selectivity: `875.5429815550424`.
 
 ## Interpretation
 

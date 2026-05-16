@@ -17,6 +17,8 @@ src/lithium_extraction/prommis_case_study/tbac_da_topo_org_properties.py
 src/lithium_extraction/prommis_case_study/tbac_da_topo_transfer_reactions.py
 tests/test_case_study_no_forbidden_diagnostics.py
 tests/test_epcsaft_contract.py
+tests/test_rezaee_reactive_equilibrium_replay.py
+tests/test_rezaee_section32_paper_figures.py
 tests/test_tbac_da_topo_alamo_contract.py
 tests/test_tbac_da_topo_prommis_mscontactor.py
 tests/test_tbac_da_topo_stage_response.py

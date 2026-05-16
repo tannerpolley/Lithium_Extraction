@@ -9,21 +9,21 @@ from typing import Any
 
 import numpy as np
 import pandas as pd
-from epcsaft import ePCSAFTMixture
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 if str(SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPT_DIR))
 
-REPO_ROOT = Path(__file__).resolve().parents[3]
+from _paths import ANALYSIS_DIR, REPO_ROOT  # noqa: E402
+
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 import rezaee_reactive_equilibrium_replay as replay  # noqa: E402
-from data.epcsaft_properties import get_prop_dict  # noqa: E402
-from scripts.epcsaft_compat import _normalized_params  # noqa: E402
+from _epcsaft_compat import _normalized_params  # noqa: E402
+from _epcsaft_properties import get_prop_dict  # noqa: E402
+from epcsaft import ePCSAFTMixture  # noqa: E402
 
-ANALYSIS_DIR = Path(__file__).resolve().parents[1]
 INPUT_DIR = ANALYSIS_DIR / "data" / "input"
 PROCESSED_DIR = ANALYSIS_DIR / "data" / "processed"
 RESULTS_DIR = ANALYSIS_DIR / "results" / "reaction_equilibrium"
