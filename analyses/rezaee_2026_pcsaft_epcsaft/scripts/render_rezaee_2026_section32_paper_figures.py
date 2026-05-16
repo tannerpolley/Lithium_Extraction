@@ -19,6 +19,8 @@ FIGURES_DIR = RESULTS_DIR / "figures" / "rezaee_2026_section32_paper_figures"
 DIGITIZED_POINTS_CSV = PROCESSED_DIR / "rezaee_2026_paper_figure_digitized_points.csv"
 SUMMARY_JSON = RESULTS_DIR / "rezaee_2026_section32_paper_figures_summary.json"
 REPORT_MD = RESULTS_DIR / "rezaee_2026_section32_paper_figures.md"
+SVG_METADATA = {"Date": "2026-05-15T00:00:00"}
+SVG_HASHSALT = "rezaee_2026_section32_paper_figures"
 
 FIGURE_SPECS: list[dict[str, Any]] = [
     {
@@ -98,6 +100,7 @@ def _render_figure(rows: pd.DataFrame, spec: dict[str, Any]) -> dict[str, Any]:
             "axes.labelsize": 16,
             "xtick.labelsize": 13,
             "ytick.labelsize": 13,
+            "svg.hashsalt": SVG_HASHSALT,
         }
     )
     fig, ax = plt.subplots(figsize=(8.6, 6.4), constrained_layout=True)
@@ -108,7 +111,7 @@ def _render_figure(rows: pd.DataFrame, spec: dict[str, Any]) -> dict[str, Any]:
     png_path = FIGURES_DIR / f"{spec['figure_id']}.png"
     svg_path = FIGURES_DIR / f"{spec['figure_id']}.svg"
     fig.savefig(png_path, dpi=220)
-    fig.savefig(svg_path)
+    fig.savefig(svg_path, metadata=SVG_METADATA)
     _normalize_svg_whitespace(svg_path)
     plt.close(fig)
 
